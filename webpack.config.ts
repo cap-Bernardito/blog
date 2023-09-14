@@ -13,7 +13,7 @@ export default (env: BuildEnv) => {
     devtool: isDev ? "inline-source-map" : false,
     paths: {
       dist: path.resolve(__dirname, "dist"),
-      entry: "./src/index.ts",
+      entry: "./src/index.tsx",
       html: path.resolve(__dirname, "public", "index.html"),
     },
     port,
