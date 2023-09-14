@@ -1,0 +1,10 @@
+pre-commit:
+  commands:
+    format:
+      glob: '*.{ts,tsx}'
+      run: yarn prettier --write {staged_files} && git add {staged_files}
+
+commit-msg:
+  commands:
+    commit_message:
+      run: npx commitlint --edit {1}

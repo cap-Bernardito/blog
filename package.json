@@ -13,7 +13,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@commitlint/config-conventional": "^17.7.0",
+    "@evilmartians/lefthook": "^1.4.11",
     "@types/node": "^20.6.0",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
     "@types/webpack": "^5.28.2",
     "css-loader": "^6.8.1",
     "html-webpack-plugin": "^5.5.3",
@@ -30,8 +34,6 @@
     "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
-    "@types/react": "^18.2.21",
-    "@types/react-dom": "^18.2.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }
