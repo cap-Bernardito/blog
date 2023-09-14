@@ -1,18 +1,21 @@
 import path from "path";
 
 import { buildWebpackConfig } from "./config/build/build_webpack_config";
+import { BuildEnv } from "./config/build/types/config";
 
-const mode = "development";
-const isDev = mode === "development";
+export default (env: BuildEnv) => {
+  const isDev = env.mode === "development";
+  const port = (env.port as number) || 3000;
 
-const config = buildWebpackConfig({
-  mode: "development",
-  isDev,
-  paths: {
-    dist: path.resolve(__dirname, "dist"),
-    entry: "./src/index.ts",
-    html: path.resolve(__dirname, "public", "index.html"),
-  },
-});
-
-export default config;
+  return buildWebpackConfig({
+    mode: env.mode,
+    isDev,
+    devtool: isDev ? "inline-source-map" : false,
+    paths: {
+      dist: path.resolve(__dirname, "dist"),
+      entry: "./src/index.ts",
+      html: path.resolve(__dirname, "public", "index.html"),
+    },
+    port,
+  });
+};
