@@ -1,0 +1,17 @@
+@import "normalize.css";
+@import "variables/global";
+@import "themes/light";
+@import "themes/dark";
+
+.app {
+  font: var(--font-m);
+  min-height: 100vh;
+  background: var(--bg-color);
+  color: var(--primary-color);
+
+  a {
+    display: inline-block;
+    padding: 0 20px 10px 0;
+    color: inherit
+  }
+}
