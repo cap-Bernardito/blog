@@ -1,0 +1,15 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  width: var(--sidebar-width);
+
+  transition: width 0.3s;
+
+  &__main {
+    flex-grow: 1;
+  }
+
+  &.collapsed {
+    width: var(--sidebar-width-collapsed);
+  }
+}
