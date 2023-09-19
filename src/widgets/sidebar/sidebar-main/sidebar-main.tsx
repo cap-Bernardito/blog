@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import cn from "classnames";
 import { ThemeButton } from "features/theme-switcher";
+import { LangSwitcher } from "features/lang-switcher";
 import css from "./sidebar-main.module.scss";
 
 type SidebarMainProps = {
@@ -19,6 +20,7 @@ export const SidebarMain: React.FC<SidebarMainProps> = ({ className }) => {
       </div>
       <div className={cn(css.root__switchers)}>
         <ThemeButton />
+        <LangSwitcher />
       </div>
     </div>
   );
