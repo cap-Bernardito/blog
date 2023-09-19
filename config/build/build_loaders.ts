@@ -1,5 +1,6 @@
 import webpack from "webpack";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import ReactRefreshTypeScript from "react-refresh-typescript";
 import { BuildOptions } from "./types/config";
 
 export const buildLoaders = (options: BuildOptions): webpack.RuleSetRule[] => {
@@ -23,8 +24,13 @@ export const buildLoaders = (options: BuildOptions): webpack.RuleSetRule[] => {
 
   const tsLoader: webpack.RuleSetRule = {
     test: /\.tsx?$/,
-    use: "ts-loader",
+    loader: "ts-loader",
     exclude: /node_modules/,
+    options: {
+      getCustomTransformers: () => ({
+        before: [options.isDev && ReactRefreshTypeScript()].filter(Boolean),
+      }),
+    },
   };
 
   const scssLoader: webpack.RuleSetRule = {
