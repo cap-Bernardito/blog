@@ -3,13 +3,31 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { BuildOptions } from "./types/config";
 
 export const buildLoaders = (options: BuildOptions): webpack.RuleSetRule[] => {
-  const tsLoader = {
+  const svgUrlLoader: webpack.RuleSetRule = {
+    test: /\.svg$/i,
+    type: "asset",
+    resourceQuery: /url/, // *.svg?url
+  };
+
+  const svgrLoader: webpack.RuleSetRule = {
+    test: /\.svg$/i,
+    issuer: /\.[jt]sx?$/,
+    resourceQuery: { not: [/url/] }, // exclude react component if *.svg?url
+    use: ["@svgr/webpack"],
+  };
+
+  const resourceLoader: webpack.RuleSetRule = {
+    test: /\.(png|jpg|gif)$/i,
+    type: "asset/resource",
+  };
+
+  const tsLoader: webpack.RuleSetRule = {
     test: /\.tsx?$/,
     use: "ts-loader",
     exclude: /node_modules/,
   };
 
-  const scssLoader = {
+  const scssLoader: webpack.RuleSetRule = {
     test: /\.s[ac]ss$/i,
     use: [
       options.isDev ? "style-loader" : MiniCssExtractPlugin.loader,
@@ -26,5 +44,5 @@ export const buildLoaders = (options: BuildOptions): webpack.RuleSetRule[] => {
     ],
   };
 
-  return [tsLoader, scssLoader];
+  return [tsLoader, scssLoader, svgUrlLoader, svgrLoader, resourceLoader];
 };
