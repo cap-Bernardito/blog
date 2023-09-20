@@ -8,7 +8,8 @@
     "watch": "webpack serve --env port=3000 --env mode=development",
     "build": "npm run build:prod",
     "build:dev": "webpack --env mode=development",
-    "build:prod": "webpack --env mode=production"
+    "build:prod": "webpack --env mode=production",
+    "lint:ts": "eslint --color --ext \".ts,.tsx\" ."
   },
   "keywords": [],
   "author": "",
@@ -22,7 +23,13 @@
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "@types/webpack": "^5.28.2",
+    "@typescript-eslint/eslint-plugin": "^6.7.2",
+    "@typescript-eslint/parser": "^6.7.2",
     "css-loader": "^6.8.1",
+    "eslint": "^8.49.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-i18next": "^6.0.3",
+    "eslint-plugin-react": "^7.33.2",
     "html-webpack-plugin": "^5.5.3",
     "mini-css-extract-plugin": "^2.7.6",
     "prettier": "^2.8.8",

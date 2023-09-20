@@ -2,7 +2,10 @@ pre-commit:
   commands:
     format:
       glob: '*.{ts,tsx}'
-      run: yarn prettier --write {staged_files} && git add {staged_files}
+      run: npx prettier --write {staged_files} && git add {staged_files}
+    lintTS:
+      glob: '*.{ts,tsx}'
+      run: npx eslint --fix {staged_files} && git add {staged_files}
 
 commit-msg:
   commands:
