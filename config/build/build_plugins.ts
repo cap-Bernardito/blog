@@ -2,6 +2,7 @@ import webpack from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
+import CopyPlugin from "copy-webpack-plugin";
 import type { BuildOptions } from "./types/config";
 
 export const buildPlugins = ({ paths, isDev }: BuildOptions): webpack.WebpackPluginInstance[] =>
@@ -22,4 +23,8 @@ export const buildPlugins = ({ paths, isDev }: BuildOptions): webpack.WebpackPlu
     }),
 
     isDev && new ReactRefreshWebpackPlugin(),
+
+    new CopyPlugin({
+      patterns: [{ from: paths.locales, to: paths.buildLocales }],
+    }),
   ].filter(Boolean);
