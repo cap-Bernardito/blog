@@ -13,7 +13,7 @@ type AppLinkProps = LinkProps & {
   color?: AppLinkColor;
 };
 
-export const AppLink: React.FC<AppLinkProps> = (props) => {
+export const AppLink: React.FC<React.PropsWithChildren<AppLinkProps>> = (props) => {
   const { to, className, children, color = AppLinkColor.PRIMARY, ...otherProps } = props;
 
   return (

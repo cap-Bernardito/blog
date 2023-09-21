@@ -1,7 +1,7 @@
 import webpack from "webpack";
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import ReactRefreshTypeScript from "react-refresh-typescript";
 import { BuildOptions } from "./types/config";
+import { buildCssLoader } from "./loaders/build-css-loader";
 
 export const buildLoaders = (options: BuildOptions): webpack.RuleSetRule[] => {
   const svgUrlLoader: webpack.RuleSetRule = {
@@ -33,22 +33,7 @@ export const buildLoaders = (options: BuildOptions): webpack.RuleSetRule[] => {
     },
   };
 
-  const scssLoader: webpack.RuleSetRule = {
-    test: /\.s[ac]ss$/i,
-    use: [
-      options.isDev ? "style-loader" : MiniCssExtractPlugin.loader,
-      {
-        loader: "css-loader",
-        options: {
-          modules: {
-            auto: true,
-            localIdentName: options.isDev ? "[name]__[local]_[hash:base64:4]" : "[hash:base64:6]",
-          },
-        },
-      },
-      "sass-loader",
-    ],
-  };
+  const scssLoader: webpack.RuleSetRule = buildCssLoader(options);
 
   return [tsLoader, scssLoader, svgUrlLoader, svgrLoader, resourceLoader];
 };
