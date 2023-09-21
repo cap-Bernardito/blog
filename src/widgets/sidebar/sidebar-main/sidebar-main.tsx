@@ -14,11 +14,13 @@ export const SidebarMain: React.FC<SidebarMainProps> = ({ className }) => {
   const { t } = useTranslation();
 
   return (
-    <div className={cn(css.root, className, { [css["collapsed"]]: collapsed })}>
+    <div className={cn(css.root, className, { [css["collapsed"]]: collapsed })} data-testid="sidebar">
       <div className={cn(css.root__main)}>
         {t("Сайдбар")}
         <br />
-        <button onClick={() => setCollapsed((state) => !state)}>{t("Сжать сайдбар")}</button>
+        <button data-testid="sidebar-toggle" onClick={() => setCollapsed((state) => !state)}>
+          {t("Сжать сайдбар")}
+        </button>
       </div>
       <div className={cn(css.root__switchers)}>
         <ThemeButton />

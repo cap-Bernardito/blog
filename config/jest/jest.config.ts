@@ -30,9 +30,23 @@ const config: Config = {
   // The glob patterns Jest uses to detect test files
   testMatch: ["<rootDir>src/**/*(*.)@(spec|test).[tj]s?(x)"],
 
+  // A map from regular expressions to paths to transformers
+  transform: {},
+
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
+    ".+\\.(css|scss)": "identity-obj-proxy",
+    "\\.svg": "<rootDir>/config/jest/jestEmptyComponent.tsx",
     "^shared(.*)$": "<rootDir>/src/shared$1",
+    "^features(.*)$": "<rootDir>/src/features$1",
+  },
+
+  // A list of paths to modules that run some code to configure or set up the testing framework before each test
+  setupFilesAfterEnv: ["<rootDir>/config/jest/jest-setup.ts"],
+
+  // A set of global variables that need to be available in all test environments
+  globals: {
+    __IS_DEV__: true,
   },
 
   // All imported modules in your tests should be mocked automatically
@@ -87,9 +101,6 @@ const config: Config = {
   // A path to a module which exports an async function that is triggered once after all test suites
   // globalTeardown: undefined,
 
-  // A set of global variables that need to be available in all test environments
-  // globals: {},
-
   // The maximum amount of workers used to run your tests. Can be specified as % or a number. E.g. maxWorkers: 10% will use 10% of your CPU amount + 1 as the maximum worker number. maxWorkers: 2 will use a maximum of 2 workers.
   // maxWorkers: "50%",
 
@@ -136,9 +147,6 @@ const config: Config = {
   // The paths to modules that run some code to configure or set up the testing environment before each test
   // setupFiles: [],
 
-  // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  // setupFilesAfterEnv: [],
-
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,
 
@@ -159,9 +167,6 @@ const config: Config = {
 
   // This option allows use of a custom test runner
   // testRunner: "jest-circus/runner",
-
-  // A map from regular expressions to paths to transformers
-  // transform: undefined,
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   // transformIgnorePatterns: [
