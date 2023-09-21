@@ -22,7 +22,10 @@ export const buildPlugins = ({ paths, isDev }: BuildOptions): webpack.WebpackPlu
       __IS_DEV__: isDev,
     }),
 
-    isDev && new ReactRefreshWebpackPlugin(),
+    isDev &&
+      new ReactRefreshWebpackPlugin({
+        overlay: false,
+      }),
 
     new CopyPlugin({
       patterns: [{ from: paths.locales, to: paths.buildLocales }],

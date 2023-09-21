@@ -1,0 +1,14 @@
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+
+  height: 100vh;
+}
+
+.resetButton {
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+}
