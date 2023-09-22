@@ -15,7 +15,10 @@
     "test:jest:only": "jest --config ./config/jest/jest.config.ts",
     "test:jest:watch": "npm run test:only -- --watch",
     "test:ui": "loki test",
-    "test:ui:ok": "loki approve",
+    "test:ui:update": "loki approve",
+    "test:ui:report": "npm run test:ui:json && npm run test:ui:html",
+    "test:ui:json": "node scripts/generate-visual-json-report.js",
+    "test:ui:html": "reg-cli --from .loki/report.json --report .loki/report.html",
     "test": "npm run test:only",
     "storybook": "storybook dev -p 6006 -c ./config/storybook --no-open",
     "storybook:build": "storybook build -c ./config/storybook"
@@ -64,6 +67,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^3.0.3",
     "react-refresh-typescript": "^2.0.9",
+    "reg-cli": "^0.17.7",
     "sass": "^1.67.0",
     "sass-loader": "^13.3.2",
     "storybook": "^7.4.3",
@@ -96,6 +100,12 @@
   "overrides": {
     "loki": {
       "@storybook/react": "$@storybook/react"
+    },
+    "@loki/integration-react": {
+      "@storybook/react": "$@storybook/react"
+    },
+    "react-reconciler": {
+      "react": "$react"
     }
   },
   "loki": {
