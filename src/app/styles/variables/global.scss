@@ -24,8 +24,12 @@
 
   // Размеры
   --navbar-height: 50px;
-  --sidebar-width: 300px;
-  --sidebar-width-collapsed: 80px;
+  --sidebar-width: 220px;
+  --sidebar-width-collapsed: 50px;
+
+  // Spacer
+  --spacer: 16px;
+  --spacer-x2: 32px;
 
   // Transition
   --transition-base: all 0.25s ease-in-out;

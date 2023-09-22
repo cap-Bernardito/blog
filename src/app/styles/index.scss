@@ -9,19 +9,23 @@
 }
 
 .app {
-  min-height: 100vh;
   font: var(--font-m);
   color: var(--text);
   background: var(--bg);
 }
 
 .content {
+  $gap: var(--spacer-x2);
+
   display: flex;
   flex-wrap: nowrap;
-  min-height: calc(100vh - var(--navbar-height));
+  min-height: 100vh;
+  padding: $gap;
 
   &__sidebar {
     flex: 0 0 auto;
+    max-height: 880px;
+    margin-right: $gap;
     background: var(--light-bg);
   }
 

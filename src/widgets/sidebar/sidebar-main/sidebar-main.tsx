@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import cn from "classnames";
-import { useTranslation } from "react-i18next";
 import { ThemeButton } from "features/theme-switcher";
 import { LangSwitcher } from "features/lang-switcher";
 import { Button, ButtonVariant } from "shared/ui/button";
 import ArrowBottom from "shared/assets/icons/arrow-bottom.svg";
 import css from "./sidebar-main.module.scss";
+import { SidebarNav } from "../sidebar-nav/sidebar-nav";
 
 type SidebarMainProps = {
   className?: string;
@@ -13,13 +13,11 @@ type SidebarMainProps = {
 
 export const SidebarMain: React.FC<SidebarMainProps> = ({ className }) => {
   const [collapsed, setCollapsed] = useState(false);
-  const { t } = useTranslation();
 
   return (
     <div className={cn(css.root, className, { [css["collapsed"]]: collapsed })} data-testid="sidebar">
       <div className={cn(css.root__main)}>
-        {t("Сайдбар")}
-        <br />
+        <SidebarNav collapsed={collapsed} />
         <Button
           className={css.root__toggle}
           data-testid="sidebar-toggle"

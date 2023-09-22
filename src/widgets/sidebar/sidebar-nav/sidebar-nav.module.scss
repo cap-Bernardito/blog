@@ -1,0 +1,43 @@
+.root {
+  &__nav {
+    margin-top: 124px;
+  }
+}
+
+.nav__item {
+  margin-bottom: 4px;
+  padding: 0 10px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  text-decoration: none;
+
+  &__title {
+    overflow: hidden;
+  }
+
+  &__icon {
+    margin-right: 8px;
+    color: var(--icon);
+  }
+}
+
+.nav__list {
+  padding: 0;
+  list-style: none;
+
+  &.collapsed {
+    .nav__item {
+      padding: 0 0 0 9px;
+    }
+
+    .link {
+      &__title {
+        width: 0;
+      }
+    }
+  }
+}

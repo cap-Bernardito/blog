@@ -6,6 +6,8 @@
 
   width: var(--sidebar-width);
 
+  border-radius: var(--spacer-x2);
+
   transition: width 0.3s;
 
   &__main {
