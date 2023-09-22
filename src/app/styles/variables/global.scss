@@ -26,4 +26,12 @@
   --navbar-height: 50px;
   --sidebar-width: 300px;
   --sidebar-width-collapsed: 80px;
+
+  // Transition
+  --transition-base: all 0.25s ease-in-out;
+  --transition-transform: transform 0.25s ease-in-out;
+  --transition-btn: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+  --transition-input: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  --transition-nav-link: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }

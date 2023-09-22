@@ -1,7 +1,11 @@
 .root {
+  position: relative;
+
   display: flex;
   flex-direction: column;
+
   width: var(--sidebar-width);
+
   transition: width 0.3s;
 
   &__main {
@@ -17,7 +21,28 @@
     padding-bottom: 20px;
   }
 
+  &__toggle {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+
+    font-size: 0;
+    color: var(--icon);
+
+    &_icon {
+      transform: rotate(90deg);
+      transition: var(--transition-transform);
+    }
+  }
+
   &.collapsed {
     width: var(--sidebar-width-collapsed);
+
+    .root__toggle {
+      &_icon {
+        transform: rotate(-90deg);
+      }
+    }
   }
 }
