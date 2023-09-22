@@ -1,9 +1,18 @@
 .app-dark {
-  --bg-color: #090949;
-  --inverted-bg-color: #e8e8ea;
+  --dark-bg: #090f11;
+  --bg: #0c1214;
+  --light-bg: #151c1f;
+  --text: #dbdbdb;
+  --hint: #555;
+  --cancel: #d95757;
+  --save: #6cd98b;
+  --icon: #74a2b2;
+  --accent: #5ed3f3;
+  --orange: coral;
 
-  --primary-color: #049604;
-  --secondary-color: #04ff04;
-  --inverted-primary-color: #0232c2;
-  --inverted-secondary-color: #0449e0;
+  --primary-color: var(--accent);
+  --secondary-color: var(--icon);
+  --warning-color: var(--orange);
+  --success-color: var(--save);
+  --error-color: var(var(--cancel));
 }

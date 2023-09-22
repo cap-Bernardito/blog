@@ -1,9 +1,18 @@
 .app-light {
-  --bg-color: #e8e8ea;
-  --inverted-bg-color: #090949;
+  --dark-bg: #fff;
+  --bg: #eff5f6;
+  --light-bg: #e2eef1;
+  --text: #141c1f;
+  --hint: #adbcc0;
+  --cancel: #f77;
+  --save: #62de85;
+  --icon: #5ed3f3;
+  --accent: #00c8ff;
+  --orange: coral;
 
-  --primary-color: #0232c2;
-  --secondary-color: #0449e0;
-  --inverted-primary-color: #049604;
-  --inverted-secondary-color: #04ff04;
+  --primary-color: var(--accent);
+  --secondary-color: var(--icon);
+  --warning-color: var(--orange);
+  --success-color: var(--save);
+  --error-color: var(var(--cancel));
 }

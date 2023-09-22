@@ -1,3 +1,4 @@
+@import "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Roboto:wght@400;500;700&display=swap";
 @import "normalize.css";
 @import "variables/global";
 @import "themes/light";
@@ -10,8 +11,8 @@
 .app {
   min-height: 100vh;
   font: var(--font-m);
-  color: var(--primary-color);
-  background: var(--bg-color);
+  color: var(--text);
+  background: var(--bg);
 }
 
 .content {
@@ -21,7 +22,7 @@
 
   &__sidebar {
     flex: 0 0 auto;
-    background: var(--inverted-bg-color);
+    background: var(--light-bg);
   }
 
   &__main {

@@ -4,6 +4,7 @@ import cn from "classnames";
 import css from "./app-link.module.scss";
 
 export enum AppLinkColor {
+  DEFAULT = "default",
   PRIMARY = "primary",
   SECONDARY = "secondary",
 }
@@ -14,7 +15,7 @@ type AppLinkProps = LinkProps & {
 };
 
 export const AppLink: React.FC<React.PropsWithChildren<AppLinkProps>> = (props) => {
-  const { to, className, children, color = AppLinkColor.PRIMARY, ...otherProps } = props;
+  const { to, className, children, color = AppLinkColor.DEFAULT, ...otherProps } = props;
 
   return (
     <Link className={cn(css.root, className, css[color])} to={to} {...otherProps}>

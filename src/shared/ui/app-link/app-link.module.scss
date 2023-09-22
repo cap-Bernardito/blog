@@ -1,5 +1,9 @@
 .root {
-  color: var(--primary-color);
+  cursor: pointer;
+}
+
+.default {
+  color: var(--text);
 }
 
 .primary {
@@ -7,5 +11,5 @@
 }
 
 .secondary {
-  color: var(--inverted-primary-color);
+  color: var(--secondary-color);
 }
