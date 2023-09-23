@@ -9,17 +9,20 @@ import { SidebarNav } from "../sidebar-nav/sidebar-nav";
 
 type SidebarMainProps = {
   className?: string;
+  isNarrow?: boolean;
 };
 
-export const SidebarMain: React.FC<SidebarMainProps> = ({ className }) => {
-  const [collapsed, setCollapsed] = useState(false);
+export const SidebarMain: React.FC<SidebarMainProps> = ({ className, isNarrow = false }) => {
+  const [collapsed, setCollapsed] = useState(isNarrow);
 
   return (
     <div className={cn(css.root, className, { [css["collapsed"]]: collapsed })} data-testid="sidebar">
       <div className={cn(css.root__main)}>
         <SidebarNav collapsed={collapsed} />
+      </div>
+      <div className={cn(css.root__toggle)}>
         <Button
-          className={css.root__toggle}
+          className={css.root__toggle_btn}
           data-testid="sidebar-toggle"
           variant={ButtonVariant.ICON}
           onClick={() => setCollapsed((state) => !state)}
@@ -28,8 +31,10 @@ export const SidebarMain: React.FC<SidebarMainProps> = ({ className }) => {
         </Button>
       </div>
       <div className={cn(css.root__switchers)}>
-        <ThemeButton />
-        <LangSwitcher />
+        <div className={cn(css.root__switchers_inner)}>
+          <ThemeButton />
+          <LangSwitcher />
+        </div>
       </div>
     </div>
   );

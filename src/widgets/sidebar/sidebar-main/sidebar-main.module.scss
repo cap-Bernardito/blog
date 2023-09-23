@@ -6,35 +6,48 @@
 
   width: var(--sidebar-width);
 
+  background: var(--light-bg);
   border-radius: var(--spacer-x2);
 
   transition: width 0.3s;
 
   &__main {
-    flex-grow: 1;
-  }
-
-  &__switchers {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
-
-    padding-bottom: 20px;
+    flex: 1 0 40px;
+    padding: 20px 0;
   }
 
   &__toggle {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
+    position: relative;
+    flex: 1 0 20px;
 
-    font-size: 0;
+    &_btn {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+
+      font-size: 0;
+    }
 
     &_icon {
       transform: rotate(90deg);
       transition: var(--transition-transform);
+    }
+  }
+
+  &__switchers {
+    display: flex;
+    flex: 1 0 40px;
+    align-items: flex-end;
+    padding: 20px 0;
+
+    &_inner {
+      display: flex;
+      flex: 1 0 40px;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
     }
   }
 

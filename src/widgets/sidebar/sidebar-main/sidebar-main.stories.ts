@@ -23,6 +23,15 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Light: Story = {};
 
+export const LightNarrow: Story = {
+  args: { isNarrow: true },
+};
+
 export const Dark: Story = {
+  decorators: [ThemeDecorator(Theme.DARK)],
+};
+
+export const DarkNarrow: Story = {
+  args: { isNarrow: true },
   decorators: [ThemeDecorator(Theme.DARK)],
 };
