@@ -16,9 +16,10 @@
 
   &__switchers {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 10px;
     align-items: center;
+    justify-content: center;
 
     padding-bottom: 20px;
   }
@@ -30,7 +31,6 @@
     transform: translateY(-50%);
 
     font-size: 0;
-    color: var(--icon);
 
     &_icon {
       transform: rotate(90deg);

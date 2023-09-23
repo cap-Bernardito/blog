@@ -48,3 +48,10 @@ export const OutlineDark: Story = {
   },
   decorators: [ThemeDecorator(Theme.DARK)],
 };
+
+export const Icon: Story = {
+  args: {
+    children: "BUTTON",
+    variant: ButtonVariant.ICON,
+  },
+};

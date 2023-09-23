@@ -21,7 +21,7 @@ export const SidebarMain: React.FC<SidebarMainProps> = ({ className }) => {
         <Button
           className={css.root__toggle}
           data-testid="sidebar-toggle"
-          variant={ButtonVariant.CLEAR}
+          variant={ButtonVariant.ICON}
           onClick={() => setCollapsed((state) => !state)}
         >
           <ArrowBottom className={css.root__toggle_icon} width={32} height={32} viewBox="0 0 32 32" />

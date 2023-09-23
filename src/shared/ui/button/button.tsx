@@ -5,6 +5,7 @@ import css from "./button.module.scss";
 export enum ButtonVariant {
   CLEAR = "clear",
   OUTLINE = "outline",
+  ICON = "icon",
 }
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {

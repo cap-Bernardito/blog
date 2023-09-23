@@ -2,8 +2,7 @@ import React from "react";
 import cn from "classnames";
 import "shared/config/i18n/i18n";
 import { useTranslation } from "react-i18next";
-import { Button } from "shared/ui/button";
-import css from "./lang-switcher.module.scss";
+import { Button, ButtonVariant } from "shared/ui/button";
 
 type LangSwitcherProps = {
   className?: string;
@@ -14,10 +13,11 @@ export const LangSwitcher: React.FC<LangSwitcherProps> = ({ className }) => {
 
   return (
     <Button
-      className={cn(css.root, className)}
+      className={cn(className)}
+      variant={ButtonVariant.ICON}
       onClick={() => i18n.changeLanguage(i18n.language === "ru" ? "en" : "ru")}
     >
-      {t("Переключить язык")}
+      {t("RU")}
     </Button>
   );
 };
