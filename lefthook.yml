@@ -9,6 +9,8 @@ pre-commit:
     lintCSS:
       glob: '*.{css,scss}'
       run: npx stylelint --fix {staged_files} && git add {staged_files}
+    testJest:
+      run: npm test
 
 commit-msg:
   commands:
