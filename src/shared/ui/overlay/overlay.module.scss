@@ -1,0 +1,10 @@
+@use "../../../app/styles/variables/mixin.scss" as *;
+
+.root {
+  @include modal-animation(0.15s, 0.6);
+
+  position: fixed;
+  z-index: var(--z-index-overlay);
+  inset: 0;
+  background-color: var(--bg);
+}

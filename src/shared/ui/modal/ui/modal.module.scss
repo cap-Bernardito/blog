@@ -1,0 +1,94 @@
+@use "../../../../app/styles/variables/mixin.scss" as *;
+
+$spacer: 8px;
+$close-size: 20px;
+$inline-fields-spacer: $spacer * 5;
+$top-fields-spacer: $spacer * 5;
+$bottom-fields-spacer: $spacer * 7;
+
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+:global(.modal-opened) {
+  overflow: hidden;
+}
+
+.root {
+  $v-spaser: $spacer * 5;
+
+  @include modal-animation;
+
+  position: fixed;
+  z-index: var(--z-index-modal);
+  inset: 0;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  &__inner {
+    @include media-bp-down(tablet) {
+      display: block;
+      min-height: 100vh;
+      margin: 0;
+      background: var(--light-bg);
+    }
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: calc(100% - #{$v-spaser * 2});
+    margin: $v-spaser;
+  }
+
+  &__content {
+    @include media-bp-up(tablet) {
+      border: 1px solid rgb(var(--icon-rgb) / 20%);
+      border-radius: $spacer * 2;
+    }
+
+    @include media-bp-down(tablet) {
+      padding: $top-fields-spacer * 0.5 $inline-fields-spacer * 0.5 $bottom-fields-spacer * 0.5;
+      background: var(--light-bg);
+    }
+
+    position: relative;
+
+    width: 100%;
+    max-width: 720px;
+    padding: $top-fields-spacer $inline-fields-spacer $bottom-fields-spacer;
+
+    background: var(--light-bg);
+
+    &_withoutHeader {
+      padding-top: $spacer * 8;
+      padding-bottom: $spacer * 7;
+    }
+  }
+}
+
+.close {
+  cursor: pointer;
+
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  color: var(--icon);
+
+  transition: var(--transition-btn);
+
+  &:hover {
+    color: var(--accent);
+  }
+}
+
+.header {
+  @include media-bp-down(tablet) {
+    margin-right: 20px + $close-size;
+    margin-bottom: 10vh;
+    font-size: 28px;
+  }
+
+  margin-right: $close-size;
+  margin-bottom: var(--spacer-x2);
+  font: var(--font-xl);
+}

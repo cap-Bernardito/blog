@@ -57,6 +57,7 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-i18next": "^6.0.3",
     "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-storybook": "^0.6.14",
     "html-webpack-plugin": "^5.5.3",
     "identity-obj-proxy": "^3.0.0",
@@ -109,6 +110,7 @@
     }
   },
   "loki": {
+    "chromeSelector": "#modals > *, #storybook-root > *",
     "configurations": {
       "chrome.laptop": {
         "target": "chrome.docker",

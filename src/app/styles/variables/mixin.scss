@@ -1,0 +1,50 @@
+// Animations
+@mixin modal-animation($time: 0.3s, $opacity: 1) {
+  animation: open-modal $time;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+
+  @keyframes open-modal {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: $opacity;
+    }
+  }
+}
+
+@mixin media-bp-up($breakpoint) {
+  @if $breakpoint == desktop {
+    @media screen and (width >= 1138px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tablet {
+    @media screen and (width >= 560px) {
+      @content;
+    }
+  }
+}
+
+@mixin media-bp-down($breakpoint) {
+  @if $breakpoint == desktop {
+    @media screen and (width <= 1137px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tablet {
+    @media screen and (width <= 559px) {
+      @content;
+    }
+  }
+}
+
+@mixin no-touch() {
+  @media (hover: hover) and (pointer: fine) {
+    @content;
+  }
+}
