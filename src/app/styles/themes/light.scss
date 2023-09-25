@@ -1,18 +1,35 @@
-.theme-light {
-  --dark-bg: #fff;
-  --bg: #eff5f6;
-  --light-bg: #e2eef1;
-  --text: #141c1f;
-  --hint: #adbcc0;
-  --cancel: #f77;
-  --save: #62de85;
-  --icon: #5ed3f3;
-  --accent: #00c8ff;
-  --orange: coral;
+@use "sass:map";
 
-  --primary-color: var(--accent);
-  --secondary-color: var(--icon);
-  --warning-color: var(--orange);
-  --success-color: var(--save);
-  --error-color: var(--cancel);
+$colors-pallete: (
+  "dark-bg": #fff,
+  "bg": #eff5f6,
+  "light-bg": #e2eef1,
+  "text": #141c1f,
+  "hint": #adbcc0,
+  "cancel": #f77,
+  "save": #62de85,
+  "icon": #5ed3f3,
+  "accent": #00c8ff,
+  "orange": #ff7f50,
+);
+$colors-theme: (
+  "primary": map.get($colors-pallete, "accent"),
+  "secondary": map.get($colors-pallete, "icon"),
+  "warning": map.get($colors-pallete, "orange"),
+  "success": map.get($colors-pallete, "save"),
+  "error": map.get($colors-pallete, "cancel"),
+);
+
+.theme-light {
+  @if $colors-pallete {
+    @each $key, $value in $colors_theme {
+      --#{$key}-color: #{$value};
+      --#{$key}-color-rgb: #{HexToRGB($value)};
+    }
+
+    @each $key, $value in $colors-pallete {
+      --#{$key}: #{$value};
+      --#{$key}-rgb: #{HexToRGB($value)};
+    }
+  }
 }

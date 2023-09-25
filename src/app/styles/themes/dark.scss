@@ -1,18 +1,37 @@
-.theme-dark {
-  --dark-bg: #090f11;
-  --bg: #0c1214;
-  --light-bg: #151c1f;
-  --text: #dbdbdb;
-  --hint: #555;
-  --cancel: #d95757;
-  --save: #6cd98b;
-  --icon: #74a2b2;
-  --accent: #5ed3f3;
-  --orange: coral;
+@use "sass:map";
 
-  --primary-color: var(--accent);
-  --secondary-color: var(--icon);
-  --warning-color: var(--orange);
-  --success-color: var(--save);
-  --error-color: var(--cancel);
+$colors-pallete: (
+  "dark-bg": #090f11,
+  "bg": #0c1214,
+  "light-bg": #151c1f,
+  "text": #dbdbdb,
+  "hint": #555,
+  "cancel": #d95757,
+  "save": #6cd98b,
+  "icon": #74a2b2,
+  "accent": #5ed3f3,
+  "orange": #ff7f50,
+);
+$colors-theme: (
+  "primary": map.get($colors-pallete, "accent"),
+  "secondary": map.get($colors-pallete, "icon"),
+  "warning": map.get($colors-pallete, "orange"),
+  "success": map.get($colors-pallete, "save"),
+  "error": map.get($colors-pallete, "cancel"),
+);
+
+// Цвет переменной в RGB нужен для указания прозрачности с помощью css vars
+// background: rgb(var(--icon-rgb) / 20%)
+.theme-dark {
+  @if $colors-pallete {
+    @each $key, $value in $colors_theme {
+      --#{$key}-color: #{$value};
+      --#{$key}-color-rgb: #{HexToRGB($value)};
+    }
+
+    @each $key, $value in $colors-pallete {
+      --#{$key}: #{$value};
+      --#{$key}-rgb: #{HexToRGB($value)};
+    }
+  }
 }

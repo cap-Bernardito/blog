@@ -1,0 +1,14 @@
+/* stylelint-disable at-rule-empty-line-before */
+
+// https://habr.com/ru/articles/533084/
+@function HexToRGB($hex) {
+  @return red($hex) green($hex) blue($hex);
+}
+
+@function cl($name, $opacity: false) {
+  @if $opacity {
+    @return rgba(var(--color-#{unquote($name)}--rgb), $opacity);
+  } @else {
+    @return var(--color-#{unquote($name)});
+  }
+}
