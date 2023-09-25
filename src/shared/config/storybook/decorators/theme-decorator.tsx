@@ -1,15 +1,12 @@
 import { Decorator, StoryFn } from "@storybook/react";
+import { ThemeProvider } from "features/theme-switcher";
 import { Theme } from "features/theme-switcher/model/theme-context";
 
 export const ThemeDecorator = (theme: Theme): Decorator =>
   function withTheme(StoryComponent: StoryFn) {
-    const styles = {
-      minHeight: "auto",
-    };
-
     return (
-      <div className={`app app-${theme}`} style={styles}>
+      <ThemeProvider defaultTheme={theme}>
         <StoryComponent />
-      </div>
+      </ThemeProvider>
     );
   };
