@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { ThemeDecorator } from "shared/config/storybook/decorators/theme-decorator";
 import { Theme } from "features/theme-switcher/model/theme-context";
-import { Button, ButtonVariant } from "./button";
+import { Button, ButtonColor, ButtonVariant } from "./button";
+import IconTheme from "shared/assets/icons/theme.svg";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
@@ -49,9 +50,26 @@ export const OutlineDark: Story = {
   decorators: [ThemeDecorator(Theme.DARK)],
 };
 
+export const SecondaryOutline: Story = {
+  args: {
+    children: "Button",
+    variant: ButtonVariant.OUTLINE,
+    color: ButtonColor.SECONDARY_OUTLINE,
+  },
+};
+
+export const SecondaryOutlineDark: Story = {
+  args: {
+    children: "Button",
+    variant: ButtonVariant.OUTLINE,
+    color: ButtonColor.SECONDARY_OUTLINE,
+  },
+  decorators: [ThemeDecorator(Theme.DARK)],
+};
+
 export const Icon: Story = {
   args: {
-    children: "BUTTON",
+    children: <IconTheme width={32} height={32} viewBox="0 0 32 32" />,
     variant: ButtonVariant.ICON,
   },
 };
