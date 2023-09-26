@@ -12,7 +12,12 @@ export const ThemeButton: React.FC<ThemeButtonProps> = ({ className }) => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <Button className={cn(className, theme)} variant={ButtonVariant.ICON} onClick={toggleTheme}>
+    <Button
+      className={cn(className, theme)}
+      variant={ButtonVariant.ICON}
+      onClick={toggleTheme}
+      title="Переключить тему"
+    >
       <Icon />
     </Button>
   );

@@ -4,6 +4,7 @@ import { Overlay } from "../../overlay/overlay";
 import CloseIcon from "shared/assets/icons/close.svg";
 import css from "./modal.module.scss";
 import { Portal } from "shared/ui/portal/portal";
+import { Button, ButtonVariant } from "shared/ui/button";
 
 type ModalProps = {
   className?: string;
@@ -48,15 +49,22 @@ export const Modal: React.FC<React.PropsWithChildren<ModalProps>> = ({ className
     <Portal root={modalRoot}>
       <Overlay />
       <div className={cn(css.root, className)}>
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
         <div className={cn(css.root__inner)} ref={overlayRef} onClick={handleClose}>
           <div
             className={cn(css.root__content, {
               [css.root__content_withoutHeader]: !title,
             })}
           >
-            <div className={cn(css.close)} onClick={onClose} data-test-id="modal-close-button">
+            <Button
+              className={cn(css.close)}
+              onClick={onClose}
+              variant={ButtonVariant.ICON}
+              data-test-id="modal-close-button"
+              title="Закрыть модальное окно"
+            >
               <CloseIcon width={24} height={24} viewBox="0 0 24 24" />
-            </div>
+            </Button>
             {title && <div className={cn(css.header, "text text_type_main-large")}>{title}</div>}
             <div className={cn(css.body, "text text_type_main-default")}>{children}</div>
           </div>

@@ -16,16 +16,17 @@ export const SidebarMain: React.FC<SidebarMainProps> = ({ className, isNarrow = 
   const [collapsed, setCollapsed] = useState(isNarrow);
 
   return (
-    <div className={cn(css.root, className, { [css["collapsed"]]: collapsed })} data-testid="sidebar">
-      <div className={cn(css.root__main)}>
+    <aside className={cn(css.root, className, { [css["collapsed"]]: collapsed })} data-testid="sidebar">
+      <nav className={cn(css.root__main)}>
         <SidebarNav collapsed={collapsed} />
-      </div>
+      </nav>
       <div className={cn(css.root__toggle)}>
         <Button
           className={css.root__toggle_btn}
           data-testid="sidebar-toggle"
           variant={ButtonVariant.ICON}
           onClick={() => setCollapsed((state) => !state)}
+          title="Переключить сайдбар"
         >
           <ArrowBottom className={css.root__toggle_icon} width={32} height={32} viewBox="0 0 32 32" />
         </Button>
@@ -36,6 +37,6 @@ export const SidebarMain: React.FC<SidebarMainProps> = ({ className, isNarrow = 
           <LangSwitcher />
         </div>
       </div>
-    </div>
+    </aside>
   );
 };

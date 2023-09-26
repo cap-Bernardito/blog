@@ -6,5 +6,5 @@ type NavbarProps = {
 };
 
 export const Navbar: React.FC<NavbarProps> = ({ className }) => {
-  return <div className={cn(className)}></div>;
+  return <header className={cn(className)}></header>;
 };

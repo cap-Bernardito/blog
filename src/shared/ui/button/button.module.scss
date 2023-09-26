@@ -6,10 +6,8 @@
 .clear {
   margin: 0;
   padding: 0;
-
   background: none;
   border: none;
-  outline: none;
 }
 
 .icon {
@@ -21,7 +19,6 @@
 
   background: none;
   border: none;
-  outline: none;
 
   &:hover {
     color: var(--accent);
