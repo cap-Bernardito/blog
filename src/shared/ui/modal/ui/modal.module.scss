@@ -42,7 +42,7 @@ $bottom-fields-spacer: $spacer * 7;
   &__content {
     @include media-bp-up(tablet) {
       border: 1px solid rgb(var(--icon-rgb) / 20%);
-      border-radius: $spacer * 2;
+      border-radius: var(--border-radius);
     }
 
     @include media-bp-down(tablet) {

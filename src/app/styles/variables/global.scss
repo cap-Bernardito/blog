@@ -42,4 +42,8 @@
   // Z-index
   --z-index-modal: 2010;
   --z-index-overlay: 2000;
+
+  // Border-radius
+  --border-radius: var(--spacer-x2);
+  --border-radius-sm: var(--spacer);
 }
