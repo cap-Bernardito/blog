@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import cn from "classnames";
 import { ThemeButton } from "features/theme-switcher";
 import { LangSwitcher } from "features/lang-switcher";
+import { LoginModalButton } from "features/auth-by-username";
 import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
 import ArrowBottom from "shared/assets/icons/arrow-bottom.svg";
-import css from "./sidebar-main.module.scss";
 import { SidebarNav } from "../sidebar-nav/sidebar-nav";
+import css from "./sidebar-main.module.scss";
 
 type SidebarMainProps = {
   className?: string;
@@ -25,7 +26,7 @@ export const SidebarMain: React.FC<SidebarMainProps> = ({ className, isNarrow = 
           className={css.root__toggle_btn}
           data-testid="sidebar-toggle"
           variant={ButtonVariant.ICON}
-          color={ButtonColor.SECONDARY_OUTLINE}
+          color={ButtonColor.SECONDARY}
           onClick={() => setCollapsed((state) => !state)}
           title="Переключить сайдбар"
         >
@@ -34,6 +35,7 @@ export const SidebarMain: React.FC<SidebarMainProps> = ({ className, isNarrow = 
       </div>
       <div className={cn(css.root__switchers)}>
         <div className={cn(css.root__switchers_inner)}>
+          <LoginModalButton />
           <ThemeButton />
           <LangSwitcher />
         </div>

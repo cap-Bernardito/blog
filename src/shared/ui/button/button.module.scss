@@ -1,13 +1,28 @@
 .root {
   cursor: pointer;
+
+  padding: 11px 18px;
+
+  color: var(--text);
+
+  background: none;
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--border-radius-sm);
+
   transition: var(--transition-btn);
+
+  &:hover {
+    border-color: var(--accent);
+  }
 }
 
 .clear {
   margin: 0;
   padding: 0;
+
   background: none;
   border: none;
+  border-radius: 0;
 }
 
 .icon {
@@ -18,15 +33,10 @@
 
   background: none;
   border: none;
+  border-radius: 0;
 }
 
-.outline {
-  color: var(--text);
-  background: none;
-  border: 1px solid var(--text);
-}
-
-.secondary-outline {
+.secondary {
   color: var(--secondary-color);
   background: none;
   border-color: var(--secondary-color);

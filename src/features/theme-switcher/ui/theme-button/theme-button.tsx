@@ -16,7 +16,7 @@ export const ThemeButton: React.FC<ThemeButtonProps> = ({ className }) => {
     <Button
       className={cn(className, theme)}
       variant={ButtonVariant.ICON}
-      color={ButtonColor.SECONDARY_OUTLINE}
+      color={ButtonColor.SECONDARY}
       onClick={toggleTheme}
       title="Переключить тему"
     >

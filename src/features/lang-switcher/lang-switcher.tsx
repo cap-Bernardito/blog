@@ -15,7 +15,7 @@ export const LangSwitcher: React.FC<LangSwitcherProps> = ({ className }) => {
     <Button
       className={cn(className)}
       variant={ButtonVariant.CLEAR}
-      color={ButtonColor.SECONDARY_OUTLINE}
+      color={ButtonColor.SECONDARY}
       onClick={() => i18n.changeLanguage(i18n.language === "ru" ? "en" : "ru")}
       title={`Переключить язык на ${t("RU")}`}
     >

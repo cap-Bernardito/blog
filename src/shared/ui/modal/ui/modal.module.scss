@@ -4,7 +4,7 @@ $spacer: 8px;
 $close-size: 20px;
 $inline-fields-spacer: $spacer * 5;
 $top-fields-spacer: $spacer * 5;
-$bottom-fields-spacer: $spacer * 7;
+$bottom-fields-spacer: $spacer * 5;
 
 /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :global(.modal-opened) {
@@ -53,7 +53,7 @@ $bottom-fields-spacer: $spacer * 7;
     position: relative;
 
     width: 100%;
-    max-width: 720px;
+    max-width: 560px;
     padding: $top-fields-spacer $inline-fields-spacer $bottom-fields-spacer;
 
     background: var(--light-bg);
@@ -88,6 +88,7 @@ $bottom-fields-spacer: $spacer * 7;
     font-size: 28px;
   }
 
+  margin-top: 0;
   margin-right: $close-size;
   margin-bottom: var(--spacer-x2);
   font: var(--font-xl);

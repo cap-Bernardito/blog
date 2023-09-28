@@ -4,12 +4,11 @@ import css from "./button.module.scss";
 
 export enum ButtonVariant {
   CLEAR = "clear",
-  OUTLINE = "outline",
   ICON = "icon",
 }
 
 export enum ButtonColor {
-  SECONDARY_OUTLINE = "secondary-outline",
+  SECONDARY = "secondary",
 }
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {

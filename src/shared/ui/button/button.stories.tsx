@@ -35,34 +35,17 @@ export const Clear: Story = {
   },
 };
 
-export const Outline: Story = {
+export const Secondary: Story = {
   args: {
     children: "Button",
-    variant: ButtonVariant.OUTLINE,
+    color: ButtonColor.SECONDARY,
   },
 };
 
-export const OutlineDark: Story = {
+export const SecondaryDark: Story = {
   args: {
     children: "Button",
-    variant: ButtonVariant.OUTLINE,
-  },
-  decorators: [ThemeDecorator(Theme.DARK)],
-};
-
-export const SecondaryOutline: Story = {
-  args: {
-    children: "Button",
-    variant: ButtonVariant.OUTLINE,
-    color: ButtonColor.SECONDARY_OUTLINE,
-  },
-};
-
-export const SecondaryOutlineDark: Story = {
-  args: {
-    children: "Button",
-    variant: ButtonVariant.OUTLINE,
-    color: ButtonColor.SECONDARY_OUTLINE,
+    color: ButtonColor.SECONDARY,
   },
   decorators: [ThemeDecorator(Theme.DARK)],
 };

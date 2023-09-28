@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import cn from "classnames";
-import { Overlay } from "../../overlay/overlay";
+import FocusLock from "react-focus-lock";
 import CloseIcon from "shared/assets/icons/close.svg";
-import css from "./modal.module.scss";
 import { Portal } from "shared/ui/portal/portal";
 import { Button, ButtonVariant } from "shared/ui/button";
+import { Overlay } from "../../overlay/overlay";
+import css from "./modal.module.scss";
 
 type ModalProps = {
   className?: string;
@@ -48,28 +49,39 @@ export const Modal: React.FC<React.PropsWithChildren<ModalProps>> = ({ className
   return (
     <Portal root={modalRoot}>
       <Overlay />
-      <div className={cn(css.root, className)}>
-        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
-        <div className={cn(css.root__inner)} ref={overlayRef} onClick={handleClose}>
-          <div
-            className={cn(css.root__content, {
-              [css.root__content_withoutHeader]: !title,
-            })}
-          >
-            <Button
-              className={cn(css.close)}
-              onClick={onClose}
-              variant={ButtonVariant.ICON}
-              data-test-id="modal-close-button"
-              title="Закрыть модальное окно"
+      <FocusLock returnFocus={true}>
+        <div
+          className={cn(css.root, className)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={title ? "modal_title" : undefined}
+        >
+          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
+          <div className={cn(css.root__inner)} ref={overlayRef} onClick={handleClose}>
+            <div
+              className={cn(css.root__content, {
+                [css.root__content_withoutHeader]: !title,
+              })}
             >
-              <CloseIcon width={24} height={24} viewBox="0 0 24 24" />
-            </Button>
-            {title && <div className={cn(css.header, "text text_type_main-large")}>{title}</div>}
-            <div className={cn(css.body, "text text_type_main-default")}>{children}</div>
+              <Button
+                className={cn(css.close)}
+                onClick={onClose}
+                variant={ButtonVariant.ICON}
+                data-test-id="modal-close-button"
+                title="Закрыть модальное окно"
+              >
+                <CloseIcon width={24} height={24} viewBox="0 0 24 24" />
+              </Button>
+              {title && (
+                <h2 className={cn(css.header, "text text_type_main-large")} id="modal_title">
+                  {title}
+                </h2>
+              )}
+              <div className={cn(css.body, "text text_type_main-default")}>{children}</div>
+            </div>
           </div>
         </div>
-      </div>
+      </FocusLock>
     </Portal>
   );
 };
