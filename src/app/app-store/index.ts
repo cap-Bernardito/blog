@@ -1,2 +1,2 @@
 export * from "./store-hooks";
-export { appStore, makeStore } from "./store";
+export { appStore, makeStore, type RootState } from "./store";

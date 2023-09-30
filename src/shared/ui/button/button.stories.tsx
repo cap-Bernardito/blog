@@ -56,3 +56,18 @@ export const Icon: Story = {
     variant: ButtonVariant.ICON,
   },
 };
+
+export const Disabled: Story = {
+  args: {
+    children: "Button",
+    disabled: true,
+  },
+};
+
+export const DisabledDark: Story = {
+  args: {
+    children: "Button",
+    disabled: true,
+  },
+  decorators: [ThemeDecorator(Theme.DARK)],
+};

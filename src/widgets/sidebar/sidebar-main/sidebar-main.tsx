@@ -3,6 +3,8 @@ import cn from "classnames";
 import { ThemeButton } from "features/theme-switcher";
 import { LangSwitcher } from "features/lang-switcher";
 import { LoginModalButton } from "features/auth-by-username";
+import { userSelectors } from "entities/user";
+import { useAppSelector } from "app/app-store";
 import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
 import ArrowBottom from "shared/assets/icons/arrow-bottom.svg";
 import { SidebarNav } from "../sidebar-nav/sidebar-nav";
@@ -15,9 +17,11 @@ type SidebarMainProps = {
 
 export const SidebarMain: React.FC<SidebarMainProps> = ({ className, isNarrow = false }) => {
   const [collapsed, setCollapsed] = useState(isNarrow);
+  const user = useAppSelector(userSelectors.getAuthData);
 
   return (
     <aside className={cn(css.root, className, { [css["collapsed"]]: collapsed })} data-testid="sidebar">
+      {user && !collapsed && <div className={cn(css.root__userinfo)}>{user.username}</div>}
       <nav className={cn(css.root__main)}>
         <SidebarNav collapsed={collapsed} />
       </nav>

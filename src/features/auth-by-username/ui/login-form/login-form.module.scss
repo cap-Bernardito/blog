@@ -4,4 +4,18 @@
   &__button {
     margin-top: var(--spacer-x2);
   }
+
+  &__info {
+    display: none;
+    margin-top: var(--spacer);
+    color: var(--info-color);
+  }
+}
+
+.active {
+  display: block;
+}
+
+.error {
+  color: var(--error-color);
 }

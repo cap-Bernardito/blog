@@ -39,6 +39,8 @@ const config: Config = {
     "\\.svg": "<rootDir>/config/jest/jestEmptyComponent.tsx",
     "^shared(.*)$": "<rootDir>/src/shared$1",
     "^features(.*)$": "<rootDir>/src/features$1",
+    "^entities(.*)$": "<rootDir>/src/entities$1",
+    "^app(.*)$": "<rootDir>/src/app$1",
   },
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test

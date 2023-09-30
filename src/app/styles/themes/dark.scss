@@ -18,6 +18,7 @@ $colors-theme: (
   "warning": map.get($colors-pallete, "orange"),
   "success": map.get($colors-pallete, "save"),
   "error": map.get($colors-pallete, "cancel"),
+  "info": map.get($colors-pallete, "icon"),
 );
 
 // Цвет переменной в RGB нужен для указания прозрачности с помощью css vars
