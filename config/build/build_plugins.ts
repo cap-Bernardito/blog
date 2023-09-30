@@ -3,6 +3,7 @@ import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 import CopyPlugin from "copy-webpack-plugin";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import type { BuildOptions } from "./types/config";
 
 export const buildPlugins = ({ paths, isDev }: BuildOptions): webpack.WebpackPluginInstance[] =>
@@ -25,6 +26,11 @@ export const buildPlugins = ({ paths, isDev }: BuildOptions): webpack.WebpackPlu
     isDev &&
       new ReactRefreshWebpackPlugin({
         overlay: false,
+      }),
+
+    !isDev &&
+      new BundleAnalyzerPlugin({
+        analyzerMode: "static",
       }),
 
     new CopyPlugin({

@@ -1,9 +1,14 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-export function delayImportForDemo(promise, moduleName) {
+import { ComponentType } from "react";
+
+export function delayImportForDemo<T extends Record<string, ComponentType>, K extends keyof T>(
+  promise: Promise<T>,
+  moduleName: K,
+) {
   return new Promise((resolve) => {
     setTimeout(resolve, 1500);
   })
     .then(() => promise)
-    .then((module) => ({ default: module[moduleName] }));
+    .then((module) => {
+      return { default: module[moduleName] };
+    });
 }

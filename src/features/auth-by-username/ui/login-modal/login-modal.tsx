@@ -1,10 +1,11 @@
-import { useCallback, useEffect } from "react";
+import { Suspense, useCallback, useEffect } from "react";
 import { Modal, useModal } from "shared/ui/modal";
 import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
 import IconAvatar from "shared/assets/icons/avatar.svg";
 import { userSelectors, userActions } from "entities/user";
 import { useAppSelector, useAppDispatch } from "app/app-store";
-import { LoginForm } from "../login-form/login-form";
+import { LoginForm } from "../login-form";
+import { Loader } from "shared/ui/loader/loader";
 
 export const LoginModal = () => {
   const modal = useModal();
@@ -40,7 +41,9 @@ export const LoginModal = () => {
 
       {modal.modalIsOpen && (
         <Modal onClose={modal.closeModal} title="Авторизация">
-          <LoginForm />
+          <Suspense fallback={<Loader />}>
+            <LoginForm />
+          </Suspense>
         </Modal>
       )}
     </>
