@@ -9,12 +9,12 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   error?: string;
 };
 
-export const Input: React.FC<InputProps> = (props) => {
+export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { className, type = "text", label, id, error, ...otherProps } = props;
 
   return (
     <div className={cn(css.root, className)}>
-      <input className={css.root__input} type={type} id={id} {...otherProps} />
+      <input className={css.root__input} type={type} id={id} ref={ref} {...otherProps} />
       <label className={css.root__label} htmlFor={id}>
         {label}
       </label>
@@ -25,4 +25,6 @@ export const Input: React.FC<InputProps> = (props) => {
       )}
     </div>
   );
-};
+});
+
+Input.displayName = "Input";
