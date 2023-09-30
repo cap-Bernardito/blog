@@ -1,11 +1,16 @@
 import { Suspense, useCallback, useEffect } from "react";
-import { Modal, useModal } from "shared/ui/modal";
+
+import { useAppDispatch, useAppSelector } from "app/app-store";
+
+import { userActions, userSelectors } from "entities/user";
+
 import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
-import IconAvatar from "shared/assets/icons/avatar.svg";
-import { userSelectors, userActions } from "entities/user";
-import { useAppSelector, useAppDispatch } from "app/app-store";
-import { LoginForm } from "../login-form";
 import { Loader } from "shared/ui/loader/loader";
+import { Modal, useModal } from "shared/ui/modal";
+
+import IconAvatar from "shared/assets/icons/avatar.svg";
+
+import { LoginForm } from "../login-form";
 
 export const LoginModal = () => {
   const modal = useModal();

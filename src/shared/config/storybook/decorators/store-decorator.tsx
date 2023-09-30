@@ -1,7 +1,8 @@
+import { DeepPartial } from "@reduxjs/toolkit";
 import { StoryFn } from "@storybook/react";
 import { Provider } from "react-redux";
-import { DeepPartial } from "@reduxjs/toolkit";
-import { RootState, appStore, makeStore } from "app/app-store";
+
+import { appStore, makeStore, RootState } from "app/app-store";
 
 export const StoreDecorator = (state?: DeepPartial<RootState>) =>
   function withTheme(StoryComponent: StoryFn) {

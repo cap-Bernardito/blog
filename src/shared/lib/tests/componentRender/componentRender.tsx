@@ -1,11 +1,13 @@
-import React from "react";
-import { MemoryRouter } from "react-router-dom";
-import { Provider } from "react-redux";
-import { render } from "@testing-library/react";
-import { I18nextProvider } from "react-i18next";
-import i18nForTests from "shared/config/i18n/i18nForTests";
 import { DeepPartial } from "@reduxjs/toolkit";
-import { RootState, appStore, makeStore } from "app/app-store";
+import { render } from "@testing-library/react";
+import React from "react";
+import { I18nextProvider } from "react-i18next";
+import { Provider } from "react-redux";
+import { MemoryRouter } from "react-router-dom";
+
+import { appStore, makeStore, RootState } from "app/app-store";
+
+import i18nForTests from "shared/config/i18n/i18nForTests";
 
 export type ComponentRenderOptions = {
   route?: string;

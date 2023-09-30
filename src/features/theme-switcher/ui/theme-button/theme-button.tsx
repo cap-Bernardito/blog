@@ -1,9 +1,12 @@
-import React, { ButtonHTMLAttributes } from "react";
 import cn from "classnames";
+import React, { ButtonHTMLAttributes } from "react";
+
 import { Button, ButtonVariant } from "shared/ui/button";
-import { useTheme } from "../../model/useTheme";
-import Icon from "shared/assets/icons/theme.svg";
 import { ButtonColor } from "shared/ui/button/button";
+
+import Icon from "shared/assets/icons/theme.svg";
+
+import { useTheme } from "../../model/useTheme";
 
 type ThemeButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   className?: string;

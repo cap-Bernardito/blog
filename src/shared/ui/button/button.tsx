@@ -1,5 +1,6 @@
-import React, { ButtonHTMLAttributes } from "react";
 import cn from "classnames";
+import React, { ButtonHTMLAttributes } from "react";
+
 import css from "./button.module.scss";
 
 export enum ButtonVariant {

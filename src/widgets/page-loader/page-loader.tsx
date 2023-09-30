@@ -1,6 +1,8 @@
-import React from "react";
 import cn from "classnames";
+import React from "react";
+
 import { Loader } from "shared/ui/loader/loader";
+
 import css from "./page-loader.module.scss";
 
 type PageLoaderProps = {

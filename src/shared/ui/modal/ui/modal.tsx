@@ -1,10 +1,14 @@
-import React, { useEffect, useRef } from "react";
 import cn from "classnames";
+import React, { useEffect, useRef } from "react";
 import FocusLock from "react-focus-lock";
-import CloseIcon from "shared/assets/icons/close.svg";
-import { Portal } from "shared/ui/portal/portal";
+
 import { Button, ButtonVariant } from "shared/ui/button";
+import { Portal } from "shared/ui/portal/portal";
+
+import CloseIcon from "shared/assets/icons/close.svg";
+
 import { Overlay } from "../../overlay/overlay";
+
 import css from "./modal.module.scss";
 
 type ModalProps = {

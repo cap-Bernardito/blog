@@ -1,6 +1,8 @@
 import { fireEvent, screen } from "@testing-library/react";
-import { SidebarMain as Sidebar } from "./sidebar-main";
+
 import { componentRender } from "shared/lib/tests/componentRender/componentRender";
+
+import { SidebarMain as Sidebar } from "./sidebar-main";
 
 describe("Sidebar", () => {
   it("should be defined", () => {

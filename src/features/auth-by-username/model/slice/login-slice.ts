@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { LoginSchema } from "../types/login-schema";
+
 import { loginByUsername } from "../services/login-by-username";
+import { LoginSchema } from "../types/login-schema";
 
 const initialState: LoginSchema = {
   isLoading: false,

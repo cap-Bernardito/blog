@@ -1,12 +1,16 @@
-import React from "react";
 import cn from "classnames";
+import React from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { Input } from "shared/ui/input";
+
+import { useAppDispatch, useAppSelector } from "app/app-store";
+
 import { Button } from "shared/ui/button";
-import { loginByUsername } from "../../model/services/login-by-username";
+import { Input } from "shared/ui/input";
+
 import { getLoginState } from "../../model/selectors";
-import { useAppSelector, useAppDispatch } from "app/app-store";
+import { loginByUsername } from "../../model/services/login-by-username";
+
 import css from "./login-form.module.scss";
 
 type LoginFormProps = {

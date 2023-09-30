@@ -1,5 +1,6 @@
-import React, { InputHTMLAttributes } from "react";
 import cn from "classnames";
+import React, { InputHTMLAttributes } from "react";
+
 import css from "./input.module.scss";
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {

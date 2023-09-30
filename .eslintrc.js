@@ -21,7 +21,7 @@ module.exports = {
     "plugin:react-hooks/recommended",
     "plugin:jsx-a11y/recommended",
   ],
-  plugins: ["@typescript-eslint", "react", "i18next"],
+  plugins: ["@typescript-eslint", "react", "i18next", "simple-import-sort"],
   settings: {
     react: {
       version: "detect",
@@ -33,6 +33,25 @@ module.exports = {
     },
   },
   rules: {
+    "simple-import-sort/imports": [
+      "warn",
+      {
+        groups: [
+          ["^@?\\w"],
+          ["^(app)(/.*|$)"],
+          ["^(pages)(/.*|$)"],
+          ["^(widgets)(/.*|$)"],
+          ["^(features)(/.*|$)"],
+          ["^(entities)(/.*|$)"],
+          ["^(shared)(/.[^assets]|$)"],
+          ["^(shared/assets)(/.*|$)"],
+          ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+          ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+          ["^.+\\.s?css$"],
+        ],
+      },
+    ],
+    "simple-import-sort/exports": "warn",
     "i18next/no-literal-string": 1,
     "react/react-in-jsx-scope": "off",
     "no-unused-vars": "off",

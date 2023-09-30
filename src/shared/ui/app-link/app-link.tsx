@@ -1,6 +1,7 @@
+import cn from "classnames";
 import React from "react";
 import { Link, LinkProps } from "react-router-dom";
-import cn from "classnames";
+
 import css from "./app-link.module.scss";
 
 export enum AppLinkColor {

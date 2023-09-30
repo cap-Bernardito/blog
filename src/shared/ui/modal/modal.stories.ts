@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ThemeDecorator } from "shared/config/storybook/decorators/theme-decorator";
+
 import { Theme } from "features/theme-switcher/model/theme-context";
+
+import { ThemeDecorator } from "shared/config/storybook/decorators/theme-decorator";
+
 import { Modal } from "./ui/modal";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export

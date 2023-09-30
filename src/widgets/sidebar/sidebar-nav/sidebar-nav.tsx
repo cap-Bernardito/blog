@@ -1,10 +1,13 @@
-import React from "react";
 import cn from "classnames";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import css from "./sidebar-nav.module.scss";
+
 import { AppLink } from "shared/ui/app-link";
+
 import Home from "shared/assets/icons/home.svg";
 import Info from "shared/assets/icons/Info.svg";
+
+import css from "./sidebar-nav.module.scss";
 
 type SidebarNavProps = {
   className?: string;

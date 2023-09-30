@@ -1,7 +1,8 @@
 import path from "path";
 import webpack, { RuleSetRule } from "webpack";
-import { BuildPaths } from "../build/types/config";
+
 import { buildCssLoader } from "../build/loaders/build-css-loader";
+import { BuildPaths } from "../build/types/config";
 
 export default ({ config }: { config: webpack.Configuration }) => {
   const paths: BuildPaths = {

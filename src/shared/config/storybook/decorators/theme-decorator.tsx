@@ -1,4 +1,5 @@
 import { Decorator, StoryFn } from "@storybook/react";
+
 import { ThemeProvider } from "features/theme-switcher";
 import { Theme } from "features/theme-switcher/model/theme-context";
 

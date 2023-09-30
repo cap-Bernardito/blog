@@ -1,13 +1,20 @@
-import React, { useState } from "react";
 import cn from "classnames";
-import { ThemeButton } from "features/theme-switcher";
-import { LangSwitcher } from "features/lang-switcher";
-import { LoginModalButton } from "features/auth-by-username";
-import { userSelectors } from "entities/user";
+import React, { useState } from "react";
+
 import { useAppSelector } from "app/app-store";
+
+import { LoginModalButton } from "features/auth-by-username";
+import { LangSwitcher } from "features/lang-switcher";
+import { ThemeButton } from "features/theme-switcher";
+
+import { userSelectors } from "entities/user";
+
 import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
+
 import ArrowBottom from "shared/assets/icons/arrow-bottom.svg";
+
 import { SidebarNav } from "../sidebar-nav/sidebar-nav";
+
 import css from "./sidebar-main.module.scss";
 
 type SidebarMainProps = {

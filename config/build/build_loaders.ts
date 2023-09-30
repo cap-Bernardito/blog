@@ -1,7 +1,8 @@
-import webpack from "webpack";
 import ReactRefreshTypeScript from "react-refresh-typescript";
-import { BuildOptions } from "./types/config";
+import webpack from "webpack";
+
 import { buildCssLoader } from "./loaders/build-css-loader";
+import { BuildOptions } from "./types/config";
 
 export const buildLoaders = (options: BuildOptions): webpack.RuleSetRule[] => {
   const svgUrlLoader: webpack.RuleSetRule = {

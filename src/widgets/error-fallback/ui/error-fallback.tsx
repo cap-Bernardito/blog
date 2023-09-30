@@ -1,8 +1,10 @@
-import React from "react";
 import cn from "classnames";
-import { useTranslation } from "react-i18next";
+import React from "react";
 import { useErrorBoundary } from "react-error-boundary";
+import { useTranslation } from "react-i18next";
+
 import { Button } from "shared/ui/button";
+
 import css from "./error-fallback.module.scss";
 
 type ErrorFallbackProps = {

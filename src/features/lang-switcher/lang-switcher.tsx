@@ -1,8 +1,10 @@
-import React from "react";
 import cn from "classnames";
-import "shared/config/i18n/i18n";
+import React from "react";
 import { useTranslation } from "react-i18next";
+
 import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
+
+import "shared/config/i18n/i18n";
 
 type LangSwitcherProps = {
   className?: string;

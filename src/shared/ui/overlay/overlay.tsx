@@ -1,5 +1,6 @@
-import React from "react";
 import cn from "classnames";
+import React from "react";
+
 import css from "./overlay.module.scss";
 
 type OverlayProps = {
