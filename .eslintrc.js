@@ -54,6 +54,7 @@ module.exports = {
     "simple-import-sort/exports": "warn",
     "i18next/no-literal-string": 1,
     "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "error",
   },

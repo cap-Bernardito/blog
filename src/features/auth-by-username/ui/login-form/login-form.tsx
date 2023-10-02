@@ -1,15 +1,16 @@
 import cn from "classnames";
-import React from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { useAppDispatch, useAppSelector } from "app/app-store";
 
+import { ReducersList, useAsyncReducerLoader } from "shared/lib/use-async-reducer-loader";
 import { Button } from "shared/ui/button";
 import { Input } from "shared/ui/input";
 
-import { getLoginState } from "../../model/selectors";
+import { getLoginError, getLoginLoading } from "../../model/selectors";
 import { loginByUsername } from "../../model/services/login-by-username";
+import { loginReducer } from "../../model/slice/login-slice";
 
 import css from "./login-form.module.scss";
 
@@ -22,10 +23,15 @@ type IFormInputs = {
   password: string;
 };
 
+const asyncLoginReducer: ReducersList = { loginForm: loginReducer };
+
 export const LoginForm: React.FC<LoginFormProps> = ({ className }) => {
   const { t } = useTranslation();
-  const { error, isLoading } = useAppSelector(getLoginState);
+  const isLoading = useAppSelector(getLoginLoading);
+  const error = useAppSelector(getLoginError);
   const dispatch = useAppDispatch();
+
+  useAsyncReducerLoader(asyncLoginReducer, true);
 
   const { handleSubmit, control } = useForm<IFormInputs>({
     defaultValues: {

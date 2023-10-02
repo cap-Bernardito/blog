@@ -1,10 +1,20 @@
-import { combineReducers } from "@reduxjs/toolkit";
+import type { LoginSchema } from "features/auth-by-username";
 
-import { loginReducer } from "features/auth-by-username/model/slice/login-slice";
+import { userReducer, UserSchema } from "entities/user";
 
-import { userReducer } from "entities/user";
+import { createReducerManager } from "./reducer-manager";
 
-export const rootReducer = combineReducers({
+export type StateSchemaKey = keyof StateSchema;
+
+export type ReducerManager = ReturnType<typeof createReducerManager>;
+
+export type StateSchema = {
+  user: UserSchema;
+
+  // Асинхронные редюсеры
+  loginForm?: LoginSchema;
+};
+
+export const staticReducers = {
   user: userReducer,
-  loginForm: loginReducer,
-});
+};

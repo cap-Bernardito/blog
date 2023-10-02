@@ -1,6 +1,9 @@
 import { Suspense, useCallback, useEffect } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
 import { useAppDispatch, useAppSelector } from "app/app-store";
+
+import { ErrorFallback } from "widgets/error-fallback";
 
 import { userActions, userSelectors } from "entities/user";
 
@@ -28,7 +31,7 @@ export const LoginModal = () => {
   }, [dispatch]);
 
   return (
-    <>
+    <ErrorBoundary fallback={<ErrorFallback />}>
       {user ? (
         <Button onClick={onLogout} variant={ButtonVariant.ICON} color={ButtonColor.SECONDARY} title="Выйти">
           <IconAvatar width={32} height={32} viewBox="0 0 32 32" />
@@ -51,6 +54,6 @@ export const LoginModal = () => {
           </Suspense>
         </Modal>
       )}
-    </>
+    </ErrorBoundary>
   );
 };
