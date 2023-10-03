@@ -16,6 +16,7 @@ import css from "./login-form.module.scss";
 
 type LoginFormProps = {
   className?: string;
+  onSuccess: () => void;
 };
 
 type IFormInputs = {
@@ -25,7 +26,7 @@ type IFormInputs = {
 
 const asyncLoginReducer: ReducersList = { loginForm: loginReducer };
 
-export const LoginForm: React.FC<LoginFormProps> = ({ className }) => {
+export const LoginForm: React.FC<LoginFormProps> = ({ className, onSuccess }) => {
   const { t } = useTranslation();
   const isLoading = useAppSelector(getLoginLoading);
   const error = useAppSelector(getLoginError);
@@ -40,8 +41,12 @@ export const LoginForm: React.FC<LoginFormProps> = ({ className }) => {
     },
   });
 
-  const handleSubmitForm: SubmitHandler<IFormInputs> = ({ login, password }) => {
-    dispatch(loginByUsername({ username: login, password }));
+  const handleSubmitForm: SubmitHandler<IFormInputs> = async ({ login, password }) => {
+    const result = await dispatch(loginByUsername({ username: login, password }));
+
+    if (result.meta.requestStatus === "fulfilled") {
+      onSuccess();
+    }
   };
 
   return (

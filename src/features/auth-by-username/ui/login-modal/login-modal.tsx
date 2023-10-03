@@ -1,4 +1,4 @@
-import { Suspense, useCallback, useEffect } from "react";
+import { Suspense, useCallback } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 import { useAppDispatch, useAppSelector } from "app/app-store";
@@ -19,12 +19,6 @@ export const LoginModal = () => {
   const modal = useModal();
   const user = useAppSelector(userSelectors.getAuthData);
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (user) {
-      modal.closeModal();
-    }
-  }, [modal, user]);
 
   const onLogout = useCallback(() => {
     dispatch(userActions.logout());
@@ -50,7 +44,7 @@ export const LoginModal = () => {
       {modal.modalIsOpen && (
         <Modal onClose={modal.closeModal} title="Авторизация">
           <Suspense fallback={<Loader />}>
-            <LoginForm />
+            <LoginForm onSuccess={modal.closeModal} />
           </Suspense>
         </Modal>
       )}
