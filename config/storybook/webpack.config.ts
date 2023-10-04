@@ -10,6 +10,7 @@ export default ({ config }: { config: webpack.Configuration }) => {
     html: "",
     entry: "",
     src: path.resolve(__dirname, "..", "..", "src"),
+    env: path.resolve(__dirname, "..", "..", "env"),
     locales: "",
     buildLocales: "",
   };

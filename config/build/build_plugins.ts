@@ -1,5 +1,8 @@
 import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 import CopyPlugin from "copy-webpack-plugin";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore, В пакете @types/dotenv-webpack неверные типы опций
+import Dotenv from "dotenv-webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import webpack, { WebpackPluginInstance } from "webpack";
@@ -36,5 +39,10 @@ export const buildPlugins = ({ paths, isDev }: BuildOptions): webpack.WebpackPlu
 
     new CopyPlugin({
       patterns: [{ from: paths.locales, to: paths.buildLocales }],
+    }),
+
+    new Dotenv({
+      path: paths.env,
+      prefix: "import.meta.env.",
     }),
   ].filter(Boolean) as WebpackPluginInstance[];

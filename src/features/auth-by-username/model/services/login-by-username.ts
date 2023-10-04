@@ -3,6 +3,7 @@ import axios from "axios";
 
 import { User, userActions } from "entities/user";
 
+import { configEnv } from "shared/config/config-env";
 import { USER_LOCALSTORAGE_KEY } from "shared/const/localstorage";
 
 type LoginByUsernameProps = {
@@ -14,7 +15,7 @@ export const loginByUsername = createAsyncThunk<User, LoginByUsernameProps, { re
   "login/loginByUsername",
   async (authData, thunkAPI) => {
     try {
-      const response = await axios.post<User>("http://localhost:8000/login", authData);
+      const response = await axios.post<User>(`${configEnv.API_BASEURL}/login`, authData);
 
       if (!response.data) {
         throw new Error();

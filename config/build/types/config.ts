@@ -7,10 +7,10 @@ export type BuildPaths = {
   src: string;
   locales: string;
   buildLocales: string;
+  env: string;
 };
 
 export type BuildEnv = {
-  port: number;
   mode: BuildMode;
 };
 

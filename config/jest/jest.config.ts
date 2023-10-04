@@ -31,7 +31,28 @@ const config: Config = {
   testMatch: ["<rootDir>src/**/*(*.)@(spec|test).[tj]s?(x)"],
 
   // A map from regular expressions to paths to transformers
-  transform: {},
+  transform: {
+    "^.+\\.tsx?$": [
+      "ts-jest",
+      {
+        diagnostics: {
+          ignoreCodes: [1343],
+        },
+        astTransformers: {
+          before: [
+            {
+              path: "node_modules/ts-jest-mock-import-meta",
+              options: {
+                metaObjectReplacement: {
+                  env: { API_BASEURL: "http://localhost:8000", CLIENT_PORT: 3000, SERVER_PORT: 8000 },
+                },
+              },
+            },
+          ],
+        },
+      },
+    ],
+  },
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {

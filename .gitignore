@@ -11,4 +11,5 @@
 # production
 /dist
 
-
+# env
+.env
