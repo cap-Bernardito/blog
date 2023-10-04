@@ -1,5 +1,5 @@
 import path from "path";
-import webpack, { RuleSetRule } from "webpack";
+import webpack from "webpack";
 
 import { buildCssLoader } from "../build/loaders/build-css-loader";
 import { BuildPaths } from "../build/types/config";
@@ -14,10 +14,28 @@ export default ({ config }: { config: webpack.Configuration }) => {
     buildLocales: "",
   };
 
-  config.resolve.modules.push(paths.src);
-  config.resolve.extensions.push(".ts", ".tsx");
+  if (typeof config === "undefined") {
+    return {};
+  }
 
-  config.module.rules = config.module.rules.map((rule: RuleSetRule) => {
+  config.resolve?.modules?.push(paths.src);
+  config.resolve?.extensions?.push(".ts", ".tsx");
+
+  config.plugins?.push(
+    new webpack.DefinePlugin({
+      __IS_DEV__: true,
+    }),
+  );
+
+  if (typeof config.module?.rules === "undefined") {
+    return config;
+  }
+
+  config.module.rules = config.module.rules.map((rule) => {
+    if (!rule || rule === "...") {
+      return rule;
+    }
+
     if (/svg/.test(rule.test as string)) {
       return { ...rule, exclude: /\.svg$/i };
     }
@@ -25,18 +43,12 @@ export default ({ config }: { config: webpack.Configuration }) => {
     return rule;
   });
 
-  config.module.rules.push({
+  config.module.rules?.push({
     test: /\.svg$/,
     use: ["@svgr/webpack"],
   });
 
-  config.module.rules.push(buildCssLoader({ isDev: true }));
-
-  config.plugins.push(
-    new webpack.DefinePlugin({
-      __IS_DEV__: true,
-    }),
-  );
+  config.module.rules?.push(buildCssLoader({ isDev: true }));
 
   return config;
 };

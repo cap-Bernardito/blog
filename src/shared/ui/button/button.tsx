@@ -22,7 +22,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = (props) =>
   const { className, children, variant, color, ...otherProps } = props;
 
   return (
-    <button className={cn(css.root, className, css[variant], css[color])} {...otherProps}>
+    <button className={cn(css.root, className, variant && css[variant], color && css[color])} {...otherProps}>
       {children}
     </button>
   );

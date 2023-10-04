@@ -14,7 +14,7 @@ import { loginReducer } from "../../model/slice/login-slice";
 
 import css from "./login-form.module.scss";
 
-type LoginFormProps = {
+export type LoginFormProps = {
   className?: string;
   onSuccess: () => void;
 };

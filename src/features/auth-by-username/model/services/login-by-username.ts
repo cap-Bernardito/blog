@@ -28,7 +28,13 @@ export const loginByUsername = createAsyncThunk<User, LoginByUsernameProps, { re
       // TODO: сделать обработку ошибок, когда API устаканится
       console.log(e);
 
-      return thunkAPI.rejectWithValue(e.message);
+      let errorMessage = "";
+
+      if (e instanceof Error) {
+        errorMessage = e.message;
+      }
+
+      return thunkAPI.rejectWithValue(errorMessage);
     }
   },
 );

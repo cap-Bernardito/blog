@@ -10,7 +10,7 @@ import css from "./sidebar-nav-item.module.scss";
 
 type SidebarNavItemProps = {
   className?: string;
-  collapsed: boolean;
+  collapsed?: boolean;
   item: SidebarNavItemType;
 };
 
