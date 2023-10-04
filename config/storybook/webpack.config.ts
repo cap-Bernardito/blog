@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore, В пакете @types/dotenv-webpack неверные типы опций
+import Dotenv from "dotenv-webpack";
 import path from "path";
 import webpack from "webpack";
 
@@ -10,7 +13,7 @@ export default ({ config }: { config: webpack.Configuration }) => {
     html: "",
     entry: "",
     src: path.resolve(__dirname, "..", "..", "src"),
-    env: path.resolve(__dirname, "..", "..", "env"),
+    env: path.resolve(__dirname, "..", "..", ".env"),
     locales: "",
     buildLocales: "",
   };
@@ -25,6 +28,10 @@ export default ({ config }: { config: webpack.Configuration }) => {
   config.plugins?.push(
     new webpack.DefinePlugin({
       __IS_DEV__: true,
+    }),
+    new Dotenv({
+      path: paths.env,
+      prefix: "import.meta.env.",
     }),
   );
 
