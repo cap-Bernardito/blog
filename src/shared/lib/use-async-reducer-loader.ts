@@ -2,14 +2,14 @@ import { Reducer } from "@reduxjs/toolkit";
 import { useEffect } from "react";
 import { useStore } from "react-redux";
 
-import { StateSchemaKey, useAppDispatch } from "app/app-store";
+import { AsyncStateSchemaKey, StateSchemaKey, useAppDispatch } from "app/app-store";
 import { AppStoreWithReducerManager } from "app/app-store/store";
 
-export type ReducersList = {
-  [name in StateSchemaKey]?: Reducer;
+export type AsyncReducersList = {
+  [name in AsyncStateSchemaKey]?: Reducer;
 };
 
-export const useAsyncReducerLoader = (reducers: ReducersList, removeAfterUnmount = false) => {
+export const useAsyncReducerLoader = (reducers: AsyncReducersList, removeAfterUnmount = false) => {
   const store = useStore() as AppStoreWithReducerManager;
   const dispatch = useAppDispatch();
 

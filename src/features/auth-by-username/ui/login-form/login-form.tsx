@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import { useAppDispatch, useAppSelector } from "app/app-store";
 
-import { ReducersList, useAsyncReducerLoader } from "shared/lib/use-async-reducer-loader";
+import { AsyncReducersList, useAsyncReducerLoader } from "shared/lib/use-async-reducer-loader";
 import { Button } from "shared/ui/button";
 import { Input } from "shared/ui/input";
 
@@ -24,7 +24,7 @@ type IFormInputs = {
   password: string;
 };
 
-const asyncLoginReducer: ReducersList = { loginForm: loginReducer };
+const asyncLoginReducer: AsyncReducersList = { loginForm: loginReducer };
 
 export const LoginForm: React.FC<LoginFormProps> = ({ className, onSuccess }) => {
   const { t } = useTranslation();
