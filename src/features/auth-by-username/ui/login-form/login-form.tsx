@@ -1,7 +1,9 @@
 import cn from "classnames";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
+import { routePaths } from "app/app-router/app-router-config";
 import { useAppDispatch, useAppSelector } from "app/app-store";
 
 import { AsyncReducersList, useAsyncReducerLoader } from "shared/lib/use-async-reducer-loader";
@@ -31,6 +33,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ className, onSuccess }) =>
   const isLoading = useAppSelector(getLoginLoading);
   const error = useAppSelector(getLoginError);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useAsyncReducerLoader(asyncLoginReducer, true);
 
@@ -46,6 +49,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ className, onSuccess }) =>
 
     if (result.meta.requestStatus === "fulfilled") {
       onSuccess();
+      navigate(routePaths.profile);
     }
   };
 

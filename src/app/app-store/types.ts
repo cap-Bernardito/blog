@@ -5,8 +5,6 @@ import type { LoginSchema } from "features/auth-by-username";
 import { ProfileSchema } from "entities/profile/model/types/profile";
 import { UserSchema } from "entities/user";
 
-import { request } from "shared/api/api-request";
-
 import { createReducerManager } from "./reducer-manager";
 
 export type StateSchemaKey = keyof StateSchema;
@@ -32,7 +30,4 @@ export type StateSchema = StaticStateSchema & AsyncStateSchema;
 
 export type ThunkConfig<T> = {
   rejectValue: T;
-  extra: {
-    api: typeof request;
-  };
 };

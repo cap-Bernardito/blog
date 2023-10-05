@@ -2,8 +2,6 @@ import { CombinedState, configureStore, Reducer, ReducersMapObject } from "@redu
 
 import { createReducerManager } from "app/app-store/reducer-manager";
 
-import { request } from "shared/api/api-request";
-
 import { staticReducers } from "./root-reducer";
 import { ReducerManager, StateSchema } from "./types";
 
@@ -19,14 +17,6 @@ export const makeStore = (preloadedState?: StateSchema, asyncReducers?: Reducers
     reducer: reducerManager.reduce as Reducer<CombinedState<StateSchema>>,
     devTools: __IS_DEV__,
     preloadedState,
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({
-        thunk: {
-          extraArgument: {
-            api: request,
-          },
-        },
-      }),
   });
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment

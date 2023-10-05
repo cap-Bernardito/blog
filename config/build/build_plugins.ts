@@ -1,4 +1,5 @@
 import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
+import StatoscopeWebpackPlugin from "@statoscope/webpack-plugin";
 import CopyPlugin from "copy-webpack-plugin";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore, В пакете @types/dotenv-webpack неверные типы опций
@@ -6,7 +7,6 @@ import Dotenv from "dotenv-webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import webpack, { WebpackPluginInstance } from "webpack";
-import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
 import type { BuildOptions } from "./types/config";
 
@@ -33,8 +33,8 @@ export const buildPlugins = ({ paths, isDev }: BuildOptions): webpack.WebpackPlu
       }),
 
     !isDev &&
-      new BundleAnalyzerPlugin({
-        analyzerMode: "static",
+      new StatoscopeWebpackPlugin({
+        compressor: false,
       }),
 
     new CopyPlugin({

@@ -1,6 +1,10 @@
 import cn from "classnames";
 import React, { useMemo } from "react";
 
+import { useAppSelector } from "app/app-store";
+
+import { userSelectors } from "entities/user";
+
 import { SidebarItemsList } from "../../model/nav-items";
 import { SidebarNavItem } from "../sidebar-nav-item/sidebar-nav-item";
 
@@ -12,12 +16,24 @@ type SidebarNavProps = {
 };
 
 export const SidebarNav: React.FC<SidebarNavProps> = ({ className, collapsed }) => {
+  const isAuth = useAppSelector(userSelectors.getAuthData);
   const navItems = useMemo(
     () =>
-      SidebarItemsList.map((props) => (
-        <SidebarNavItem className={css.nav__item} key={props.title} collapsed={collapsed} item={{ ...props }} />
-      )),
-    [collapsed],
+      SidebarItemsList.map(({ privateRoute, ...otherProps }) => {
+        if (privateRoute && !isAuth) {
+          return null;
+        }
+
+        return (
+          <SidebarNavItem
+            className={css.nav__item}
+            key={otherProps.title}
+            collapsed={collapsed}
+            item={{ ...otherProps }}
+          />
+        );
+      }),
+    [collapsed, isAuth],
   );
 
   return (

@@ -7,6 +7,7 @@ import Home from "shared/assets/icons/home.svg";
 import Info from "shared/assets/icons/Info.svg";
 
 export type SidebarNavItemType = {
+  privateRoute?: boolean;
   path: string;
   title: string;
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;
@@ -24,6 +25,7 @@ export const SidebarItemsList: SidebarNavItemType[] = [
     title: "О нас",
   },
   {
+    privateRoute: true,
     path: routePaths.profile,
     Icon: Profile,
     title: "Профиль",

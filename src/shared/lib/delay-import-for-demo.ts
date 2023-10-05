@@ -6,7 +6,7 @@ export function delayImportForDemo<
   P = Record<string, never>,
 >(promise: Promise<T>, moduleName: K) {
   return new Promise((resolve) => {
-    setTimeout(resolve, 1500);
+    setTimeout(resolve, 800);
   })
     .then(() => promise)
     .then((module) => {

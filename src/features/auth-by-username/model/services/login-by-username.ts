@@ -4,6 +4,7 @@ import { ThunkConfig } from "app/app-store";
 
 import { User, userActions } from "entities/user";
 
+import { request } from "shared/api";
 import { configEnv } from "shared/config/config-env";
 import { USER_LOCALSTORAGE_KEY } from "shared/const/localstorage";
 
@@ -16,10 +17,7 @@ export const loginByUsername = createAsyncThunk<User, LoginByUsernameProps, Thun
   "login/loginByUsername",
   async (authData, thunkAPI) => {
     try {
-      const response = await thunkAPI.extra.api.post<User, LoginByUsernameProps>(
-        `${configEnv.API_BASEURL}/login`,
-        authData,
-      );
+      const response = await request.post<User, LoginByUsernameProps>(`${configEnv.API_BASEURL}/login`, authData);
 
       if (!response) {
         throw new Error();
