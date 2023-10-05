@@ -2,6 +2,9 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 import { configEnv } from "shared/config/config-env";
 import { USER_LOCALSTORAGE_KEY } from "shared/const/localstorage";
+import SyncStorage from "shared/lib/sync-storage/sync-storage";
+
+const storage = new SyncStorage().create("local");
 
 const axiosInstance = axios.create({
   baseURL: configEnv.API_BASEURL,
@@ -10,7 +13,11 @@ const axiosInstance = axios.create({
 
 // TODO: приделать нормальную авторизацию
 const getConfig = (config?: AxiosRequestConfig): AxiosRequestConfig => {
-  const autorizationHeader = localStorage.getItem(USER_LOCALSTORAGE_KEY) || "";
+  const autorizationHeader = storage.get(USER_LOCALSTORAGE_KEY) && "atata";
+
+  if (typeof autorizationHeader !== "string") {
+    return {};
+  }
 
   if (typeof config === "undefined") {
     return {

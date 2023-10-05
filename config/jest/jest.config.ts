@@ -74,6 +74,9 @@ const config: Config = {
     __IS_DEV__: true,
   },
 
+  // Automatically reset mock state before every test
+  resetMocks: false,
+
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
@@ -148,9 +151,6 @@ const config: Config = {
 
   // Use this configuration option to add custom reporters to Jest
   // reporters: undefined,
-
-  // Automatically reset mock state before every test
-  // resetMocks: false,
 
   // Reset the module registry before running each individual test
   // resetModules: false,

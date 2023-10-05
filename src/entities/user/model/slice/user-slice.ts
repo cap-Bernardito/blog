@@ -1,8 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { USER_LOCALSTORAGE_KEY } from "shared/const/localstorage";
+import SyncStorage from "shared/lib/sync-storage/sync-storage";
 
-import { User, UserSchema } from "../types/user";
+import { isUser, User, UserSchema } from "../types/user";
+
+const storage = new SyncStorage().create("local");
 
 const initialState: UserSchema = {};
 
@@ -14,15 +17,15 @@ export const userSlice = createSlice({
       state.authData = action.payload;
     },
     initAuthData: (state) => {
-      const user = localStorage.getItem(USER_LOCALSTORAGE_KEY);
+      const user = storage.get(USER_LOCALSTORAGE_KEY);
 
-      if (user) {
-        state.authData = JSON.parse(user) as User;
+      if (isUser(user)) {
+        state.authData = user;
       }
     },
     logout: (state) => {
       state.authData = undefined;
-      localStorage.removeItem(USER_LOCALSTORAGE_KEY);
+      storage.remove(USER_LOCALSTORAGE_KEY);
     },
   },
 });

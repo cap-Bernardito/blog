@@ -7,11 +7,14 @@ import { User, userActions } from "entities/user";
 import { request } from "shared/api";
 import { configEnv } from "shared/config/config-env";
 import { USER_LOCALSTORAGE_KEY } from "shared/const/localstorage";
+import SyncStorage from "shared/lib/sync-storage/sync-storage";
 
 type LoginByUsernameProps = {
   username: string;
   password: string;
 };
+
+const storage = new SyncStorage().create("local");
 
 export const loginByUsername = createAsyncThunk<User, LoginByUsernameProps, ThunkConfig<string>>(
   "login/loginByUsername",
@@ -23,7 +26,7 @@ export const loginByUsername = createAsyncThunk<User, LoginByUsernameProps, Thun
         throw new Error();
       }
 
-      localStorage.setItem(USER_LOCALSTORAGE_KEY, JSON.stringify(response));
+      storage.add(USER_LOCALSTORAGE_KEY, response);
       thunkAPI.dispatch(userActions.setAuthData(response));
 
       return response;
