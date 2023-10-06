@@ -1,28 +1,55 @@
-.root {
-  // Nothing
-}
+$gap: 32px;
 
-.header {
-  // Nothing
-}
-
-.content {
-  $gap: var(--spacer-x2);
-
+@mixin children-centered() {
   display: flex;
-  flex-wrap: nowrap;
-  min-height: 100vh;
-  padding: $gap;
+  justify-content: center;
+  padding-top: $gap;
 
-  &__sidebar {
-    margin-right: $gap;
+  & > div {
+    max-width: calc(100% - #{$gap});
   }
+}
 
-  &__main {
-    flex: 1 1 auto;
-  }
+.root {
+  display: grid;
+  grid-template: minmax(100vh, auto) auto / auto minmax(auto, 284px) minmax(320px, 920px) minmax(auto, 284px) minmax(
+      auto,
+      284px
+    );
+  grid-template-areas: "sidebar__left controls main sidebar__right tools" "footer footer footer footer footer";
+}
+
+.sidebar__left {
+  grid-area: sidebar__left;
+  padding: $gap $gap * 0.5 $gap $gap;
+}
+
+.controls {
+  @include children-centered;
+
+  grid-area: controls;
+}
+
+.main {
+  @include children-centered;
+
+  grid-area: main;
+}
+
+.sidebar__right {
+  @include children-centered;
+
+  grid-area: sidebar__right;
+}
+
+.tools {
+  @include children-centered;
+
+  grid-area: tools;
 }
 
 .footer {
-  // Nothing
+  grid-area: footer;
+  margin-bottom: $gap;
+  padding: 0 $gap * 0.5 0 $gap;
 }

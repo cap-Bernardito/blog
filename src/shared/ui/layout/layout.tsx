@@ -5,45 +5,31 @@ import { Outlet } from "react-router-dom";
 import css from "./layout.module.scss";
 
 type LayoutProps = {
-  className?: string;
-  headerSlot: ReactNode;
-  bottomSlot?: ReactNode;
-  sidebarSlot?: ReactNode;
+  footerSlot?: ReactNode;
+  sidebarLeftSlot?: ReactNode;
+  sidebarRightSlot?: ReactNode;
+  controlsSlot?: ReactNode;
+  toolsSlot?: ReactNode;
 };
 
 export const Layout: React.FC<LayoutProps> = (props) => {
-  const { className, headerSlot, bottomSlot, sidebarSlot } = props;
+  const { footerSlot, sidebarLeftSlot, sidebarRightSlot, controlsSlot, toolsSlot } = props;
 
   return (
-    <div className={cn(css.root, className)}>
-      <header className={cn(css.header)}>{headerSlot}</header>
+    <div className={cn(css.root)}>
+      <div className={cn(css.sidebar__left)}>{sidebarLeftSlot}</div>
 
-      <div className={css.content}>
-        <aside className={cn(css.content__sidebar)}>{sidebarSlot}</aside>
+      <div className={css.controls}>{controlsSlot}</div>
 
-        <main className={cn(css.content__main)}>
-          <Outlet />
-        </main>
-      </div>
+      <main className={cn(css.main)}>
+        <Outlet />
+      </main>
 
-      <footer className={css.footer}>{bottomSlot}</footer>
+      <aside className={css.sidebar__right}>{sidebarRightSlot}</aside>
+
+      <div className={css.tools}>{toolsSlot}</div>
+
+      <footer className={css.footer}>{footerSlot}</footer>
     </div>
   );
 };
-
-{
-  /* <div className={cn(css.root, className)}>
-      <header>{headerSlot}</header>
-
-      <div className="content">
-        <aside className="content__sidebar">{sidebarSlot}</aside>
-        <main className="content__main">
-          <Outlet />
-        </main>
-      </div>
-
-      <footer className={css.footer}>
-        {bottomSlot}
-      </footer>
-    </div> */
-}
