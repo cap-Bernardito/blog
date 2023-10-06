@@ -1,8 +1,5 @@
 import { useEffect } from "react";
 
-import { Navbar } from "widgets/navbar";
-import { Sidebar } from "widgets/sidebar";
-
 import { userActions } from "entities/user";
 
 import { AppRouter } from "./app-router";
@@ -17,13 +14,5 @@ export const App = () => {
     dispatch(userActions.initAuthData());
   }, [dispatch]);
 
-  return (
-    <>
-      <Navbar />
-      <div className="content">
-        <Sidebar className="content__sidebar" />
-        <AppRouter />
-      </div>
-    </>
-  );
+  return <AppRouter />;
 };

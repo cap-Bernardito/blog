@@ -14,22 +14,3 @@
   color: var(--text);
   background: var(--bg);
 }
-
-.content {
-  $gap: var(--spacer-x2);
-
-  display: flex;
-  flex-wrap: nowrap;
-  min-height: 100vh;
-  padding: $gap;
-
-  &__sidebar {
-    flex: 0 0 auto;
-    max-height: 880px;
-    margin-right: $gap;
-  }
-
-  &__main {
-    flex: 1 1 auto;
-  }
-}

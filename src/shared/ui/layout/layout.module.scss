@@ -1,0 +1,28 @@
+.root {
+  // Nothing
+}
+
+.header {
+  // Nothing
+}
+
+.content {
+  $gap: var(--spacer-x2);
+
+  display: flex;
+  flex-wrap: nowrap;
+  min-height: 100vh;
+  padding: $gap;
+
+  &__sidebar {
+    margin-right: $gap;
+  }
+
+  &__main {
+    flex: 1 1 auto;
+  }
+}
+
+.footer {
+  // Nothing
+}

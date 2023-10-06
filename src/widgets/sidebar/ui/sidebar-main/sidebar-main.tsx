@@ -27,7 +27,7 @@ export const SidebarMain: React.FC<SidebarMainProps> = ({ className, isNarrow = 
   const user = useAppSelector(userSelectors.getAuthData);
 
   return (
-    <aside className={cn(css.root, className, { [css["collapsed"]]: collapsed })} data-testid="sidebar">
+    <div className={cn(css.root, className, { [css["collapsed"]]: collapsed })} data-testid="sidebar">
       {user && !collapsed && <div className={cn(css.root__userinfo)}>{user.username}</div>}
       <nav className={cn(css.root__main)}>
         <SidebarNav collapsed={collapsed} />
@@ -51,6 +51,6 @@ export const SidebarMain: React.FC<SidebarMainProps> = ({ className, isNarrow = 
           <LangSwitcher />
         </div>
       </div>
-    </aside>
+    </div>
   );
 };
