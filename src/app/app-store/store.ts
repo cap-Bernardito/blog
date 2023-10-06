@@ -3,9 +3,9 @@ import { CombinedState, configureStore, Reducer, ReducersMapObject } from "@redu
 import { createReducerManager } from "app/app-store/reducer-manager";
 
 import { staticReducers } from "./root-reducer";
-import { ReducerManager, StateSchema } from "./types";
+import { AsyncReducersList, ReducerManager, StateSchema } from "./types";
 
-export const makeStore = (preloadedState?: StateSchema, asyncReducers?: ReducersMapObject<StateSchema>) => {
+export const makeStore = (preloadedState?: StateSchema, asyncReducers?: AsyncReducersList) => {
   const rootReducers: ReducersMapObject<StateSchema> = {
     ...asyncReducers,
     ...staticReducers,

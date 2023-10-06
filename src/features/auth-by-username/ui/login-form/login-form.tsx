@@ -4,9 +4,9 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { routePaths } from "app/app-router/app-router-config";
-import { useAppDispatch, useAppSelector } from "app/app-store";
+import { AsyncReducersList, useAppDispatch, useAppSelector } from "app/app-store";
 
-import { AsyncReducersList, useAsyncReducerLoader } from "shared/lib/use-async-reducer-loader";
+import { useAsyncReducerLoader } from "shared/lib/use-async-reducer-loader";
 import { Button } from "shared/ui/button";
 import { Input } from "shared/ui/input";
 

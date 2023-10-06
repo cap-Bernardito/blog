@@ -1,11 +1,14 @@
-$gap: 32px;
+$gap: var(--spacer-x2);
+$half-gap: var(--spacer);
 
 @mixin children-centered() {
   display: flex;
+  align-items: flex-start;
   justify-content: center;
   padding-top: $gap;
 
   & > div {
+    width: 100%;
     max-width: calc(100% - #{$gap});
   }
 }
@@ -21,7 +24,7 @@ $gap: 32px;
 
 .sidebar__left {
   grid-area: sidebar__left;
-  padding: $gap $gap * 0.5 $gap $gap;
+  padding: $gap $half-gap $gap $gap;
 }
 
 .controls {
@@ -51,5 +54,5 @@ $gap: 32px;
 .footer {
   grid-area: footer;
   margin-bottom: $gap;
-  padding: 0 $gap * 0.5 0 $gap;
+  padding: 0 $half-gap 0 $gap;
 }

@@ -2,7 +2,7 @@ import { Reducer } from "@reduxjs/toolkit";
 
 import type { LoginSchema } from "features/auth-by-username";
 
-import { ProfileSchema } from "entities/profile/model/types/profile";
+import { ProfileSchema } from "entities/profile";
 import { UserSchema } from "entities/user";
 
 import { createReducerManager } from "./reducer-manager";
@@ -24,6 +24,10 @@ export type StaticReducers<T> = {
 export type AsyncStateSchema = {
   loginForm?: LoginSchema;
   profile?: ProfileSchema;
+};
+
+export type AsyncReducersList = {
+  [name in AsyncStateSchemaKey]?: Reducer;
 };
 
 export type StateSchema = StaticStateSchema & AsyncStateSchema;

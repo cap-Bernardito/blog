@@ -1,13 +1,12 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import { useAppDispatch, useAppSelector } from "app/app-store";
+import { AsyncReducersList, useAppDispatch, useAppSelector } from "app/app-store";
 
-import { getProfileData } from "entities/profile/model/selectors";
-import { fetchProfileData } from "entities/profile/model/services/fetch-profile-data";
-import { profileReducer } from "entities/profile/model/slice/profile-slice";
+import { fetchProfileData, profileSelectors } from "entities/profile";
+import { profileReducer } from "entities/profile";
 
-import { AsyncReducersList, useAsyncReducerLoader } from "shared/lib/use-async-reducer-loader";
+import { useAsyncReducerLoader } from "shared/lib/use-async-reducer-loader";
 
 import "shared/config/i18n/i18n";
 
@@ -15,7 +14,7 @@ const asyncProfileReducer: AsyncReducersList = { profile: profileReducer };
 
 export const ProfilePage = () => {
   const { t } = useTranslation("profile");
-  const user = useAppSelector(getProfileData);
+  const user = useAppSelector(profileSelectors.getProfileData);
   const dispatch = useAppDispatch();
 
   useAsyncReducerLoader(asyncProfileReducer);

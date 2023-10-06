@@ -28,3 +28,14 @@
     border-radius: 5px;
   }
 }
+
+.img {
+  &_adaptive {
+    max-width: 100%;
+    height: auto;
+  }
+
+  &_round {
+    border-radius: 50%;
+  }
+}

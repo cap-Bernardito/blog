@@ -1,0 +1,8 @@
+.root {
+  position: relative;
+  top: calc(var(--spacer) * -1);
+
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
