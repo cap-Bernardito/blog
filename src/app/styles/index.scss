@@ -13,4 +13,18 @@
   font: var(--font-m);
   color: var(--text);
   background: var(--bg);
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--light-bg);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--icon);
+    border: 1px solid var(--icon);
+    border-radius: 5px;
+  }
 }
