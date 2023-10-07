@@ -9,7 +9,7 @@ type ThemeProviderProps = {
 };
 
 const themeClasses = (() =>
-  [Theme.DARK, Theme.LIGHT].reduce((acc: string[], theme) => {
+  Object.values(Theme).reduce((acc: string[], theme) => {
     acc.push(`theme-${theme}`);
     return acc;
   }, []))();
