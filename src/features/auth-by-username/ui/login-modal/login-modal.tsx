@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from "app/app-store";
 
 import { ErrorFallback } from "widgets/error-fallback";
 
-import { profileSelectors } from "entities/profile";
 import { userActions, userSelectors } from "entities/user";
 
 import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
@@ -15,11 +14,12 @@ import { Modal, useModal } from "shared/ui/modal";
 import IconAvatar from "shared/assets/icons/avatar.svg";
 
 import { LoginForm } from "../login-form";
+import { LoginProfileButton } from "../login-profile-button";
 
 export const LoginModal = () => {
   const modal = useModal();
   const isAuth = useAppSelector(userSelectors.getAuthData);
-  const userProfile = useAppSelector(profileSelectors.getProfileData);
+
   const dispatch = useAppDispatch();
 
   const onLogout = useCallback(() => {
@@ -28,10 +28,10 @@ export const LoginModal = () => {
 
   return (
     <ErrorBoundary fallback={<ErrorFallback />}>
-      {isAuth && userProfile ? (
-        <Button onClick={onLogout} variant={ButtonVariant.ICON} color={ButtonColor.SECONDARY} title="Выйти">
-          <img className="img_adaptive img_round" width={48} height={48} src={userProfile.avatar} alt="Разлогиниться" />
-        </Button>
+      {isAuth ? (
+        <Suspense fallback="...">
+          <LoginProfileButton onClick={onLogout} />
+        </Suspense>
       ) : (
         <Button
           onClick={modal.openModal}

@@ -35,6 +35,7 @@
     "@babel/preset-typescript": "^7.22.15",
     "@commitlint/config-conventional": "^17.7.0",
     "@evilmartians/lefthook": "^1.4.11",
+    "@loki/create-async-callback": "^0.32.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
     "@statoscope/webpack-plugin": "^5.28.0",
     "@storybook/addon-essentials": "^7.4.3",
