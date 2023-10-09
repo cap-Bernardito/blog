@@ -7,7 +7,9 @@ import { isUser, User, UserSchema } from "../types/user";
 
 const storage = new SyncStorage().create("local");
 
-const initialState: UserSchema = {};
+const initialState: UserSchema = {
+  _isInit: false,
+};
 
 export const userSlice = createSlice({
   name: "user",
@@ -22,6 +24,8 @@ export const userSlice = createSlice({
       if (isUser(user)) {
         state.authData = user;
       }
+
+      state._isInit = true;
     },
     logout: (state) => {
       state.authData = undefined;

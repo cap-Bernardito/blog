@@ -6,6 +6,7 @@ import { LayoutWithSidebar } from "app/layouts/layout-with-sidebar";
 import { PageLoader } from "widgets/page-loader/page-loader";
 
 import { routeConfig } from "./app-router-config";
+import { ProtectedRoute } from "./protected-route";
 
 export const AppRouter = () => {
   return (
@@ -17,7 +18,7 @@ export const AppRouter = () => {
             path={path}
             element={
               <Suspense fallback={<PageLoader />}>
-                <>{element}</>
+                <ProtectedRoute>{element}</ProtectedRoute>
               </Suspense>
             }
           />

@@ -7,6 +7,7 @@ export type User = {
 
 export type UserSchema = {
   authData?: User;
+  _isInit: boolean;
 };
 
 export const isUser = (user: unknown): user is User => {

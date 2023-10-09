@@ -1,7 +1,7 @@
 import createAsyncCallback from "@loki/create-async-callback";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { AsyncReducersList } from "app/app-store";
+import { AsyncReducersList, RootState } from "app/app-store";
 
 import { Theme } from "features/theme-switcher/model/theme-context";
 
@@ -15,12 +15,13 @@ import { DelayedComponent } from "shared/lib/tests/delayed-component";
 import { ToolsPanel } from "./tools-panel";
 
 const asyncProfileReducer: AsyncReducersList = { profile: profileReducer };
-const preloadAuthState = {
+const preloadAuthState: RootState = {
   user: {
     authData: {
       id: "1",
       username: "Вася",
     },
+    _isInit: true,
   },
   profile: {
     isLoading: false,
