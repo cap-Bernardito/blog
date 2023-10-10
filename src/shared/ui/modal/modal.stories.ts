@@ -2,8 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Theme } from "features/theme-switcher/model/theme-context";
 
-import { ThemeDecorator } from "shared/config/storybook/decorators/theme-decorator";
-
 import { Modal } from "./ui/modal";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -46,7 +44,7 @@ export const Dark: Story = {
   args: {
     children: mockText,
   },
-  decorators: [ThemeDecorator(Theme.DARK)],
+  parameters: { theme: Theme.DARK },
 };
 
 export const DarkWithTitle: Story = {
@@ -54,5 +52,5 @@ export const DarkWithTitle: Story = {
     children: mockText,
     title: "Modal component",
   },
-  decorators: [ThemeDecorator(Theme.DARK)],
+  parameters: { theme: Theme.DARK },
 };

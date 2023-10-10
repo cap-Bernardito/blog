@@ -7,8 +7,7 @@ import { Theme } from "features/theme-switcher/model/theme-context";
 
 import { profileReducer } from "entities/profile";
 
-import { StoreDecorator } from "shared/config/storybook/decorators/store-decorator";
-import { ThemeDecorator } from "shared/config/storybook/decorators/theme-decorator";
+import { getWithStore } from "shared/config/storybook/decorators/with-store";
 import { Country, Currency } from "shared/const/common";
 import { DelayedComponent } from "shared/lib/tests/delayed-component";
 
@@ -55,7 +54,7 @@ type Story = StoryObj<typeof meta>;
 export const Light: Story = {};
 
 export const Dark: Story = {
-  decorators: [ThemeDecorator(Theme.DARK)],
+  parameters: { theme: Theme.DARK },
 };
 
 export const LightWithAuth = () => (
@@ -64,7 +63,7 @@ export const LightWithAuth = () => (
   </DelayedComponent>
 );
 LightWithAuth.story = {
-  decorators: [StoreDecorator(preloadAuthState, asyncProfileReducer)],
+  decorators: [getWithStore(preloadAuthState, asyncProfileReducer)],
 };
 
 export const DarkWithAuth = () => (
@@ -73,5 +72,6 @@ export const DarkWithAuth = () => (
   </DelayedComponent>
 );
 DarkWithAuth.story = {
-  decorators: [ThemeDecorator(Theme.DARK), StoreDecorator(preloadAuthState, asyncProfileReducer)],
+  parameters: { theme: Theme.DARK },
+  decorators: [getWithStore(preloadAuthState, asyncProfileReducer)],
 };

@@ -2,8 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Theme } from "features/theme-switcher/model/theme-context";
 
-import { ThemeDecorator } from "shared/config/storybook/decorators/theme-decorator";
-
 import IconTheme from "shared/assets/icons/theme.svg";
 
 import { Button, ButtonColor, ButtonVariant } from "./button";
@@ -51,7 +49,7 @@ export const SecondaryDark: Story = {
     children: "Button",
     color: ButtonColor.SECONDARY,
   },
-  decorators: [ThemeDecorator(Theme.DARK)],
+  parameters: { theme: Theme.DARK },
 };
 
 export const Icon: Story = {
@@ -73,5 +71,5 @@ export const DisabledDark: Story = {
     children: "Button",
     disabled: true,
   },
-  decorators: [ThemeDecorator(Theme.DARK)],
+  parameters: { theme: Theme.DARK },
 };

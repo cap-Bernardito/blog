@@ -2,8 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Theme } from "features/theme-switcher/model/theme-context";
 
-import { ThemeDecorator } from "shared/config/storybook/decorators/theme-decorator";
-
 import { Loader } from "./loader";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -27,5 +25,5 @@ type Story = StoryObj<typeof meta>;
 export const Light: Story = {};
 
 export const Dark: Story = {
-  decorators: [ThemeDecorator(Theme.DARK)],
+  parameters: { theme: Theme.DARK },
 };

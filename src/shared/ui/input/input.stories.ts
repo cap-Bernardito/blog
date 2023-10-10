@@ -2,8 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Theme } from "features/theme-switcher/model/theme-context";
 
-import { ThemeDecorator } from "shared/config/storybook/decorators/theme-decorator";
-
 import { Input } from "./input";
 
 const meta = {
@@ -31,7 +29,7 @@ export const DefaultDark: Story = {
     value: "",
     label: "Имя",
   },
-  decorators: [ThemeDecorator(Theme.DARK)],
+  parameters: { theme: Theme.DARK },
 };
 
 export const WithValue: Story = {
@@ -46,7 +44,7 @@ export const WithValueDark: Story = {
     value: "Arabella",
     label: "Имя",
   },
-  decorators: [ThemeDecorator(Theme.DARK)],
+  parameters: { theme: Theme.DARK },
 };
 
 export const WithError: Story = {
@@ -63,7 +61,7 @@ export const WithErrorDark: Story = {
     error: "Поле не может быть пустым",
     label: "Имя",
   },
-  decorators: [ThemeDecorator(Theme.DARK)],
+  parameters: { theme: Theme.DARK },
 };
 
 export const WithErrorValue: Story = {
@@ -80,5 +78,5 @@ export const WithErrorValueDark: Story = {
     label: "Имя",
     error: "Неверный формат имени",
   },
-  decorators: [ThemeDecorator(Theme.DARK)],
+  parameters: { theme: Theme.DARK },
 };

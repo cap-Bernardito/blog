@@ -2,8 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Theme } from "features/theme-switcher/model/theme-context";
 
-import { ThemeDecorator } from "shared/config/storybook/decorators/theme-decorator";
-
 import { SidebarMain as Sidebar } from "./sidebar-main";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -31,10 +29,10 @@ export const LightNarrow: Story = {
 };
 
 export const Dark: Story = {
-  decorators: [ThemeDecorator(Theme.DARK)],
+  parameters: { theme: Theme.DARK },
 };
 
 export const DarkNarrow: Story = {
   args: { isNarrow: true },
-  decorators: [ThemeDecorator(Theme.DARK)],
+  parameters: { theme: Theme.DARK },
 };
