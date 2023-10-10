@@ -8,7 +8,7 @@ import { appStore } from "app/app-store";
 
 import { ErrorFallback } from "widgets/error-fallback";
 
-import { ThemeProvider } from "features/theme-switcher";
+import { ThemeProvider } from "entities/theme";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLDivElement);
 

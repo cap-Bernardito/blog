@@ -7,7 +7,7 @@ import { User, userActions } from "entities/user";
 import { request } from "shared/api";
 import { configEnv } from "shared/config/config-env";
 import { USER_LOCALSTORAGE_KEY } from "shared/const/localstorage";
-import SyncStorage from "shared/lib/sync-storage/sync-storage";
+import { SyncStorage } from "shared/lib/sync-storage";
 
 type LoginByUsernameProps = {
   username: string;

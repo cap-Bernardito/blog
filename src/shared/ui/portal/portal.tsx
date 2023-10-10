@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { ThemeProvider, useTheme } from "features/theme-switcher";
+import { ThemeProvider, useTheme } from "entities/theme";
 
 type PortalProps = {
   root: HTMLDivElement;

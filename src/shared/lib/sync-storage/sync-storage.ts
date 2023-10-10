@@ -2,7 +2,7 @@ import LocalStoragesAdapter from "./local-storages-adapter";
 import MemoryAdapter from "./memory-adapter";
 import { StorageType } from "./types";
 
-export default class SyncStorage {
+export class SyncStorage {
   static #instance: SyncStorage;
 
   constructor() {

@@ -1,6 +1,6 @@
 import type { Preview } from "@storybook/react";
 
-import { Theme } from "../../src/features/theme-switcher/model/theme-context";
+import { Theme } from "../../src/entities/theme";
 import { withI18n } from "../../src/shared/config/storybook/decorators/with-I18n";
 import { withRouter } from "../../src/shared/config/storybook/decorators/with-router";
 import { getWithStore } from "../../src/shared/config/storybook/decorators/with-store";

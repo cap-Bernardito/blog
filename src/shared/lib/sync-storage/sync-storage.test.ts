@@ -1,4 +1,4 @@
-import SyncStorage from "./sync-storage";
+import { SyncStorage } from "./sync-storage";
 
 describe("SyncStorage - localStorage", () => {
   it("should save the string", () => {

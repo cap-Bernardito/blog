@@ -1,6 +1,6 @@
 import { type Decorator } from "@storybook/react";
 
-import { ThemeProvider } from "features/theme-switcher";
+import { ThemeProvider } from "entities/theme";
 
 export const withTheme: Decorator = (StoryFn, context) => {
   const theme = context.parameters.theme || context.globals.theme;

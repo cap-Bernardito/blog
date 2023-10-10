@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { USER_LOCALSTORAGE_KEY } from "shared/const/localstorage";
-import SyncStorage from "shared/lib/sync-storage/sync-storage";
+import { SyncStorage } from "shared/lib/sync-storage";
 
 import { isUser, User, UserSchema } from "../types/user";
 

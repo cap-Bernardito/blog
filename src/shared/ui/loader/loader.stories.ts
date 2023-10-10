@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Theme } from "features/theme-switcher/model/theme-context";
+import { Theme } from "entities/theme";
 
 import { Loader } from "./loader";
 

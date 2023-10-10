@@ -1,8 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
 
+import { SyncStorage } from "shared/lib/sync-storage";
+
 import { LOCAL_STORAGE_THEME_KEY, Theme, ThemeContext } from "../model/theme-context";
 
-export const initialTheme = (localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme) || Theme.LIGHT;
+const storage = new SyncStorage().create("local");
+
+export const initialTheme = (storage.get(LOCAL_STORAGE_THEME_KEY) as Theme) || Theme.LIGHT;
 
 type ThemeProviderProps = {
   defaultTheme?: Theme.DARK | Theme.LIGHT;

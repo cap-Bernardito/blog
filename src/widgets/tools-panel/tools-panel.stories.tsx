@@ -3,9 +3,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { AsyncReducersList, RootState } from "app/app-store";
 
-import { Theme } from "features/theme-switcher/model/theme-context";
-
 import { profileReducer } from "entities/profile";
+import { Theme } from "entities/theme";
 
 import { getWithStore } from "shared/config/storybook/decorators/with-store";
 import { Country, Currency } from "shared/const/common";
