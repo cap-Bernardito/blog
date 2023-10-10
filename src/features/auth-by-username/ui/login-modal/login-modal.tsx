@@ -5,7 +5,7 @@ import { useAppSelector } from "app/app-store";
 
 import { ErrorFallback } from "widgets/error-fallback";
 
-import { userSelectors } from "entities/user";
+import { sessionSelectors } from "entities/session";
 
 import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
 import { Loader } from "shared/ui/loader/loader";
@@ -18,7 +18,7 @@ import { LogoutProfileButton } from "../login-profile-button";
 
 export const LoginModal = () => {
   const modal = useModal();
-  const isAuth = useAppSelector(userSelectors.getAuthData);
+  const isAuth = useAppSelector(sessionSelectors.isAuth);
 
   return (
     <ErrorBoundary fallback={<ErrorFallback />}>

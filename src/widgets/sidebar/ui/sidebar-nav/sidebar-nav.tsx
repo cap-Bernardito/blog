@@ -3,7 +3,7 @@ import React, { useMemo } from "react";
 
 import { useAppSelector } from "app/app-store";
 
-import { userSelectors } from "entities/user";
+import { sessionSelectors } from "entities/session";
 
 import { SidebarItemsList } from "../../model/nav-items";
 import { SidebarNavItem } from "../sidebar-nav-item/sidebar-nav-item";
@@ -16,7 +16,7 @@ type SidebarNavProps = {
 };
 
 export const SidebarNav: React.FC<SidebarNavProps> = ({ className, collapsed }) => {
-  const isAuth = useAppSelector(userSelectors.getAuthData);
+  const isAuth = useAppSelector(sessionSelectors.isAuth);
   const navItems = useMemo(
     () =>
       SidebarItemsList.map(({ privateRoute, ...otherProps }) => {

@@ -14,11 +14,10 @@ import { ToolsPanel } from "./tools-panel";
 
 const asyncProfileReducer: AsyncReducersList = { profile: profileReducer };
 const preloadAuthState: RootState = {
-  user: {
-    authData: {
-      id: "1",
-      username: "Вася",
-    },
+  session: {
+    isAuthorized: true,
+    accessToken: "atata",
+    userId: 1,
     _isInit: true,
   },
   profile: {

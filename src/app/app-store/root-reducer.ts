@@ -1,7 +1,7 @@
-import { userReducer } from "entities/user";
+import { sessionReducer } from "entities/session";
 
 import { StaticReducers, StaticStateSchema } from "./types";
 
 export const staticReducers: StaticReducers<StaticStateSchema> = {
-  user: userReducer,
+  session: sessionReducer,
 };

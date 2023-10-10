@@ -1,12 +1,8 @@
 import cn from "classnames";
 import React, { useState } from "react";
 
-import { useAppSelector } from "app/app-store";
-
 import { ChangeLanguage } from "features/change-language";
 import { ChangeTheme } from "features/change-theme";
-
-import { userSelectors } from "entities/user";
 
 import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
 
@@ -23,11 +19,9 @@ type SidebarMainProps = {
 
 export const SidebarMain: React.FC<SidebarMainProps> = ({ className, isNarrow = false }) => {
   const [collapsed, setCollapsed] = useState(isNarrow);
-  const user = useAppSelector(userSelectors.getAuthData);
 
   return (
     <div className={cn(css.root, className, { [css["collapsed"]]: collapsed })} data-testid="sidebar">
-      {user && !collapsed && <div className={cn(css.root__userinfo)}>{user.username}</div>}
       <nav className={cn(css.root__main)}>
         <SidebarNav collapsed={collapsed} />
       </nav>

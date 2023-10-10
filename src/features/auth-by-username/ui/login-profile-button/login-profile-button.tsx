@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "app/app-store";
 
 import { profileSelectors } from "entities/profile";
-import { userActions } from "entities/user";
+import { sessionActions } from "entities/session";
 
 import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
 
@@ -12,7 +12,7 @@ export const LogoutProfileButton = () => {
   const dispatch = useAppDispatch();
 
   const handleClick = useCallback(() => {
-    dispatch(userActions.logout());
+    dispatch(sessionActions.clearSessionData());
   }, [dispatch]);
 
   return (

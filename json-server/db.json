@@ -22,7 +22,8 @@
     {
       "id": 1,
       "username": "admin",
-      "password": "123"
+      "password": "123",
+      "accessToken": "admin-123"
     }
   ],
   "profile": {

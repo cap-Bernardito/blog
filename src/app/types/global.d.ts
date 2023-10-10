@@ -20,3 +20,18 @@ declare module "*.svg" {
 }
 
 declare const __IS_DEV__: boolean;
+
+declare type Brand<K, T> = K & { [_brand]: T };
+
+/**
+ * Type aliases
+ */
+declare type Phone = string;
+
+declare type Email = string;
+
+declare type Id = number;
+
+declare type DateIso = string;
+
+declare type Timestamp = number;

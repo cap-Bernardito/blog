@@ -34,7 +34,13 @@ server.post("/login", (req, res) => {
     const userFromBd = users.find((user) => user.username === username && user.password === password);
 
     if (userFromBd) {
-      return res.json(userFromBd);
+      const { accessToken, ...user } = userFromBd;
+      const session = {
+        accessToken,
+        user,
+      };
+
+      return res.json(session);
     }
 
     return res.status(403).json({ message: "User not found" });
