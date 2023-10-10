@@ -6,11 +6,11 @@ import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
 
 import "shared/config/i18n/i18n";
 
-type LangSwitcherProps = {
+type ChangeLanguageProps = {
   className?: string;
 };
 
-export const LangSwitcher: React.FC<LangSwitcherProps> = ({ className }) => {
+export const ChangeLanguage: React.FC<ChangeLanguageProps> = ({ className }) => {
   const { t, i18n } = useTranslation();
 
   return (

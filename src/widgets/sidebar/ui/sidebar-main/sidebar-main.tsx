@@ -3,8 +3,8 @@ import React, { useState } from "react";
 
 import { useAppSelector } from "app/app-store";
 
+import { ChangeLanguage } from "features/change-language";
 import { ChangeTheme } from "features/change-theme";
-import { LangSwitcher } from "features/lang-switcher";
 
 import { userSelectors } from "entities/user";
 
@@ -46,7 +46,7 @@ export const SidebarMain: React.FC<SidebarMainProps> = ({ className, isNarrow = 
       <div className={cn(css.root__switchers)}>
         <div className={cn(css.root__switchers_inner)}>
           <ChangeTheme />
-          <LangSwitcher />
+          <ChangeLanguage />
         </div>
       </div>
     </div>
