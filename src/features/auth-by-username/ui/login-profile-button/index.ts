@@ -1,1 +1,1 @@
-export { LoginProfileButtonAsync as LoginProfileButton } from "./login-profile-button.async";
+export { LogoutProfileButtonAsync as LogoutProfileButton } from "./login-profile-button.async";

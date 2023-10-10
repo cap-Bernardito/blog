@@ -1,11 +1,11 @@
-import { Suspense, useCallback } from "react";
+import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
-import { useAppDispatch, useAppSelector } from "app/app-store";
+import { useAppSelector } from "app/app-store";
 
 import { ErrorFallback } from "widgets/error-fallback";
 
-import { userActions, userSelectors } from "entities/user";
+import { userSelectors } from "entities/user";
 
 import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
 import { Loader } from "shared/ui/loader/loader";
@@ -14,23 +14,17 @@ import { Modal, useModal } from "shared/ui/modal";
 import IconAvatar from "shared/assets/icons/avatar.svg";
 
 import { LoginForm } from "../login-form";
-import { LoginProfileButton } from "../login-profile-button";
+import { LogoutProfileButton } from "../login-profile-button";
 
 export const LoginModal = () => {
   const modal = useModal();
   const isAuth = useAppSelector(userSelectors.getAuthData);
 
-  const dispatch = useAppDispatch();
-
-  const onLogout = useCallback(() => {
-    dispatch(userActions.logout());
-  }, [dispatch]);
-
   return (
     <ErrorBoundary fallback={<ErrorFallback />}>
       {isAuth ? (
         <Suspense fallback="...">
-          <LoginProfileButton onClick={onLogout} />
+          <LogoutProfileButton />
         </Suspense>
       ) : (
         <Button
