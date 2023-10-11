@@ -3,6 +3,8 @@ import { AsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { USER_LOCALSTORAGE_KEY } from "shared/const/localstorage";
 import { SyncStorage } from "shared/lib/sync-storage";
 
+import { toSessionUserId } from "../api/types";
+
 import { isSession, Session, SessionSchema } from "./types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -36,7 +38,7 @@ export const sessionSlice = createSlice<
       if (isSession(session)) {
         // NOTE: такое себе, но пока нет сервера для нормальной авторизации
         state.isAuthorized = true;
-        state.userId = Number(session.userId);
+        state.userId = toSessionUserId(Number(session.userId));
         state.accessToken = session.accessToken;
       }
 

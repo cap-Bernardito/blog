@@ -1,6 +1,6 @@
 import { Reducer } from "@reduxjs/toolkit";
 
-import type { LoginSchema } from "features/auth-by-username";
+import type { LoginSchema } from "features/auth/login";
 
 import { ProfileSchema } from "entities/profile";
 import { SessionSchema } from "entities/session";

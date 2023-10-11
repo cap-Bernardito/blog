@@ -5,6 +5,9 @@ import { useAppSelector } from "app/app-store";
 
 import { ErrorFallback } from "widgets/error-fallback";
 
+import { LoginForm } from "features/auth/login";
+import { LogoutButton } from "features/auth/logout";
+
 import { sessionSelectors } from "entities/session";
 
 import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
@@ -12,9 +15,6 @@ import { Loader } from "shared/ui/loader/loader";
 import { Modal, useModal } from "shared/ui/modal";
 
 import IconAvatar from "shared/assets/icons/avatar.svg";
-
-import { LoginForm } from "../login-form";
-import { LogoutProfileButton } from "../login-profile-button";
 
 export const LoginModal = () => {
   const modal = useModal();
@@ -24,7 +24,7 @@ export const LoginModal = () => {
     <ErrorBoundary fallback={<ErrorFallback />}>
       {isAuth ? (
         <Suspense fallback="...">
-          <LogoutProfileButton />
+          <LogoutButton />
         </Suspense>
       ) : (
         <Button

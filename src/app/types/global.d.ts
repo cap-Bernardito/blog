@@ -21,7 +21,8 @@ declare module "*.svg" {
 
 declare const __IS_DEV__: boolean;
 
-declare type Brand<K, T> = K & { [_brand]: T };
+const __brand: unique symbol;
+declare type Brand<K, T> = K & { [__brand]: T };
 
 /**
  * Type aliases

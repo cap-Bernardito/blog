@@ -7,21 +7,19 @@ export type Session = {
   userId: SessionUserId;
 };
 
-export type SessionSchemaAuth = {
-  isAuthorized: true;
-  accessToken: string;
-  userId: SessionUserId;
-  _isInit: true;
-};
-
-export type SessionSchemaNotAuth = {
-  isAuthorized: false;
-  accessToken?: string;
-  userId?: SessionUserId;
-  _isInit?: true;
-};
-
-export type SessionSchema = SessionSchemaAuth | SessionSchemaNotAuth;
+export type SessionSchema =
+  | {
+      isAuthorized: false;
+      accessToken?: string;
+      userId?: SessionUserId;
+      _isInit?: true;
+    }
+  | {
+      isAuthorized: true;
+      accessToken: string;
+      userId: SessionUserId;
+      _isInit: true;
+    };
 
 // TODO: Move user to entities/user/model/types.ts
 export type User = {
