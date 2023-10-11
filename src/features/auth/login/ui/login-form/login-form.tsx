@@ -1,18 +1,18 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import cn from "classnames";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { useCallback } from "react";
+import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { routePaths } from "app/app-router/app-router-config";
-import { AsyncReducersList, useAppDispatch, useAppSelector } from "app/app-store";
+import { useAppDispatch } from "app/app-store";
 
-import { useAsyncReducerLoader } from "shared/lib/use-async-reducer-loader";
 import { Button } from "shared/ui/button";
 import { Input } from "shared/ui/input";
 
-import { getLoginError, getLoginLoading } from "../../model/selectors";
 import { loginByUsername } from "../../model/services/login-by-username";
-import { loginReducer } from "../../model/slice/login-slice";
+import { LoginFormSchema, loginFormSchema } from "../../model/types/login-schema";
 
 import css from "./login-form.module.scss";
 
@@ -21,37 +21,42 @@ export type LoginFormProps = {
   onSuccess: () => void;
 };
 
-type IFormInputs = {
-  login: string;
-  password: string;
-};
-
-const asyncLoginReducer: AsyncReducersList = { loginForm: loginReducer };
-
 export const LoginForm: React.FC<LoginFormProps> = ({ className, onSuccess }) => {
   const { t } = useTranslation();
-  const isLoading = useAppSelector(getLoginLoading);
-  const error = useAppSelector(getLoginError);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  useAsyncReducerLoader(asyncLoginReducer, true);
-
-  const { handleSubmit, control } = useForm<IFormInputs>({
+  const {
+    handleSubmit,
+    control,
+    setError,
+    reset,
+    formState: { isDirty, isSubmitting, errors },
+  } = useForm<LoginFormSchema>({
+    resolver: zodResolver(loginFormSchema),
     defaultValues: {
-      login: "",
+      username: "",
       password: "",
     },
   });
 
-  const handleSubmitForm: SubmitHandler<IFormInputs> = async ({ login, password }) => {
-    const result = await dispatch(loginByUsername({ username: login, password }));
+  const formError = errors?.root?.message;
 
-    if (result.meta.requestStatus === "fulfilled") {
-      onSuccess();
-      navigate(routePaths.profile);
-    }
-  };
+  const handleSubmitForm: SubmitHandler<LoginFormSchema> = useCallback(
+    async ({ username, password }) => {
+      try {
+        await dispatch(loginByUsername({ username, password })).unwrap();
+        reset();
+        onSuccess();
+        navigate(routePaths.profile);
+      } catch (error) {
+        if (typeof error === "string") {
+          setError("root", { message: error });
+        }
+      }
+    },
+    [dispatch, navigate, onSuccess, reset, setError],
+  );
 
   return (
     <form
@@ -62,10 +67,12 @@ export const LoginForm: React.FC<LoginFormProps> = ({ className, onSuccess }) =>
       onSubmit={handleSubmit(handleSubmitForm)}
     >
       <Controller
-        name="login"
+        name="username"
         control={control}
         rules={{ required: true }}
-        render={({ field }) => <Input {...field} label="Логин" id="login" aria-describedby="info" />}
+        render={({ field }) => (
+          <Input {...field} label="Логин" id="username" aria-describedby="info" error={errors.username?.message} />
+        )}
       />
 
       <Controller
@@ -73,19 +80,26 @@ export const LoginForm: React.FC<LoginFormProps> = ({ className, onSuccess }) =>
         control={control}
         rules={{ required: true }}
         render={({ field }) => (
-          <Input {...field} type="password" label="Пароль" id="password" aria-describedby="info" />
+          <Input
+            {...field}
+            type="password"
+            label="Пароль"
+            id="password"
+            aria-describedby="info"
+            error={errors.password?.message}
+          />
         )}
       />
 
       <div
-        className={cn(css.root__info, { [css.active]: isLoading || error, [css.error]: error })}
+        className={cn(css.root__info, { [css.active]: isSubmitting || formError, [css.error]: formError })}
         id="info"
         aria-live="assertive"
       >
-        {error ? error : isLoading ? t("Получение данных") : ""}
+        {formError ? formError : isSubmitting ? t("Получение данных") : ""}
       </div>
 
-      <Button className={cn(css.root__button)} disabled={isLoading}>
+      <Button className={cn(css.root__button)} disabled={!isDirty || isSubmitting}>
         {t("Войти")}
       </Button>
     </form>

@@ -101,6 +101,7 @@
     "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.1",
     "@reduxjs/toolkit": "^1.9.6",
     "axios": "^1.5.1",
     "classnames": "^2.3.2",

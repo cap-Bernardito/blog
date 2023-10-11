@@ -1,7 +1,5 @@
 import { Reducer } from "@reduxjs/toolkit";
 
-import type { LoginSchema } from "features/auth/login";
-
 import { ProfileSchema } from "entities/profile";
 import { SessionSchema } from "entities/session";
 
@@ -22,9 +20,8 @@ export type StaticReducers<T> = {
   [K in keyof T]: Reducer<T[K]>;
 };
 
-export type AsyncStateSchema = {
-  loginForm?: LoginSchema;
-};
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type AsyncStateSchema = {};
 
 export type AsyncReducersList = {
   [name in AsyncStateSchemaKey]?: Reducer;
