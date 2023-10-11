@@ -12,13 +12,13 @@ export const AppRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<LayoutWithSidebar />}>
-        {Object.values(routeConfig).map(({ path, element }) => (
+        {Object.values(routeConfig).map(({ path, element, isProtected }) => (
           <Route
             key={path}
             path={path}
             element={
               <Suspense fallback={<PageLoader />}>
-                <ProtectedRoute>{element}</ProtectedRoute>
+                {isProtected ? <ProtectedRoute>{element}</ProtectedRoute> : element}
               </Suspense>
             }
           />

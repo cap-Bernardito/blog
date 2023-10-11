@@ -6,7 +6,7 @@ import { NotFoundPage } from "pages/not-found-page";
 import { ProfilePage } from "pages/profile-page";
 
 type AppRouteProps = RouteProps & {
-  private?: boolean;
+  isProtected?: boolean;
 };
 
 export const enum AppRoutes {
@@ -35,7 +35,7 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
   [AppRoutes.PROFILE]: {
     path: routePaths[AppRoutes.PROFILE],
     element: <ProfilePage />,
-    private: true,
+    isProtected: true,
   },
   [AppRoutes.NOT_FOUND]: {
     path: routePaths[AppRoutes.NOT_FOUND],
