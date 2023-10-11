@@ -15,6 +15,7 @@ export type ReducerManager = ReturnType<typeof createReducerManager>;
 
 export type StaticStateSchema = {
   session: SessionSchema;
+  profile: ProfileSchema;
 };
 
 export type StaticReducers<T> = {
@@ -23,7 +24,6 @@ export type StaticReducers<T> = {
 
 export type AsyncStateSchema = {
   loginForm?: LoginSchema;
-  profile?: ProfileSchema;
 };
 
 export type AsyncReducersList = {

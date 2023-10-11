@@ -1,9 +1,8 @@
 import createAsyncCallback from "@loki/create-async-callback";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { AsyncReducersList, RootState } from "app/app-store";
+import { RootState } from "app/app-store";
 
-import { profileReducer } from "entities/profile";
 import { toSessionUserId } from "entities/session/api/types";
 import { Theme } from "entities/theme";
 
@@ -13,7 +12,6 @@ import { DelayedComponent } from "shared/lib/tests/delayed-component";
 
 import { ToolsPanel } from "./tools-panel";
 
-const asyncProfileReducer: AsyncReducersList = { profile: profileReducer };
 const preloadAuthState: RootState = {
   session: {
     isAuthorized: true,
@@ -62,7 +60,7 @@ export const LightWithAuth = () => (
   </DelayedComponent>
 );
 LightWithAuth.story = {
-  decorators: [getWithStore(preloadAuthState, asyncProfileReducer)],
+  decorators: [getWithStore(preloadAuthState)],
 };
 
 export const DarkWithAuth = () => (
@@ -72,5 +70,5 @@ export const DarkWithAuth = () => (
 );
 DarkWithAuth.story = {
   parameters: { theme: Theme.DARK },
-  decorators: [getWithStore(preloadAuthState, asyncProfileReducer)],
+  decorators: [getWithStore(preloadAuthState)],
 };
