@@ -2,14 +2,14 @@ import { useCallback } from "react";
 
 import { useAppDispatch, useAppSelector } from "app/app-store";
 
-import { profileSelectors } from "entities/profile";
+import { userSelectors } from "entities/user";
 
 import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
 
 import { logout } from "../../model/services/logout";
 
 export const LogoutButton = () => {
-  const userProfile = useAppSelector(profileSelectors.getProfileData);
+  const userProfile = useAppSelector(userSelectors.getUserData);
   const dispatch = useAppDispatch();
 
   const handleClick = useCallback(() => {

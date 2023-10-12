@@ -2,13 +2,13 @@ import { useTranslation } from "react-i18next";
 
 import { useAppSelector } from "app/app-store";
 
-import { profileSelectors } from "entities/profile";
+import { userSelectors } from "entities/user";
 
 import "shared/config/i18n/i18n";
 
 export const ProfilePage = () => {
   const { t } = useTranslation("profile");
-  const user = useAppSelector(profileSelectors.getProfileData);
+  const user = useAppSelector(userSelectors.getUserData);
 
   return (
     <div>

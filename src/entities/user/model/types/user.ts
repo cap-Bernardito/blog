@@ -1,6 +1,6 @@
 import { Country, Currency } from "shared/const/common";
 
-export type Profile = {
+export type User = {
   first: string;
   lastname: string;
   age: number;
@@ -11,8 +11,8 @@ export type Profile = {
   avatar: string;
 };
 
-export type ProfileSchema = {
-  data?: Profile;
+export type UserSchema = {
+  data?: User;
   isLoading: boolean;
   error?: string;
   readonly: boolean;

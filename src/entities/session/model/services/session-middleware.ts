@@ -2,7 +2,7 @@ import { Middleware } from "@reduxjs/toolkit";
 
 import { AppDispatch } from "app/app-store/store";
 
-import { fetchProfileData } from "entities/profile";
+import { fetchUserData } from "entities/user";
 
 import { USER_LOCALSTORAGE_KEY } from "shared/const/localstorage";
 import { SyncStorage } from "shared/lib/sync-storage";
@@ -20,12 +20,12 @@ export const sessionMiddleware: Middleware = ({ dispatch }: { dispatch: AppDispa
 
       if (isSession(session)) {
         dispatch(sessionActions.setAuthData(session));
-        dispatch(fetchProfileData());
+        dispatch(fetchUserData());
       }
     }
 
     if (sessionActions.setAuthData.match(action)) {
-      dispatch(fetchProfileData());
+      dispatch(fetchUserData());
     }
 
     if (sessionActions.clearSessionData.match(action)) {

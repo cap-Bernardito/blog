@@ -19,7 +19,7 @@ const preloadAuthState: RootState = {
     userId: toSessionUserId(1),
     _isInit: true,
   },
-  profile: {
+  user: {
     isLoading: false,
     readonly: false,
     data: {
