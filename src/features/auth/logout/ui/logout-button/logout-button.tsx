@@ -19,7 +19,7 @@ export const LogoutButton = () => {
   return (
     userProfile && (
       <Button onClick={handleClick} variant={ButtonVariant.ICON} color={ButtonColor.SECONDARY} title="Выйти">
-        <img className="img_adaptive img_round" width={48} height={48} src={userProfile.avatar} alt="Разлогиниться" />
+        <img className="img_adaptive img_round" width={48} height={48} src={userProfile.avatar} alt="" />
       </Button>
     )
   );

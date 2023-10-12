@@ -11,6 +11,7 @@ import { useAppDispatch } from "app/app-store";
 import { Button } from "shared/ui/button";
 import { Input } from "shared/ui/input";
 
+import { fields } from "../../model/form-fields";
 import { loginByUsername } from "../../model/services/login-by-username";
 import { LoginFormSchema, loginFormSchema } from "../../model/types/login-schema";
 
@@ -58,6 +59,18 @@ export const LoginForm: React.FC<LoginFormProps> = ({ className, onSuccess }) =>
     [dispatch, navigate, onSuccess, reset, setError],
   );
 
+  const fieldsList = fields.map((item) => (
+    <Controller
+      key={item.name}
+      name={item.name}
+      control={control}
+      rules={{ required: item.required }}
+      render={({ field }) => (
+        <Input {...field} type={item.type} label={item.label} id={field.name} error={errors[field.name]?.message} />
+      )}
+    />
+  ));
+
   return (
     <form
       className={cn(css.root, className)}
@@ -66,34 +79,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ className, onSuccess }) =>
       autoComplete="off"
       onSubmit={handleSubmit(handleSubmitForm)}
     >
-      <Controller
-        name="username"
-        control={control}
-        rules={{ required: true }}
-        render={({ field }) => (
-          <Input {...field} label="Логин" id="username" aria-describedby="info" error={errors.username?.message} />
-        )}
-      />
-
-      <Controller
-        name="password"
-        control={control}
-        rules={{ required: true }}
-        render={({ field }) => (
-          <Input
-            {...field}
-            type="password"
-            label="Пароль"
-            id="password"
-            aria-describedby="info"
-            error={errors.password?.message}
-          />
-        )}
-      />
+      {fieldsList}
 
       <div
         className={cn(css.root__info, { [css.active]: isSubmitting || formError, [css.error]: formError })}
-        id="info"
         aria-live="assertive"
       >
         {formError ? formError : isSubmitting ? t("Получение данных") : ""}

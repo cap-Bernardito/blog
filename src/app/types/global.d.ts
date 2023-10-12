@@ -24,6 +24,13 @@ declare const __IS_DEV__: boolean;
 const __brand: unique symbol;
 declare type Brand<K, T> = K & { [__brand]: T };
 
+declare type FormField<T> = {
+  name: keyof T;
+  label: string;
+  type: "text" | "password";
+  required: boolean;
+};
+
 /**
  * Type aliases
  */
