@@ -1,7 +1,7 @@
 import { Reducer } from "@reduxjs/toolkit";
 
 import { SessionSchema } from "entities/session";
-import { UserSchema } from "entities/user";
+import { UserStateSchema } from "entities/user";
 
 import { createReducerManager } from "./reducer-manager";
 
@@ -13,7 +13,7 @@ export type ReducerManager = ReturnType<typeof createReducerManager>;
 
 export type StaticStateSchema = {
   session: SessionSchema;
-  user: UserSchema;
+  user: UserStateSchema;
 };
 
 export type StaticReducers<T> = {

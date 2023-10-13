@@ -9,7 +9,7 @@ import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
 import { logout } from "../../model/services/logout";
 
 export const LogoutButton = () => {
-  const userProfile = useAppSelector(userSelectors.getUserData);
+  const userProfile = useAppSelector(userSelectors.selectUserData);
   const dispatch = useAppDispatch();
 
   const handleClick = useCallback(() => {

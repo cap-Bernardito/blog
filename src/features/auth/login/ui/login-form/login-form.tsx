@@ -64,7 +64,6 @@ export const LoginForm: React.FC<LoginFormProps> = ({ className, onSuccess }) =>
       key={item.name}
       name={item.name}
       control={control}
-      rules={{ required: item.required }}
       render={({ field }) => (
         <Input {...field} type={item.type} label={item.label} id={field.name} error={errors[field.name]?.message} />
       )}

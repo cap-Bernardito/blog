@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { fetchUserData } from "../services/fetch-user-data";
-import { User, UserSchema } from "../types/user";
+import { User, UserStateSchema } from "../types/user";
 
-const initialState: UserSchema = {
+const initialState: UserStateSchema = {
   readonly: true,
   isLoading: false,
   error: undefined,

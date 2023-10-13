@@ -21,12 +21,6 @@ export type SessionSchema =
       _isInit: true;
     };
 
-// TODO: Move user to entities/user/model/types.ts
-export type User = {
-  id: string;
-  username: string;
-};
-
 export const isSession = (session: unknown): session is Session => {
   if (!isPlainObject(session)) {
     return false;

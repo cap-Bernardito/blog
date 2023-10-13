@@ -1,0 +1,13 @@
+.root {
+  // Nothing
+}
+
+.columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacer-x2);
+
+  &__item {
+    flex: 1 1 200px;
+  }
+}

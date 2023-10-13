@@ -1,17 +1,10 @@
-import { Country, Currency } from "shared/const/common";
+import { z } from "zod";
 
-export type User = {
-  first: string;
-  lastname: string;
-  age: number;
-  currency: Currency;
-  country: Country;
-  city: string;
-  username: string;
-  avatar: string;
-};
+import { userFormSchema } from "entities/user/@x/types";
 
-export type UserSchema = {
+export type User = z.infer<typeof userFormSchema>;
+
+export type UserStateSchema = {
   data?: User;
   isLoading: boolean;
   error?: string;

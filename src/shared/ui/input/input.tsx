@@ -6,7 +6,7 @@ import css from "./input.module.scss";
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   className?: string;
   label: string;
-  value: string;
+  value: string | number;
   error?: string;
 };
 

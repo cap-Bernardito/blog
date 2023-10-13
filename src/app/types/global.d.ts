@@ -28,7 +28,6 @@ declare type FormField<T> = {
   name: keyof T;
   label: string;
   type: "text" | "password";
-  required: boolean;
 };
 
 /**
@@ -43,3 +42,10 @@ declare type Id = number;
 declare type DateIso = string;
 
 declare type Timestamp = number;
+
+/**
+ * Type utils
+ */
+declare type Entries<T> = {
+  [K in keyof T]: [K, T[K]];
+}[keyof T][];

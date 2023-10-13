@@ -25,7 +25,7 @@ const preloadAuthState: RootState = {
     data: {
       first: "Вася",
       lastname: "Василек",
-      age: 33,
+      age: "33",
       currency: Currency.RUB,
       country: Country.Russia,
       city: "Moscow",
