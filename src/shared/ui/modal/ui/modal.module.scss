@@ -24,7 +24,7 @@ $bottom-fields-spacer: $spacer * 5;
   overflow-y: auto;
 
   &__inner {
-    @include media-bp-down(tablet) {
+    @include media-bp-down($media-xs-viewport) {
       display: block;
       min-height: 100vh;
       margin: 0;
@@ -40,12 +40,12 @@ $bottom-fields-spacer: $spacer * 5;
   }
 
   &__content {
-    @include media-bp-up(tablet) {
+    @include media-bp-up($media-xs-viewport) {
       border: 1px solid rgb(var(--icon-rgb) / 20%);
       border-radius: var(--border-radius);
     }
 
-    @include media-bp-down(tablet) {
+    @include media-bp-down($media-xs-viewport) {
       padding: $top-fields-spacer * 0.5 $inline-fields-spacer * 0.5 $bottom-fields-spacer * 0.5;
       background: var(--light-bg);
     }
@@ -82,7 +82,7 @@ $bottom-fields-spacer: $spacer * 5;
 }
 
 .header {
-  @include media-bp-down(tablet) {
+  @include media-bp-down($media-xs-viewport) {
     margin-right: 20px + $close-size;
     margin-bottom: 10vh;
     font-size: 28px;

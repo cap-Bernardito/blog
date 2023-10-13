@@ -1,13 +1,68 @@
+@use "../../../app/styles/variables/mixin.scss" as *;
+
 .root {
-  // Nothing
+  padding: 38px var(--spacer-x2);
+  background: var(--dark-bg);
+  border-radius: var(--border-radius);
 }
 
 .columns {
+  @include media-bp-down($media-l-viewport) {
+    gap: 0;
+  }
+
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacer-x2);
 
   &__item {
+    @include media-bp-down($media-l-viewport) {
+      flex: 1 1 100%;
+    }
+
     flex: 1 1 200px;
+  }
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: var(--spacer-x3);
+
+  &__item {
+    flex: 1 1 200px;
+  }
+
+  &__left {
+    @include media-bp-down($media-l-viewport) {
+      flex: 1 1 100%;
+      text-align-last: center;
+
+      & > button {
+        margin-bottom: var(--spacer-x2);
+      }
+    }
+
+    text-align-last: left;
+  }
+
+  &__middle {
+    @include media-bp-down($media-xl-viewport) {
+      flex: 1 1 100%;
+      order: -1;
+      margin-bottom: var(--spacer-x2);
+    }
+
+    text-align-last: center;
+  }
+
+  &__right {
+    @include media-bp-down($media-l-viewport) {
+      flex: 1 1 100%;
+      text-align-last: center;
+    }
+
+    text-align-last: right;
   }
 }

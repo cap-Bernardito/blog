@@ -18,10 +18,10 @@ export const selectFormFields = createSelector(userSelectors.selectUserData, (us
     fullData.push({
       ...fieldMeta,
       name: fieldName,
-      value: user[fieldName],
+      value: user[fieldName] + "",
     });
 
-    valuesOnly.push([fieldName, String(user[fieldName])]);
+    valuesOnly.push([fieldName, user[fieldName] + ""]);
   }
 
   const defaultValues: FieldValues = Object.fromEntries(valuesOnly);

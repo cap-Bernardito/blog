@@ -80,3 +80,20 @@ export const WithErrorValueDark: Story = {
   },
   parameters: { theme: Theme.DARK },
 };
+
+export const Disabled: Story = {
+  args: {
+    value: "Arabella",
+    label: "Имя",
+    disabled: true,
+  },
+};
+
+export const DisabledDark: Story = {
+  args: {
+    value: "Arabella",
+    label: "Имя",
+    disabled: true,
+  },
+  parameters: { theme: Theme.DARK },
+};

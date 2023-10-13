@@ -52,6 +52,36 @@ export const SecondaryDark: Story = {
   parameters: { theme: Theme.DARK },
 };
 
+export const Success: Story = {
+  args: {
+    children: "Button",
+    color: ButtonColor.SUCCESS,
+  },
+};
+
+export const SuccessDark: Story = {
+  args: {
+    children: "Button",
+    color: ButtonColor.SUCCESS,
+  },
+  parameters: { theme: Theme.DARK },
+};
+
+export const Error: Story = {
+  args: {
+    children: "Button",
+    color: ButtonColor.ERROR,
+  },
+};
+
+export const ErrorDark: Story = {
+  args: {
+    children: "Button",
+    color: ButtonColor.ERROR,
+  },
+  parameters: { theme: Theme.DARK },
+};
+
 export const Icon: Story = {
   args: {
     children: <IconTheme width={32} height={32} viewBox="0 0 32 32" />,

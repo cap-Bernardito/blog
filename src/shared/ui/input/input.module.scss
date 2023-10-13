@@ -40,6 +40,14 @@
       color: transparent;
     }
 
+    &[disabled] {
+      color: var(--hint) !important;
+
+      & + #{$root}__label {
+        color: var(--icon) !important;
+      }
+    }
+
     &:not([value=""]),
     &_filled,
     &:focus {

@@ -15,31 +15,21 @@
   }
 }
 
-@mixin media-bp-up($breakpoint) {
-  @if $breakpoint == desktop {
-    @media screen and (width >= 1138px) {
-      @content;
-    }
-  }
+$media-xs-viewport: 600;
+$media-s-viewport: 768;
+$media-m-viewport: 1024;
+$media-l-viewport: 1440;
+$media-xl-viewport: 1920;
 
-  @if $breakpoint == tablet {
-    @media screen and (width >= 560px) {
-      @content;
-    }
+@mixin media-bp-up($breakpoint) {
+  @media screen and (width >= #{$breakpoint}px) {
+    @content;
   }
 }
 
 @mixin media-bp-down($breakpoint) {
-  @if $breakpoint == desktop {
-    @media screen and (width <= 1137px) {
-      @content;
-    }
-  }
-
-  @if $breakpoint == tablet {
-    @media screen and (width <= 559px) {
-      @content;
-    }
+  @media screen and (width < #{$breakpoint}px) {
+    @content;
   }
 }
 

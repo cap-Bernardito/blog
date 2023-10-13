@@ -10,6 +10,8 @@ export enum ButtonVariant {
 
 export enum ButtonColor {
   SECONDARY = "secondary",
+  SUCCESS = "success",
+  ERROR = "error",
 }
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {

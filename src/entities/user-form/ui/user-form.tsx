@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import cn from "classnames";
-import React, { useCallback } from "react";
+import React, { useCallback, useReducer } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
@@ -9,7 +9,8 @@ import { useAppSelector } from "app/app-store";
 import { User } from "entities/user";
 import { userFormSchema } from "entities/user/@x/types";
 
-import { Button } from "shared/ui/button";
+import { Avatar } from "shared/ui/avatar";
+import { Button, ButtonColor } from "shared/ui/button";
 import { Input } from "shared/ui/input";
 import { Select, SelectOption } from "shared/ui/select";
 
@@ -23,11 +24,13 @@ type UserFormProps = {
 
 export const UserForm: React.FC<UserFormProps> = ({ className }) => {
   const { t } = useTranslation();
+  const [editableForm, toggleEditableForm] = useReducer((v) => !v, false);
   const formFields = useAppSelector(selectFormFields);
 
   const {
     handleSubmit,
     control,
+    reset,
     formState: { isDirty, isSubmitting, errors },
   } = useForm<User>({
     resolver: zodResolver(userFormSchema),
@@ -36,6 +39,15 @@ export const UserForm: React.FC<UserFormProps> = ({ className }) => {
   const handleSubmitForm: SubmitHandler<User> = useCallback(async (formData) => {
     console.log("FormData: ", formData);
   }, []);
+
+  const handleCancelClick: React.MouseEventHandler = useCallback(
+    (event) => {
+      event.preventDefault();
+      reset();
+      toggleEditableForm();
+    },
+    [reset],
+  );
 
   if (!formFields.all) {
     return null;
@@ -56,7 +68,7 @@ export const UserForm: React.FC<UserFormProps> = ({ className }) => {
           name={item.name}
           control={control}
           render={({ field }) => (
-            <Select {...field} label={item.label} id={field.name}>
+            <Select {...field} label={item.label} id={field.name} disabled={!editableForm}>
               {item.options!.map((item) => (
                 <SelectOption key={item}>{item}</SelectOption>
               ))}
@@ -73,7 +85,14 @@ export const UserForm: React.FC<UserFormProps> = ({ className }) => {
         name={item.name}
         control={control}
         render={({ field }) => (
-          <Input {...field} type={item.type} label={item.label} id={field.name} error={errors[field.name]?.message} />
+          <Input
+            {...field}
+            type={item.type}
+            label={item.label}
+            id={field.name}
+            error={errors[field.name]?.message}
+            disabled={!editableForm}
+          />
         )}
       />
     );
@@ -91,6 +110,29 @@ export const UserForm: React.FC<UserFormProps> = ({ className }) => {
       autoComplete="off"
       onSubmit={handleSubmit(handleSubmitForm)}
     >
+      <div className={css.header}>
+        <div className={cn(css.header__item, css.header__left)}>
+          {editableForm && (
+            <Button className={cn(css.root__button)} onClick={handleCancelClick} color={ButtonColor.ERROR}>
+              {t("Отмена")}
+            </Button>
+          )}
+        </div>
+        <div className={cn(css.header__item, css.header__middle)}>
+          <Avatar url={formFields.defaults.avatar} size="xl" />
+        </div>
+        <div className={cn(css.header__item, css.header__right)}>
+          {editableForm ? (
+            <Button className={cn(css.root__button)} disabled={!isDirty || isSubmitting} color={ButtonColor.SUCCESS}>
+              {t("Сохранить")}
+            </Button>
+          ) : (
+            <Button className={cn(css.root__button)} onClick={toggleEditableForm}>
+              {t("Редактировать профиль")}
+            </Button>
+          )}
+        </div>
+      </div>
       <div className={css.columns}>
         <div className={css.columns__item}>{leftColumnFields}</div>
         <div className={css.columns__item}>{rightColumnFields}</div>
@@ -101,10 +143,6 @@ export const UserForm: React.FC<UserFormProps> = ({ className }) => {
       >
         {formError ? formError : isSubmitting ? t("Получение данных") : ""}
       </div>
-
-      <Button className={cn(css.root__button)} disabled={!isDirty || isSubmitting}>
-        {t("Сохранить")}
-      </Button>
     </form>
   );
 };
