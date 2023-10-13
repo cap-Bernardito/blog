@@ -20,12 +20,16 @@ export const sessionMiddleware: Middleware = ({ dispatch }: { dispatch: AppDispa
 
       if (isSession(session)) {
         dispatch(sessionActions.setAuthData(session));
-        dispatch(fetchUserData());
+        dispatch(fetchUserData(session.userId));
       }
     }
 
     if (sessionActions.setAuthData.match(action)) {
-      dispatch(fetchUserData());
+      const session = storage.get(USER_LOCALSTORAGE_KEY);
+
+      if (isSession(session)) {
+        dispatch(fetchUserData(session.userId));
+      }
     }
 
     if (sessionActions.clearSessionData.match(action)) {

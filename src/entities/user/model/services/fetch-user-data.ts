@@ -2,15 +2,16 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { ThunkConfig } from "app/app-store";
 
-import { request } from "shared/api";
+import { Session } from "entities/session";
 
+import { getUser } from "../../api/user-api";
 import { User } from "../types/user";
 
-export const fetchUserData = createAsyncThunk<User, void, ThunkConfig<string>>(
+export const fetchUserData = createAsyncThunk<User, Session["userId"], ThunkConfig<string>>(
   "user/fetchUserData",
-  async (_, thunkApi) => {
+  async (userId, thunkApi) => {
     try {
-      const response = await request.get<User>("/profile");
+      const response = await getUser(userId);
 
       return response;
     } catch (e) {

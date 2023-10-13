@@ -35,6 +35,7 @@ server.post("/login", (req, res) => {
 
     if (userFromBd) {
       const { accessToken, ...user } = userFromBd;
+
       const session = {
         accessToken,
         user,

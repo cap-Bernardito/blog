@@ -4,6 +4,10 @@
   padding: 38px var(--spacer-x2);
   background: var(--dark-bg);
   border-radius: var(--border-radius);
+
+  &__info {
+    text-align: center;
+  }
 }
 
 .columns {

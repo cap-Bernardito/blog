@@ -1,11 +1,11 @@
-import { UserForm } from "entities/user-form";
+import { ChangeUserForm } from "features/change-user";
 
 import "shared/config/i18n/i18n";
 
 export const ProfilePage = () => {
   return (
     <div>
-      <UserForm />
+      <ChangeUserForm />
     </div>
   );
 };

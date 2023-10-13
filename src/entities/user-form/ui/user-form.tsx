@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import cn from "classnames";
-import React, { useCallback, useReducer } from "react";
+import React, { useCallback, useEffect, useReducer } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
@@ -20,9 +20,10 @@ import css from "./user-form.module.scss";
 
 type UserFormProps = {
   className?: string;
+  onSubmit: (formData: User) => Promise<boolean>;
 };
 
-export const UserForm: React.FC<UserFormProps> = ({ className }) => {
+export const UserForm: React.FC<UserFormProps> = ({ className, onSubmit }) => {
   const { t } = useTranslation();
   const [editableForm, toggleEditableForm] = useReducer((v) => !v, false);
   const formFields = useAppSelector(selectFormFields);
@@ -31,18 +32,44 @@ export const UserForm: React.FC<UserFormProps> = ({ className }) => {
     handleSubmit,
     control,
     reset,
-    formState: { isDirty, isSubmitting, errors },
+    setError,
+    formState: { isDirty, isSubmitting, isSubmitSuccessful, errors },
   } = useForm<User>({
     resolver: zodResolver(userFormSchema),
   });
 
-  const handleSubmitForm: SubmitHandler<User> = useCallback(async (formData) => {
-    console.log("FormData: ", formData);
+  useEffect(() => {
+    if (formFields.defaults) {
+      reset(formFields.defaults);
+    }
+  }, [formFields.defaults, reset]);
+
+  const handleSubmitForm: SubmitHandler<User> = useCallback(
+    async (formData) => {
+      try {
+        await onSubmit(formData);
+
+        toggleEditableForm();
+      } catch (error) {
+        if (typeof error === "string") {
+          setError("root", { message: error });
+          reset();
+        }
+      }
+    },
+    [onSubmit, reset, setError],
+  );
+
+  const handleEditFormClick: React.MouseEventHandler = useCallback((event) => {
+    event.preventDefault();
+
+    toggleEditableForm();
   }, []);
 
   const handleCancelClick: React.MouseEventHandler = useCallback(
     (event) => {
       event.preventDefault();
+
       reset();
       toggleEditableForm();
     },
@@ -113,7 +140,12 @@ export const UserForm: React.FC<UserFormProps> = ({ className }) => {
       <div className={css.header}>
         <div className={cn(css.header__item, css.header__left)}>
           {editableForm && (
-            <Button className={cn(css.root__button)} onClick={handleCancelClick} color={ButtonColor.ERROR}>
+            <Button
+              className={cn(css.root__button)}
+              onClick={handleCancelClick}
+              color={ButtonColor.ERROR}
+              disabled={isSubmitting}
+            >
               {t("Отмена")}
             </Button>
           )}
@@ -127,7 +159,7 @@ export const UserForm: React.FC<UserFormProps> = ({ className }) => {
               {t("Сохранить")}
             </Button>
           ) : (
-            <Button className={cn(css.root__button)} onClick={toggleEditableForm}>
+            <Button className={cn(css.root__button)} onClick={handleEditFormClick}>
               {t("Редактировать профиль")}
             </Button>
           )}
@@ -141,7 +173,9 @@ export const UserForm: React.FC<UserFormProps> = ({ className }) => {
         className={cn(css.root__info, { [css.active]: isSubmitting || formError, [css.error]: formError })}
         aria-live="assertive"
       >
-        {formError ? formError : isSubmitting ? t("Получение данных") : ""}
+        {formError && formError}
+        {isSubmitting && t("Обновление данных")}
+        {isSubmitSuccessful && t("Данные обновлены")}
       </div>
     </form>
   );

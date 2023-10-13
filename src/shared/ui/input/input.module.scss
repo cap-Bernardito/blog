@@ -54,7 +54,7 @@
       outline: none;
 
       & + #{$root}__label {
-        transform: translate(-8%, -100%) scale(0.9);
+        transform: translate(-6%, -100%) scale(0.9);
         color: var(--accent);
 
         &:has(~ .root__error.error-active) {
