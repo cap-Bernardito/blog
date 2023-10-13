@@ -21,7 +21,7 @@ export const selectFormFields = createSelector(userSelectors.selectUserData, (us
       value: user[fieldName],
     });
 
-    valuesOnly.push([fieldName, user[fieldName]]);
+    valuesOnly.push([fieldName, String(user[fieldName])]);
   }
 
   const defaultValues: FieldValues = Object.fromEntries(valuesOnly);

@@ -1,29 +1,33 @@
 import cn from "classnames";
-import React, { InputHTMLAttributes } from "react";
+import React, { ReactElement, SelectHTMLAttributes } from "react";
 
-import css from "./input.module.scss";
+import css from "./select.module.scss";
 
-type InputProps = InputHTMLAttributes<HTMLInputElement> & {
+export const SelectOption: React.FC<React.PropsWithChildren> = ({ children }) => <option>{children}</option>;
+
+type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
   className?: string;
   label: string;
   value: string;
   error?: string;
+  children: ReactElement[];
 };
 
-export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  const { className, type = "text", label, id, error, ...otherProps } = props;
+export const Select = React.forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
+  const { className, label, id, error, children, ...otherProps } = props;
   const fieldHint = `${otherProps.name}-error-info`;
 
   return (
     <div className={cn(css.root, className)}>
-      <input
+      <select
         className={css.root__field}
-        type={type}
         id={id}
         ref={ref}
         {...otherProps}
         aria-describedby={error ? fieldHint : undefined}
-      />
+      >
+        {children}
+      </select>
       <label className={css.root__label} htmlFor={id}>
         {label}
       </label>
@@ -38,4 +42,4 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref)
   );
 });
 
-Input.displayName = "Input";
+Select.displayName = "Select";

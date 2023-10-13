@@ -1,0 +1,13 @@
+@use "../input/input.module.scss" as *;
+
+.root {
+  @include form-field;
+
+  &__field {
+    padding: 11px 0 10px;
+
+    option {
+      background: var(--light-bg);
+    }
+  }
+}

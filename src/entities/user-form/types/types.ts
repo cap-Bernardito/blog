@@ -10,6 +10,6 @@ type FieldValuesList<T> = {
 
 export type FieldsListUser = FieldsList<User>;
 
-export type FormFieldWithValue = FormField<User> & { value: unknown };
+export type FormFieldWithValue = FormField<User> & { value: string };
 
 export type FieldValues = FieldValuesList<User>;

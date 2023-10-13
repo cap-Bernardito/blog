@@ -1,3 +1,5 @@
+import { Country, Currency } from "shared/const/common";
+
 import { FieldsListUser } from "../types/types";
 
 export const formFields: FieldsListUser = {
@@ -27,10 +29,12 @@ export const formFields: FieldsListUser = {
   },
   currency: {
     label: "Валюта",
-    type: "text",
+    type: "select",
+    options: Object.values(Currency),
   },
   country: {
     label: "Страна",
-    type: "text",
+    type: "select",
+    options: Object.values(Country),
   },
 };

@@ -27,7 +27,8 @@ declare type Brand<K, T> = K & { [__brand]: T };
 declare type FormField<T> = {
   name: keyof T;
   label: string;
-  type: "text" | "password";
+  type: "text" | "password" | "select";
+  options?: string[];
 };
 
 /**

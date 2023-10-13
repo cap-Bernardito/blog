@@ -4,7 +4,7 @@ import { Country, Currency } from "shared/const/common";
 
 const zodErrorMap: z.ZodErrorMap = (issue, ctx) => {
   if (issue.code === z.ZodIssueCode.invalid_enum_value) {
-    return { message: `Допустимые значения: ${issue.options.join(", ")}` };
+    return { message: "" };
   }
 
   return { message: ctx.defaultError };

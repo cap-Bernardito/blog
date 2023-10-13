@@ -11,6 +11,7 @@ import { userFormSchema } from "entities/user/@x/types";
 
 import { Button } from "shared/ui/button";
 import { Input } from "shared/ui/input";
+import { Select, SelectOption } from "shared/ui/select";
 
 import { selectFormFields } from "../model/selectors";
 
@@ -23,13 +24,13 @@ type UserFormProps = {
 export const UserForm: React.FC<UserFormProps> = ({ className }) => {
   const { t } = useTranslation();
   const formFields = useAppSelector(selectFormFields);
+
   const {
     handleSubmit,
     control,
     formState: { isDirty, isSubmitting, errors },
   } = useForm<User>({
     resolver: zodResolver(userFormSchema),
-    defaultValues: formFields.defaults ? { ...formFields.defaults } : {},
   });
 
   const handleSubmitForm: SubmitHandler<User> = useCallback(async (formData) => {
@@ -42,16 +43,41 @@ export const UserForm: React.FC<UserFormProps> = ({ className }) => {
 
   const formError = errors?.root?.message;
 
-  const fieldsList = formFields.all.map((item) => (
-    <Controller
-      key={item.name}
-      name={item.name}
-      control={control}
-      render={({ field }) => (
-        <Input {...field} type={item.type} label={item.label} id={field.name} error={errors[field.name]?.message} />
-      )}
-    />
-  ));
+  const fieldsList = formFields.all.map((item) => {
+    if (item.type === "select") {
+      if (typeof item.options === "undefined") {
+        return null;
+      }
+
+      return (
+        <Controller
+          defaultValue={item.value}
+          key={item.name}
+          name={item.name}
+          control={control}
+          render={({ field }) => (
+            <Select {...field} label={item.label} id={field.name}>
+              {item.options!.map((item) => (
+                <SelectOption key={item}>{item}</SelectOption>
+              ))}
+            </Select>
+          )}
+        />
+      );
+    }
+
+    return (
+      <Controller
+        defaultValue={item.value}
+        key={item.name}
+        name={item.name}
+        control={control}
+        render={({ field }) => (
+          <Input {...field} type={item.type} label={item.label} id={field.name} error={errors[field.name]?.message} />
+        )}
+      />
+    );
+  });
 
   const halfCountFields = Math.floor(fieldsList.length / 2);
   const leftColumnFields = fieldsList.slice(0, halfCountFields);
