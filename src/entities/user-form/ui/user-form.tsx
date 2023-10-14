@@ -87,11 +87,14 @@ export const UserForm: React.FC<UserFormProps> = ({ className, onSubmit, formFie
   }, []);
 
   const handleCancelClick: React.MouseEventHandler = useCallback(
-    (event) => {
+    async (event) => {
       event.preventDefault();
 
       reset();
       toggleEditableForm();
+
+      await wait(10);
+      editButtonRef.current?.focus();
     },
     [reset],
   );
