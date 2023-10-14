@@ -20,13 +20,15 @@ export const Avatar: React.FC<AvatarProps> = (props) => {
   const { className, url, size = "md", ...otherProps } = props;
 
   return (
-    <img
-      className={cn(css.root, className, "img_adaptive", "img_round")}
-      width={sizesAvatar[size]}
-      height={sizesAvatar[size]}
-      src={url}
-      alt=""
-      {...otherProps}
-    />
+    <div className={cn(css.root, className, css[`root__${size}`])}>
+      <img
+        className={cn(css.root__img)}
+        width={sizesAvatar[size]}
+        height={sizesAvatar[size]}
+        src={url}
+        alt=""
+        {...otherProps}
+      />
+    </div>
   );
 };
