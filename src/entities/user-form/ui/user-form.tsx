@@ -1,8 +1,10 @@
 import cn from "classnames";
-import React, { useCallback, useEffect, useReducer } from "react";
+import React, { useCallback, useEffect, useReducer, useRef } from "react";
+import FocusLock from "react-focus-lock";
 import { Controller, Resolver, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
+import { wait } from "shared/lib/wait";
 import { Avatar } from "shared/ui/avatar";
 import { Button, ButtonColor } from "shared/ui/button";
 import { Input } from "shared/ui/input";
@@ -22,6 +24,7 @@ type UserFormProps = {
 export const UserForm: React.FC<UserFormProps> = ({ className, onSubmit, formFields, zodResolver }) => {
   const { t } = useTranslation();
   const [editableForm, toggleEditableForm] = useReducer((v) => !v, false);
+  const editButtonRef = useRef<HTMLButtonElement>(null);
 
   const {
     handleSubmit,
@@ -39,12 +42,33 @@ export const UserForm: React.FC<UserFormProps> = ({ className, onSubmit, formFie
     }
   }, [formFields.defaults, reset]);
 
+  useEffect(() => {
+    const onKeyDown = async (event: KeyboardEvent) => {
+      if (editableForm && event.key === "Escape") {
+        reset();
+        toggleEditableForm();
+
+        // Ждем следующий event loop tick, когда кнопка будет доступна
+        await wait(10);
+        editButtonRef.current?.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [editableForm, reset]);
+
   const handleSubmitForm = useCallback(
     async (formData: FieldValuesList<FieldValuesWithAvatar>) => {
       try {
         await onSubmit(formData);
 
         toggleEditableForm();
+
+        // Ждем следующий event loop tick, когда кнопка будет доступна
+        await wait(10);
+        editButtonRef.current?.focus();
       } catch (error) {
         if (typeof error === "string") {
           setError("root", { message: error });
@@ -71,11 +95,19 @@ export const UserForm: React.FC<UserFormProps> = ({ className, onSubmit, formFie
     [reset],
   );
 
+  const formError = errors?.root?.message;
+
+  const isStatusMessageVisible = formError || isSubmitting || isSubmitSuccessful;
+
+  const statusMessage = useCallback(() => {
+    if (formError) return formError;
+    if (isSubmitting) return t("Обновление данных");
+    if (isSubmitSuccessful) return t("Данные обновлены");
+  }, [formError, isSubmitSuccessful, isSubmitting, t]);
+
   if (!formFields.all) {
     return null;
   }
-
-  const formError = errors?.root?.message;
 
   const fieldsList = formFields.all.map((item) => {
     if (item.type === "select") {
@@ -139,47 +171,49 @@ export const UserForm: React.FC<UserFormProps> = ({ className, onSubmit, formFie
       noValidate
       autoComplete="off"
       onSubmit={handleSubmit(handleSubmitForm)}
+      aria-label="Редактирование информации о пользователе"
     >
-      <div className={css.header}>
-        <div className={cn(css.header__item, css.header__left)}>
-          {editableForm && (
-            <Button
-              className={cn(css.root__button)}
-              onClick={handleCancelClick}
-              color={ButtonColor.ERROR}
-              disabled={isSubmitting}
-            >
-              {t("Отмена")}
-            </Button>
-          )}
+      <FocusLock returnFocus={true} disabled={!editableForm}>
+        <div className={css.header}>
+          <div className={cn(css.header__item, css.header__left)}>
+            {editableForm && (
+              <Button
+                type="button"
+                className={cn(css.root__button)}
+                onClick={handleCancelClick}
+                color={ButtonColor.ERROR}
+                disabled={isSubmitting}
+              >
+                {t("Отмена")}
+              </Button>
+            )}
+          </div>
+          <div className={cn(css.header__item, css.header__middle)}>
+            {formFields.defaults.avatar && <Avatar url={formFields.defaults.avatar} size="xl" />}
+          </div>
+          <div className={cn(css.header__item, css.header__right)}>
+            {editableForm ? (
+              <Button className={cn(css.root__button)} disabled={!isDirty || isSubmitting} color={ButtonColor.SUCCESS}>
+                {t("Сохранить")}
+              </Button>
+            ) : (
+              <Button type="button" className={cn(css.root__button)} onClick={handleEditFormClick} ref={editButtonRef}>
+                {t("Редактировать профиль")}
+              </Button>
+            )}
+          </div>
         </div>
-        <div className={cn(css.header__item, css.header__middle)}>
-          {formFields.defaults.avatar && <Avatar url={formFields.defaults.avatar} size="xl" />}
+        <div className={css.columns}>
+          <div className={css.columns__item}>{leftColumnFields}</div>
+          <div className={css.columns__item}>{rightColumnFields}</div>
         </div>
-        <div className={cn(css.header__item, css.header__right)}>
-          {editableForm ? (
-            <Button className={cn(css.root__button)} disabled={!isDirty || isSubmitting} color={ButtonColor.SUCCESS}>
-              {t("Сохранить")}
-            </Button>
-          ) : (
-            <Button className={cn(css.root__button)} onClick={handleEditFormClick}>
-              {t("Редактировать профиль")}
-            </Button>
-          )}
+        <div
+          className={cn(css.root__info, { [css.active]: isStatusMessageVisible, [css.error]: formError })}
+          aria-live="assertive"
+        >
+          {statusMessage()}
         </div>
-      </div>
-      <div className={css.columns}>
-        <div className={css.columns__item}>{leftColumnFields}</div>
-        <div className={css.columns__item}>{rightColumnFields}</div>
-      </div>
-      <div
-        className={cn(css.root__info, { [css.active]: isSubmitting || formError, [css.error]: formError })}
-        aria-live="assertive"
-      >
-        {formError && formError}
-        {isSubmitting && t("Обновление данных")}
-        {isSubmitSuccessful && t("Данные обновлены")}
-      </div>
+      </FocusLock>
     </form>
   );
 };

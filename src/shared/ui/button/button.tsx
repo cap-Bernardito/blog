@@ -20,12 +20,14 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   color?: ButtonColor;
 };
 
-export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = (props) => {
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const { className, children, variant, color, ...otherProps } = props;
 
   return (
-    <button className={cn(css.root, className, variant && css[variant], color && css[color])} {...otherProps}>
+    <button className={cn(css.root, className, variant && css[variant], color && css[color])} {...otherProps} ref={ref}>
       {children}
     </button>
   );
-};
+});
+
+Button.displayName = "Button";
