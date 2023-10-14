@@ -6,6 +6,7 @@
   "scripts": {
     "bootstrap": "node init.mjs",
     "start": "npm run watch",
+    "start:dev": "concurrently \"npm run start:dev:server\" \"npm run start\"",
     "start:dev:server": "node ./json-server/index.js",
     "watch": "webpack serve --env mode=development",
     "build": "npm run build:prod",
@@ -58,6 +59,7 @@
     "@types/webpack-bundle-analyzer": "^4.6.1",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "@typescript-eslint/parser": "^6.7.5",
+    "concurrently": "^8.2.1",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
     "dotenv": "^16.3.1",
