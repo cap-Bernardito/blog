@@ -1,32 +1,27 @@
-import { zodResolver } from "@hookform/resolvers/zod";
 import cn from "classnames";
 import React, { useCallback, useEffect, useReducer } from "react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, Resolver, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-
-import { useAppSelector } from "app/app-store";
-
-import { User } from "entities/user";
-import { userFormSchema } from "entities/user/@x/types";
 
 import { Avatar } from "shared/ui/avatar";
 import { Button, ButtonColor } from "shared/ui/button";
 import { Input } from "shared/ui/input";
 import { Select, SelectOption } from "shared/ui/select";
 
-import { selectFormFields } from "../model/selectors";
+import { FieldValuesList, FieldValuesWithAvatar, FormFields } from "../types/types";
 
 import css from "./user-form.module.scss";
 
 type UserFormProps = {
   className?: string;
-  onSubmit: (formData: User) => Promise<boolean>;
+  onSubmit: (formData: FieldValuesList<FieldValuesWithAvatar>) => Promise<boolean>;
+  formFields: FormFields<FieldValuesWithAvatar>;
+  zodResolver: Resolver;
 };
 
-export const UserForm: React.FC<UserFormProps> = ({ className, onSubmit }) => {
+export const UserForm: React.FC<UserFormProps> = ({ className, onSubmit, formFields, zodResolver }) => {
   const { t } = useTranslation();
   const [editableForm, toggleEditableForm] = useReducer((v) => !v, false);
-  const formFields = useAppSelector(selectFormFields);
 
   const {
     handleSubmit,
@@ -34,8 +29,8 @@ export const UserForm: React.FC<UserFormProps> = ({ className, onSubmit }) => {
     reset,
     setError,
     formState: { isDirty, isSubmitting, isSubmitSuccessful, errors },
-  } = useForm<User>({
-    resolver: zodResolver(userFormSchema),
+  } = useForm({
+    resolver: zodResolver,
   });
 
   useEffect(() => {
@@ -44,8 +39,8 @@ export const UserForm: React.FC<UserFormProps> = ({ className, onSubmit }) => {
     }
   }, [formFields.defaults, reset]);
 
-  const handleSubmitForm: SubmitHandler<User> = useCallback(
-    async (formData) => {
+  const handleSubmitForm = useCallback(
+    async (formData: FieldValuesList<FieldValuesWithAvatar>) => {
       try {
         await onSubmit(formData);
 
@@ -111,16 +106,24 @@ export const UserForm: React.FC<UserFormProps> = ({ className, onSubmit }) => {
         key={item.name}
         name={item.name}
         control={control}
-        render={({ field }) => (
-          <Input
-            {...field}
-            type={item.type}
-            label={item.label}
-            id={field.name}
-            error={errors[field.name]?.message}
-            disabled={!editableForm}
-          />
-        )}
+        render={({ field }) => {
+          let error = errors[field.name]?.message;
+
+          if (typeof error !== "string") {
+            error = undefined;
+          }
+
+          return (
+            <Input
+              {...field}
+              type={item.type}
+              label={item.label}
+              id={field.name}
+              error={error}
+              disabled={!editableForm}
+            />
+          );
+        }}
       />
     );
   });
@@ -151,7 +154,7 @@ export const UserForm: React.FC<UserFormProps> = ({ className, onSubmit }) => {
           )}
         </div>
         <div className={cn(css.header__item, css.header__middle)}>
-          <Avatar url={formFields.defaults.avatar} size="xl" />
+          {formFields.defaults.avatar && <Avatar url={formFields.defaults.avatar} size="xl" />}
         </div>
         <div className={cn(css.header__item, css.header__right)}>
           {editableForm ? (

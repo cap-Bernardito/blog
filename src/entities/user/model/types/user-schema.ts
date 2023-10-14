@@ -1,3 +1,4 @@
+import { isPlainObject } from "@reduxjs/toolkit";
 import { z } from "zod";
 
 import { Country, Currency } from "shared/const/common";
@@ -24,3 +25,15 @@ export const userFormSchema = z.object({
   currency: z.nativeEnum(Currency, { errorMap: zodErrorMap }),
   country: z.nativeEnum(Country, { errorMap: zodErrorMap }),
 });
+
+export type User = z.infer<typeof userFormSchema>;
+
+export const isUser = (user: unknown): user is User => {
+  if (!isPlainObject(user)) {
+    return false;
+  }
+
+  const { success } = userFormSchema.safeParse(user);
+
+  return success;
+};

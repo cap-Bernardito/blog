@@ -2,7 +2,7 @@ import { Session } from "entities/session";
 
 import { request } from "shared/api";
 
-import { User } from "../model/types/user";
+import { User } from "../model/types/user-schema";
 
 export const getUser = async (userId: Session["userId"]): Promise<User> => {
   const response = await request.get<User>(`/profile/${userId}`);

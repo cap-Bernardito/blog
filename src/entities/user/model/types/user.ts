@@ -1,8 +1,4 @@
-import { z } from "zod";
-
-import { userFormSchema } from "entities/user/@x/types";
-
-export type User = z.infer<typeof userFormSchema>;
+import { User } from "./user-schema";
 
 export type UserStateSchema = {
   data?: User;

@@ -1,6 +1,6 @@
 import { Country, Currency } from "shared/const/common";
 
-import { FieldsListUser } from "../types/types";
+import { FieldsListUser } from "./types";
 
 export const formFields: FieldsListUser = {
   first: {
