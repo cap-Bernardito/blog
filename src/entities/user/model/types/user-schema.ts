@@ -1,4 +1,3 @@
-import { isPlainObject } from "@reduxjs/toolkit";
 import { z } from "zod";
 
 import { Country, Currency } from "shared/const/common";
@@ -11,7 +10,8 @@ const zodErrorMap: z.ZodErrorMap = (issue, ctx) => {
   return { message: ctx.defaultError };
 };
 
-export const userFormSchema = z.object({
+export const userSchema = z.object({
+  id: z.number(),
   first: z.string().min(3, "От 3 знаков").max(20, "До 20 знаков"),
   lastname: z.string().min(3, "От 3 знаков").max(20, "До 20 знаков"),
   city: z.string().min(3, "От 3 знаков").max(20, "До 20 знаков"),
@@ -26,13 +26,19 @@ export const userFormSchema = z.object({
   country: z.nativeEnum(Country, { errorMap: zodErrorMap }),
 });
 
-export type User = z.infer<typeof userFormSchema>;
+export const userFormSchema = userSchema.omit({ id: true });
+
+export type User = z.infer<typeof userSchema>;
+
+export type UserForm = z.infer<typeof userFormSchema>;
 
 export const isUser = (user: unknown): user is User => {
-  if (!isPlainObject(user)) {
-    return false;
-  }
+  const { success } = userSchema.safeParse(user);
 
+  return success;
+};
+
+export const isUserForm = (user: unknown): user is User => {
   const { success } = userFormSchema.safeParse(user);
 
   return success;

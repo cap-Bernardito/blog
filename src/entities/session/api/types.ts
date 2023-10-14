@@ -1,9 +1,10 @@
-import { SessionUserId } from "../model/types";
+import { SessionUserId } from "../model/types/session-schema";
 
-export type SessionDto = {
+export type SessionDTO = {
   accessToken: string;
   user: {
-    email: string;
+    username: string;
+    password: string;
     id: number;
   };
 };

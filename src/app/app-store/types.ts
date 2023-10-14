@@ -1,6 +1,6 @@
 import { Reducer } from "@reduxjs/toolkit";
 
-import { SessionSchema } from "entities/session";
+import { SessionStateSchema } from "entities/session";
 import { UserStateSchema } from "entities/user";
 
 import { createReducerManager } from "./reducer-manager";
@@ -12,7 +12,7 @@ export type AsyncStateSchemaKey = keyof AsyncStateSchema;
 export type ReducerManager = ReturnType<typeof createReducerManager>;
 
 export type StaticStateSchema = {
-  session: SessionSchema;
+  session: SessionStateSchema;
   user: UserStateSchema;
 };
 

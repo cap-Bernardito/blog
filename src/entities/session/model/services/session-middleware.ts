@@ -8,7 +8,7 @@ import { USER_LOCALSTORAGE_KEY } from "shared/const/localstorage";
 import { SyncStorage } from "shared/lib/sync-storage";
 
 import { sessionActions } from "../slice";
-import { isSession } from "../types";
+import { isSession } from "../types/session-schema";
 
 // NOTE: такое себе, но пока нет сервера для нормальной авторизации, как демо побудет так
 export const sessionMiddleware: Middleware = ({ dispatch }: { dispatch: AppDispatch }) => {

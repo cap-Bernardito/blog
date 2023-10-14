@@ -1,17 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { Session, SessionSchema } from "./types";
+import { SessionStateSchema } from "./types/session";
+import { Session } from "./types/session-schema";
 
-const initialState: SessionSchema = {
+const initialState: SessionStateSchema = {
   isAuthorized: false,
 };
 
 export const sessionSlice = createSlice<
-  SessionSchema,
+  SessionStateSchema,
   {
-    initSessionData: (state: SessionSchema) => void;
-    setAuthData: (state: SessionSchema, action: PayloadAction<Session>) => void;
-    clearSessionData: (state: SessionSchema) => void;
+    initSessionData: (state: SessionStateSchema) => void;
+    setAuthData: (state: SessionStateSchema, action: PayloadAction<Session>) => void;
+    clearSessionData: (state: SessionStateSchema) => void;
   },
   "session"
 >({

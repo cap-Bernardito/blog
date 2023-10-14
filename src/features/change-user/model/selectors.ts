@@ -1,9 +1,9 @@
 import { createSelector } from "reselect";
 
-import { User, userSelectors } from "entities/user";
+import { userSelectors } from "entities/user";
 
 import { formFields } from "./form-fields";
-import { FieldsListUser } from "./types";
+import { FieldsListUser, UserWithoutId } from "./types";
 
 export const selectFormFields = createSelector(userSelectors.selectUserData, (user) => {
   if (typeof user === "undefined") {
@@ -17,13 +17,13 @@ export const selectFormFields = createSelector(userSelectors.selectUserData, (us
     fullData.push({
       ...fieldMeta,
       name: fieldName,
-      value: user[fieldName] + "",
+      value: user[fieldName],
     });
 
-    valuesOnly.push([fieldName, user[fieldName] + ""]);
+    valuesOnly.push([fieldName, user[fieldName]]);
   }
 
-  const defaultValues: User = Object.fromEntries(valuesOnly);
+  const defaultValues: UserWithoutId = Object.fromEntries(valuesOnly);
 
   return { all: fullData, defaults: defaultValues };
 });

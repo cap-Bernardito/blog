@@ -72,11 +72,12 @@ export const UserForm: React.FC<UserFormProps> = ({ className, onSubmit, formFie
       } catch (error) {
         if (typeof error === "string") {
           setError("root", { message: error });
-          reset();
+        } else if (error instanceof Error) {
+          setError("root", { message: error.message });
         }
       }
     },
-    [onSubmit, reset, setError],
+    [onSubmit, setError],
   );
 
   const handleEditFormClick: React.MouseEventHandler = useCallback((event) => {

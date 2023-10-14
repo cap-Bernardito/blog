@@ -2,16 +2,23 @@ import { Session } from "entities/session";
 
 import { request } from "shared/api";
 
+import { checkUser } from "../lib/check-user";
+import { mapUser } from "../lib/map-user";
 import { User } from "../model/types/user-schema";
 
-export const getUser = async (userId: Session["userId"]): Promise<User> => {
-  const response = await request.get<User>(`/profile/${userId}`);
+import { RequestUpdateUserBody, UserDTO } from "./types";
 
-  return response;
+export const getUser = async (userId: Session["userId"]): Promise<User> => {
+  const response = await request.get<UserDTO>(`/profile/${userId}`);
+
+  return mapUser(response);
 };
 
-export const updateUser = async (formData: User, userId: Session["userId"]): Promise<User> => {
-  const response = await request.put<User, User>(`/profile/${userId}`, formData);
+export const updateUser = async (formData: RequestUpdateUserBody, userId: Session["userId"]): Promise<User> => {
+  const response = await request.put<UserDTO, RequestUpdateUserBody>(`/profile/${userId}`, formData);
+  const result = mapUser(response);
 
-  return response;
+  checkUser(result);
+
+  return result;
 };
