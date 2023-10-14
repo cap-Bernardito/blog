@@ -9,7 +9,7 @@ const storage = new SyncStorage().create("local");
 export const initialTheme = (storage.get(LOCAL_STORAGE_THEME_KEY) as Theme) || Theme.LIGHT;
 
 type ThemeProviderProps = {
-  defaultTheme?: Theme.DARK | Theme.LIGHT;
+  defaultTheme?: Theme;
 };
 
 const themeClasses = (() =>

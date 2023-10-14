@@ -1,0 +1,38 @@
+@use "sass:map";
+
+$colors-pallete: (
+  "dark-bg": #fff3d6,
+  "bg": #f0c048,
+  "light-bg": #f2d791,
+  "text": #1b1311,
+  "hint": #b8b2a2,
+  "cancel": #ff5e5e,
+  "save": #52fa81,
+  "icon": #4875f0,
+  "accent": #1d59ff,
+  "orange": #ff7f50,
+);
+$colors-theme: (
+  "primary": map.get($colors-pallete, "accent"),
+  "secondary": map.get($colors-pallete, "icon"),
+  "warning": map.get($colors-pallete, "orange"),
+  "success": map.get($colors-pallete, "save"),
+  "error": map.get($colors-pallete, "cancel"),
+  "info": map.get($colors-pallete, "icon"),
+);
+
+// Цвет переменной в RGB нужен для указания прозрачности с помощью css vars
+// background: rgb(var(--icon-rgb) / 20%)
+.theme-orange {
+  @if $colors-pallete {
+    @each $key, $value in $colors_theme {
+      --#{$key}-color: #{$value};
+      --#{$key}-color-rgb: #{HexToRGB($value)};
+    }
+
+    @each $key, $value in $colors-pallete {
+      --#{$key}: #{$value};
+      --#{$key}-rgb: #{HexToRGB($value)};
+    }
+  }
+}
