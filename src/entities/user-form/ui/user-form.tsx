@@ -18,7 +18,7 @@ type UserFormProps = {
   className?: string;
   onSubmit: (formData: FieldValuesList<FieldValuesWithAvatar>) => Promise<boolean>;
   formFields: FormFields<FieldValuesWithAvatar>;
-  zodResolver: Resolver;
+  zodResolver?: Resolver;
 };
 
 export const UserForm: React.FC<UserFormProps> = ({ className, onSubmit, formFields, zodResolver }) => {
