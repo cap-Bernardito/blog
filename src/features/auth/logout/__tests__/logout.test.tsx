@@ -11,6 +11,7 @@ import { LogoutButton } from "../ui/logout-button/logout-button";
 
 describe("logout", () => {
   const setup = (isAuth = false) => {
+    const user = userEvent.setup();
     const utils = !isAuth
       ? componentRender(<LogoutButton />)
       : componentRender(<LogoutButton />, {
@@ -23,6 +24,7 @@ describe("logout", () => {
     const logoutButton = screen.queryByRole("button", { name: /выйти/i });
 
     return {
+      user,
       logoutButton,
       utils,
     };
@@ -35,13 +37,13 @@ describe("logout", () => {
   });
 
   it("should be removed from the DOM after clicking", async () => {
-    const { logoutButton } = setup(true);
+    const { user, logoutButton } = setup(true);
 
     if (!logoutButton) {
       throw new Error("The button should not be available");
     }
 
-    await userEvent.click(logoutButton);
+    await user.click(logoutButton);
 
     await waitFor(() => {
       expect(logoutButton).not.toBeInTheDocument();
