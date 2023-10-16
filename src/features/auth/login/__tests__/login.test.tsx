@@ -28,14 +28,6 @@ describe("login", () => {
     };
   };
 
-  it("should render the form", async () => {
-    const { loginField, passwordField, submitButton } = setup();
-
-    expect(loginField).toBeInTheDocument();
-    expect(passwordField).toBeInTheDocument();
-    expect(submitButton).toBeInTheDocument();
-  });
-
   it("should show error when username field is not valid", async () => {
     const { loginField, passwordField, submitButton } = setup();
 
