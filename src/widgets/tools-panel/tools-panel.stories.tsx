@@ -21,7 +21,6 @@ const preloadAuthState: RootState = {
   },
   user: {
     isLoading: false,
-    readonly: false,
     data: {
       id: 1,
       first: "Вася",

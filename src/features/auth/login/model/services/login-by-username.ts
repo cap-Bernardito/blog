@@ -25,8 +25,6 @@ export const loginByUsername = createAsyncThunk<Session, RequestLoginBody, Thunk
       return response;
     } catch (e) {
       // TODO: сделать обработку ошибок, когда API устаканится
-      console.log(e);
-
       let errorMessage = "";
 
       if (e instanceof Error) {

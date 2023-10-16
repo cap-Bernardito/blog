@@ -77,6 +77,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ className, onSuccess }) =>
       noValidate
       autoComplete="off"
       onSubmit={handleSubmit(handleSubmitForm)}
+      aria-label="Авторизация"
     >
       {fieldsList}
 

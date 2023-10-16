@@ -4,7 +4,6 @@ export type SessionDTO = {
   accessToken: string;
   user: {
     username: string;
-    password: string;
     id: number;
   };
 };

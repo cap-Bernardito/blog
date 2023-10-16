@@ -1,9 +1,11 @@
-/**
- * For a detailed explanation regarding each configuration property, visit:
- * https://jestjs.io/docs/configuration
- */
-
+import dotenv from "dotenv";
 import type { Config } from "jest";
+
+dotenv.config();
+
+const API_BASEURL = process.env.API_BASEURL;
+const CLIENT_PORT = process.env.CLIENT_PORT;
+const SERVER_PORT = process.env.SERVER_PORT;
 
 const config: Config = {
   // A preset that is used as a base for Jest's configuration
@@ -44,7 +46,7 @@ const config: Config = {
               path: "node_modules/ts-jest-mock-import-meta",
               options: {
                 metaObjectReplacement: {
-                  env: { API_BASEURL: "http://localhost:8000", CLIENT_PORT: 3000, SERVER_PORT: 8000 },
+                  env: { API_BASEURL, CLIENT_PORT, SERVER_PORT },
                 },
               },
             },
@@ -67,11 +69,14 @@ const config: Config = {
   },
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: ["<rootDir>/config/jest/jest-setup.ts"],
+  setupFilesAfterEnv: ["<rootDir>/config/jest/jest-setup.ts", "<rootDir>/src/shared/lib/tests/api-setup.ts"],
 
   // A set of global variables that need to be available in all test environments
   globals: {
     __IS_DEV__: true,
+    API_BASEURL,
+    CLIENT_PORT,
+    SERVER_PORT,
   },
 
   // Automatically reset mock state before every test

@@ -6,7 +6,6 @@ import { UserStateSchema } from "../types/user";
 import { User } from "../types/user-schema";
 
 const initialState: UserStateSchema = {
-  readonly: true,
   isLoading: false,
   error: undefined,
   data: undefined,

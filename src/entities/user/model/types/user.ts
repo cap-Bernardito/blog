@@ -4,5 +4,4 @@ export type UserStateSchema = {
   data?: User;
   isLoading: boolean;
   error?: string;
-  readonly: boolean;
 };

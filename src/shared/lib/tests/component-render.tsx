@@ -1,24 +1,30 @@
-import { DeepPartial } from "@reduxjs/toolkit";
-import { render } from "@testing-library/react";
+import { render, RenderResult } from "@testing-library/react";
 import React from "react";
 import { I18nextProvider } from "react-i18next";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
 
-import { appStore, makeStore, RootState } from "app/app-store";
+import { appStore, makeStore, StateSchema } from "app/app-store";
+import { AppStoreWithReducerManager } from "app/app-store/store";
 
 import i18nForTests from "shared/config/i18n/i18nForTests";
 
 export type ComponentRenderOptions = {
   route?: string;
-  initialState?: DeepPartial<RootState>;
+  initialState?: StateSchema;
 };
 
-export function componentRender(component: React.ReactNode, options: ComponentRenderOptions = {}) {
+type ComponentRenderFn = {
+  (component: React.ReactNode, options?: ComponentRenderOptions): RenderResult;
+  store?: AppStoreWithReducerManager;
+};
+
+export const componentRender: ComponentRenderFn = function (component, options = {}) {
   const { route = "/", initialState } = options;
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
+
   const store = initialState ? makeStore(initialState) : appStore;
+
+  componentRender.store = store as AppStoreWithReducerManager;
 
   return render(
     <Provider store={store}>
@@ -27,4 +33,4 @@ export function componentRender(component: React.ReactNode, options: ComponentRe
       </MemoryRouter>
     </Provider>,
   );
-}
+};
