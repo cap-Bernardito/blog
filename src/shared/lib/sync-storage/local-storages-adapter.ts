@@ -25,7 +25,15 @@ export default class LocalStoragesAdapter implements StorageAdapter {
       return null;
     }
 
-    return JSON.parse(value);
+    let result = null;
+
+    try {
+      result = JSON.parse(value);
+    } catch (error) {
+      console.log(error);
+    }
+
+    return result;
   }
 
   remove(key: string): void {
