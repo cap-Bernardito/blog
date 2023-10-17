@@ -15,15 +15,25 @@ const handlers = [
       return res(ctx.status(401), ctx.json({ message: "Not authorized" }));
     }
 
-    return res(ctx.delay(10), ctx.status(200), ctx.json(testUser));
+    return res(ctx.delay(100), ctx.status(200), ctx.json(testUser));
   }),
 
   rest.post(requestUrl("login"), async (req, res, ctx) => {
     const { username, password } = await req.json();
 
     return password === "valid" && username === "username"
-      ? res(ctx.delay(10), ctx.status(200), ctx.json(testSession))
-      : res(ctx.delay(10), ctx.status(401), ctx.json({ message: "Login or password is incorrect" }));
+      ? res(ctx.delay(100), ctx.status(200), ctx.json(testSession))
+      : res(ctx.delay(100), ctx.status(401), ctx.json({ message: "Login or password is incorrect" }));
+  }),
+
+  rest.put(requestUrl("profile/1"), async (req, res, ctx) => {
+    const { first } = await req.json();
+
+    if (first === "generate HTTPError") {
+      return res(ctx.status(401), ctx.json({ message: "Не получается" }));
+    }
+
+    return res(ctx.delay(100), ctx.status(200), ctx.json(testUser));
   }),
 ];
 
