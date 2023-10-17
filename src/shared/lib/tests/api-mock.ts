@@ -23,7 +23,7 @@ const handlers = [
 
     return password === "valid" && username === "username"
       ? res(ctx.delay(10), ctx.status(200), ctx.json(testSession))
-      : res(ctx.delay(10), ctx.status(401), ctx.json({ reason: "Login or password is incorrect" }));
+      : res(ctx.delay(10), ctx.status(401), ctx.json({ message: "Login or password is incorrect" }));
   }),
 ];
 

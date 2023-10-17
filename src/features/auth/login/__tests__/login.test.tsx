@@ -62,7 +62,7 @@ describe("login", () => {
     await user.click(submitButton);
 
     await waitFor(() => {
-      expect(screen.getByText("Request failed with status code 401")).toBeInTheDocument();
+      expect(screen.getByText("Login or password is incorrect")).toBeInTheDocument();
     });
   });
 

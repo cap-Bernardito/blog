@@ -16,19 +16,19 @@ export const loginByUsername = createAsyncThunk<Session, RequestLoginBody, Thunk
       const response = await sessionApi.login(authData);
 
       if (!response) {
-        throw new Error();
+        throw new Error("No data");
       }
 
       storage.add(USER_LOCALSTORAGE_KEY, response);
       thunkAPI.dispatch(sessionActions.setAuthData(response));
 
       return response;
-    } catch (e) {
+    } catch (error) {
       // TODO: сделать обработку ошибок, когда API устаканится
       let errorMessage = "";
 
-      if (e instanceof Error) {
-        errorMessage = e.message;
+      if (error instanceof Error) {
+        errorMessage = error.message;
       }
 
       return thunkAPI.rejectWithValue(errorMessage);

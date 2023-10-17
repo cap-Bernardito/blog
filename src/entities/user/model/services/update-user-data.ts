@@ -16,12 +16,17 @@ export const updateUserData = createAsyncThunk<
     const response = await updateUser(formData, userId);
 
     if (!response) {
-      throw new Error();
+      throw new Error("No data");
     }
 
     return response;
-  } catch (e) {
-    console.log(e);
-    return thunkApi.rejectWithValue("error");
+  } catch (error) {
+    let errorMessage = "";
+
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+
+    return thunkApi.rejectWithValue(errorMessage);
   }
 });

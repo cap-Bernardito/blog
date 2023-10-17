@@ -1,15 +1,46 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
 import { configEnv } from "shared/config/config-env";
 import { USER_LOCALSTORAGE_KEY } from "shared/const/localstorage";
 import { SyncStorage } from "shared/lib/sync-storage";
 
-const storage = new SyncStorage().create("local");
+export class HTTPClientError extends Error {
+  constructor(
+    public message: string,
+    public code: number,
+    public type = "HTTPClientError",
+  ) {
+    super(message);
+  }
+}
+
+const normalizeError = (error: unknown) => {
+  if (!(error instanceof AxiosError)) {
+    return new Error("Что-то пошло не так");
+  }
+
+  if (error.response) {
+    return new HTTPClientError(error.response.data.message, error.response.status, error.response.statusText);
+  } else if (error.request) {
+    return new Error("Превышено время ожидания ответа сервера");
+  } else {
+    return error;
+  }
+};
 
 const axiosInstance = axios.create({
   baseURL: configEnv.API_BASEURL,
   withCredentials: true,
 });
+
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    return Promise.reject(normalizeError(error));
+  },
+);
+
+const storage = new SyncStorage().create("local");
 
 // TODO: приделать нормальную авторизацию
 const getConfig = (config?: AxiosRequestConfig): AxiosRequestConfig => {
