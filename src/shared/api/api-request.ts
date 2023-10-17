@@ -33,8 +33,26 @@ const axiosInstance = axios.create({
   withCredentials: true,
 });
 
+axiosInstance.interceptors.request.use(
+  (config) => {
+    // TODO: приделать нормальную авторизацию
+    const autorizationHeader = (storage.get(USER_LOCALSTORAGE_KEY) as string) && "atata";
+
+    if (autorizationHeader) {
+      config.headers.Authorization = autorizationHeader;
+    }
+
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
+
 axiosInstance.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    return response;
+  },
   (error) => {
     return Promise.reject(normalizeError(error));
   },
@@ -42,52 +60,27 @@ axiosInstance.interceptors.response.use(
 
 const storage = new SyncStorage().create("local");
 
-// TODO: приделать нормальную авторизацию
-const getConfig = (config?: AxiosRequestConfig): AxiosRequestConfig => {
-  const autorizationHeader = storage.get(USER_LOCALSTORAGE_KEY) && "atata";
-
-  if (typeof autorizationHeader !== "string") {
-    return {};
-  }
-
-  if (typeof config === "undefined") {
-    return {
-      headers: {
-        Authorization: autorizationHeader,
-      },
-    };
-  }
-
-  return {
-    ...config,
-    headers: {
-      ...(config.headers || {}),
-      Authorization: autorizationHeader,
-    },
-  };
-};
-
 export const request = {
   get: async <T>(url: string, config?: AxiosRequestConfig) => {
-    const result = await axiosInstance.get<T, AxiosResponse<T>>(url, getConfig(config));
+    const result = await axiosInstance.get<T, AxiosResponse<T>>(url, config);
 
     return result.data;
   },
 
   post: async <T, D>(url: string, data?: D, config?: AxiosRequestConfig<D>) => {
-    const result = await axiosInstance.post<T, AxiosResponse<T>, D>(url, data, getConfig(config));
+    const result = await axiosInstance.post<T, AxiosResponse<T>, D>(url, data, config);
 
     return result.data;
   },
 
   put: async <T, D>(url: string, data?: D, config?: AxiosRequestConfig<D>) => {
-    const result = await axiosInstance.put<T, AxiosResponse<T>, D>(url, data, getConfig(config));
+    const result = await axiosInstance.put<T, AxiosResponse<T>, D>(url, data, config);
 
     return result.data;
   },
 
   delete: async <T>(url: string, config?: AxiosRequestConfig) => {
-    const result = await axiosInstance.delete<T, AxiosResponse<T>>(url, getConfig(config));
+    const result = await axiosInstance.delete<T, AxiosResponse<T>>(url, config);
 
     return result.data;
   },
