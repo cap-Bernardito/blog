@@ -2,6 +2,7 @@ import React from "react";
 
 import { routePaths } from "app/app-router/app-router-config";
 
+import Article from "shared/assets/icons/article.svg";
 import Profile from "shared/assets/icons/avatar.svg";
 import Home from "shared/assets/icons/home.svg";
 import Info from "shared/assets/icons/Info.svg";
@@ -29,5 +30,11 @@ export const SidebarItemsList: SidebarNavItemType[] = [
     path: routePaths.profile,
     Icon: Profile,
     title: "Профиль",
+  },
+  {
+    privateRoute: true,
+    path: routePaths.articles,
+    Icon: Article,
+    title: "Статьи",
   },
 ];
