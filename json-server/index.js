@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-
-const fs = require("fs");
+// https://billyyyyy3320.com/en/2019/07/21/create-json-server-with-multiple-files/
 const jsonServer = require("json-server");
-const path = require("path");
 const dotenv = require("dotenv");
+const db = require("./db.js")();
+const router = jsonServer.router(db);
+const middlewares = jsonServer.defaults();
 
 dotenv.config();
 
@@ -11,9 +12,7 @@ const PORT = Number(process.env.SERVER_PORT);
 
 const server = jsonServer.create();
 
-const router = jsonServer.router(path.resolve(__dirname, "db.json"));
-
-server.use(jsonServer.defaults({}));
+server.use(middlewares);
 server.use(jsonServer.bodyParser);
 
 // Нужно для небольшой задержки, чтобы запрос проходил не мгновенно, имитация реального апи
@@ -28,7 +27,6 @@ server.use(async (req, res, next) => {
 server.post("/login", (req, res) => {
   try {
     const { username, password } = req.body;
-    const db = JSON.parse(fs.readFileSync(path.resolve(__dirname, "db.json"), "UTF-8"));
     const { users = [] } = db;
 
     const userFromBd = users.find((user) => user.username === username && user.password === password);
