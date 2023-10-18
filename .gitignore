@@ -13,3 +13,6 @@
 
 # env
 .env
+
+# server
+json-server/articles
