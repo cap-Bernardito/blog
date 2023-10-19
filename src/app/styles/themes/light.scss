@@ -1,4 +1,5 @@
 @use "sass:map";
+@use "sass:meta";
 
 $colors-pallete: (
   "dark-bg": #fff,
@@ -33,4 +34,6 @@ $colors-theme: (
       --#{$key}-rgb: #{HexToRGB($value)};
     }
   }
+
+  @include meta.load-css("highlight.js/styles/atom-one-light");
 }

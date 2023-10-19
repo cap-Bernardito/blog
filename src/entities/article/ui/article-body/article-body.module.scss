@@ -1,0 +1,10 @@
+.image {
+  max-width: 100%;
+  height: auto;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+:global(.hljs) {
+  padding: var(--spacer);
+  border-radius: var(--border-radius-sm);
+}

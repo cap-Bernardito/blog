@@ -4,7 +4,7 @@ import { BuildOptions } from "../types/config";
 
 export const buildCssLoader = ({ isDev }: Pick<BuildOptions, "isDev">) => {
   return {
-    test: /\.s[ac]ss$/i,
+    test: /\.((c|sa|sc)ss)$/i,
     use: [
       isDev ? "style-loader" : MiniCssExtractPlugin.loader,
       {

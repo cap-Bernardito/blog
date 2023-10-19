@@ -1,7 +1,8 @@
 import { Reducer } from "@reduxjs/toolkit";
 
-import { SessionStateSchema } from "entities/session";
-import { UserStateSchema } from "entities/user";
+import type { ArticleStateSchema } from "entities/article";
+import type { SessionStateSchema } from "entities/session";
+import type { UserStateSchema } from "entities/user";
 
 import { createReducerManager } from "./reducer-manager";
 
@@ -20,8 +21,9 @@ export type StaticReducers<T> = {
   [K in keyof T]: Reducer<T[K]>;
 };
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type AsyncStateSchema = {};
+export type AsyncStateSchema = {
+  article?: ArticleStateSchema;
+};
 
 export type AsyncReducersList = {
   [name in AsyncStateSchemaKey]?: Reducer;
