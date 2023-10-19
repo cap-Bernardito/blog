@@ -52,7 +52,7 @@ module.exports = {
       },
     ],
     "simple-import-sort/exports": "warn",
-    "i18next/no-literal-string": 1,
+    "i18next/no-literal-string": "off",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
     "no-unused-vars": "off",

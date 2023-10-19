@@ -13,7 +13,7 @@ export type TArticle = {
   img: string;
   views: number;
   createdAt: string;
-  type: string;
+  type: string[];
   body: TArticleBody[];
 };
 
