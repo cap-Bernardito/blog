@@ -22,9 +22,17 @@ $half-gap: var(--spacer);
   grid-template-areas: "sidebar__left controls main sidebar__right tools" "footer footer footer footer footer";
 }
 
-.sidebar__left {
+.sidebar-left {
+  position: relative;
   grid-area: sidebar__left;
   padding: $gap $half-gap $gap $gap;
+
+  &__inner {
+    position: sticky;
+    top: $gap;
+    height: 100%;
+    max-height: 873px;
+  }
 }
 
 .controls {
