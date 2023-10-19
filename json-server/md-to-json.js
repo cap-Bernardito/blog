@@ -1,12 +1,26 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const fsPromises = require("fs").promises;
-const fm = require("front-matter");
+const matter = require("gray-matter");
 const prettier = require("prettier");
 const fg = require("fast-glob");
 const parseMarkdown = require("./parse-markdown");
 
 const FROM = [`articles/*.md`];
 const TO = `${__dirname}/db-parts/articles.js`;
+
+const first_250_characters = (file) => {
+  const excerptDraft = file.content
+    .split("\n")
+    .filter((item) => !item.includes("#") && item !== "")
+    .slice(0, 2)
+    .join(" ")
+    .slice(0, 250);
+
+  const lastWord = excerptDraft.lastIndexOf(" ");
+  const excerpt = excerptDraft.slice(0, lastWord);
+
+  file.excerpt = `${excerpt} ...`;
+};
 
 const processFiles = async () => {
   const stream = fg.globStream(FROM, { cwd: __dirname, absolute: true });
@@ -17,10 +31,10 @@ const processFiles = async () => {
   }
 
   const result = (await Promise.all(tasks)).map((file) => {
-    const { attributes, body } = fm(file);
-    const { elements } = parseMarkdown(body);
+    const { data, content, excerpt } = matter(file, { excerpt: first_250_characters });
+    const { elements } = parseMarkdown(content);
 
-    return { ...attributes, body: elements };
+    return { ...data, excerpt, body: elements };
   });
 
   const resultStringify = await prettier.format(`module.exports = ${JSON.stringify(result)};`, { parser: "babel" });

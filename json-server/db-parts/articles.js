@@ -2,7 +2,8 @@ module.exports = [
   {
     id: 1,
     title: "Javascript news",
-    excerpt: "Nothing to see here",
+    excerpt:
+      "Программа, которую по традиции называют «Hello, world!», очень проста. Она выводит куда-либо фразу «Hello, world!», или другую подобную, средствами некоего языка., JavaScript — это язык, программы на котором можно выполнять в разных средах. В нашем ...",
     img: "https://teknotower.com/wp-content/uploads/2020/11/js.png",
     views: 1022,
     createdAt: "26.02.2022",
@@ -51,7 +52,8 @@ module.exports = [
   {
     id: 2,
     title: "Javascript news",
-    excerpt: "Nothing to see here",
+    excerpt:
+      "Программа, которую по традиции называют «Hello, world!», очень проста. Она выводит куда-либо фразу «Hello, world!», или другую подобную, средствами некоего языка., JavaScript — это язык, программы на котором можно выполнять в разных средах. В нашем ...",
     img: "https://teknotower.com/wp-content/uploads/2020/11/js.png",
     views: 1022,
     createdAt: "26.02.2022",
