@@ -1,23 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-
 const MarkdownIt = require("markdown-it");
-const hljs = require("highlight.js/lib/core");
-
-hljs.registerLanguage("javascript", require("highlight.js/lib/languages/javascript"));
-
-const md = new MarkdownIt({
-  highlight: function (str, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return hljs.highlight(str, { language: lang, ignoreIllegals: true }).value;
-      } catch (__) {
-        /* empty */
-      }
-    }
-
-    return ""; // use external default escaping
-  },
-});
+const md = new MarkdownIt();
 
 md.renderer.rules.fence = function (tokens, idx, options, env, slf) {
   var token = tokens[idx],
@@ -39,7 +22,7 @@ md.renderer.rules.fence = function (tokens, idx, options, env, slf) {
   if (options.highlight) {
     highlighted = options.highlight(token.content, langName, langAttrs) || md.utils.escapeHtml(token.content);
   } else {
-    highlighted = md.utils.escapeHtml(token.content);
+    highlighted = token.content;
   }
 
   if (highlighted.indexOf("<pre") === 0) {
@@ -70,8 +53,8 @@ md.renderer.rules.fence = function (tokens, idx, options, env, slf) {
       node: {
         tag: "code",
         type: "fence",
-        body: '<pre class="hljs"><code' + slf.renderAttrs(tmpToken) + ">" + highlighted + "</code></pre>",
-        attrs: tmpAttrs,
+        body: highlighted,
+        attrs: { lang: langName },
       },
     };
   }
@@ -81,8 +64,8 @@ md.renderer.rules.fence = function (tokens, idx, options, env, slf) {
     node: {
       tag: "code",
       type: "fence",
-      body: '<pre class="hljs"><code' + slf.renderAttrs(token) + ">" + highlighted + "</code></pre>",
-      attrs: token,
+      body: highlighted,
+      attrs: { lang: langName },
     },
   };
 };

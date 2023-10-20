@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Code } from "shared/ui/code";
+
 import { TArticleBody } from "../../model/types/article";
 
 import css from "./article-body.module.scss";
@@ -9,10 +11,23 @@ export const ArticleBody: React.FC<TArticleBody> = (block) => {
     return null;
   }
 
+  if (typeof block.body !== "string") {
+    return React.createElement(
+      block.tag,
+      {
+        key: block.id,
+      },
+
+      block.body.map((subComp) => ArticleBody(subComp)),
+    );
+  }
+
   if (block.tag === "code") {
-    return React.createElement(() => <div dangerouslySetInnerHTML={{ __html: block.body }}></div>, {
-      key: block.id,
-    });
+    return (
+      <Code key={block.id} language={block.attrs?.lang}>
+        {block.body}
+      </Code>
+    );
   }
 
   if (block.tag === "img") {
@@ -27,16 +42,5 @@ export const ArticleBody: React.FC<TArticleBody> = (block) => {
     );
   }
 
-  if (typeof block.body === "string") {
-    return React.createElement(block.tag, { key: block.id }, block.body);
-  }
-
-  return React.createElement(
-    block.tag,
-    {
-      key: block.id,
-    },
-
-    block.body.map((subComp) => ArticleBody(subComp)),
-  );
+  return React.createElement(block.tag, { key: block.id }, block.body);
 };

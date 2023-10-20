@@ -1,9 +1,11 @@
+import { Language } from "shared/ui/code";
+
 export type TArticleBody = {
   id: string;
-  tag?: keyof HTMLElementTagNameMap;
-  type: "image" | string;
+  tag: keyof HTMLElementTagNameMap;
+  type: string;
   body: TArticleBody[] | string;
-  attrs?: Record<string, string>;
+  attrs?: Record<string, string> & { lang?: Language };
 };
 
 export type TArticle = {
