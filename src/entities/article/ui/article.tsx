@@ -4,11 +4,11 @@ import React, { useEffect } from "react";
 import { AsyncReducersList, useAppDispatch, useAppSelector } from "app/app-store";
 
 import { useAsyncReducerLoader } from "shared/lib/use-async-reducer-loader";
-import { Loader } from "shared/ui/loader/loader";
+import { Skeleton } from "shared/ui/skeleton";
 
 import EyeIcon from "shared/assets/icons/eye.svg";
 
-import { selectArticleData, selectArticleError, selectArticleIsLoading } from "../model/selectors";
+import { selectArticleData, selectArticleError } from "../model/selectors";
 import { fetchArticleData } from "../model/services/fetch-article-data";
 import { articleReducer } from "../model/slice/article-slice";
 import { type TArticle } from "../model/types/article";
@@ -25,7 +25,6 @@ const asyncArticleReducer: AsyncReducersList = { article: articleReducer };
 
 export const Article: React.FC<ArticleProps> = ({ id }) => {
   const dispatch = useAppDispatch();
-  const isLoading = useAppSelector(selectArticleIsLoading);
   const data = useAppSelector(selectArticleData);
   const error = useAppSelector(selectArticleError);
 
@@ -37,15 +36,11 @@ export const Article: React.FC<ArticleProps> = ({ id }) => {
     }
   }, [dispatch, id]);
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
   if (error) {
     return <div>{error}</div>;
   }
 
-  const articleHeader = data && (
+  const articleHeader = data ? (
     <header className={cn(css.header)}>
       <h1 className={css.header__title}>{data.title}</h1>
       <time className={css.header__date}>
@@ -61,17 +56,31 @@ export const Article: React.FC<ArticleProps> = ({ id }) => {
         <img src={data.img} className="img_adaptive" alt="" />
       </div>
     </header>
+  ) : (
+    <div>
+      <Skeleton count={1} height={20} style={{ marginBottom: "20px" }} />
+      <Skeleton count={1} height={32} style={{ marginBottom: "16px" }} />
+      <Skeleton count={1} height={180} style={{ marginBottom: "32px" }} />
+    </div>
   );
 
-  const articleBody = data && (
+  const articleBody = data ? (
     <section className={cn(css.body)}>
       {data.body.map((el) => {
         return ArticleBody(el);
       })}
     </section>
+  ) : (
+    <div>
+      <Skeleton count={10} />
+      <Skeleton count={1} style={{ marginBottom: "24px" }} />
+      <Skeleton count={1} height={30} style={{ marginBottom: "16px" }} />
+      <Skeleton count={10} />
+      <Skeleton count={1} style={{ marginBottom: "24px" }} />
+    </div>
   );
 
-  const articleFooter = data && (
+  const articleFooter = data ? (
     <footer className={cn(css.footer)}>
       <div className="sr-only">Тэги</div>
       <div className={cn(css.tags)}>
@@ -82,6 +91,8 @@ export const Article: React.FC<ArticleProps> = ({ id }) => {
         ))}
       </div>
     </footer>
+  ) : (
+    <Skeleton count={1} height={30} />
   );
 
   return (

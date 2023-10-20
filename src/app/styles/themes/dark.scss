@@ -12,6 +12,8 @@ $colors-pallete: (
   "icon": #74a2b2,
   "accent": #5ed3f3,
   "orange": #ff7f50,
+  "skeleton-base-color": #313131,
+  "skeleton-highlight-color": #3d3d3d,
 );
 $colors-theme: (
   "primary": map.get($colors-pallete, "accent"),

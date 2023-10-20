@@ -44,6 +44,7 @@ $half-gap: var(--spacer);
 .main {
   @include children-centered;
 
+  display: block;
   grid-area: main;
 }
 
