@@ -1,12 +1,21 @@
 import { Language } from "shared/ui/code";
 
-export type TArticleBody = {
+export type TArticleBodyImg = {
   id: string;
-  tag: keyof HTMLElementTagNameMap;
+  tag: "img";
+  type: string;
+  attrs?: Record<string, string>;
+};
+
+export type TArticleBodyOther = {
+  id: string;
+  tag: keyof Omit<HTMLElementTagNameMap, "img">;
   type: string;
   body: TArticleBody[] | string;
   attrs?: Record<string, string> & { lang?: Language };
 };
+
+export type TArticleBody = TArticleBodyImg | TArticleBodyOther;
 
 export type TArticle = {
   id: string;
