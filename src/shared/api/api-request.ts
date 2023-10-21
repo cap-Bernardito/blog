@@ -6,11 +6,12 @@ import { SyncStorage } from "shared/lib/sync-storage";
 
 export class HTTPClientError extends Error {
   constructor(
-    public message: string,
+    public errorMessage: string,
     public code: number,
-    public type = "HTTPClientError",
+    public type: string,
+    public name = "HTTPClientError",
   ) {
-    super(message);
+    super(errorMessage || type);
   }
 }
 
