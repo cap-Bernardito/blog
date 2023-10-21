@@ -1,0 +1,15 @@
+.root {
+  padding: 10px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacer);
+
+  &__item {
+    padding: 2px 16px;
+    background: var(--light-bg);
+    border-radius: 4px;
+  }
+}

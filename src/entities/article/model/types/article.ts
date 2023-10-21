@@ -1,23 +1,23 @@
 import { Language } from "shared/ui/code";
 
-export type TArticleBodyImg = {
+export type ArticleBodyElementImg = {
   id: string;
   tag: "img";
   type: string;
   attrs?: Record<string, string>;
 };
 
-export type TArticleBodyOther = {
+export type ArticleBodyElementNoImg = {
   id: string;
   tag: keyof Omit<HTMLElementTagNameMap, "img">;
   type: string;
-  body: TArticleBody[] | string;
+  body: ArticleBodyElement[] | string;
   attrs?: Record<string, string> & { lang?: Language };
 };
 
-export type TArticleBody = TArticleBodyImg | TArticleBodyOther;
+export type ArticleBodyElement = ArticleBodyElementImg | ArticleBodyElementNoImg;
 
-export type TArticle = {
+export type Article = {
   id: string;
   title: string;
   excerpt: string;
@@ -25,11 +25,11 @@ export type TArticle = {
   views: number;
   createdAt: string;
   type: string[];
-  body: TArticleBody[];
+  body: ArticleBodyElement[];
 };
 
 export type ArticleStateSchema = {
-  data?: TArticle;
+  data?: Article;
   isLoading: boolean;
   error?: string;
 };

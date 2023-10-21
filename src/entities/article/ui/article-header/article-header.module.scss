@@ -1,8 +1,4 @@
 .root {
-  // Nothing
-}
-
-.header {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto;
@@ -32,25 +28,5 @@
   &__hero {
     grid-column: 1 / span all;
     margin-bottom: var(--spacer-x2);
-  }
-}
-
-.body {
-  margin-bottom: var(--spacer-x2);
-}
-
-.footer {
-  padding: 10px;
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacer);
-
-  &__item {
-    padding: 2px 16px;
-    background: var(--light-bg);
-    border-radius: 4px;
   }
 }

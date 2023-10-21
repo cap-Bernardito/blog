@@ -2,10 +2,10 @@ import { screen } from "@testing-library/react";
 
 import { componentRender } from "shared/lib/tests/component-render";
 
-import { TArticleBodyOther } from "../../../model/types/article";
-import { ArticleBody } from "../article-body";
+import { ArticleBodyElementNoImg } from "../../../model/types/article";
+import { createElementFromMeta } from "../create-element-from-meta";
 
-const data: [Partial<TArticleBodyOther> & { tag: TArticleBodyOther["tag"] }, string?][] = [
+const data: [Partial<ArticleBodyElementNoImg> & { tag: ArticleBodyElementNoImg["tag"] }, string?][] = [
   [{ tag: "h1" }],
   [{ tag: "h2" }],
   [{ tag: "h3" }],
@@ -23,7 +23,7 @@ const data: [Partial<TArticleBodyOther> & { tag: TArticleBodyOther["tag"] }, str
 describe("article-block", () => {
   it.each(data)("no-image elements", async ({ tag, body = "search_this_text" }, searchText = "search_this_text") => {
     componentRender(
-      ArticleBody({
+      createElementFromMeta({
         tag,
         body,
         type: "unused",
@@ -34,9 +34,9 @@ describe("article-block", () => {
     expect(screen.queryByText(searchText)).toBeInTheDocument();
   });
 
-  test("image elements", async () => {
+  it("image elements", async () => {
     componentRender(
-      ArticleBody({
+      createElementFromMeta({
         tag: "img",
         attrs: { src: "http://get.me/image", alt: "search_this_text" },
         type: "unused",

@@ -1,7 +1,7 @@
 import { ArticleDTO } from "../api/types";
-import { TArticle } from "../model/types/article";
+import { Article } from "../model/types/article";
 
-export function mapArticle(dto: ArticleDTO): TArticle {
+export function mapArticle(dto: ArticleDTO): Article {
   return {
     ...dto,
     id: String(dto.id),

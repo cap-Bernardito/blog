@@ -1,4 +1,4 @@
-import { TArticleBody } from "../model/types/article";
+import { ArticleBodyElement } from "../model/types/article";
 
 export type ArticleDTO = {
   id: number;
@@ -8,5 +8,5 @@ export type ArticleDTO = {
   views: number;
   createdAt: string;
   type: string[];
-  body: TArticleBody[];
+  body: ArticleBodyElement[];
 };

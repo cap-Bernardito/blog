@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { fetchArticleData } from "../services/fetch-article-data";
 import { type ArticleStateSchema } from "../types/article";
-import { TArticle } from "../types/article";
+import { Article } from "../types/article";
 
 const initialState: ArticleStateSchema = {
   isLoading: false,
@@ -18,7 +18,7 @@ export const articleSlice = createSlice({
         state.error = undefined;
         state.isLoading = true;
       })
-      .addCase(fetchArticleData.fulfilled, (state, action: PayloadAction<TArticle>) => {
+      .addCase(fetchArticleData.fulfilled, (state, action: PayloadAction<Article>) => {
         state.isLoading = false;
         state.data = action.payload;
       })
