@@ -14,9 +14,13 @@
   font: var(--font-m);
   color: var(--text);
   background: var(--bg);
+}
 
+.theme,
+.hljs {
   &::-webkit-scrollbar {
     width: 10px;
+    height: 6px;
   }
 
   &::-webkit-scrollbar-track {

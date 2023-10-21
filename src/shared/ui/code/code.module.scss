@@ -4,6 +4,7 @@
 }
 
 :global(.hljs) {
+  overflow-x: auto;
   padding: var(--spacer);
   border-radius: var(--border-radius-sm);
 }
