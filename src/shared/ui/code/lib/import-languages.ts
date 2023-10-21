@@ -1,5 +1,6 @@
 export type Language =
   | "python"
+  | "js"
   | "javascript"
   | "shell"
   | "sql"
@@ -25,6 +26,7 @@ export const loadLanguageModule = async (language: Language) => {
     case "python":
       module = import(/* webpackChunkName: "lang_pyton" */ "highlight.js/lib/languages/python");
       break;
+    case "js":
     case "javascript":
       module = import(/* webpackChunkName: "lang_javascript" */ "highlight.js/lib/languages/javascript");
       break;

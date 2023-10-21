@@ -30,7 +30,7 @@ export const Code: React.FC<CodeProps> = (props) => {
     }
 
     loadLanguageModule(language).then((module) => {
-      hljs.registerLanguage(language, module.default);
+      module && hljs.registerLanguage(language, module.default);
 
       nodeRef.current && hljs.highlightElement(nodeRef.current);
     });
