@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 
 import { AsyncReducersList, useAppDispatch, useAppSelector } from "app/app-store";
 
+import { ArticleCommentsList } from "widgets/article-comments-list";
+
 import {
   type Article,
   ArticleBody,
@@ -12,17 +14,18 @@ import {
   articleSelectors,
   fetchArticleData,
 } from "entities/article";
+import { articleCommentsReducer } from "entities/article-comments";
 
 import { useAsyncReducerLoader } from "shared/lib/use-async-reducer-loader";
 
-const asyncArticleReducer: AsyncReducersList = { article: articleReducer };
+const asyncArticleReducer: AsyncReducersList = { article: articleReducer, articleComments: articleCommentsReducer };
 
 export const ArticlePage = () => {
   const { id } = useParams<Article["id"]>();
 
   const dispatch = useAppDispatch();
-  const data = useAppSelector(articleSelectors.selectArticleData);
-  const error = useAppSelector(articleSelectors.selectArticleError);
+  const articleData = useAppSelector(articleSelectors.selectArticleData);
+  const articleError = useAppSelector(articleSelectors.selectArticleError);
 
   useAsyncReducerLoader(asyncArticleReducer, true);
 
@@ -32,17 +35,20 @@ export const ArticlePage = () => {
     }
   }, [dispatch, id]);
 
-  if (error) {
-    return <div>{error}</div>;
+  if (articleError) {
+    return <div>{articleError}</div>;
   }
 
-  const { title, createdAt, views, img, body, type } = data || {};
+  const { title, createdAt, views, img, body, type } = articleData || {};
 
   return (
-    <article>
-      <ArticleHeader title={title} createdAt={createdAt} views={views} img={img} />
-      <ArticleBody data={body} />
-      <ArticleFooter tags={type} />
-    </article>
+    <>
+      <article>
+        <ArticleHeader title={title} createdAt={createdAt} views={views} img={img} />
+        <ArticleBody data={body} />
+        <ArticleFooter tags={type} />
+      </article>
+      <ArticleCommentsList id={id} />
+    </>
   );
 };

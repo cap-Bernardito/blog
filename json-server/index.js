@@ -12,6 +12,12 @@ const PORT = Number(process.env.SERVER_PORT);
 
 const server = jsonServer.create();
 
+server.use(
+  jsonServer.rewriter({
+    "/profile/:id": "/profiles/:id",
+  }),
+);
+
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
 
