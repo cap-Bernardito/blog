@@ -1,4 +1,5 @@
 import type { Preview } from "@storybook/react";
+import { initialize, mswDecorator } from "msw-storybook-addon";
 
 import { Theme } from "../../src/entities/theme";
 import { withI18n } from "../../src/shared/config/storybook/decorators/with-I18n";
@@ -6,6 +7,20 @@ import { withRouter } from "../../src/shared/config/storybook/decorators/with-ro
 import { getWithStore } from "../../src/shared/config/storybook/decorators/with-store";
 import { withStyles } from "../../src/shared/config/storybook/decorators/with-styles";
 import { withTheme } from "../../src/shared/config/storybook/decorators/with-theme";
+
+// import avatar from "./public/tigger.jpg";
+
+initialize({}, [
+  // Loki failed to load
+  // rest.get("http://get.avatar", async (_, res, ctx) => {
+  //   const image = await fetch(avatar).then((res) => res.arrayBuffer());
+  //   return res(
+  //     ctx.set("Content-Length", image.byteLength.toString()),
+  //     ctx.set("Content-Type", "image/png"),
+  //     ctx.body(image),
+  //   );
+  // }),
+]);
 
 const preview: Preview = {
   globalTypes: {
@@ -33,6 +48,6 @@ const preview: Preview = {
   },
 };
 
-export const decorators = [withStyles, withTheme, withRouter, withI18n, getWithStore()];
+export const decorators = [withStyles, withTheme, withRouter, withI18n, getWithStore(), mswDecorator];
 
 export default preview;
