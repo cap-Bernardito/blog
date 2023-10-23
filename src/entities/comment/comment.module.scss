@@ -1,0 +1,13 @@
+.root {
+  display: flex;
+  flex-wrap: no-wrap;
+  gap: var(--spacer);
+
+  &__right {
+    flex: 1 1 200px;
+  }
+}
+
+.title {
+  margin-bottom: var(--spacer);
+}
