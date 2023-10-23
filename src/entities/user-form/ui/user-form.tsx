@@ -193,7 +193,7 @@ export const UserForm: React.FC<UserFormProps> = ({ className, onSubmit, formFie
             )}
           </div>
           <div className={cn(css.header__item, css.header__middle)}>
-            {formFields.defaults.avatar && <Avatar url={formFields.defaults.avatar} size="xl" />}
+            <Avatar url={formFields.defaults.avatar} size="xl" />
           </div>
           <div className={cn(css.header__item, css.header__right)}>
             {editableForm ? (

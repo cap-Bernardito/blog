@@ -1,13 +1,15 @@
 import cn from "classnames";
 import React, { ImgHTMLAttributes } from "react";
 
+import { Skeleton } from "../skeleton";
+
 import css from "./avatar.module.scss";
 
 type SizesAvatar = "md" | "xl";
 
 type AvatarProps = ImgHTMLAttributes<HTMLImageElement> & {
   className?: string;
-  url: string;
+  url?: string;
   size?: SizesAvatar;
 };
 
@@ -21,14 +23,24 @@ export const Avatar: React.FC<AvatarProps> = (props) => {
 
   return (
     <div className={cn(css.root, className, css[`root__${size}`])}>
-      <img
-        className={cn(css.root__img)}
-        width={sizesAvatar[size]}
-        height={sizesAvatar[size]}
-        src={url}
-        alt=""
-        {...otherProps}
-      />
+      {url ? (
+        <img
+          className={cn(css.root__img)}
+          width={sizesAvatar[size]}
+          height={sizesAvatar[size]}
+          src={url}
+          alt=""
+          data-testid="avatar-image"
+          {...otherProps}
+        />
+      ) : (
+        <Skeleton
+          width={sizesAvatar[size]}
+          height={sizesAvatar[size]}
+          containerClassName={css.root__skeleton}
+          containerTestId="avatar-placeholder"
+        />
+      )}
     </div>
   );
 };

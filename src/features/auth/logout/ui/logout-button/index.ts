@@ -1,1 +1,1 @@
-export { LogoutButtonAsync as LogoutButton } from "./logout-button.async";
+export { LogoutButton } from "./logout-button";

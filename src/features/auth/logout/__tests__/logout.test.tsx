@@ -7,7 +7,7 @@ import { mapUser } from "entities/user/lib/map-user";
 import { componentRender } from "shared/lib/tests/component-render";
 import { testUser } from "shared/lib/tests/fixtures/fixtures";
 
-import { LogoutButton } from "../ui/logout-button/logout-button";
+import { LogoutButton } from "../ui/logout-button";
 
 describe("logout", () => {
   const setup = (isAuth = false) => {
@@ -21,7 +21,7 @@ describe("logout", () => {
           },
         });
 
-    const logoutButton = screen.queryByRole("button", { name: /выйти/i });
+    const logoutButton = screen.getByRole("button", { name: /выйти/i });
 
     return {
       user,
@@ -30,23 +30,26 @@ describe("logout", () => {
     };
   };
 
-  it("should not render when user is not auth", async () => {
-    const { logoutButton } = setup();
+  it("should render placeholder when user is not auth", async () => {
+    setup(false);
 
-    expect(logoutButton).not.toBeInTheDocument();
+    expect(screen.getByTestId("avatar-placeholder")).toBeInTheDocument();
   });
 
-  it("should be removed from the DOM after clicking", async () => {
-    const { user, logoutButton } = setup(true);
+  it("should render image when user is available", async () => {
+    setup(true);
 
-    if (!logoutButton) {
-      throw new Error("The button should not be available");
-    }
+    expect(screen.getByTestId("avatar-image")).toBeInTheDocument();
+  });
+
+  it("should change image on placeholder after clicking", async () => {
+    const { user, logoutButton } = setup(true);
+    expect(screen.getByTestId("avatar-image")).toBeInTheDocument();
 
     await user.click(logoutButton);
 
     await waitFor(() => {
-      expect(logoutButton).not.toBeInTheDocument();
+      expect(screen.getByTestId("avatar-placeholder")).toBeInTheDocument();
     });
   });
 });

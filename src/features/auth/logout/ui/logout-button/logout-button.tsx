@@ -18,10 +18,8 @@ export const LogoutButton = () => {
   }, [dispatch]);
 
   return (
-    userProfile && (
-      <Button onClick={handleClick} variant={ButtonVariant.ICON} color={ButtonColor.SECONDARY} title="Выйти">
-        <Avatar url={userProfile.avatar} size="md" />
-      </Button>
-    )
+    <Button onClick={handleClick} variant={ButtonVariant.ICON} color={ButtonColor.SECONDARY} aria-label="Выйти">
+      <Avatar url={userProfile?.avatar} size="md" />
+    </Button>
   );
 };

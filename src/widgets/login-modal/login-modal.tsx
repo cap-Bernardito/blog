@@ -23,9 +23,7 @@ export const LoginModal = () => {
   return (
     <ErrorBoundary fallback={<ErrorFallback />}>
       {isAuth ? (
-        <Suspense fallback="...">
-          <LogoutButton />
-        </Suspense>
+        <LogoutButton />
       ) : (
         <Button
           onClick={modal.openModal}

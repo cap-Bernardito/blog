@@ -12,7 +12,7 @@ import { DelayedComponent } from "shared/lib/tests/delayed-component";
 
 import { ToolsPanel } from "./tools-panel";
 
-const preloadAuthState: RootState = {
+const preloadAuthStateWithUser: RootState = {
   session: {
     isAuthorized: true,
     accessToken: "atata",
@@ -35,6 +35,18 @@ const preloadAuthState: RootState = {
   },
 };
 
+const preloadOnlyAuthState: RootState = {
+  session: {
+    isAuthorized: true,
+    accessToken: "atata",
+    userId: toSessionUserId(1),
+    _isInit: true,
+  },
+  user: {
+    isLoading: false,
+  },
+};
+
 const meta = {
   title: "widgets/ToolsPanel",
   component: ToolsPanel,
@@ -54,13 +66,21 @@ export const Dark: Story = {
   parameters: { theme: Theme.DARK },
 };
 
+export const LightWithAuthLoading: Story = {
+  decorators: [getWithStore(preloadOnlyAuthState)],
+};
+
+export const DarkWithAuthLoading: Story = {
+  decorators: [getWithStore(preloadOnlyAuthState)],
+};
+
 export const LightWithAuth = () => (
   <DelayedComponent delay={2000} onDone={createAsyncCallback()}>
     <ToolsPanel />
   </DelayedComponent>
 );
 LightWithAuth.story = {
-  decorators: [getWithStore(preloadAuthState)],
+  decorators: [getWithStore(preloadAuthStateWithUser)],
 };
 
 export const DarkWithAuth = () => (
@@ -70,5 +90,5 @@ export const DarkWithAuth = () => (
 );
 DarkWithAuth.story = {
   parameters: { theme: Theme.DARK },
-  decorators: [getWithStore(preloadAuthState)],
+  decorators: [getWithStore(preloadAuthStateWithUser)],
 };
