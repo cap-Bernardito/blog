@@ -11,7 +11,7 @@ import { UserForm } from "entities/user-form";
 import { selectFormFields } from "../model/selectors";
 
 export const ChangeUserForm = () => {
-  const userId = useAppSelector(sessionSelectors.selectUseId);
+  const userId = useAppSelector(sessionSelectors.selectUserId);
   const formFields = useAppSelector(selectFormFields);
   const dispatch = useAppDispatch();
 

@@ -21,7 +21,6 @@ describe("change user form", () => {
           isLoading: false,
           user: mapUser(testUser),
         },
-        user: { isLoading: false },
       },
     });
 

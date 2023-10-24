@@ -26,7 +26,7 @@ const handlers = [
       : res(ctx.delay(100), ctx.status(401), ctx.json({ message: "Login or password is incorrect" }));
   }),
 
-  rest.put(requestUrl("profile/1"), async (req, res, ctx) => {
+  rest.put(requestUrl("profiles/1"), async (req, res, ctx) => {
     const { first } = await req.json();
 
     if (first === "generate HTTPError") {

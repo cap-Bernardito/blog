@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { fetchUserData } from "../services/fetch-user-data";
-import { updateUserData } from "../services/update-user-data";
 import { UserStateSchema } from "../types/user";
 import { User } from "../types/user-schema";
 
@@ -28,10 +27,6 @@ export const userSlice = createSlice({
       .addCase(fetchUserData.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
-      })
-
-      .addCase(updateUserData.fulfilled, (state, action: PayloadAction<User>) => {
-        state.data = action.payload;
       });
   },
 });

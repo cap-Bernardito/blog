@@ -1,5 +1,7 @@
 import { Reducer } from "@reduxjs/toolkit";
 
+import { AllUsersStateSchema } from "pages/users-page/model/types/all-users";
+
 import type { ArticleStateSchema } from "entities/article";
 import { ArticleCommentsStateSchema } from "entities/article-comments";
 import type { SessionStateSchema } from "entities/session";
@@ -15,7 +17,6 @@ export type ReducerManager = ReturnType<typeof createReducerManager>;
 
 export type StaticStateSchema = {
   session: SessionStateSchema;
-  user: UserStateSchema;
 };
 
 export type StaticReducers<T> = {
@@ -25,6 +26,8 @@ export type StaticReducers<T> = {
 export type AsyncStateSchema = {
   article?: ArticleStateSchema;
   articleComments?: ArticleCommentsStateSchema;
+  user?: UserStateSchema;
+  allUsers?: AllUsersStateSchema;
 };
 
 export type AsyncReducersList = {

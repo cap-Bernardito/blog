@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { User } from "entities/user/@x";
+import { updateUserData, User } from "entities/user/@x";
 
 import { fetchSessionUserData } from "./services/fetch-session-user-data";
 import { SessionStateSchema } from "./types/session";
@@ -57,6 +57,10 @@ export const sessionSlice = createSlice<
       .addCase(fetchSessionUserData.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+      })
+
+      .addCase(updateUserData.fulfilled, (state, action: PayloadAction<User>) => {
+        state.user = action.payload;
       });
   },
 });
