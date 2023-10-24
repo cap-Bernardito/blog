@@ -1,12 +1,12 @@
 import { createSelector } from "reselect";
 
-import { userSelectors } from "entities/user";
+import { sessionSelectors } from "entities/session";
 
 import { formFields } from "./form-fields";
 import { FieldsListUser, UserWithoutId } from "./types";
 
-export const selectFormFields = createSelector(userSelectors.selectUserData, (user) => {
-  if (typeof user === "undefined") {
+export const selectFormFields = createSelector(sessionSelectors.selectUser, (user) => {
+  if (!user) {
     return { all: null, defaults: null };
   }
 

@@ -90,11 +90,7 @@ describe("login", () => {
     });
 
     await waitFor(() => {
-      expect(componentRender.store?.getState().user).toEqual({
-        isLoading: false,
-        error: undefined,
-        data: mapUser(testUser),
-      });
+      expect(componentRender.store?.getState().session.user).toEqual(mapUser(testUser));
     });
   });
 

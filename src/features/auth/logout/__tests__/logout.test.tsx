@@ -16,8 +16,15 @@ describe("logout", () => {
       ? componentRender(<LogoutButton />)
       : componentRender(<LogoutButton />, {
           initialState: {
-            session: { isAuthorized: true, _isInit: true, accessToken: "atata", userId: toSessionUserId(1) },
-            user: { isLoading: false, data: mapUser(testUser) },
+            session: {
+              isAuthorized: true,
+              _isInit: true,
+              accessToken: "atata",
+              userId: toSessionUserId(1),
+              isLoading: false,
+              user: mapUser(testUser),
+            },
+            user: { isLoading: false },
           },
         });
 

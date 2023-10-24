@@ -18,10 +18,8 @@ const preloadAuthStateWithUser: RootState = {
     accessToken: "atata",
     userId: toSessionUserId(1),
     _isInit: true,
-  },
-  user: {
     isLoading: false,
-    data: {
+    user: {
       id: 1,
       first: "Вася",
       lastname: "Василек",
@@ -33,6 +31,9 @@ const preloadAuthStateWithUser: RootState = {
       avatar: "tigger.jpg",
     },
   },
+  user: {
+    isLoading: false,
+  },
 };
 
 const preloadOnlyAuthState: RootState = {
@@ -41,6 +42,8 @@ const preloadOnlyAuthState: RootState = {
     accessToken: "atata",
     userId: toSessionUserId(1),
     _isInit: true,
+    isLoading: false,
+    user: null,
   },
   user: {
     isLoading: false,

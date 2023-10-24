@@ -1,10 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+import { User } from "entities/user/@x";
+
+import { fetchSessionUserData } from "./services/fetch-session-user-data";
 import { SessionStateSchema } from "./types/session";
 import { Session } from "./types/session-schema";
 
 const initialState: SessionStateSchema = {
   isAuthorized: false,
+  isLoading: false,
+  user: null,
 };
 
 export const sessionSlice = createSlice<
@@ -12,6 +17,7 @@ export const sessionSlice = createSlice<
   {
     initSessionData: (state: SessionStateSchema) => void;
     setAuthData: (state: SessionStateSchema, action: PayloadAction<Session>) => void;
+    setUser: (state: SessionStateSchema, action: PayloadAction<User>) => void;
     clearSessionData: (state: SessionStateSchema) => void;
   },
   "session"
@@ -27,11 +33,31 @@ export const sessionSlice = createSlice<
       state.userId = payload.userId;
       state.accessToken = payload.accessToken;
     },
+    setUser: (state, { payload }) => {
+      state.isAuthorized = true;
+      state.user = payload;
+    },
     clearSessionData: (state) => {
       state.accessToken = undefined;
       state.userId = undefined;
       state.isAuthorized = false;
+      state.user = null;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchSessionUserData.pending, (state) => {
+        state.error = undefined;
+        state.isLoading = true;
+      })
+      .addCase(fetchSessionUserData.fulfilled, (state, action: PayloadAction<User>) => {
+        state.isLoading = false;
+        state.user = action.payload;
+      })
+      .addCase(fetchSessionUserData.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
   },
 });
 

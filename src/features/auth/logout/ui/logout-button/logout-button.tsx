@@ -2,7 +2,7 @@ import { useCallback } from "react";
 
 import { useAppDispatch, useAppSelector } from "app/app-store";
 
-import { userSelectors } from "entities/user";
+import { sessionSelectors } from "entities/session";
 
 import { Avatar } from "shared/ui/avatar";
 import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
@@ -10,7 +10,7 @@ import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
 import { logout } from "../../model/services/logout";
 
 export const LogoutButton = () => {
-  const userProfile = useAppSelector(userSelectors.selectUserData);
+  const userProfile = useAppSelector(sessionSelectors.selectUser);
   const dispatch = useAppDispatch();
 
   const handleClick = useCallback(() => {

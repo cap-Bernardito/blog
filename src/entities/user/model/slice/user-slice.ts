@@ -14,11 +14,7 @@ const initialState: UserStateSchema = {
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {
-    clearUserData: (state) => {
-      state.data = undefined;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchUserData.pending, (state) => {
