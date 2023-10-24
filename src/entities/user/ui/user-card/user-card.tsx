@@ -2,6 +2,9 @@ import cn from "classnames";
 import plural from "plural-ru";
 import React from "react";
 
+import { routePaths } from "app/app-router/app-router-config";
+
+import { AppLink } from "shared/ui/app-link";
 import { Avatar } from "shared/ui/avatar";
 
 import { User } from "../../model/types/user-schema";
@@ -14,9 +17,10 @@ type UserCardProps = {
   first: User["first"];
   lastName: User["lastname"];
   age: User["age"];
+  id: User["age"];
 };
 
-export const UserCard: React.FC<UserCardProps> = ({ className, avatar, first, lastName, age }) => {
+export const UserCard: React.FC<UserCardProps> = ({ className, avatar, first, lastName, age, id }) => {
   const userName = `${first} ${lastName}`;
 
   return (
@@ -25,7 +29,9 @@ export const UserCard: React.FC<UserCardProps> = ({ className, avatar, first, la
         <Avatar url={avatar} />
       </div>
       <div className={cn(css.root__right)}>
-        <div className={cn(css.title)}>{userName}</div>
+        <div className={cn(css.title)}>
+          <AppLink to={`${routePaths.users}/${id}`}>{userName}</AppLink>
+        </div>
         <div className={cn(css.age)}>{plural(Number(age), "%d год", "%d года", "%d лет")}</div>
       </div>
     </div>

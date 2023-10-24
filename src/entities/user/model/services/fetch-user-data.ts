@@ -2,12 +2,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { ThunkConfig } from "app/app-store";
 
-import { Session } from "entities/session";
-
 import { getUser } from "../../api/user-api";
 import { User } from "../types/user-schema";
 
-export const fetchUserData = createAsyncThunk<User, Session["userId"], ThunkConfig<string>>(
+export const fetchUserData = createAsyncThunk<User, User["id"], ThunkConfig<string>>(
   "user/fetchUserData",
   async (userId, thunkApi) => {
     try {

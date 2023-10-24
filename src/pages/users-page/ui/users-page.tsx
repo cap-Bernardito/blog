@@ -45,6 +45,7 @@ export const UsersPage = () => {
         first={user.first}
         lastName={user.lastname}
         age={user.age}
+        id={String(user.id)}
         className={css.userlist__item}
       />
     ));

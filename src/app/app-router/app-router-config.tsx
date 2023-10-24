@@ -6,6 +6,7 @@ import { ArticlesPage } from "pages/articles-page";
 import { HomePage } from "pages/home-page";
 import { NotFoundPage } from "pages/not-found-page";
 import { ProfilePage } from "pages/profile-page";
+import { UserPage } from "pages/user-page";
 import { UsersPage } from "pages/users-page";
 
 type AppRouteProps = RouteProps & {
@@ -17,6 +18,7 @@ export const enum AppRoutes {
   ABOUT = "about",
   PROFILE = "profile",
   USERS = "users",
+  USER = "user",
   ARTICLES = "articles",
   ARTICLE = "article",
   NOT_FOUND = "not_found",
@@ -24,11 +26,12 @@ export const enum AppRoutes {
 
 export const routePaths: Record<AppRoutes, string> = {
   [AppRoutes.HOME]: "/",
-  [AppRoutes.ABOUT]: "about",
-  [AppRoutes.PROFILE]: "profile",
-  [AppRoutes.USERS]: "users",
-  [AppRoutes.ARTICLES]: "articles",
-  [AppRoutes.ARTICLE]: "articles/:id",
+  [AppRoutes.ABOUT]: "/about",
+  [AppRoutes.PROFILE]: "/profile",
+  [AppRoutes.USERS]: "/users",
+  [AppRoutes.USER]: "/users/:id",
+  [AppRoutes.ARTICLES]: "/articles",
+  [AppRoutes.ARTICLE]: "/articles/:id",
   [AppRoutes.NOT_FOUND]: "*",
 };
 
@@ -49,6 +52,11 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
   [AppRoutes.USERS]: {
     path: routePaths[AppRoutes.USERS],
     element: <UsersPage />,
+    isProtected: true,
+  },
+  [AppRoutes.USER]: {
+    path: routePaths[AppRoutes.USER],
+    element: <UserPage />,
     isProtected: true,
   },
   [AppRoutes.ARTICLES]: {

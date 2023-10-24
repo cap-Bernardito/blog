@@ -9,7 +9,7 @@ import { User } from "../model/types/user-schema";
 
 import { RequestUpdateUserBody, UserDTO } from "./types";
 
-export const getUser = async (userId: Session["userId"]): Promise<User> => {
+export const getUser = async (userId: number): Promise<User> => {
   const response = await request.get<UserDTO>(`/profiles/${userId}`);
 
   return mapUser(response);

@@ -1,0 +1,32 @@
+.root {
+  // Nothing
+}
+
+.userinfo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacer-x2);
+  align-items: center;
+  justify-content: center;
+
+  &__avatar {
+    display: flex;
+    flex: 0 1 100%;
+    justify-content: center;
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    font: var(--font-l);
+    list-style: none;
+
+    li {
+      margin-bottom: 8px;
+
+      span {
+        margin-right: 5px;
+      }
+    }
+  }
+}

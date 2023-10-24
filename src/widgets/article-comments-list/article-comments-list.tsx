@@ -1,6 +1,7 @@
 import cn from "classnames";
 import React, { useEffect } from "react";
 
+import { routePaths } from "app/app-router/app-router-config";
 import { useAppDispatch, useAppSelector } from "app/app-store";
 
 import { Article } from "entities/article";
@@ -10,6 +11,8 @@ import {
   fetchArticleComments,
 } from "entities/article-comments";
 import { Comment } from "entities/comment";
+
+import { AppLink } from "shared/ui/app-link";
 
 import css from "./article-comments-list.module.scss";
 
@@ -36,11 +39,23 @@ export const ArticleCommentsList: React.FC<ArticleCommentsListtProps> = ({ class
   return (
     <section className={cn(css.root, className)}>
       <h2 className={cn(css.title)}>Комментарии</h2>
-      {comments.map((comment) => (
-        <Comment className={css.comment} key={comment.id} img={comment.author.avatar} title={comment.author.name}>
-          {comment.text}
-        </Comment>
-      ))}
+      {comments.map((comment) => {
+        const {
+          id,
+          author: { name, avatar },
+        } = comment;
+
+        return (
+          <Comment
+            className={css.comment}
+            key={id}
+            img={avatar}
+            title={<AppLink to={`${routePaths.users}/${id}`}>{name}</AppLink>}
+          >
+            {comment.text}
+          </Comment>
+        );
+      })}
     </section>
   );
 };
