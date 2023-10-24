@@ -1,0 +1,48 @@
+@use "../../../app/styles/variables/mixin.scss" as *;
+
+.root {
+  @include form-field;
+
+  position: relative;
+  padding-top: 0;
+
+  &__sizer {
+    pointer-events: none;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+
+    padding: 8px 10px;
+
+    opacity: 0;
+  }
+
+  &__field {
+    resize: none;
+
+    display: block;
+
+    min-width: 100%;
+    max-width: 100%;
+    padding: 8px 10px;
+
+    line-height: 1.4;
+    color: var(--text);
+
+    background: rgb(var(--hint-rgb) / 30%);
+    border: 1px solid rgb(var(--icon-rgb) / 30%);
+
+    &::placeholder {
+      font-size: var(--font-size-m);
+      color: var(--hint);
+    }
+
+    &::-webkit-scrollbar,
+    &::-webkit-scrollbar-track,
+    &::-webkit-scrollbar-thumb {
+      display: none;
+    }
+  }
+}

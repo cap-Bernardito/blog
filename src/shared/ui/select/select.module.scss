@@ -1,4 +1,4 @@
-@use "../input/input.module.scss" as *;
+@use "../../../app/styles/variables/mixin.scss" as *;
 
 .root {
   @include form-field;
