@@ -4,6 +4,8 @@ import React, { useEffect } from "react";
 import { routePaths } from "app/app-router/app-router-config";
 import { useAppDispatch, useAppSelector } from "app/app-store";
 
+import { AddCommentForm } from "features/add-comment";
+
 import { Article } from "entities/article";
 import {
   articleCommentsAdapterSelectors,
@@ -39,6 +41,11 @@ export const ArticleCommentsList: React.FC<ArticleCommentsListtProps> = ({ class
   return (
     <section className={cn(css.root, className)}>
       <h2 className={cn(css.title)}>Комментарии</h2>
+
+      <div className={cn(css.form)}>
+        <AddCommentForm />
+      </div>
+
       {comments.map((comment) => {
         const {
           id,
