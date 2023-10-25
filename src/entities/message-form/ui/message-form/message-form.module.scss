@@ -1,0 +1,24 @@
+.root {
+  &__main {
+    display: flex;
+    gap: var(--spacer);
+    align-items: start;
+
+    .field {
+      flex: 1 1 100px;
+    }
+
+    .button {
+      position: relative;
+      top: 6px;
+    }
+  }
+
+  &__info {
+    text-align: center;
+  }
+}
+
+.error {
+  color: var(--error-color);
+}

@@ -7,7 +7,7 @@ import { UserForm } from "../ui/user-form";
 
 import { fieldsZodResolver, formFields, formFieldsEmpty } from "./fixtures";
 
-describe("login", () => {
+describe("user-form", () => {
   const setup = () => {
     const stub = jest.fn();
     const user = userEvent.setup();

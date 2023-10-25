@@ -24,7 +24,6 @@ describe("logout", () => {
               isLoading: false,
               user: mapUser(testUser),
             },
-            user: { isLoading: false },
           },
         });
 

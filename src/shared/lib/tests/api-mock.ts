@@ -8,7 +8,7 @@ import { testSession, testUser } from "./fixtures/fixtures";
 export const requestUrl = (endPoint: string) => `${configEnv.API_BASEURL}/${endPoint}`;
 
 const handlers = [
-  rest.get(requestUrl("profile/1"), (req, res, ctx) => {
+  rest.get(requestUrl("profiles/1"), (req, res, ctx) => {
     const isAuthorized = req.headers.get("authorization");
 
     if (!isAuthorized) {

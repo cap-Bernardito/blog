@@ -22,13 +22,20 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((pr
     const field = taRef.current;
     const div = divRef.current;
 
-    if (field && div) {
-      const fieldHeight = div.scrollHeight;
-      const lineHeight = Number.parseFloat(getComputedStyle(div).lineHeight);
-      const estimatedRows = Math.ceil(fieldHeight / lineHeight - 1);
-
-      setRowCount(estimatedRows > 7 ? 7 : Math.max(estimatedRows, 1));
+    if (!field || !div) {
+      return;
     }
+
+    const fieldHeight = div.scrollHeight;
+    const lineHeight = Number.parseFloat(getComputedStyle(div).lineHeight);
+
+    if (isNaN(fieldHeight) || isNaN(lineHeight)) {
+      return;
+    }
+
+    const estimatedRows = Math.ceil(fieldHeight / lineHeight - 1);
+
+    setRowCount(estimatedRows > 7 ? 7 : Math.max(estimatedRows, 1));
   }, [ref, value]);
 
   return (
