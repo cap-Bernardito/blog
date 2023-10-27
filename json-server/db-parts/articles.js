@@ -1,6 +1,7 @@
 module.exports = [
   {
     id: 1,
+    profileId: 2,
     title: "Javascript news",
     excerpt:
       'ООП позволяет разрабатывать сложные системы, которые могут быть легко поняты, поддержаны и модифицированы. ООП - это методология программирования, которая строится на концепции "объектов". Объекты представляют собой экземпляры классов, которые ...',
@@ -63,10 +64,11 @@ module.exports = [
   },
   {
     id: 2,
+    profileId: 1,
     title: "Javascript news",
     excerpt:
       "Программа, которую по традиции называют «Hello, world!», очень проста. Она выводит куда-либо фразу «Hello, world!», или другую подобную, средствами некоего языка., JavaScript — это язык, программы на котором можно выполнять в разных средах. В нашем ...",
-    img: "https://teknotower.com/wp-content/uploads/2020/11/js.png",
+    img: "http://www.websovet.com/wp-content/uploads/2017/09/javascript.jpg",
     views: 1022,
     createdAt: "26.02.2022",
     type: ["IT"],

@@ -39,6 +39,46 @@ $media-xl-viewport: 1920;
   }
 }
 
+// Font
+@function strip-unit($number) {
+  // stylelint-disable-next-line scss/at-rule-conditional-no-parentheses
+  @if type-of($number) == "number" and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+@mixin text-overflow() {
+  overflow: hidden;
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin text-overflow-line-clamp($lines-to-show: 1, $line-height: $line-height-base, $font-size: $font-size-base) {
+  position: relative;
+
+  overflow: hidden;
+  display: block;
+
+  padding: 0 !important;
+
+  text-overflow: ellipsis;
+
+  @if $lines-to-show == 1 {
+    white-space: nowrap;
+  }
+
+  /* stylelint-disable-next-line scss/at-else-empty-line-before */
+  @else {
+    max-height: #{strip-unit($line-height) * $lines-to-show}em;
+    font-size: $font-size;
+    line-height: #{strip-unit($line-height)}em;
+  }
+}
+
+// Input, select, textarea
 @mixin form-field() {
   $root: &;
   $mb: 12px;

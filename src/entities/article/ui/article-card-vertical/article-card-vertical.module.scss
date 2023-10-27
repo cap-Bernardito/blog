@@ -1,0 +1,79 @@
+@use "../../../../app/styles/variables/mixin.scss" as *;
+
+.root {
+  max-width: 300px;
+  margin: 0 auto;
+  background: var(--dark-bg);
+  border-radius: var(--border-radius-sm);
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+
+  &::before {
+    content: "";
+
+    display: block;
+
+    width: 1px;
+    padding-bottom: 50%;
+
+    background: transparent;
+  }
+
+  &__inner {
+    position: absolute;
+    inset: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.main {
+  padding: 10px 10px 16px;
+}
+
+.body {
+  @include text-overflow-line-clamp(4, 1.5, 1);
+
+  margin-bottom: var(--spacer);
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+
+  &__date {
+    // Nothing
+  }
+
+  &__view {
+    display: flex;
+    align-items: center;
+
+    svg {
+      color: var(--icon);
+    }
+  }
+}
+
+.autor {
+  display: flex;
+  align-items: center;
+
+  &__avatar {
+    margin-right: 8px;
+  }
+
+  &__username {
+    // Nothing
+  }
+}

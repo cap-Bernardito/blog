@@ -1,3 +1,5 @@
+import { User } from "entities/user/@x";
+
 import { Language } from "shared/ui/code";
 
 export type ArticleBodyElementImg = {
@@ -19,6 +21,7 @@ export type ArticleBodyElement = ArticleBodyElementImg | ArticleBodyElementNoImg
 
 export type Article = {
   id: string;
+  author: User;
   title: string;
   excerpt: string;
   img: string;

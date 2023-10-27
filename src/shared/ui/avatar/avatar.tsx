@@ -5,7 +5,7 @@ import { Skeleton } from "../skeleton";
 
 import css from "./avatar.module.scss";
 
-type SizesAvatar = "md" | "xl";
+type SizesAvatar = "sm" | "md" | "xl";
 
 type AvatarProps = ImgHTMLAttributes<HTMLImageElement> & {
   className?: string;
@@ -14,6 +14,7 @@ type AvatarProps = ImgHTMLAttributes<HTMLImageElement> & {
 };
 
 const sizesAvatar: Record<SizesAvatar, number> = {
+  sm: 32,
   md: 48,
   xl: 128,
 };
