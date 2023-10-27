@@ -12,14 +12,14 @@ import css from "./article-card-vertical.module.scss";
 type ArticleCardVerticalProps = {
   className?: string;
   img: Article["img"];
-  excerpt: Article["title"];
+  title: Article["title"];
   createdAt: Article["createdAt"];
   views: Article["views"];
   author: Pick<Article["author"], "avatar" | "username">;
 };
 
 export const ArticleCardVertical: React.FC<ArticleCardVerticalProps> = (props) => {
-  const { className, img, excerpt, createdAt, views, author } = props;
+  const { className, img, title, createdAt, views, author } = props;
 
   return (
     <div className={cn(css.root, className)}>
@@ -29,7 +29,7 @@ export const ArticleCardVertical: React.FC<ArticleCardVerticalProps> = (props) =
         </div>
       </div>
       <div className={cn(css.main)}>
-        <div className={css.body}>{excerpt}</div>
+        <div className={css.body}>{title}</div>
         <div className={css.meta}>
           <div className={css.meta__date}>{createdAt}</div>
           <div className={css.meta__view}>
@@ -38,9 +38,9 @@ export const ArticleCardVertical: React.FC<ArticleCardVerticalProps> = (props) =
             {views}
           </div>
         </div>
-        <div className={css.autor}>
-          <Avatar url={author.avatar} size="sm" className={css.autor__avatar} />
-          <span className={css.autor__username}>{author.username}</span>
+        <div className={css.author}>
+          <Avatar url={author.avatar} size="sm" className={css.author__avatar} />
+          <span className={css.author__username}>{author.username}</span>
         </div>
       </div>
     </div>

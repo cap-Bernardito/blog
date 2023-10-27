@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>;
 export const Light: Story = {
   args: {
     img: "js.jpg",
-    excerpt:
+    title:
       "Программа, которую по традиции называют «Hello, world!», очень проста. Она выводит куда-либо фразу «Hello, world!», или другую подобную, средствами некоего языка.",
     createdAt: "27 апр 2017",
     views: 1230,
@@ -34,7 +34,7 @@ export const Light: Story = {
 export const Dark: Story = {
   args: {
     img: "js.jpg",
-    excerpt:
+    title:
       "Программа, которую по традиции называют «Hello, world!», очень проста. Она выводит куда-либо фразу «Hello, world!», или другую подобную, средствами некоего языка.",
     createdAt: "27 апр 2017",
     views: 1230,
