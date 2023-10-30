@@ -31,9 +31,10 @@ export const ArticlesPage = () => {
     return <div>{articlesError}</div>;
   }
 
-  if (articlesIsLoading) {
-    return <Loader />;
-  }
-
-  return <div>{articles && articles.map((article) => <ArticleCardVertical key={article.id} {...article} />)}</div>;
+  return (
+    <>
+      {articlesIsLoading && <Loader />}
+      {articles && articles.map((article) => <ArticleCardVertical key={article.id} {...article} />)}
+    </>
+  );
 };

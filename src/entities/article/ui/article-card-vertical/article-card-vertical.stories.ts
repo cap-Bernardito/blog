@@ -19,6 +19,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Light: Story = {
   args: {
+    id: "1",
     img: "js.jpg",
     title:
       "Программа, которую по традиции называют «Hello, world!», очень проста. Она выводит куда-либо фразу «Hello, world!», или другую подобную, средствами некоего языка.",
@@ -33,6 +34,7 @@ export const Light: Story = {
 
 export const Dark: Story = {
   args: {
+    id: "1",
     img: "js.jpg",
     title:
       "Программа, которую по традиции называют «Hello, world!», очень проста. Она выводит куда-либо фразу «Hello, world!», или другую подобную, средствами некоего языка.",

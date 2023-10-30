@@ -43,6 +43,15 @@
   @include text-overflow-line-clamp(4, 1.5, 1);
 
   margin-bottom: var(--spacer);
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .meta {

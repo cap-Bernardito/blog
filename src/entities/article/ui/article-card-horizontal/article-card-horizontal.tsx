@@ -1,5 +1,8 @@
 import cn from "classnames";
 import React from "react";
+import { Link } from "react-router-dom";
+
+import { routePaths } from "app/app-router/app-router-config";
 
 import { Avatar } from "shared/ui/avatar";
 import { Button, ButtonColor } from "shared/ui/button";
@@ -12,6 +15,7 @@ import css from "./article-card-horizontal.module.scss";
 
 type ArticleCardHorizontalProps = {
   className?: string;
+  id: Article["id"];
   img: Article["img"];
   title: Article["title"];
   excerpt: Article["excerpt"];
@@ -21,7 +25,8 @@ type ArticleCardHorizontalProps = {
 };
 
 export const ArticleCardHorizontal: React.FC<ArticleCardHorizontalProps> = (props) => {
-  const { className, img, title, excerpt, createdAt, views, author } = props;
+  const { className, img, title, excerpt, createdAt, views, author, id } = props;
+  const articlePath = `${routePaths.articles}/${id}`;
 
   return (
     <div className={cn(css.root, className)}>
@@ -35,13 +40,17 @@ export const ArticleCardHorizontal: React.FC<ArticleCardHorizontalProps> = (prop
       <div className={css.title}>{title}</div>
       <div className={css.hero}>
         <div className={css.hero__inner}>
-          <img src={img} alt="" />
+          <Link to={articlePath} aria-label={title}>
+            <img src={img} alt="" />
+          </Link>
         </div>
       </div>
       <div className={cn(css.main)}>{excerpt}</div>
       <div className={css.footer}>
         <div className={css.footer__more}>
-          <Button color={ButtonColor.SECONDARY}>Читать далее</Button>
+          <Button as="a" to={articlePath} color={ButtonColor.SECONDARY}>
+            Читать далее
+          </Button>
         </div>
         <div className={css.footer__view}>
           <span className="sr-only">Количество просмотров</span>

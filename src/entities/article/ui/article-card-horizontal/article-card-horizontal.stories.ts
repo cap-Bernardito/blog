@@ -19,6 +19,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Light: Story = {
   args: {
+    id: "1",
     img: "js.jpg",
     title: "Что такое объектно-ориентированное программирование?",
     excerpt:
@@ -34,6 +35,7 @@ export const Light: Story = {
 
 export const Dark: Story = {
   args: {
+    id: "1",
     img: "js.jpg",
     title: "Что такое объектно-ориентированное программирование?",
     excerpt:

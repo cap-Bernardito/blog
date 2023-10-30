@@ -1,5 +1,8 @@
 import cn from "classnames";
 import React from "react";
+import { Link } from "react-router-dom";
+
+import { routePaths } from "app/app-router/app-router-config";
 
 import { Avatar } from "shared/ui/avatar";
 
@@ -11,6 +14,7 @@ import css from "./article-card-vertical.module.scss";
 
 type ArticleCardVerticalProps = {
   className?: string;
+  id: Article["id"];
   img: Article["img"];
   title: Article["title"];
   createdAt: Article["createdAt"];
@@ -19,17 +23,22 @@ type ArticleCardVerticalProps = {
 };
 
 export const ArticleCardVertical: React.FC<ArticleCardVerticalProps> = (props) => {
-  const { className, img, title, createdAt, views, author } = props;
+  const { className, img, title, createdAt, views, author, id } = props;
+  const articlePath = `${routePaths.articles}/${id}`;
 
   return (
     <div className={cn(css.root, className)}>
       <div className={css.hero}>
         <div className={css.hero__inner}>
-          <img src={img} alt="" />
+          <Link to={articlePath} aria-label={title}>
+            <img src={img} alt="" />
+          </Link>
         </div>
       </div>
       <div className={cn(css.main)}>
-        <div className={css.body}>{title}</div>
+        <div className={css.body}>
+          <Link to={articlePath}>{title}</Link>
+        </div>
         <div className={css.meta}>
           <div className={css.meta__date}>{createdAt}</div>
           <div className={css.meta__view}>
