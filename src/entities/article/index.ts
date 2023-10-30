@@ -4,5 +4,7 @@ export { articleReducer } from "./model/slice/article-slice";
 export type { ArticleStateSchema } from "./model/types/article";
 export { type Article } from "./model/types/article";
 export { ArticleBody } from "./ui/article-body/article-body";
+export { ArticleCardHorizontal } from "./ui/article-card-horizontal";
+export { ArticleCardVertical } from "./ui/article-card-vertical";
 export { ArticleFooter } from "./ui/article-footer/article-footer";
 export { ArticleHeader } from "./ui/article-header/article-header";

@@ -4,6 +4,7 @@ import { AllUsersStateSchema } from "pages/users-page/model/types/all-users";
 
 import type { ArticleStateSchema } from "entities/article";
 import { ArticleCommentsStateSchema } from "entities/article-comments";
+import { ArticlesListStateSchema } from "entities/articles-list";
 import type { SessionStateSchema } from "entities/session";
 import type { UserStateSchema } from "entities/user";
 
@@ -24,6 +25,7 @@ export type StaticReducers<T> = {
 };
 
 export type AsyncStateSchema = {
+  articles?: ArticlesListStateSchema;
   article?: ArticleStateSchema;
   articleComments?: ArticleCommentsStateSchema;
   user?: UserStateSchema;
