@@ -1,3 +1,23 @@
+@use "../../../app/styles/variables/mixin.scss" as *;
+
 .root {
-  // Nothing
+  &.grid {
+    @include media-bp-down($media-xl-viewport) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @include media-bp-down($media-l-viewport) {
+      grid-template-columns: 1fr;
+    }
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--spacer-x2);
+  }
+
+  &.list {
+    > div {
+      margin-bottom: var(--spacer-x2);
+    }
+  }
 }

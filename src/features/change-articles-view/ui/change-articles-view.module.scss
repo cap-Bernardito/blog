@@ -1,0 +1,41 @@
+.root {
+  display: inline-flex;
+  line-height: 1;
+
+  .active {
+    color: var(--icon);
+    background: var(--bg);
+  }
+
+  &__left {
+    padding: 8px 10px 8px 14px;
+
+    font-size: 0;
+    color: var(--light-bg);
+
+    border: 1px solid var(--dark-bg);
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+
+    transition: var(--transition-btn);
+
+    &:hover {
+      color: var(--icon);
+      border-color: var(--icon);
+    }
+  }
+
+  &__right {
+    padding: 8px 14px 8px 10px;
+
+    font-size: 0;
+    color: var(--light-bg);
+
+    border: 1px solid var(--dark-bg);
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+
+    &:hover {
+      color: var(--icon);
+      border-color: var(--icon);
+    }
+  }
+}

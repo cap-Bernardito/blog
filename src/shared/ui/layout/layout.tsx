@@ -21,7 +21,9 @@ export const Layout: React.FC<LayoutProps> = (props) => {
         <div className={cn(css["sidebar-left__inner"])}>{sidebarLeftSlot}</div>
       </div>
 
-      <div className={css.controls}>{controlsSlot}</div>
+      <div className={css.controls}>
+        <div className={cn(css["controls__inner"])}>{controlsSlot}</div>
+      </div>
 
       <main className={cn(css.main)}>
         <Outlet />

@@ -14,6 +14,7 @@ const articlesListAdapter = createEntityAdapter<Article>({
 
 const initialState = articlesListAdapter.getInitialState<ArticlesListStateSchema>({
   isLoading: false,
+  view: "grid",
   ids: [],
   entities: {},
 });
@@ -21,7 +22,11 @@ const initialState = articlesListAdapter.getInitialState<ArticlesListStateSchema
 export const articlesListSlice = createSlice({
   name: "articlesListSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    setView: (state, action: PayloadAction<ArticlesListStateSchema["view"]>) => {
+      state.view = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchArticlesList.pending, (state) => {
