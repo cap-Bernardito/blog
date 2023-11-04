@@ -16,3 +16,6 @@
 
 # server
 json-server/articles
+json-server/posts_md
+json-server/posts_js
+json-server/db-parts/*_generated.js

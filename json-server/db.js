@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const articles = require("./db-parts/articles");
-const comments = require("./db-parts/comments");
+const articles = require("./db-parts/articles_generated");
+const comments = require("./db-parts/comments_generated");
 const users = require("./db-parts/users");
 const profiles = require("./db-parts/profile");
 
