@@ -16,9 +16,13 @@ export const getArticle = async (articleId: Article["id"]): Promise<Article> => 
   return mapArticle(response);
 };
 
-export const getArticles = async (): Promise<Article[]> => {
+type getArticlesProps = { page: number; limit: number };
+
+export const getArticles = async ({ page, limit }: getArticlesProps): Promise<Article[]> => {
   const response = await request.get<ArticleDTO[]>(`/articles`, {
     params: {
+      _page: page,
+      _limit: limit,
       _expand: "profile",
     },
   });

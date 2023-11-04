@@ -5,6 +5,7 @@ import { AsyncReducersList, useAppDispatch, useAppSelector } from "app/app-store
 
 import { ArticleCardHorizontal, ArticleCardVertical } from "entities/article";
 import {
+  articlesActions,
   articlesAdapterSelectors,
   articlesReducer,
   articlesSelectors,
@@ -28,8 +29,9 @@ export const ArticlesPage = () => {
   useAsyncReducerLoader(asyncArticlesReducer);
 
   useEffect(() => {
-    dispatch(fetchArticlesList());
-  }, [dispatch]);
+    dispatch(articlesActions.initState());
+    dispatch(fetchArticlesList({ page: 1 }));
+  }, [articlesView, dispatch]);
 
   if (articlesError) {
     return <div>{articlesError}</div>;

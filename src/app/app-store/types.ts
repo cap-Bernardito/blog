@@ -40,4 +40,5 @@ export type StateSchema = StaticStateSchema & AsyncStateSchema;
 
 export type ThunkConfig<T> = {
   rejectValue: T;
+  state: StateSchema;
 };
