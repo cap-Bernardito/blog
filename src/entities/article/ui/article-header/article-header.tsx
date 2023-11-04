@@ -20,7 +20,7 @@ export const ArticleHeader: React.FC<ArticleHeaderProps> = (props) => {
 
   return (
     <header className={cn(css.root, className)}>
-      <h1 className={css.root__title}>
+      <h1 className={cn(css.root__title, "page-title")}>
         {title || <Skeleton count={1} height={32} style={{ marginBottom: "16px" }} />}
       </h1>
       <time className={css.root__date}>

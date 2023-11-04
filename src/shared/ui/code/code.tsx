@@ -17,7 +17,8 @@ type CodeProps = {
 };
 
 export const Code: React.FC<CodeProps> = (props) => {
-  const { className, children, language = "javascript" } = props;
+  const { className, children } = props;
+  const language = props.language ? props.language : "javascript";
   const nodeRef = useRef<HTMLPreElement>(null);
 
   const handleClick = useCallback(() => {
@@ -25,14 +26,14 @@ export const Code: React.FC<CodeProps> = (props) => {
   }, [children]);
 
   useEffect(() => {
-    if (!nodeRef.current) {
-      return;
-    }
-
     loadLanguageModule(language).then((module) => {
       module && hljs.registerLanguage(language, module.default);
 
-      nodeRef.current && hljs.highlightElement(nodeRef.current);
+      if (!nodeRef.current || nodeRef.current.dataset.highlighted === "yes") {
+        return;
+      }
+
+      hljs.highlightElement(nodeRef.current);
     });
   }, [language]);
 
