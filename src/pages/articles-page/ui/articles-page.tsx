@@ -6,11 +6,10 @@ import { AsyncReducersList, useAppDispatch, useAppSelector } from "app/app-store
 
 import { ArticleCardHorizontal, ArticleCardVertical } from "entities/article";
 import {
-  articlesActions,
   articlesAdapterSelectors,
   articlesReducer,
   articlesSelectors,
-  fetchArticlesList,
+  fetchArticlesListInitial,
   fetchArticlesListPortion,
 } from "entities/articles-list";
 
@@ -33,7 +32,6 @@ export const ArticlesPage = () => {
     rootMargin: "-100px 0px 0px 0px",
     onChange(inView) {
       if (inView) {
-        console.log("HERE: inView", inView);
         dispatch(fetchArticlesListPortion());
       }
     },
@@ -42,11 +40,8 @@ export const ArticlesPage = () => {
   useAsyncReducerLoader(asyncArticlesReducer);
 
   useEffect(() => {
-    if (articles.length === 0) {
-      dispatch(articlesActions.initState());
-      dispatch(fetchArticlesList({ page: 1 }));
-    }
-  }, [articles.length, articlesView, dispatch]);
+    dispatch(fetchArticlesListInitial());
+  }, [dispatch]);
 
   if (articlesError) {
     return <div>{articlesError}</div>;

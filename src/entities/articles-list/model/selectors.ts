@@ -11,3 +11,5 @@ export const selectPage = (state: RootState) => state.articles?.page;
 export const selectLimit = (state: RootState) => state.articles?.limit;
 
 export const selectHasMore = (state: RootState) => state.articles?.hasMore;
+
+export const selectIsInit = (state: RootState) => state.articles?._isInit;

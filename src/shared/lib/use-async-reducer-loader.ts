@@ -10,6 +10,10 @@ export const useAsyncReducerLoader = (reducers: AsyncReducersList, removeAfterUn
 
   useEffect(() => {
     Object.entries(reducers).forEach(([name, reducer]) => {
+      if (name in store.reducerManager.getReducerMap()) {
+        return;
+      }
+
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       store.reducerManager.add(name as StateSchemaKey, reducer);

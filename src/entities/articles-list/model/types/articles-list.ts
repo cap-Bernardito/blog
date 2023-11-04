@@ -7,6 +7,7 @@ export type ArticlesListStateSchema = EntityState<Article> & {
   view: "grid" | "list";
   page: number;
   hasMore: boolean;
+  _isInit: boolean;
   limit?: number;
   data?: Article[];
   error?: string;

@@ -32,6 +32,7 @@ const initialState = articlesListAdapter.getInitialState<ArticlesListStateSchema
   view: "grid",
   page: 1,
   hasMore: true,
+  _isInit: false,
   ids: [],
   entities: {},
 });
@@ -62,6 +63,7 @@ export const articlesListSlice = createSlice({
       })
       .addCase(fetchArticlesList.fulfilled, (state, action: PayloadAction<Article[]>) => {
         state.isLoading = false;
+        state._isInit = true;
         articlesListAdapter.addMany(state, action.payload);
         state.hasMore = action.payload.length === state.limit;
       })
