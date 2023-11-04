@@ -22,12 +22,12 @@ type ArticleCardVerticalProps = {
   author: Pick<Article["author"], "avatar" | "username">;
 };
 
-export const ArticleCardVertical: React.FC<ArticleCardVerticalProps> = (props) => {
+export const ArticleCardVertical = React.forwardRef<HTMLDivElement, ArticleCardVerticalProps>((props, ref) => {
   const { className, img, title, createdAt, views, author, id } = props;
   const articlePath = `${routePaths.articles}/${id}`;
 
   return (
-    <div className={cn(css.root, className)}>
+    <div className={cn(css.root, className)} ref={ref}>
       <div className={css.hero}>
         <div className={css.hero__inner}>
           <Link to={articlePath} aria-label={title}>
@@ -54,4 +54,6 @@ export const ArticleCardVertical: React.FC<ArticleCardVerticalProps> = (props) =
       </div>
     </div>
   );
-};
+});
+
+ArticleCardVertical.displayName = "ArticleCardVertical";

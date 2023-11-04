@@ -25,7 +25,6 @@ const getInitialView = (defaultView: ArticlesListStateSchema["view"]): ArticlesL
 
 const articlesListAdapter = createEntityAdapter<Article>({
   selectId: (comment) => comment.id,
-  sortComparer: (a, b) => Number(a.id) - Number(b.id),
 });
 
 const initialState = articlesListAdapter.getInitialState<ArticlesListStateSchema>({
@@ -45,11 +44,14 @@ export const articlesListSlice = createSlice({
       state.view = action.payload;
       storage.add(ARTICLES_VIEW_LOCALSTORAGE_KEY, action.payload);
     },
+    setPage: (state, action: PayloadAction<ArticlesListStateSchema["page"]>) => {
+      state.page = action.payload;
+    },
     initState: (state) => {
       const view = getInitialView("grid");
 
       state.view = view;
-      state.limit = view === "list" ? 1 : 9;
+      state.limit = view === "list" ? 3 : 9;
     },
   },
   extraReducers: (builder) => {
@@ -61,6 +63,7 @@ export const articlesListSlice = createSlice({
       .addCase(fetchArticlesList.fulfilled, (state, action: PayloadAction<Article[]>) => {
         state.isLoading = false;
         articlesListAdapter.addMany(state, action.payload);
+        state.hasMore = action.payload.length === state.limit;
       })
       .addCase(fetchArticlesList.rejected, (state, action) => {
         state.isLoading = false;

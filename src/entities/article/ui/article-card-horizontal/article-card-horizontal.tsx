@@ -24,12 +24,12 @@ type ArticleCardHorizontalProps = {
   author: Pick<Article["author"], "avatar" | "username">;
 };
 
-export const ArticleCardHorizontal: React.FC<ArticleCardHorizontalProps> = (props) => {
+export const ArticleCardHorizontal = React.forwardRef<HTMLDivElement, ArticleCardHorizontalProps>((props, ref) => {
   const { className, img, title, excerpt, createdAt, views, author, id } = props;
   const articlePath = `${routePaths.articles}/${id}`;
 
   return (
-    <div className={cn(css.root, className)}>
+    <div className={cn(css.root, className)} ref={ref}>
       <div className={css.meta}>
         <div className={cn(css.meta__author, css.author)}>
           <Avatar url={author.avatar} size="sm" className={css.author__avatar} />
@@ -60,4 +60,6 @@ export const ArticleCardHorizontal: React.FC<ArticleCardHorizontalProps> = (prop
       </div>
     </div>
   );
-};
+});
+
+ArticleCardHorizontal.displayName = "ArticleCardHorizontal";
