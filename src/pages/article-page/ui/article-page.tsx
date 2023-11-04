@@ -15,6 +15,7 @@ import {
   fetchArticleData,
 } from "entities/article";
 import { articleCommentsReducer } from "entities/article-comments";
+import { useScrollPosition } from "entities/scroll-position";
 
 import { useAsyncReducerLoader } from "shared/lib/use-async-reducer-loader";
 
@@ -28,6 +29,7 @@ export const ArticlePage = () => {
   const articleError = useAppSelector(articleSelectors.selectArticleError);
 
   useAsyncReducerLoader(asyncArticleReducer, true);
+  useScrollPosition("top");
 
   useEffect(() => {
     if (id) {

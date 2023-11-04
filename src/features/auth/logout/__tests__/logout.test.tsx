@@ -24,6 +24,9 @@ describe("logout", () => {
               isLoading: false,
               user: mapUser(testUser),
             },
+            scrollPosition: {
+              scroll: {},
+            },
           },
         });
 

@@ -21,6 +21,9 @@ describe("change user form", () => {
           isLoading: false,
           user: mapUser(testUser),
         },
+        scrollPosition: {
+          scroll: {},
+        },
       },
     });
 

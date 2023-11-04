@@ -12,6 +12,7 @@ import {
   fetchArticlesListInitial,
   fetchArticlesListPortion,
 } from "entities/articles-list";
+import { useScrollPosition } from "entities/scroll-position";
 
 import { useAsyncReducerLoader } from "shared/lib/use-async-reducer-loader";
 import { Loader } from "shared/ui/loader/loader";
@@ -38,6 +39,7 @@ export const ArticlesPage = () => {
   });
 
   useAsyncReducerLoader(asyncArticlesReducer);
+  useScrollPosition();
 
   useEffect(() => {
     dispatch(fetchArticlesListInitial());

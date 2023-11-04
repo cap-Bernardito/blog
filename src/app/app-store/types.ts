@@ -5,6 +5,7 @@ import { AllUsersStateSchema } from "pages/users-page/model/types/all-users";
 import type { ArticleStateSchema } from "entities/article";
 import { ArticleCommentsStateSchema } from "entities/article-comments";
 import { ArticlesListStateSchema } from "entities/articles-list";
+import { ScrollPositionStateSchema } from "entities/scroll-position";
 import type { SessionStateSchema } from "entities/session";
 import type { UserStateSchema } from "entities/user";
 
@@ -18,6 +19,7 @@ export type ReducerManager = ReturnType<typeof createReducerManager>;
 
 export type StaticStateSchema = {
   session: SessionStateSchema;
+  scrollPosition: ScrollPositionStateSchema;
 };
 
 export type StaticReducers<T> = {

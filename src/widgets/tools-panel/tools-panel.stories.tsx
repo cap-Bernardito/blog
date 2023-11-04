@@ -34,6 +34,9 @@ const preloadAuthStateWithUser: RootState = {
   user: {
     isLoading: false,
   },
+  scrollPosition: {
+    scroll: {},
+  },
 };
 
 const preloadOnlyAuthState: RootState = {
@@ -47,6 +50,9 @@ const preloadOnlyAuthState: RootState = {
   },
   user: {
     isLoading: false,
+  },
+  scrollPosition: {
+    scroll: {},
   },
 };
 
