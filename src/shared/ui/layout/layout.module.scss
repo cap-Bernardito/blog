@@ -53,12 +53,23 @@ $half-gap: var(--spacer);
 
   display: block;
   grid-area: main;
+
+  & > div {
+    max-width: calc(100% - #{$half-gap});
+  }
 }
 
-.sidebar__right {
-  @include children-centered;
-
+.sidebar-right {
+  position: relative;
   grid-area: sidebar__right;
+  padding-top: $gap;
+
+  &__inner {
+    position: sticky;
+    top: $gap;
+    height: 100%;
+    max-height: 873px;
+  }
 }
 
 .tools {

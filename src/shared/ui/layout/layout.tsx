@@ -29,7 +29,9 @@ export const Layout: React.FC<LayoutProps> = (props) => {
         <Outlet />
       </main>
 
-      <aside className={css.sidebar__right}>{sidebarRightSlot}</aside>
+      <aside className={cn(css["sidebar-right"])}>
+        <div className={cn(css["sidebar-right__inner"])}>{sidebarRightSlot}</div>
+      </aside>
 
       <div className={css.tools}>{toolsSlot}</div>
 
