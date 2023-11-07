@@ -14,7 +14,7 @@ export const fetchArticlesListInitial = createAsyncThunk<void, void, ThunkConfig
 
     if (!articlesIsInit) {
       thunkApi.dispatch(articlesActions.initState());
-      thunkApi.dispatch(fetchArticlesList({ page: 1 }));
+      thunkApi.dispatch(fetchArticlesList({ replace: true }));
     }
   },
 );

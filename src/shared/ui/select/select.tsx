@@ -3,19 +3,49 @@ import React, { ReactElement, SelectHTMLAttributes } from "react";
 
 import css from "./select.module.scss";
 
-export const SelectOption: React.FC<React.PropsWithChildren> = ({ children }) => <option>{children}</option>;
+export const SelectOption: React.FC<React.PropsWithChildren<{ value?: string }>> = ({ children, value }) => (
+  <option value={value}>{children}</option>
+);
 
-type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
+type BaseSelectProps<T extends string> = SelectHTMLAttributes<HTMLSelectElement> & {
   className?: string;
   label: string;
-  value: string;
+  value: T;
+  noLabel?: boolean;
   error?: string;
   children: ReactElement[];
+  changeHandler?: (value: T) => void;
 };
 
-export const Select = React.forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
-  const { className, label, id, error, children, ...otherProps } = props;
+type PolymorphicComponentProp<C extends React.ElementType, Props = object> = React.PropsWithChildren<Props> &
+  Omit<React.ComponentPropsWithoutRef<C>, keyof Props>;
+
+type PolymorphicComponentPropWithRef<C extends React.ElementType, Props = object> = PolymorphicComponentProp<
+  C,
+  Props
+> & { ref?: React.ComponentPropsWithRef<C>["ref"] };
+
+type SelectProps<C extends React.ElementType, T extends string> = PolymorphicComponentPropWithRef<
+  C,
+  BaseSelectProps<T>
+>;
+
+type SelectComponent = <C extends React.ElementType, T extends string>(
+  props: SelectProps<C, T>,
+) => React.ReactNode | null;
+
+export const Select: SelectComponent = React.forwardRef(function Select<
+  C extends React.ElementType = "select",
+  T extends string = "",
+>(props: SelectProps<C, T>, ref?: React.ComponentPropsWithRef<C>["ref"]) {
+  const { className, label, id, error, children, changeHandler, noLabel, ...otherProps } = props;
   const fieldHint = `${otherProps.name}-error-info`;
+
+  const onChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (changeHandler) {
+      changeHandler(e.target.value as T);
+    }
+  };
 
   return (
     <div className={cn(css.root, className)}>
@@ -23,12 +53,13 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>((props, r
         className={css.root__field}
         id={id}
         ref={ref}
+        onChange={onChangeHandler}
         {...otherProps}
         aria-describedby={error ? fieldHint : undefined}
       >
         {children}
       </select>
-      <label className={css.root__label} htmlFor={id}>
+      <label className={cn(css.root__label, { ["sr-only"]: noLabel })} htmlFor={id}>
         {label}
       </label>
       {error && (
@@ -41,5 +72,3 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>((props, r
     </div>
   );
 });
-
-Select.displayName = "Select";

@@ -1,6 +1,8 @@
 import cn from "classnames";
 import React from "react";
 
+import { SortArticles } from "features/sort-articles";
+
 import css from "./sidebar-secondary.module.scss";
 
 type SidebarSecondaryProps = {
@@ -8,5 +10,9 @@ type SidebarSecondaryProps = {
 };
 
 export const SidebarSecondary: React.FC<SidebarSecondaryProps> = ({ className }) => {
-  return <div className={cn(css.root, className)}>Sidebar Secondary</div>;
+  return (
+    <div className={cn(css.root, className)}>
+      <SortArticles />
+    </div>
+  );
 };

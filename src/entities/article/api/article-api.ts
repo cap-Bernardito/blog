@@ -4,7 +4,7 @@ import { mapArticle } from "../lib/map-article";
 import { mapArticles } from "../lib/map-articles";
 import { Article } from "../model/types/article";
 
-import { ArticleDTO } from "./types";
+import { ArticleDTO, ArticlesRequestParams } from "./types";
 
 export const getArticle = async (articleId: Article["id"]): Promise<Article> => {
   const response = await request.get<ArticleDTO>(`/articles/${articleId}`, {
@@ -16,14 +16,14 @@ export const getArticle = async (articleId: Article["id"]): Promise<Article> => 
   return mapArticle(response);
 };
 
-type getArticlesProps = { page: number; limit: number };
-
-export const getArticles = async ({ page, limit }: getArticlesProps): Promise<Article[]> => {
+export const getArticles = async ({ page, limit, sortOrder, sortType }: ArticlesRequestParams): Promise<Article[]> => {
   const response = await request.get<ArticleDTO[]>(`/articles`, {
     params: {
       _page: page,
       _limit: limit,
       _expand: "profile",
+      _sort: sortType,
+      _order: sortOrder,
     },
   });
 

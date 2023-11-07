@@ -13,3 +13,10 @@ export type ArticleDTO = {
   type: string[];
   body: ArticleBodyElement[];
 };
+
+export type ArticlesRequestParams = {
+  page: number;
+  sortOrder: "asc" | "desc";
+  sortType: "views" | "createdAt";
+  limit?: number;
+};

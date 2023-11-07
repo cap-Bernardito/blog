@@ -1,14 +1,13 @@
 import { EntityState } from "@reduxjs/toolkit";
 
-import { Article } from "entities/article/@x/article";
+import { Article, ArticlesRequestParams } from "entities/article/@x/article";
 
-export type ArticlesListStateSchema = EntityState<Article> & {
-  isLoading: boolean;
-  view: "grid" | "list";
-  page: number;
-  hasMore: boolean;
-  _isInit: boolean;
-  limit?: number;
-  data?: Article[];
-  error?: string;
-};
+export type ArticlesListStateSchema = EntityState<Article> &
+  ArticlesRequestParams & {
+    isLoading: boolean;
+    view: "grid" | "list";
+    hasMore: boolean;
+    _isInit: boolean;
+    data?: Article[];
+    error?: string;
+  };
