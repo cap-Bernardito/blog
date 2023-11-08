@@ -5,8 +5,8 @@ import { RootState } from "app/app-store";
 import { Article } from "entities/article/@x/article";
 
 import {
-  ARTICLES_SORT_FIELD_LOCALSTORAGE_KEY,
   ARTICLES_SORT_ORDER_LOCALSTORAGE_KEY,
+  ARTICLES_SORT_TYPE_LOCALSTORAGE_KEY,
   ARTICLES_VIEW_LOCALSTORAGE_KEY,
 } from "shared/const/localstorage";
 import { SyncStorage } from "shared/lib/sync-storage";
@@ -25,6 +25,23 @@ const getInitialView = (defaultView: ArticlesListStateSchema["view"]): ArticlesL
   }
 
   return result as ArticlesListStateSchema["view"];
+};
+
+const getInitialSort = () => {
+  const url = new URL(window.location.href);
+  const sortOrderFromUrl = url.searchParams.get("_order") as ArticlesListStateSchema["sortOrder"];
+  const sortTypeFromUrl = url.searchParams.get("_sort") as ArticlesListStateSchema["sortType"];
+
+  if (sortOrderFromUrl || sortTypeFromUrl) {
+    return { sortOrder: sortOrderFromUrl, sortType: sortTypeFromUrl };
+  }
+
+  const sortOrder = (storage.get(ARTICLES_SORT_ORDER_LOCALSTORAGE_KEY) ||
+    "asc") as ArticlesListStateSchema["sortOrder"];
+  const sortType = (storage.get(ARTICLES_SORT_TYPE_LOCALSTORAGE_KEY) ||
+    "createdAt") as ArticlesListStateSchema["sortType"];
+
+  return { sortOrder, sortType };
 };
 
 const articlesListAdapter = createEntityAdapter<Article>({
@@ -57,7 +74,10 @@ export const articlesListSlice = createSlice({
     },
     initState: (state) => {
       const view = getInitialView("grid");
+      const { sortOrder, sortType } = getInitialSort();
 
+      state.sortOrder = sortOrder;
+      state.sortType = sortType;
       state.view = view;
       state.limit = view === "list" ? 3 : 12;
     },
@@ -69,7 +89,7 @@ export const articlesListSlice = createSlice({
     setSortType: (state, action: PayloadAction<ArticlesListStateSchema["sortType"]>) => {
       state.page = 1;
       state.sortType = action.payload;
-      storage.add(ARTICLES_SORT_FIELD_LOCALSTORAGE_KEY, action.payload);
+      storage.add(ARTICLES_SORT_TYPE_LOCALSTORAGE_KEY, action.payload);
     },
   },
   extraReducers: (builder) => {

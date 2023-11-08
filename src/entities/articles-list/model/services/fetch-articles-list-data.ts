@@ -4,6 +4,8 @@ import { ThunkConfig } from "app/app-store";
 
 import { Article, getArticles } from "entities/article/@x/article";
 
+import { addQueryParams } from "shared/lib/addQueryParams";
+
 import { selectLimit, selectPage, selectSortOrder, selectSortType } from "../selectors";
 
 export const fetchArticlesList = createAsyncThunk<Article[], { replace?: boolean }, ThunkConfig<string>>(
@@ -15,9 +17,10 @@ export const fetchArticlesList = createAsyncThunk<Article[], { replace?: boolean
     const sortOrder = selectSortOrder(thunkApi.getState());
     const sortType = selectSortType(thunkApi.getState());
 
-    if (!limit) {
-      return thunkApi.rejectWithValue("Не задан лимит статей");
-    }
+    addQueryParams([
+      ["_order", sortOrder],
+      ["_sort", sortType],
+    ]);
 
     try {
       const response = await getArticles({ page, limit, sortOrder, sortType });
