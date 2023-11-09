@@ -55,6 +55,37 @@ server.post("/login", (req, res) => {
   }
 });
 
+let cacheTags;
+// Эндпоинт тегов статей
+server.get("/articles-categories", (req, res) => {
+  try {
+    const { articles = [] } = db;
+
+    if (!cacheTags) {
+      const tags = {};
+
+      articles.forEach(({ type }) => {
+        type.forEach((tag) => {
+          if (tag in tags) {
+            tags[tag] += 1;
+          } else {
+            tags[tag] = 1;
+          }
+        });
+      });
+
+      const sortedTabs = Object.entries(tags).sort((a, b) => b[1] - a[1]).slice(0, 10);
+
+      cacheTags = Object.fromEntries(sortedTabs);
+    }
+
+    return res.json(cacheTags);
+  } catch (e) {
+    console.log(e);
+    return res.status(500).json({ message: e.message });
+  }
+});
+
 // проверяем, авторизован ли пользователь
 server.use((req, res, next) => {
   if (!req.headers.authorization) {

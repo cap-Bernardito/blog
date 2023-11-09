@@ -11,6 +11,7 @@ import {
 } from "shared/const/localstorage";
 import { SyncStorage } from "shared/lib/sync-storage";
 
+import { fetchArticlesCategories } from "../services/fetch-articles-categories";
 import { fetchArticlesList } from "../services/fetch-articles-list-data";
 import { ArticlesListStateSchema } from "../types/articles-list";
 
@@ -57,6 +58,7 @@ const initialState = articlesListAdapter.getInitialState<ArticlesListStateSchema
   sortOrder: "asc",
   sortType: "createdAt",
   search: "",
+  categories: [],
   ids: [],
   entities: {},
 });
@@ -120,7 +122,15 @@ export const articlesListSlice = createSlice({
       .addCase(fetchArticlesList.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
-      });
+      })
+
+      // Categories
+      .addCase(
+        fetchArticlesCategories.fulfilled,
+        (state, action: PayloadAction<ArticlesListStateSchema["categories"]>) => {
+          state.categories = action.payload;
+        },
+      );
   },
 });
 

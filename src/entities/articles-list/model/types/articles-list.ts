@@ -8,6 +8,7 @@ export type ArticlesListStateSchema = EntityState<Article> &
     view: "grid" | "list";
     hasMore: boolean;
     _isInit: boolean;
+    categories: string[];
     data?: Article[];
     error?: string;
   };
