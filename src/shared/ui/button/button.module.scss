@@ -45,6 +45,16 @@
   border-radius: 0;
 }
 
+.tab {
+  background: none;
+  border-color: transparent;
+
+  &:hover {
+    background: var(--light-bg);
+    border-color: var(--light-bg);
+  }
+}
+
 .secondary {
   color: var(--secondary-color);
   background: none;
@@ -54,6 +64,11 @@
     color: var(--accent);
     border-color: var(--accent);
   }
+}
+
+.dark {
+  background: var(--light-bg);
+  border-color: var(--light-bg);
 }
 
 .success {

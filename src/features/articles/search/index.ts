@@ -1,1 +1,1 @@
-export { ArticlesSearch as Search } from "./ui/search";
+export { ArticlesSearch } from "./ui/search";

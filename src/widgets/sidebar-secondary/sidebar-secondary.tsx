@@ -1,7 +1,8 @@
 import cn from "classnames";
 import React from "react";
 
-import { ArticlesSearch } from "features/articles/search/ui/search";
+import { ArticlesSearch } from "features/articles/search";
+import { ArticlesSelectCategory } from "features/articles/select-category";
 import { SortArticles } from "features/articles/sort";
 
 import css from "./sidebar-secondary.module.scss";
@@ -16,7 +17,12 @@ export const SidebarSecondary: React.FC<SidebarSecondaryProps> = ({ className })
       <div className={css.search}>
         <ArticlesSearch />
       </div>
-      <SortArticles />
+      <div className={css.categories}>
+        <ArticlesSelectCategory />
+      </div>
+      <div className={css.sort}>
+        <SortArticles />
+      </div>
     </div>
   );
 };

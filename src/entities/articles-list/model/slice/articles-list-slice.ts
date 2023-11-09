@@ -7,6 +7,7 @@ import { Article } from "entities/article/@x/article";
 import {
   ARTICLES_SORT_ORDER_LOCALSTORAGE_KEY,
   ARTICLES_SORT_TYPE_LOCALSTORAGE_KEY,
+  ARTICLES_TYPE_LOCALSTORAGE_KEY,
   ARTICLES_VIEW_LOCALSTORAGE_KEY,
 } from "shared/const/localstorage";
 import { SyncStorage } from "shared/lib/sync-storage";
@@ -32,17 +33,19 @@ const getInitialSort = () => {
   const url = new URL(window.location.href);
   const sortOrderFromUrl = url.searchParams.get("_order") as ArticlesListStateSchema["sortOrder"];
   const sortTypeFromUrl = url.searchParams.get("_sort") as ArticlesListStateSchema["sortType"];
+  const typeFromUrl = url.searchParams.get("type") as ArticlesListStateSchema["type"];
 
-  if (sortOrderFromUrl || sortTypeFromUrl) {
-    return { sortOrder: sortOrderFromUrl, sortType: sortTypeFromUrl };
+  if (sortOrderFromUrl || sortTypeFromUrl || typeFromUrl) {
+    return { sortOrder: sortOrderFromUrl, sortType: sortTypeFromUrl, type: typeFromUrl };
   }
 
   const sortOrder = (storage.get(ARTICLES_SORT_ORDER_LOCALSTORAGE_KEY) ||
     "asc") as ArticlesListStateSchema["sortOrder"];
   const sortType = (storage.get(ARTICLES_SORT_TYPE_LOCALSTORAGE_KEY) ||
     "createdAt") as ArticlesListStateSchema["sortType"];
+  const type = storage.get(ARTICLES_TYPE_LOCALSTORAGE_KEY) as ArticlesListStateSchema["type"];
 
-  return { sortOrder, sortType };
+  return { sortOrder, sortType, type };
 };
 
 const articlesListAdapter = createEntityAdapter<Article>({
@@ -58,7 +61,6 @@ const initialState = articlesListAdapter.getInitialState<ArticlesListStateSchema
   sortOrder: "asc",
   sortType: "createdAt",
   search: "",
-  categories: [],
   ids: [],
   entities: {},
 });
@@ -77,11 +79,12 @@ export const articlesListSlice = createSlice({
     },
     initState: (state) => {
       const view = getInitialView("grid");
-      const { sortOrder, sortType } = getInitialSort();
+      const { sortOrder, sortType, type } = getInitialSort();
 
       state.sortOrder = sortOrder;
       state.sortType = sortType;
       state.view = view;
+      state.type = type;
       state.limit = view === "list" ? 3 : 12;
     },
     setSortOrder: (state, action: PayloadAction<ArticlesListStateSchema["sortOrder"]>) => {
@@ -98,12 +101,21 @@ export const articlesListSlice = createSlice({
       state.page = 1;
       state.search = action.payload;
     },
+    setCategory: (state, action: PayloadAction<ArticlesListStateSchema["type"]>) => {
+      state.page = 1;
+      state.type = action.payload;
+      storage.add(ARTICLES_TYPE_LOCALSTORAGE_KEY, action.payload);
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchArticlesList.pending, (state) => {
+      .addCase(fetchArticlesList.pending, (state, action) => {
         state.error = undefined;
         state.isLoading = true;
+
+        if (action.meta.arg.replace) {
+          articlesListAdapter.removeAll(state);
+        }
       })
       .addCase(
         fetchArticlesList.fulfilled,

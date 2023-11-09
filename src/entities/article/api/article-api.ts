@@ -17,7 +17,7 @@ export const getArticle = async (articleId: Article["id"]): Promise<Article> => 
 };
 
 export const getArticles = async (props: ArticlesRequestParams): Promise<Article[]> => {
-  const { page, limit, sortOrder, sortType, search } = props;
+  const { page, limit, sortOrder, sortType, search, type } = props;
 
   const response = await request.get<ArticleDTO[]>(`/articles`, {
     params: {
@@ -27,6 +27,7 @@ export const getArticles = async (props: ArticlesRequestParams): Promise<Article
       _sort: sortType,
       _order: sortOrder,
       q: search,
+      type_like: type,
     },
   });
 

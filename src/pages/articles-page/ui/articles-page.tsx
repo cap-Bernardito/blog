@@ -49,7 +49,7 @@ export const ArticlesPage = () => {
     return <div>{articlesError}</div>;
   }
 
-  if (articles.length === 0) {
+  if (articles.length === 0 && !articlesIsLoading) {
     return (
       <div className={cn(css.root)}>
         <h1>Ничего не нашлось...</h1>

@@ -20,4 +20,5 @@ export type ArticlesRequestParams = {
   sortType: "views" | "createdAt";
   search: string;
   limit?: number;
+  type?: string;
 };

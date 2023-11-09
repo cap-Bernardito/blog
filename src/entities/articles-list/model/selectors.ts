@@ -19,3 +19,7 @@ export const selectSortOrder = (state: RootState) => state.articles?.sortOrder |
 export const selectSortType = (state: RootState) => state.articles?.sortType || "createdAt";
 
 export const selectSearch = (state: RootState) => state.articles?.search || "";
+
+export const selectType = (state: RootState) => state.articles?.type;
+
+export const selectCategories = (state: RootState) => state.articles?.categories || Array(10).fill(undefined);
