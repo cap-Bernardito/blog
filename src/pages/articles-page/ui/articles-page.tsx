@@ -49,6 +49,14 @@ export const ArticlesPage = () => {
     return <div>{articlesError}</div>;
   }
 
+  if (articles.length === 0) {
+    return (
+      <div className={cn(css.root)}>
+        <h1>Ничего не нашлось...</h1>
+      </div>
+    );
+  }
+
   const ArticleCardComponent = articlesView === "list" ? ArticleCardHorizontal : ArticleCardVertical;
 
   const articlesList = articles.map((article, index) => {

@@ -16,7 +16,9 @@ export const getArticle = async (articleId: Article["id"]): Promise<Article> => 
   return mapArticle(response);
 };
 
-export const getArticles = async ({ page, limit, sortOrder, sortType }: ArticlesRequestParams): Promise<Article[]> => {
+export const getArticles = async (props: ArticlesRequestParams): Promise<Article[]> => {
+  const { page, limit, sortOrder, sortType, search } = props;
+
   const response = await request.get<ArticleDTO[]>(`/articles`, {
     params: {
       _page: page,
@@ -24,6 +26,7 @@ export const getArticles = async ({ page, limit, sortOrder, sortType }: Articles
       _expand: "profile",
       _sort: sortType,
       _order: sortOrder,
+      q: search,
     },
   });
 

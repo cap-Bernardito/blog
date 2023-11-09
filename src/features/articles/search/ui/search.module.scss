@@ -1,0 +1,9 @@
+.root {
+  // Nothing
+}
+
+.field {
+  &_loading input {
+    color: var(--hint) !important;
+  }
+}

@@ -56,6 +56,7 @@ const initialState = articlesListAdapter.getInitialState<ArticlesListStateSchema
   _isInit: false,
   sortOrder: "asc",
   sortType: "createdAt",
+  search: "",
   ids: [],
   entities: {},
 });
@@ -90,6 +91,10 @@ export const articlesListSlice = createSlice({
       state.page = 1;
       state.sortType = action.payload;
       storage.add(ARTICLES_SORT_TYPE_LOCALSTORAGE_KEY, action.payload);
+    },
+    setSearch: (state, action: PayloadAction<ArticlesListStateSchema["search"]>) => {
+      state.page = 1;
+      state.search = action.payload;
     },
   },
   extraReducers: (builder) => {

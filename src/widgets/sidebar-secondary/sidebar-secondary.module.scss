@@ -1,5 +1,9 @@
 .root {
-  padding: 1px var(--spacer-x2);
+  padding: var(--spacer) var(--spacer-x2);
   background: var(--dark-bg);
   border-radius: var(--border-radius);
+}
+
+.search {
+  margin-bottom: var(--spacer-x2);
 }

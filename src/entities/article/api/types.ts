@@ -18,5 +18,6 @@ export type ArticlesRequestParams = {
   page: number;
   sortOrder: "asc" | "desc";
   sortType: "views" | "createdAt";
+  search: string;
   limit?: number;
 };

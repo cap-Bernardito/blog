@@ -17,3 +17,5 @@ export const selectIsInit = (state: RootState) => state.articles?._isInit;
 export const selectSortOrder = (state: RootState) => state.articles?.sortOrder || "asc";
 
 export const selectSortType = (state: RootState) => state.articles?.sortType || "createdAt";
+
+export const selectSearch = (state: RootState) => state.articles?.search || "";
