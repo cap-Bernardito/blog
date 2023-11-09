@@ -1,7 +1,7 @@
 import cn from "classnames";
 import React from "react";
 
-import { SortArticles } from "features/sort-articles";
+import { SortArticles } from "features/articles/sort";
 
 import css from "./sidebar-secondary.module.scss";
 
