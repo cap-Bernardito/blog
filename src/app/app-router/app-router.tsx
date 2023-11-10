@@ -27,7 +27,14 @@ export const AppRouter = () => {
             />
           ))}
       </Route>
-      <Route path="/" element={<LayoutArticles />}>
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <LayoutArticles />
+          </ProtectedRoute>
+        }
+      >
         <Route
           path={routeConfig.articles.path}
           element={
