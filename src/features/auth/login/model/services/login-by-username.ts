@@ -20,7 +20,7 @@ export const loginByUsername = createAsyncThunk<Session, RequestLoginBody, Thunk
       }
 
       storage.add(USER_LOCALSTORAGE_KEY, response);
-      thunkAPI.dispatch(sessionActions.setAuthData(response));
+      thunkAPI.dispatch(sessionActions.setAuth(response));
 
       return response;
     } catch (error) {

@@ -8,31 +8,26 @@ import { SyncStorage } from "shared/lib/sync-storage";
 import { sessionActions } from "../slice";
 import { isSession } from "../types/session-schema";
 
-import { fetchSessionUserData } from "./fetch-session-user-data";
+import { fetchSession } from "./fetch-session";
 
 // NOTE: такое себе, но пока нет сервера для нормальной авторизации, как демо побудет так
 export const sessionMiddleware: Middleware = ({ dispatch }: { dispatch: AppDispatch }) => {
   return (next) => async (action) => {
     const storage = new SyncStorage().create("local");
 
-    if (sessionActions.initSessionData.match(action)) {
+    if (sessionActions.initSession.match(action)) {
       const session = storage.get(USER_LOCALSTORAGE_KEY);
 
       if (isSession(session)) {
-        dispatch(sessionActions.setAuthData(session));
-        dispatch(fetchSessionUserData(session.userId));
+        dispatch(sessionActions.setAuth(session));
       }
     }
 
-    if (sessionActions.setAuthData.match(action)) {
-      const session = storage.get(USER_LOCALSTORAGE_KEY);
-
-      if (isSession(session)) {
-        dispatch(fetchSessionUserData(session.userId));
-      }
+    if (sessionActions.setAuth.match(action)) {
+      dispatch(fetchSession(action.payload.userId));
     }
 
-    if (sessionActions.clearSessionData.match(action)) {
+    if (sessionActions.clearSession.match(action)) {
       storage.remove(USER_LOCALSTORAGE_KEY);
     }
 

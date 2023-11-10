@@ -7,6 +7,6 @@ import { sessionActions } from "entities/session";
 export const logout = createAsyncThunk<void, void, ThunkConfig<string>>(
   "session/logout",
   async (_: unknown, { dispatch }) => {
-    dispatch(sessionActions.clearSessionData());
+    dispatch(sessionActions.clearSession());
   },
 );

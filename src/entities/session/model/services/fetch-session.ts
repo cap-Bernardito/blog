@@ -5,8 +5,8 @@ import { ThunkConfig } from "app/app-store";
 import { Session } from "entities/session";
 import { getUser, User } from "entities/user/@x";
 
-export const fetchSessionUserData = createAsyncThunk<User, Session["userId"], ThunkConfig<string>>(
-  "user/fetchSessionUserData",
+export const fetchSession = createAsyncThunk<User, Session["userId"], ThunkConfig<string>>(
+  "session/fetchSession",
   async (userId, thunkApi) => {
     try {
       const response = await getUser(userId);

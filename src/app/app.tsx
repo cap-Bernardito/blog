@@ -11,7 +11,7 @@ export const App = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(sessionActions.initSessionData());
+    dispatch(sessionActions.initSession());
   }, [dispatch]);
 
   return <AppRouter />;

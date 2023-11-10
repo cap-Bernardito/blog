@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { updateUserData, User } from "entities/user/@x";
 
-import { fetchSessionUserData } from "./services/fetch-session-user-data";
+import { fetchSession } from "./services/fetch-session";
 import { SessionStateSchema } from "./types/session";
 import { Session } from "./types/session-schema";
 
@@ -15,20 +15,20 @@ const initialState: SessionStateSchema = {
 export const sessionSlice = createSlice<
   SessionStateSchema,
   {
-    initSessionData: (state: SessionStateSchema) => void;
-    setAuthData: (state: SessionStateSchema, action: PayloadAction<Session>) => void;
+    initSession: (state: SessionStateSchema) => void;
+    setAuth: (state: SessionStateSchema, action: PayloadAction<Session>) => void;
     setUser: (state: SessionStateSchema, action: PayloadAction<User>) => void;
-    clearSessionData: (state: SessionStateSchema) => void;
+    clearSession: (state: SessionStateSchema) => void;
   },
   "session"
 >({
   name: "session",
   initialState,
   reducers: {
-    initSessionData: (state) => {
-      state._isInit = true;
+    initSession: () => {
+      // Запуск экшона чекается в session-middleware
     },
-    setAuthData: (state, { payload }) => {
+    setAuth: (state, { payload }) => {
       state.isAuthorized = true;
       state.userId = payload.userId;
       state.accessToken = payload.accessToken;
@@ -37,7 +37,7 @@ export const sessionSlice = createSlice<
       state.isAuthorized = true;
       state.user = payload;
     },
-    clearSessionData: (state) => {
+    clearSession: (state) => {
       state.accessToken = undefined;
       state.userId = undefined;
       state.isAuthorized = false;
@@ -46,15 +46,16 @@ export const sessionSlice = createSlice<
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchSessionUserData.pending, (state) => {
+      .addCase(fetchSession.pending, (state) => {
         state.error = undefined;
         state.isLoading = true;
       })
-      .addCase(fetchSessionUserData.fulfilled, (state, action: PayloadAction<User>) => {
+      .addCase(fetchSession.fulfilled, (state, action: PayloadAction<User>) => {
         state.isLoading = false;
         state.user = action.payload;
+        state._isInit = true;
       })
-      .addCase(fetchSessionUserData.rejected, (state, action) => {
+      .addCase(fetchSession.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
