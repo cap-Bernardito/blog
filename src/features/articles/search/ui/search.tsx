@@ -1,5 +1,5 @@
 import cn from "classnames";
-import React, { useCallback } from "react";
+import React from "react";
 
 import { useAppDispatch, useAppSelector } from "app/app-store";
 
@@ -21,11 +21,9 @@ export const ArticlesSearch: React.FC<SearchProps> = ({ className }) => {
   const searchValue = useAppSelector(articlesSelectors.selectSearch);
   const isLoading = useAppSelector(articlesSelectors.selectIsLoading);
 
-  const fetchData = useCallback(() => {
+  const debouncedFetchData = useDebounce(() => {
     dispatch(fetchArticlesList({ replace: true }));
-  }, [dispatch]);
-
-  const debouncedFetchData = useDebounce(fetchData, 500);
+  }, 500);
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     if (isLoading) {
