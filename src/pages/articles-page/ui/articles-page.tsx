@@ -5,6 +5,8 @@ import { useInView } from "react-intersection-observer";
 import { AsyncReducersList, useAppDispatch, useAppSelector } from "app/app-store";
 
 import { ArticleCardHorizontal, ArticleCardVertical } from "entities/article";
+import { ArticleCardHorizontalSkeleton } from "entities/article/ui/article-card-horizontal";
+import { ArticleCardVerticalSkeleton } from "entities/article/ui/article-card-vertical";
 import {
   articlesAdapterSelectors,
   articlesReducer,
@@ -15,7 +17,6 @@ import {
 import { useScrollPosition } from "entities/scroll-position";
 
 import { useAsyncReducerLoader } from "shared/lib/use-async-reducer-loader";
-import { Loader } from "shared/ui/loader/loader";
 
 import css from "./articles-page.module.scss";
 const asyncArticlesReducer: AsyncReducersList = { articles: articlesReducer };
@@ -25,6 +26,7 @@ export const ArticlesPage = () => {
   const articlesIsLoading = useAppSelector(articlesSelectors.selectIsLoading);
   const articlesError = useAppSelector(articlesSelectors.selectError);
   const articlesView = useAppSelector(articlesSelectors.selectView);
+  const articlesCount = useAppSelector(articlesSelectors.selectLimit);
   const articles = useAppSelector(articlesAdapterSelectors.selectAll);
   const { ref } = useInView({
     initialInView: false,
@@ -57,8 +59,19 @@ export const ArticlesPage = () => {
     );
   }
 
-  const ArticleCardComponent = articlesView === "list" ? ArticleCardHorizontal : ArticleCardVertical;
+  const ArticleCardSkeletonComponent =
+    articlesView === "list" ? ArticleCardHorizontalSkeleton : ArticleCardVerticalSkeleton;
+  const articlesSkeletonList = Array(articlesCount)
+    .fill(0)
+    .map((article, index) => {
+      if (index === articles.length - 1) {
+        return <ArticleCardSkeletonComponent key={index} ref={ref} />;
+      }
 
+      return <ArticleCardSkeletonComponent key={index} {...article} />;
+    });
+
+  const ArticleCardComponent = articlesView === "list" ? ArticleCardHorizontal : ArticleCardVertical;
   const articlesList = articles.map((article, index) => {
     if (index === articles.length - 1) {
       return <ArticleCardComponent key={article.id} {...article} ref={ref} />;
@@ -69,8 +82,8 @@ export const ArticlesPage = () => {
 
   return (
     <div className={cn(css.root, { [css.grid]: articlesView === "grid", [css.list]: articlesView === "list" })}>
-      {articles && articlesList}
-      {articlesIsLoading && <Loader />}
+      {articles.length > 0 && articlesList}
+      {articlesIsLoading && articlesSkeletonList}
     </div>
   );
 };

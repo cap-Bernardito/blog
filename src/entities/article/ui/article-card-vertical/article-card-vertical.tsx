@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { routePaths } from "app/app-router/app-router-config";
 
 import { Avatar } from "shared/ui/avatar";
+import { Skeleton } from "shared/ui/skeleton";
 
 import EyeIcon from "shared/assets/icons/eye.svg";
 
@@ -57,3 +58,36 @@ export const ArticleCardVertical = React.forwardRef<HTMLDivElement, ArticleCardV
 });
 
 ArticleCardVertical.displayName = "ArticleCardVertical";
+
+export const ArticleCardVerticalSkeleton = React.forwardRef<HTMLDivElement>((_, ref) => (
+  <div className={cn(css.root)} ref={ref}>
+    <div className={css.hero}>
+      <div className={css.hero__inner}>
+        <Skeleton style={{ paddingBottom: "50%" }} />
+      </div>
+    </div>
+    <div className={cn(css.main)}>
+      <div className={css.body}>
+        <Skeleton height={12} />
+        <Skeleton height={12} />
+        <Skeleton height={12} />
+      </div>
+      <div className={css.meta}>
+        <div className={css.meta__date}>
+          <Skeleton width={90} />
+        </div>
+        <div className={css.meta__view}>
+          <Skeleton width={90} />
+        </div>
+      </div>
+      <div className={css.author}>
+        <Skeleton className={css.author__avatar} height={32} width={32} circle={true} />
+        <span className={css.author__username}>
+          <Skeleton width={150} />
+        </span>
+      </div>
+    </div>
+  </div>
+));
+
+ArticleCardVerticalSkeleton.displayName = "ArticleCardVerticalSkeleton";

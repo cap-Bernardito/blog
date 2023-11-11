@@ -1,1 +1,1 @@
-export { ArticleCardVertical } from "./article-card-vertical";
+export { ArticleCardVertical, ArticleCardVerticalSkeleton } from "./article-card-vertical";

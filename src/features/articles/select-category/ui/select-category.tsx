@@ -56,6 +56,7 @@ export const ArticlesSelectCategory: React.FC<SelectCategoryProps> = ({ classNam
 
       dispatch(articlesActions.setCategory(result));
       dispatch(fetchArticlesList({ replace: true }));
+      window.scrollTo(0, 0);
     },
     [dispatch],
   );

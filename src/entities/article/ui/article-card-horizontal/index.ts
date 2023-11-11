@@ -1,1 +1,1 @@
-export { ArticleCardHorizontal } from "./article-card-horizontal";
+export { ArticleCardHorizontal, ArticleCardHorizontalSkeleton } from "./article-card-horizontal";
