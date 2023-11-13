@@ -28,10 +28,17 @@ const processFiles = async () => {
   const stream = fg.globStream(FROM, { cwd: __dirname, absolute: true });
   const tasks = [];
   const postsInfo = [];
+  const postIds = {};
 
   for await (const entryPath of stream) {
     const mdPath = entryPath.replace("posts_md", "posts_js").replace(".md", ".js");
     const post = require(mdPath);
+
+    if (post.id in postIds) {
+      continue;
+    }
+
+    postIds[post.id] = "";
 
     postsInfo.push({ comments: post.comments, articleId: post.id });
 
