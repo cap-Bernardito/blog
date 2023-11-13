@@ -41,6 +41,7 @@ export const SortArticles: React.FC<SortArticlesProps> = ({ className }) => {
         <Select<"select", ArticlesListStateSchema["sortType"]>
           noLabel
           label="Тип сортировки"
+          id="sort_type"
           value={sortType}
           changeHandler={handleChangeSortType}
         >
@@ -52,6 +53,7 @@ export const SortArticles: React.FC<SortArticlesProps> = ({ className }) => {
         <Select<"select", ArticlesListStateSchema["sortOrder"]>
           noLabel
           label="Порядок сортировки"
+          id="sort_order"
           value={sortOrder}
           changeHandler={handleChangeSortOrder}
         >
