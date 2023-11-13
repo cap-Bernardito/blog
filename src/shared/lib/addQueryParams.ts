@@ -4,6 +4,8 @@ export function addQueryParams(params: [string, string | undefined][]) {
   params.forEach(([key, value]) => {
     if (value) {
       url.searchParams.set(key, value);
+    } else {
+      url.searchParams.delete(key);
     }
   });
 
