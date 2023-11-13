@@ -25,7 +25,7 @@ type ArticleCardHorizontalProps = {
   author: Pick<Article["author"], "avatar" | "username">;
 };
 
-export const ArticleCardHorizontal = React.forwardRef<HTMLDivElement, ArticleCardHorizontalProps>((props, ref) => {
+const ArticleCardHorizontalNoMemo = React.forwardRef<HTMLDivElement, ArticleCardHorizontalProps>((props, ref) => {
   const { className, img, title, excerpt, createdAt, views, author, id } = props;
   const articlePath = `${routePaths.articles}/${id}`;
 
@@ -63,7 +63,9 @@ export const ArticleCardHorizontal = React.forwardRef<HTMLDivElement, ArticleCar
   );
 });
 
-ArticleCardHorizontal.displayName = "ArticleCardHorizontal";
+ArticleCardHorizontalNoMemo.displayName = "ArticleCardHorizontal";
+
+export const ArticleCardHorizontal = React.memo(ArticleCardHorizontalNoMemo);
 
 export const ArticleCardHorizontalSkeleton = React.forwardRef<HTMLDivElement>((_, ref) => (
   <div className={cn(css.root)} ref={ref}>

@@ -23,7 +23,7 @@ type ArticleCardVerticalProps = {
   author: Pick<Article["author"], "avatar" | "username">;
 };
 
-export const ArticleCardVertical = React.forwardRef<HTMLDivElement, ArticleCardVerticalProps>((props, ref) => {
+const ArticleCardVerticalNoMemo = React.forwardRef<HTMLDivElement, ArticleCardVerticalProps>((props, ref) => {
   const { className, img, title, createdAt, views, author, id } = props;
   const articlePath = `${routePaths.articles}/${id}`;
 
@@ -57,7 +57,9 @@ export const ArticleCardVertical = React.forwardRef<HTMLDivElement, ArticleCardV
   );
 });
 
-ArticleCardVertical.displayName = "ArticleCardVertical";
+ArticleCardVerticalNoMemo.displayName = "ArticleCardVertical";
+
+export const ArticleCardVertical = React.memo(ArticleCardVerticalNoMemo);
 
 export const ArticleCardVerticalSkeleton = React.forwardRef<HTMLDivElement>((_, ref) => (
   <div className={cn(css.root)} ref={ref}>
