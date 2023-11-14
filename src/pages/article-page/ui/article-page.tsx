@@ -5,6 +5,8 @@ import { AsyncReducersList, useAppDispatch, useAppSelector } from "app/app-store
 
 import { ArticleCommentsList } from "widgets/article-comments-list";
 
+import { GoToCategory } from "features/article/go-to-category";
+
 import {
   type Article,
   ArticleBody,
@@ -48,7 +50,9 @@ export const ArticlePage = () => {
       <article>
         <ArticleHeader title={title} createdAt={createdAt} views={views} img={img} />
         <ArticleBody data={body} />
-        <ArticleFooter tags={type} />
+        <ArticleFooter>
+          <GoToCategory categories={type}></GoToCategory>
+        </ArticleFooter>
       </article>
       <ArticleCommentsList id={id} />
     </>
