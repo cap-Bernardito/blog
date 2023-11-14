@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "app/app-store";
 
 import { articleSelectors } from "entities/article";
 import { addCommentThunk } from "entities/article-comments/model/services/add-comment";
-import { type MessageField,MessageForm } from "entities/message-form/";
+import { type MessageField, MessageForm } from "entities/message-form/";
 import { sessionSelectors } from "entities/session";
 
 export const AddCommentForm = () => {

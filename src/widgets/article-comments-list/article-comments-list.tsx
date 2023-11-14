@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { routePaths } from "app/app-router/app-router-config";
 import { useAppDispatch, useAppSelector } from "app/app-store";
 
-import { AddCommentForm } from "features/add-comment";
+import { AddCommentForm } from "features/article/add-comment";
 
 import { Article } from "entities/article";
 import {
