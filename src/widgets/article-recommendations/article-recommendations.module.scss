@@ -1,4 +1,14 @@
 .root {
+  --swiper-scrollbar-border-radius: 10px;
+  --swiper-scrollbar-top: auto;
+  --swiper-scrollbar-bottom: 0;
+  --swiper-scrollbar-left: auto;
+  --swiper-scrollbar-right: 4px;
+  --swiper-scrollbar-sides-offset: 1%;
+  --swiper-scrollbar-bg-color: var(--light-bg);
+  --swiper-scrollbar-drag-bg-color: var(--secondary-color);
+  --swiper-scrollbar-size: 7px;
+
   margin-bottom: var(--spacer-x3);
 }
 
