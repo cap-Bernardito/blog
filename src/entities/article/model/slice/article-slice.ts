@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { fetchArticleData } from "../services/fetch-article-data";
+import { fetchArticlesRecommendations } from "../services/fetch-articles-recommendations";
 import { type ArticleStateSchema } from "../types/article";
 import { Article } from "../types/article";
 
@@ -25,6 +26,11 @@ export const articleSlice = createSlice({
       .addCase(fetchArticleData.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+      })
+
+      // Recommendations
+      .addCase(fetchArticlesRecommendations.fulfilled, (state, action: PayloadAction<Article[]>) => {
+        state.recommendations = action.payload;
       });
   },
 });

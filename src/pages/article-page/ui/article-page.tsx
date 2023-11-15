@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { AsyncReducersList, useAppDispatch, useAppSelector } from "app/app-store";
 
 import { ArticleCommentsList } from "widgets/article-comments-list";
+import { ArticleRecommendations } from "widgets/article-recommendations";
 
 import { GoToCategory } from "features/article/go-to-category";
 
@@ -54,6 +55,7 @@ export const ArticlePage = () => {
           <GoToCategory categories={type}></GoToCategory>
         </ArticleFooter>
       </article>
+      <ArticleRecommendations type={type && type[0]} />
       <ArticleCommentsList id={id} />
     </>
   );

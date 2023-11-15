@@ -33,6 +33,7 @@ export type Article = {
 
 export type ArticleStateSchema = {
   data?: Article;
+  recommendations?: Article[];
   isLoading: boolean;
   error?: string;
 };

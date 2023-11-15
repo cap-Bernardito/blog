@@ -33,3 +33,19 @@ export const getArticles = async (props: ArticlesRequestParams): Promise<Article
 
   return mapArticles(response);
 };
+
+export const getArticlesRecommendations = async (
+  props: Pick<ArticlesRequestParams, "limit" | "type">,
+): Promise<Article[]> => {
+  const { limit, type } = props;
+
+  const response = await request.get<ArticleDTO[]>(`/articles`, {
+    params: {
+      _limit: limit || 8,
+      _expand: "profile",
+      type_like: type,
+    },
+  });
+
+  return mapArticles(response);
+};
