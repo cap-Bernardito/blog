@@ -44,7 +44,7 @@ export const ArticlePage = () => {
     return <div>{articleError}</div>;
   }
 
-  const { title, createdAt, views, img, body, type } = articleData || {};
+  const { title, createdAt, views, img, body, type, id: articleId } = articleData || {};
 
   return (
     <>
@@ -55,7 +55,7 @@ export const ArticlePage = () => {
           <GoToCategory categories={type}></GoToCategory>
         </ArticleFooter>
       </article>
-      <ArticleRecommendations type={type && type[0]} />
+      {articleId && <ArticleRecommendations type={type && type[0]} id={articleId} />}
       <ArticleCommentsList id={id} />
     </>
   );

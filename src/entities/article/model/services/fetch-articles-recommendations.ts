@@ -7,11 +7,11 @@ import { getArticlesRecommendations } from "entities/article/api/article-api";
 
 export const fetchArticlesRecommendations = createAsyncThunk<
   Article[],
-  { limit?: number; type?: string },
+  { limit?: number; type?: string; id: string },
   ThunkConfig<string>
->("article/fetchArticlesRecommendations", async ({ limit, type }, thunkApi) => {
+>("article/fetchArticlesRecommendations", async ({ limit, type, id }, thunkApi) => {
   try {
-    const response = await getArticlesRecommendations({ limit, type });
+    const response = await getArticlesRecommendations({ limit, type, id });
 
     if (!response) {
       throw new Error("No data");

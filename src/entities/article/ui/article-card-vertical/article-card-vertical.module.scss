@@ -1,6 +1,7 @@
 @use "../../../../app/styles/variables/mixin.scss" as *;
 
 .root {
+  overflow: hidden;
   background: var(--dark-bg);
   border-radius: var(--border-radius-sm);
 }

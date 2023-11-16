@@ -1,12 +1,12 @@
 import cn from "classnames";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Swiper from "swiper";
 import { register } from "swiper/element/bundle";
 import type { SwiperProps, SwiperSlideProps } from "swiper/react";
 
 import { useAppDispatch, useAppSelector } from "app/app-store";
 
-import { ArticleCardVertical, articleSelectors, fetchArticlesRecommendations } from "entities/article";
+import { Article, ArticleCardVertical, articleSelectors, fetchArticlesRecommendations } from "entities/article";
 
 import css from "./article-recommendations.module.scss";
 
@@ -27,23 +27,29 @@ register();
 type ArticleRecommendationsProps = {
   className?: string;
   type?: string;
+  id: Article["id"];
 };
 
-export const ArticleRecommendations: React.FC<ArticleRecommendationsProps> = ({ className, type }) => {
+export const ArticleRecommendations: React.FC<ArticleRecommendationsProps> = ({ className, type, id }) => {
   const recommendations = useAppSelector(articleSelectors.selectRecommendations);
   const dispatch = useAppDispatch();
   const swiperElRef = useRef<SwiperRef>(null);
+  const [swiper, setSwiper] = useState<Swiper>();
 
   useEffect(() => {
-    if (!swiperElRef.current) {
+    dispatch(fetchArticlesRecommendations({ limit: 8, type, id }));
+  }, [dispatch, type, id]);
+
+  useEffect(() => {
+    if (!swiperElRef.current || !recommendations) {
       return;
     }
 
-    const swiperParams = {
+    const swiperParams: SwiperProps = {
       navigation: false,
-      pagination: false,
-      scrollbar: {
-        draggable: true,
+      pagination: {
+        clickable: true,
+        bulletElement: "button",
       },
       spaceBetween: 16,
       slidesPerView: 1,
@@ -55,22 +61,35 @@ export const ArticleRecommendations: React.FC<ArticleRecommendationsProps> = ({ 
           slidesPerView: 3,
         },
       },
+      on: {
+        init: (swiperInstanse) => setSwiper(swiperInstanse),
+      },
+      injectStyles: [
+        `
+        .swiper-wrapper {height: auto; padding-bottom: 18px}
+        :host ::slotted(swiper-slide) {height: auto; display: flex;}
+        :host .swiper-pagination {left: 10px; right: 10px; width: auto; display: flex; justify-content: space-between;}
+        :host .swiper-pagination-bullet {flex: 1 1 10px !important;}
+      `,
+      ],
     };
 
     if (!swiperElRef.current.initialized) {
       Object.assign(swiperElRef.current, swiperParams);
       swiperElRef.current.initialize();
+    } else {
+      swiper?.update();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [swiperElRef.current]);
 
-  useEffect(() => {
-    dispatch(fetchArticlesRecommendations({ limit: 8, type }));
-  }, [dispatch, type]);
+    return () => {
+      swiper?.destroy();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [swiperElRef.current, recommendations]);
 
   return (
     recommendations && (
-      <div className={cn(css.root, className)}>
+      <section className={cn(css.root, className)}>
         <h2 className={css.title}>Рекомендуем:</h2>
         <swiper-container ref={swiperElRef} init={false}>
           {recommendations.map((article) => {
@@ -81,7 +100,7 @@ export const ArticleRecommendations: React.FC<ArticleRecommendationsProps> = ({ 
             );
           })}
         </swiper-container>
-      </div>
+      </section>
     )
   );
 };

@@ -29,6 +29,9 @@ export const articleSlice = createSlice({
       })
 
       // Recommendations
+      .addCase(fetchArticlesRecommendations.pending, (state) => {
+        state.recommendations = undefined;
+      })
       .addCase(fetchArticlesRecommendations.fulfilled, (state, action: PayloadAction<Article[]>) => {
         state.recommendations = action.payload;
       });
