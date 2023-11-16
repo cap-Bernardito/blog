@@ -2,12 +2,10 @@ import cn from "classnames";
 import React, { useEffect, useRef } from "react";
 import FocusLock from "react-focus-lock";
 
-import { Button, ButtonVariant } from "shared/ui/button";
-import { Portal } from "shared/ui/portal/portal";
-
-import CloseIcon from "shared/assets/icons/close.svg";
-
+import CloseIcon from "../../../assets/icons/close.svg";
+import { Button, ButtonVariant } from "../../button";
 import { Overlay } from "../../overlay/overlay";
+import { Portal } from "../../portal/portal";
 
 import css from "./modal.module.scss";
 

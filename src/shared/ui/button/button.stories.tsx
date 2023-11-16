@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Theme } from "entities/theme";
 
-import IconTheme from "shared/assets/icons/theme.svg";
+import IconTheme from "../../assets/icons/theme.svg";
 
 import { Button, ButtonColor, ButtonVariant } from "./button";
 

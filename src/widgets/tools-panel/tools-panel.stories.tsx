@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { RootState } from "app/app-store";
 
-import { toSessionUserId } from "entities/session/api/types";
+import { toSessionUserId } from "entities/session";
 import { Theme } from "entities/theme";
 
 import { getWithStore } from "shared/config/storybook/decorators/with-store";

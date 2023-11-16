@@ -4,10 +4,9 @@ import { I18nextProvider } from "react-i18next";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
 
-import { appStore, makeStore, StateSchema } from "app/app-store";
-import { AppStoreWithReducerManager } from "app/app-store/store";
+import { appStore, AppStoreWithReducerManager, makeStore, StateSchema } from "app/app-store";
 
-import i18nForTests from "shared/config/i18n/i18nForTests";
+import i18nForTests from "../../config/i18n/i18nForTests";
 
 export type ComponentRenderOptions = {
   route?: string;

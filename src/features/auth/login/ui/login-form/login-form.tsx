@@ -5,6 +5,7 @@ import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
+// eslint-disable-next-line @conarti/feature-sliced/layers-slices
 import { routePaths } from "app/app-router/app-router-config";
 import { useAppDispatch } from "app/app-store";
 

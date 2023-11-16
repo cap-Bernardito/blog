@@ -4,9 +4,12 @@ import { useInView } from "react-intersection-observer";
 
 import { AsyncReducersList, useAppDispatch, useAppSelector } from "app/app-store";
 
-import { ArticleCardHorizontal, ArticleCardVertical } from "entities/article";
-import { ArticleCardHorizontalSkeleton } from "entities/article/ui/article-card-horizontal";
-import { ArticleCardVerticalSkeleton } from "entities/article/ui/article-card-vertical";
+import {
+  ArticleCardHorizontal,
+  ArticleCardHorizontalSkeleton,
+  ArticleCardVertical,
+  ArticleCardVerticalSkeleton,
+} from "entities/article";
 import {
   articlesAdapterSelectors,
   articlesReducer,

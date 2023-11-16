@@ -1,6 +1,6 @@
 import { Article } from "entities/article/@x/article";
 import { Session } from "entities/session/@x";
-import { UserDTO } from "entities/user/api/types";
+import { UserDTO } from "entities/user/@x";
 
 export type ArticleCommentDTO = {
   id: number;

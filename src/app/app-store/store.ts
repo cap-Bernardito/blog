@@ -1,9 +1,8 @@
 import { CombinedState, configureStore, Reducer, ReducersMapObject } from "@reduxjs/toolkit";
 
-import { createReducerManager } from "app/app-store/reducer-manager";
+import { sessionMiddleware } from "entities/session";
 
-import { sessionMiddleware } from "entities/session/model/services/session-middleware";
-
+import { createReducerManager } from "./reducer-manager";
 import { staticReducers } from "./root-reducer";
 import { AsyncReducersList, ReducerManager, StateSchema } from "./types";
 

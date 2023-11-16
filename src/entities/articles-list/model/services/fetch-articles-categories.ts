@@ -2,8 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { ThunkConfig } from "app/app-store";
 
-import { getArticlesCategories } from "entities/articles-list/api/articles-api";
-
+import { getArticlesCategories } from "../../api/articles-api";
 import { ArticlesListStateSchema } from "../types/articles-list";
 
 export const fetchArticlesCategories = createAsyncThunk<

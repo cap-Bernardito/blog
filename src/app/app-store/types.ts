@@ -1,6 +1,6 @@
 import { Reducer } from "@reduxjs/toolkit";
 
-import { AllUsersStateSchema } from "pages/users-page/model/types/all-users";
+import { AllUsersStateSchema } from "pages/users-page";
 
 import type { ArticleStateSchema } from "entities/article";
 import { ArticleCommentsStateSchema } from "entities/article-comments";

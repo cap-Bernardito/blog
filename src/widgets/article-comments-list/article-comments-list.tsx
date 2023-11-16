@@ -1,6 +1,7 @@
 import cn from "classnames";
 import React, { useEffect } from "react";
 
+// eslint-disable-next-line @conarti/feature-sliced/layers-slices
 import { routePaths } from "app/app-router/app-router-config";
 import { useAppDispatch, useAppSelector } from "app/app-store";
 

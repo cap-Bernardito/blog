@@ -2,6 +2,7 @@ import cn from "classnames";
 import plural from "plural-ru";
 import React from "react";
 
+// eslint-disable-next-line @conarti/feature-sliced/layers-slices
 import { routePaths } from "app/app-router/app-router-config";
 
 import { AppLink } from "shared/ui/app-link";

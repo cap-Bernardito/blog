@@ -2,9 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { ThunkConfig } from "app/app-store";
 
-import { RequestAddCommentData } from "entities/article-comments/api/types";
-
 import { addArticleComment } from "../../api/article-comments-api";
+import { RequestAddCommentData } from "../../api/types";
 import { ArticleComment } from "../types/article-comments";
 
 import { fetchArticleComments } from "./fetch-article-comments-data";

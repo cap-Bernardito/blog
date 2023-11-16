@@ -21,7 +21,7 @@ module.exports = {
     "plugin:react-hooks/recommended",
     "plugin:jsx-a11y/recommended",
   ],
-  plugins: ["@typescript-eslint", "react", "i18next", "simple-import-sort"],
+  plugins: ["@typescript-eslint", "react", "i18next", "simple-import-sort", "@conarti/feature-sliced"],
   settings: {
     react: {
       version: "detect",
@@ -33,6 +33,14 @@ module.exports = {
     },
   },
   rules: {
+    "@conarti/feature-sliced/layers-slices": [
+      "warn",
+      {
+        ignorePatterns: ["**/@x/**", "app/app-store", "app/app-router"],
+      },
+    ],
+    "@conarti/feature-sliced/absolute-relative": "error",
+    "@conarti/feature-sliced/public-api": "error",
     "simple-import-sort/imports": [
       "warn",
       {

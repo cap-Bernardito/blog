@@ -1,7 +1,7 @@
-import { SessionDTO } from "entities/session/api/types";
-import { UserDTO } from "entities/user/api/types";
+import type { SessionDTO } from "entities/session";
+import type { UserDTO } from "entities/user";
 
-import { Country, Currency } from "shared/const/common";
+import { Country, Currency } from "../../../const/common";
 
 export const testSession: SessionDTO = {
   accessToken: "atata",

@@ -1,7 +1,7 @@
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 
-import { configEnv } from "shared/config/config-env";
+import { configEnv } from "../../config/config-env";
 
 import { testSession, testUser } from "./fixtures/fixtures";
 

@@ -2,8 +2,7 @@ import cn from "classnames";
 import hljs from "highlight.js/lib/core";
 import React, { useCallback, useEffect, useRef } from "react";
 
-import CopyIcon from "shared/assets/icons/copy.svg";
-
+import CopyIcon from "../../assets/icons/copy.svg";
 import { Button, ButtonColor, ButtonVariant } from "../button";
 
 import { Language, loadLanguageModule } from "./lib/import-languages";

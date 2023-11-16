@@ -1,8 +1,8 @@
 import { screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { toSessionUserId } from "entities/session/api/types";
-import { mapUser } from "entities/user/lib/map-user";
+import { toSessionUserId } from "entities/session";
+import { mapUser } from "entities/user";
 
 import { componentRender } from "shared/lib/tests/component-render";
 import { testUser } from "shared/lib/tests/fixtures/fixtures";

@@ -2,9 +2,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { ThunkConfig } from "app/app-store";
 
-import { Session } from "entities/session";
-import { updateUser } from "entities/user/api/user-api";
+import { Session } from "entities/session/@x";
 
+import { updateUser } from "../../api/user-api";
 import { User } from "../types/user-schema";
 
 export const updateUserData = createAsyncThunk<

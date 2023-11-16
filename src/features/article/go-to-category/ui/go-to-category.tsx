@@ -2,6 +2,7 @@ import cn from "classnames";
 import React, { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
+// eslint-disable-next-line @conarti/feature-sliced/layers-slices
 import { routePaths } from "app/app-router/app-router-config";
 import { useAppDispatch } from "app/app-store";
 

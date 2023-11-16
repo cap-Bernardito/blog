@@ -1,8 +1,8 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
-import { configEnv } from "shared/config/config-env";
-import { USER_LOCALSTORAGE_KEY } from "shared/const/localstorage";
-import { SyncStorage } from "shared/lib/sync-storage";
+import { configEnv } from "../config/config-env";
+import { USER_LOCALSTORAGE_KEY } from "../const/localstorage";
+import { SyncStorage } from "../lib/sync-storage";
 
 export class HTTPClientError extends Error {
   constructor(

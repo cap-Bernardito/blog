@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import { AsyncReducersList, useAppDispatch, useAppSelector } from "app/app-store";
 
-import { UserCard } from "entities/user/ui/user-card";
+import { UserCard } from "entities/user";
 
 import { useAsyncReducerLoader } from "shared/lib/use-async-reducer-loader";
 import { Loader } from "shared/ui/loader/loader";

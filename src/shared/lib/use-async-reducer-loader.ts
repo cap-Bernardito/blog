@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useStore } from "react-redux";
 
 import { AsyncReducersList, StateSchemaKey, useAppDispatch } from "app/app-store";
-import { AppStoreWithReducerManager } from "app/app-store/store";
+import { AppStoreWithReducerManager } from "app/app-store";
 
 export const useAsyncReducerLoader = (reducers: AsyncReducersList, removeAfterUnmount = false) => {
   const store = useStore() as AppStoreWithReducerManager;

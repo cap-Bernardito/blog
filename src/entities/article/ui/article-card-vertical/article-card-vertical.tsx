@@ -2,6 +2,7 @@ import cn from "classnames";
 import React from "react";
 import { Link } from "react-router-dom";
 
+// eslint-disable-next-line @conarti/feature-sliced/layers-slices
 import { routePaths } from "app/app-router/app-router-config";
 
 import { Avatar } from "shared/ui/avatar";

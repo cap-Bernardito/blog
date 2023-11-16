@@ -1,10 +1,10 @@
 import { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { LayoutArticles } from "app/layouts/layout-articles";
-import { LayoutWithSidebar } from "app/layouts/layout-with-sidebar";
-
 import { PageLoader } from "widgets/page-loader/page-loader";
+
+import { LayoutArticles } from "../layouts/layout-articles";
+import { LayoutWithSidebar } from "../layouts/layout-with-sidebar";
 
 import { routeConfig } from "./app-router-config";
 import { ProtectedRoute } from "./protected-route";

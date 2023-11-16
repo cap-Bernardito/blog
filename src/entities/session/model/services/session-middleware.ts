@@ -1,6 +1,6 @@
 import { Middleware } from "@reduxjs/toolkit";
 
-import { AppDispatch } from "app/app-store/store";
+import { AppDispatch } from "app/app-store";
 
 import { USER_LOCALSTORAGE_KEY } from "shared/const/localstorage";
 import { SyncStorage } from "shared/lib/sync-storage";

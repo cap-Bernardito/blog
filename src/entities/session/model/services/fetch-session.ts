@@ -2,8 +2,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { ThunkConfig } from "app/app-store";
 
-import { Session } from "entities/session";
 import { getUser, User } from "entities/user/@x";
+
+import { Session } from "../types/session-schema";
 
 export const fetchSession = createAsyncThunk<User, Session["userId"], ThunkConfig<string>>(
   "session/fetchSession",

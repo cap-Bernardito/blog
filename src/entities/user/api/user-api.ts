@@ -1,4 +1,4 @@
-import { Session } from "entities/session";
+import { Session } from "entities/session/@x";
 
 import { request } from "shared/api";
 

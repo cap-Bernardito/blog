@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "app/app-store";
 
 import { sessionSelectors } from "entities/session";
 import { updateUserData } from "entities/user";
-import { isUserForm, userFormSchema } from "entities/user/model/types/user-schema";
+import { isUserForm, userFormSchema } from "entities/user";
 import { UserForm } from "entities/user-form";
 
 import { selectFormFields } from "../model/selectors";
