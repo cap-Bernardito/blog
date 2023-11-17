@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Theme } from "entities/theme";
-
 import { Code } from "./code";
 
 const meta = {
@@ -31,7 +29,7 @@ export const Dark: Story = {
     children:
       'class Animal:\n\tdef __init__(self, name):\n\t\tself.name = name\n\n\tdef speak(self):\n\t\tpass\n\nclass Dog(Animal):\n\tdef speak(self):\n\t\treturn f"{self.name} говорит: Гав!"\n\nclass Cat(Animal):\n\tdef speak(self):\n\t\treturn f"{self.name} говорит: Мяу!"\n\n# Создаем объекты\ndog = Dog("Барсик")\ncat = Cat("Мурзик")\n\n# Вызываем метод speak() для объектов разных классов\nprint(dog.speak()) # Вывод: "Барсик говорит: Гав!"\nprint(cat.speak()) # Вывод: "Мурзик говорит: Мяу!"\n',
   },
-  parameters: { theme: Theme.DARK },
+  parameters: { theme: "dark" },
 };
 
 export const Orange: Story = {
@@ -40,5 +38,5 @@ export const Orange: Story = {
     children:
       'class Animal:\n\tdef __init__(self, name):\n\t\tself.name = name\n\n\tdef speak(self):\n\t\tpass\n\nclass Dog(Animal):\n\tdef speak(self):\n\t\treturn f"{self.name} говорит: Гав!"\n\nclass Cat(Animal):\n\tdef speak(self):\n\t\treturn f"{self.name} говорит: Мяу!"\n\n# Создаем объекты\ndog = Dog("Барсик")\ncat = Cat("Мурзик")\n\n# Вызываем метод speak() для объектов разных классов\nprint(dog.speak()) # Вывод: "Барсик говорит: Гав!"\nprint(cat.speak()) # Вывод: "Мурзик говорит: Мяу!"\n',
   },
-  parameters: { theme: Theme.ORANGE },
+  parameters: { theme: "orange" },
 };

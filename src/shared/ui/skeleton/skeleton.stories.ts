@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 // eslint-disable-next-line @conarti/feature-sliced/layers-slices
-import { Theme } from "entities/theme";
-
 import { Skeleton } from "./skeleton";
 
 const meta = {
@@ -30,5 +28,5 @@ export const DefaultDark: Story = {
     count: 3,
     height: 30,
   },
-  parameters: { theme: Theme.DARK },
+  parameters: { theme: "dark" },
 };

@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Theme } from "entities/theme";
-
 import IconTheme from "../../assets/icons/theme.svg";
 
 import { Button, ButtonColor, ButtonVariant } from "./button";
@@ -49,7 +47,7 @@ export const SecondaryDark: Story = {
     children: "Button",
     color: ButtonColor.SECONDARY,
   },
-  parameters: { theme: Theme.DARK },
+  parameters: { theme: "dark" },
 };
 
 export const Success: Story = {
@@ -64,7 +62,7 @@ export const SuccessDark: Story = {
     children: "Button",
     color: ButtonColor.SUCCESS,
   },
-  parameters: { theme: Theme.DARK },
+  parameters: { theme: "dark" },
 };
 
 export const Error: Story = {
@@ -79,7 +77,7 @@ export const ErrorDark: Story = {
     children: "Button",
     color: ButtonColor.ERROR,
   },
-  parameters: { theme: Theme.DARK },
+  parameters: { theme: "dark" },
 };
 
 export const Icon: Story = {
@@ -101,5 +99,5 @@ export const DisabledDark: Story = {
     children: "Button",
     disabled: true,
   },
-  parameters: { theme: Theme.DARK },
+  parameters: { theme: "dark" },
 };

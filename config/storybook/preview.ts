@@ -1,7 +1,6 @@
 import type { Preview } from "@storybook/react";
 import { initialize, mswDecorator } from "msw-storybook-addon";
 
-import { Theme } from "../../src/entities/theme";
 import { withI18n } from "../../src/shared/config/storybook/decorators/with-I18n";
 import { withRouter } from "../../src/shared/config/storybook/decorators/with-router";
 import { getWithStore } from "../../src/shared/config/storybook/decorators/with-store";
@@ -27,12 +26,12 @@ const preview: Preview = {
     theme: {
       name: "Theme",
       description: "Global theme for components",
-      defaultValue: Theme.LIGHT,
+      defaultValue: "light",
       toolbar: {
         icon: "circlehollow",
         items: [
-          { value: Theme.LIGHT, icon: "circlehollow", title: Theme.LIGHT },
-          { value: Theme.DARK, icon: "circle", title: Theme.DARK },
+          { value: "light", icon: "circlehollow", title: "light" },
+          { value: "dark", icon: "circle", title: "dark" },
         ],
       },
     },

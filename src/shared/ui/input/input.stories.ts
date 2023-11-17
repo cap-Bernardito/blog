@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Theme } from "entities/theme";
-
 import { Input } from "./input";
 
 const meta = {
@@ -29,7 +27,7 @@ export const DefaultDark: Story = {
     value: "",
     label: "Имя",
   },
-  parameters: { theme: Theme.DARK },
+  parameters: { theme: "dark" },
 };
 
 export const WithValue: Story = {
@@ -44,7 +42,7 @@ export const WithValueDark: Story = {
     value: "Arabella",
     label: "Имя",
   },
-  parameters: { theme: Theme.DARK },
+  parameters: { theme: "dark" },
 };
 
 export const WithError: Story = {
@@ -61,7 +59,7 @@ export const WithErrorDark: Story = {
     error: "Поле не может быть пустым",
     label: "Имя",
   },
-  parameters: { theme: Theme.DARK },
+  parameters: { theme: "dark" },
 };
 
 export const WithErrorValue: Story = {
@@ -78,7 +76,7 @@ export const WithErrorValueDark: Story = {
     label: "Имя",
     error: "Неверный формат имени",
   },
-  parameters: { theme: Theme.DARK },
+  parameters: { theme: "dark" },
 };
 
 export const Disabled: Story = {
@@ -95,5 +93,5 @@ export const DisabledDark: Story = {
     label: "Имя",
     disabled: true,
   },
-  parameters: { theme: Theme.DARK },
+  parameters: { theme: "dark" },
 };

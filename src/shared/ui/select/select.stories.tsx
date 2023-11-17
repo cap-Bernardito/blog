@@ -1,8 +1,6 @@
 /* eslint-disable i18next/no-literal-string */
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Theme } from "entities/theme";
-
 import { Select, SelectOption } from "./select";
 
 const meta = {
@@ -32,5 +30,5 @@ export const DefaultDark: Story = {
     label: "Страна",
     children: [<SelectOption key="Россия">Россия</SelectOption>, <SelectOption key="Беларусь">Беларусь</SelectOption>],
   },
-  parameters: { theme: Theme.DARK },
+  parameters: { theme: "dark" },
 };

@@ -4,7 +4,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { RootState } from "app/app-store";
 
 import { toSessionUserId } from "entities/session";
-import { Theme } from "entities/theme";
 
 import { getWithStore } from "shared/config/storybook/decorators/with-store";
 import { Country, Currency } from "shared/const/common";
@@ -72,7 +71,7 @@ type Story = StoryObj<typeof meta>;
 export const Light: Story = {};
 
 export const Dark: Story = {
-  parameters: { theme: Theme.DARK },
+  parameters: { theme: "dark" },
 };
 
 export const LightWithAuthLoading: Story = {
@@ -98,6 +97,6 @@ export const DarkWithAuth = () => (
   </DelayedComponent>
 );
 DarkWithAuth.story = {
-  parameters: { theme: Theme.DARK },
+  parameters: { theme: "dark" },
   decorators: [getWithStore(preloadAuthStateWithUser)],
 };

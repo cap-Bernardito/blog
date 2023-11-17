@@ -6,14 +6,16 @@ import { LOCAL_STORAGE_THEME_KEY, Theme, ThemeContext } from "../model/theme-con
 
 const storage = new SyncStorage().create("local");
 
-export const initialTheme = (storage.get(LOCAL_STORAGE_THEME_KEY) as Theme) || Theme.LIGHT;
+export const initialTheme = (storage.get(LOCAL_STORAGE_THEME_KEY) as Theme) || "light";
 
 type ThemeProviderProps = {
   defaultTheme?: Theme;
 };
 
+const themeVariants: Theme[] = ["dark", "light", "orange"];
+
 const themeClasses = (() =>
-  Object.values(Theme).reduce((acc: string[], theme) => {
+  themeVariants.reduce((acc: string[], theme) => {
     acc.push(`theme-${theme}`);
     return acc;
   }, []))();

@@ -17,23 +17,23 @@ export function useTheme(): UseThemeResult {
   const { theme, setTheme } = useContext(ThemeContext);
 
   const toggleTheme = () => {
-    let newTheme;
+    let newTheme: Theme;
 
     switch (theme) {
-      case Theme.DARK: {
-        newTheme = Theme.ORANGE;
+      case "dark": {
+        newTheme = "orange";
         break;
       }
-      case Theme.ORANGE: {
-        newTheme = Theme.LIGHT;
+      case "orange": {
+        newTheme = "light";
         break;
       }
-      case Theme.LIGHT: {
-        newTheme = Theme.DARK;
+      case "light": {
+        newTheme = "dark";
         break;
       }
       default: {
-        newTheme = Theme.LIGHT;
+        newTheme = "light";
       }
     }
 

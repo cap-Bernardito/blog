@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Theme } from "entities/theme";
-
 import { Textarea } from "./textarea";
 
 const meta = {
@@ -31,7 +29,7 @@ export const Dark: Story = {
     label: "Введите сообщение",
     placeholder: "Введите сообщение",
   },
-  parameters: { theme: Theme.DARK },
+  parameters: { theme: "dark" },
 };
 
 export const LightWithValue: Story = {
@@ -48,7 +46,7 @@ export const DarkWithValue: Story = {
     label: "Введите сообщение",
     placeholder: "Введите сообщение",
   },
-  parameters: { theme: Theme.DARK },
+  parameters: { theme: "dark" },
 };
 
 export const LightWithLongValue: Story = {
@@ -67,7 +65,7 @@ export const DarkWithLongValue: Story = {
     label: "Введите сообщение",
     placeholder: "Введите сообщение",
   },
-  parameters: { theme: Theme.DARK },
+  parameters: { theme: "dark" },
 };
 
 export const LightWithError: Story = {
@@ -86,5 +84,5 @@ export const DarkWithError: Story = {
     label: "Введите сообщение",
     placeholder: "Введите сообщение",
   },
-  parameters: { theme: Theme.DARK },
+  parameters: { theme: "dark" },
 };

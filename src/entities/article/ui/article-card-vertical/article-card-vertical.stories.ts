@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Theme } from "entities/theme";
-
 import { ArticleCardVertical } from "./article-card-vertical";
 
 const meta = {
@@ -45,5 +43,5 @@ export const Dark: Story = {
       username: "admin",
     },
   },
-  parameters: { theme: Theme.DARK },
+  parameters: { theme: "dark" },
 };
