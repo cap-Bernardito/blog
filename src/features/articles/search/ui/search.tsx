@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "app/app-store";
 
 import { articlesActions, articlesSelectors, fetchArticlesList } from "entities/articles-list";
 
-import { useDebounce } from "shared/lib/useDebounce";
+import { useDebounce } from "shared/lib/use-debounce";
 import { Input } from "shared/ui/input";
 
 import css from "./search.module.scss";

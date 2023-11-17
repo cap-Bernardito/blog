@@ -1,5 +1,6 @@
 import { type Decorator } from "@storybook/react";
 
+// eslint-disable-next-line @conarti/feature-sliced/layers-slices
 import { ThemeProvider } from "entities/theme";
 
 export const withTheme: Decorator = (StoryFn, context) => {

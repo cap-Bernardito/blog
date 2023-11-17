@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+// eslint-disable-next-line @conarti/feature-sliced/layers-slices
 import { ThemeProvider, useTheme } from "entities/theme";
 
 type PortalProps = {

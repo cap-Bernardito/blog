@@ -4,7 +4,7 @@ import { ThunkConfig } from "app/app-store";
 
 import { Article, getArticles } from "entities/article/@x/article";
 
-import { addQueryParams } from "shared/lib/addQueryParams";
+import { addQueryParams } from "shared/lib/add-query-params";
 
 import { selectLimit, selectPage, selectSearch, selectSortOrder, selectSortType, selectType } from "../selectors";
 
