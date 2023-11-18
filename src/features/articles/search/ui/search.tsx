@@ -22,6 +22,7 @@ export const ArticlesSearch: React.FC<SearchProps> = ({ className }) => {
   const isLoading = useAppSelector(articlesSelectors.selectIsLoading);
 
   const debouncedFetchData = useDebounce(() => {
+    window.scrollTo(0, 0);
     dispatch(fetchArticlesList({ replace: true }));
   }, 500);
 

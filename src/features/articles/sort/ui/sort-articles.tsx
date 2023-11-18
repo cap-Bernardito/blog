@@ -21,6 +21,7 @@ export const SortArticles: React.FC<SortArticlesProps> = ({ className }) => {
   const handleChangeSortOrder = useCallback(
     (value: ArticlesListStateSchema["sortOrder"]) => {
       value && dispatch(articlesActions.setSortOrder(value));
+      window.scrollTo(0, 0);
       dispatch(fetchArticlesList({ replace: true }));
     },
     [dispatch],
@@ -29,6 +30,7 @@ export const SortArticles: React.FC<SortArticlesProps> = ({ className }) => {
   const handleChangeSortType = useCallback(
     (value: ArticlesListStateSchema["sortType"]) => {
       value && dispatch(articlesActions.setSortType(value));
+      window.scrollTo(0, 0);
       dispatch(fetchArticlesList({ replace: true }));
     },
     [dispatch],
