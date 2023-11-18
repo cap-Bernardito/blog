@@ -34,7 +34,7 @@ module.exports = {
   },
   rules: {
     "@conarti/feature-sliced/layers-slices": [
-      "warn",
+      "error",
       {
         ignorePatterns: ["**/@x/**", "app/app-store", "app/app-router/*"],
       },
