@@ -3,11 +3,10 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import { useAppSelector } from "app/app-store";
 
-import { ErrorFallback } from "widgets/error-fallback";
-
 import { LoginForm } from "features/auth/login";
 import { LogoutButton } from "features/auth/logout";
 
+import { ErrorFallback } from "entities/error-fallback";
 import { sessionSelectors } from "entities/session";
 
 import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";

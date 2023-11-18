@@ -6,8 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { App } from "app/app";
 import { appStore } from "app/app-store";
 
-import { ErrorFallback } from "widgets/error-fallback";
-
+import { ErrorFallback } from "entities/error-fallback";
 import { ThemeProvider } from "entities/theme";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLDivElement);
