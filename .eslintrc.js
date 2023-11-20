@@ -36,7 +36,7 @@ module.exports = {
     "@conarti/feature-sliced/layers-slices": [
       "error",
       {
-        ignorePatterns: ["**/@x/**", "app/app-store", "app/app-router/*"],
+        ignorePatterns: ["entities/**/@x/**", "app/app-store", "app/app-router/*"],
       },
     ],
     "@conarti/feature-sliced/absolute-relative": "error",

@@ -32,7 +32,7 @@ export const ArticlePage = () => {
   const articleError = useAppSelector(articleSelectors.selectArticleError);
 
   useAsyncReducerLoader(asyncArticleReducer, true);
-  useScrollPosition("top");
+  useScrollPosition(false, "top");
 
   useEffect(() => {
     if (id) {

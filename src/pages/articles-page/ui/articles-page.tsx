@@ -1,6 +1,7 @@
 import cn from "classnames";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+import { Virtuoso } from "react-virtuoso";
 
 import { AsyncReducersList, useAppDispatch, useAppSelector } from "app/app-store";
 
@@ -31,6 +32,7 @@ export const ArticlesPage = () => {
   const articlesView = useAppSelector(articlesSelectors.selectView);
   const articlesCount = useAppSelector(articlesSelectors.selectLimit);
   const articles = useAppSelector(articlesAdapterSelectors.selectAll);
+  const initialScrollPosition = useScrollPosition(true);
   const { ref } = useInView({
     initialInView: false,
     triggerOnce: true,
@@ -44,7 +46,6 @@ export const ArticlesPage = () => {
   });
 
   useAsyncReducerLoader(asyncArticlesReducer);
-  useScrollPosition();
 
   useEffect(() => {
     dispatch(fetchArticlesListInitial());
@@ -75,18 +76,39 @@ export const ArticlesPage = () => {
     });
 
   const ArticleCardComponent = articlesView === "list" ? ArticleCardHorizontal : ArticleCardVertical;
-  const articlesList = articles.map((article, index) => {
-    if (index === articles.length - 1) {
-      return <ArticleCardComponent key={article.id} {...article} ref={ref} />;
-    }
 
-    return <ArticleCardComponent key={article.id} {...article} />;
+  const Footer = React.memo(function Footer() {
+    return articlesIsLoading && <>{articlesSkeletonList}</>;
   });
+
+  const articlesVirtuoso = (
+    <Virtuoso
+      useWindowScroll
+      style={{ height: "100%" }}
+      data={articles}
+      initialScrollTop={initialScrollPosition}
+      itemContent={(index, article) => {
+        if (index === articles.length - 1) {
+          return <ArticleCardComponent key={article.id} {...article} ref={ref} />;
+        }
+
+        return <ArticleCardComponent key={article.id} {...article} />;
+      }}
+      components={{
+        Footer,
+        ScrollSeekPlaceholder: () => <ArticleCardSkeletonComponent />,
+      }}
+      scrollSeekConfiguration={{
+        enter: (velocity) => Math.abs(velocity) > 500,
+        exit: (velocity) => Math.abs(velocity) < 30,
+      }}
+    />
+  );
 
   return (
     <div className={cn(css.root, { [css.grid]: articlesView === "grid", [css.list]: articlesView === "list" })}>
-      {articles.length > 0 && articlesList}
-      {articlesIsLoading && articlesSkeletonList}
+      {articles.length > 0 && articlesVirtuoso}
+      {/* {articlesIsLoading && articlesSkeletonList} */}
     </div>
   );
 };
