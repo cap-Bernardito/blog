@@ -62,35 +62,37 @@ ArticleCardVerticalNoMemo.displayName = "ArticleCardVertical";
 
 export const ArticleCardVertical = React.memo(ArticleCardVerticalNoMemo);
 
-export const ArticleCardVerticalSkeleton = React.forwardRef<HTMLDivElement>((_, ref) => (
-  <div className={cn(css.root)} ref={ref}>
-    <div className={css.hero}>
-      <div className={css.hero__inner}>
-        <Skeleton style={{ paddingBottom: "50%" }} />
-      </div>
-    </div>
-    <div className={cn(css.main)}>
-      <div className={css.body}>
-        <Skeleton height={12} />
-        <Skeleton height={12} />
-        <Skeleton height={12} />
-      </div>
-      <div className={css.meta}>
-        <div className={css.meta__date}>
-          <Skeleton width={90} />
-        </div>
-        <div className={css.meta__view}>
-          <Skeleton width={90} />
+export const ArticleCardVerticalSkeleton = React.forwardRef<HTMLDivElement>(
+  ({ className }: { className?: string }, ref) => (
+    <div className={cn(css.root, className)} ref={ref}>
+      <div className={css.hero}>
+        <div className={css.hero__inner}>
+          <Skeleton style={{ paddingBottom: "50%" }} />
         </div>
       </div>
-      <div className={css.author}>
-        <Skeleton className={css.author__avatar} height={32} width={32} circle={true} />
-        <span className={css.author__username}>
-          <Skeleton width={150} />
-        </span>
+      <div className={cn(css.main)}>
+        <div className={css.body}>
+          <Skeleton height={12} />
+          <Skeleton height={12} />
+          <Skeleton height={12} />
+        </div>
+        <div className={css.meta}>
+          <div className={css.meta__date}>
+            <Skeleton width={90} />
+          </div>
+          <div className={css.meta__view}>
+            <Skeleton width={90} />
+          </div>
+        </div>
+        <div className={css.author}>
+          <Skeleton className={css.author__avatar} height={32} width={32} circle={true} />
+          <span className={css.author__username}>
+            <Skeleton width={150} />
+          </span>
+        </div>
       </div>
     </div>
-  </div>
-));
+  ),
+);
 
 ArticleCardVerticalSkeleton.displayName = "ArticleCardVerticalSkeleton";

@@ -22,10 +22,12 @@ export const ChangeArticlesView: React.FC<ChangeArticlesViewProps> = ({ classNam
 
   const handleListClick = () => {
     dispatch(articlesActions.setView("list"));
+    window.scrollTo(0, 0);
   };
 
   const handleGridClick = () => {
     dispatch(articlesActions.setView("grid"));
+    window.scrollTo(0, 0);
   };
 
   return (

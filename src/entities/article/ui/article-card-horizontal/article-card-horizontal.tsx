@@ -68,42 +68,44 @@ ArticleCardHorizontalNoMemo.displayName = "ArticleCardHorizontal";
 
 export const ArticleCardHorizontal = React.memo(ArticleCardHorizontalNoMemo);
 
-export const ArticleCardHorizontalSkeleton = React.forwardRef<HTMLDivElement>((_, ref) => (
-  <div className={cn(css.root)} ref={ref}>
-    <div className={css.meta}>
-      <div className={cn(css.meta__author, css.author)}>
-        <Skeleton className={css.author__avatar} height={32} width={32} circle={true} />
-        <span className={css.autor__username}>
+export const ArticleCardHorizontalSkeleton = React.forwardRef<HTMLDivElement>(
+  ({ className }: { className?: string }, ref) => (
+    <div className={cn(css.root, className)} ref={ref}>
+      <div className={css.meta}>
+        <div className={cn(css.meta__author, css.author)}>
+          <Skeleton className={css.author__avatar} height={32} width={32} circle={true} />
+          <span className={css.autor__username}>
+            <Skeleton width={150} />
+          </span>
+        </div>
+        <div className={css.meta__date}>
           <Skeleton width={150} />
-        </span>
+        </div>
       </div>
-      <div className={css.meta__date}>
-        <Skeleton width={150} />
+      <div className={css.title}>
+        <Skeleton height={22} />
+        <Skeleton height={22} />
       </div>
-    </div>
-    <div className={css.title}>
-      <Skeleton height={22} />
-      <Skeleton height={22} />
-    </div>
-    <div className={css.hero}>
-      <div className={css.hero__inner}>
-        <Skeleton style={{ paddingBottom: "50%" }} />
+      <div className={css.hero}>
+        <div className={css.hero__inner}>
+          <Skeleton style={{ paddingBottom: "50%" }} />
+        </div>
       </div>
-    </div>
-    <div className={cn(css.main)}>
-      <Skeleton height={12} />
-      <Skeleton height={12} />
-      <Skeleton height={12} />
-    </div>
-    <div className={css.footer}>
-      <div className={css.footer__more}>
-        <Skeleton height={40} width={140} />
+      <div className={cn(css.main)}>
+        <Skeleton height={12} />
+        <Skeleton height={12} />
+        <Skeleton height={12} />
       </div>
-      <div className={css.footer__view}>
-        <Skeleton width={150} />
+      <div className={css.footer}>
+        <div className={css.footer__more}>
+          <Skeleton height={40} width={140} />
+        </div>
+        <div className={css.footer__view}>
+          <Skeleton width={150} />
+        </div>
       </div>
     </div>
-  </div>
-));
+  ),
+);
 
 ArticleCardHorizontalSkeleton.displayName = "ArticleCardHorizontalSkeleton";

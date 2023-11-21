@@ -1,11 +1,12 @@
 import cn from "classnames";
-import React, { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
-import { Virtuoso } from "react-virtuoso";
+import { ItemContent, Virtuoso, VirtuosoGrid, VirtuosoHandle } from "react-virtuoso";
 
 import { AsyncReducersList, useAppDispatch, useAppSelector } from "app/app-store";
 
 import {
+  Article,
   ArticleCardHorizontal,
   ArticleCardHorizontalSkeleton,
   ArticleCardVertical,
@@ -44,12 +45,19 @@ export const ArticlesPage = () => {
       }
     },
   });
+  const refVirtuoso = useRef<VirtuosoHandle>(null);
 
   useAsyncReducerLoader(asyncArticlesReducer);
 
   useEffect(() => {
     dispatch(fetchArticlesListInitial());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (articlesView === "grid") {
+      setTimeout(() => window.scrollTo(0, initialScrollPosition), 100);
+    }
+  }, [articlesView, initialScrollPosition]);
 
   if (articlesError) {
     return <div>{articlesError}</div>;
@@ -63,52 +71,63 @@ export const ArticlesPage = () => {
     );
   }
 
-  const ArticleCardSkeletonComponent =
-    articlesView === "list" ? ArticleCardHorizontalSkeleton : ArticleCardVerticalSkeleton;
-  const articlesSkeletonList = Array(articlesCount)
-    .fill(0)
-    .map((article, index) => {
-      if (index === articles.length - 1) {
-        return <ArticleCardSkeletonComponent key={index} ref={ref} />;
-      }
+  let ArticleCard: typeof ArticleCardHorizontal | typeof ArticleCardVertical;
+  let ArticleCardSkeleton: typeof ArticleCardHorizontalSkeleton | typeof ArticleCardHorizontalSkeleton;
+  let skeletonWrapperClassName: string;
 
-      return <ArticleCardSkeletonComponent key={index} {...article} />;
-    });
+  if (articlesView === "list") {
+    skeletonWrapperClassName = css.list;
+    ArticleCard = ArticleCardHorizontal;
+    ArticleCardSkeleton = ArticleCardHorizontalSkeleton;
+  } else {
+    skeletonWrapperClassName = css.grid;
+    ArticleCard = ArticleCardVertical;
+    ArticleCardSkeleton = ArticleCardVerticalSkeleton;
+  }
 
-  const ArticleCardComponent = articlesView === "list" ? ArticleCardHorizontal : ArticleCardVertical;
-
-  const Footer = React.memo(function Footer() {
-    return articlesIsLoading && <>{articlesSkeletonList}</>;
-  });
-
-  const articlesVirtuoso = (
-    <Virtuoso
-      useWindowScroll
-      style={{ height: "100%" }}
-      data={articles}
-      initialScrollTop={initialScrollPosition}
-      itemContent={(index, article) => {
-        if (index === articles.length - 1) {
-          return <ArticleCardComponent key={article.id} {...article} ref={ref} />;
-        }
-
-        return <ArticleCardComponent key={article.id} {...article} />;
-      }}
-      components={{
-        Footer,
-        ScrollSeekPlaceholder: () => <ArticleCardSkeletonComponent />,
-      }}
-      scrollSeekConfiguration={{
-        enter: (velocity) => Math.abs(velocity) > 500,
-        exit: (velocity) => Math.abs(velocity) < 30,
-      }}
-    />
+  const articlesSkeletonList = (
+    <div className={cn(skeletonWrapperClassName, css.skeleton)}>
+      {Array(articlesCount)
+        .fill(0)
+        .map((article, index) => (
+          <ArticleCardSkeleton className={css.card} key={index} {...article} />
+        ))}
+    </div>
   );
 
+  if (articles.length === 0 && articlesIsLoading) {
+    return articlesSkeletonList;
+  }
+
+  const itemContent: ItemContent<Article, unknown> = (index, article) => {
+    const isLastItem = index === articles.length - 1;
+
+    return <ArticleCard className={css.card} key={article.id} {...article} ref={isLastItem ? ref : undefined} />;
+  };
+
+  const articlesVirtuoso =
+    articlesView === "list" ? (
+      <Virtuoso
+        ref={refVirtuoso}
+        useWindowScroll
+        data={articles}
+        initialScrollTop={initialScrollPosition}
+        itemContent={itemContent}
+      />
+    ) : (
+      <VirtuosoGrid
+        ref={refVirtuoso}
+        useWindowScroll
+        data={articles}
+        listClassName={cn(css.grid)}
+        itemContent={itemContent}
+      />
+    );
+
   return (
-    <div className={cn(css.root, { [css.grid]: articlesView === "grid", [css.list]: articlesView === "list" })}>
+    <div className={cn(css.root)}>
       {articles.length > 0 && articlesVirtuoso}
-      {/* {articlesIsLoading && articlesSkeletonList} */}
+      {articlesIsLoading && articlesSkeletonList}
     </div>
   );
 };

@@ -72,7 +72,7 @@ $media-xl-viewport: 1920;
 
   /* stylelint-disable-next-line scss/at-else-empty-line-before */
   @else {
-    max-height: #{strip-unit($line-height) * $lines-to-show}em;
+    height: #{strip-unit($line-height) * $lines-to-show}em;
     font-size: $font-size;
     line-height: #{strip-unit($line-height)}em;
   }
