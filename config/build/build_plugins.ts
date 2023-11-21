@@ -4,6 +4,7 @@ import CopyPlugin from "copy-webpack-plugin";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore, В пакете @types/dotenv-webpack неверные типы опций
 import Dotenv from "dotenv-webpack";
+import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import webpack, { WebpackPluginInstance } from "webpack";
@@ -31,6 +32,8 @@ export const buildPlugins = ({ paths, isDev }: BuildOptions): webpack.WebpackPlu
       new ReactRefreshWebpackPlugin({
         overlay: false,
       }),
+
+    isDev && new ForkTsCheckerWebpackPlugin(),
 
     !isDev &&
       new StatoscopeWebpackPlugin({

@@ -2,4 +2,4 @@
 
 export { getArticles } from "../api/article-api";
 export { type ArticlesRequestParams } from "../api/types";
-export { Article } from "../model/types/article";
+export { type Article } from "../model/types/article";
