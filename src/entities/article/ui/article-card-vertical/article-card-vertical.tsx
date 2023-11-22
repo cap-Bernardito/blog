@@ -64,7 +64,7 @@ export const ArticleCardVertical = React.memo(ArticleCardVerticalNoMemo);
 
 export const ArticleCardVerticalSkeleton = React.forwardRef<HTMLDivElement>(
   ({ className }: { className?: string }, ref) => (
-    <div className={cn(css.root, className)} ref={ref}>
+    <div className={cn(css.root, css.skeleton, className)} ref={ref}>
       <div className={css.hero}>
         <div className={css.hero__inner}>
           <Skeleton style={{ paddingBottom: "50%" }} />

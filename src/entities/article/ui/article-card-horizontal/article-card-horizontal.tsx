@@ -70,16 +70,16 @@ export const ArticleCardHorizontal = React.memo(ArticleCardHorizontalNoMemo);
 
 export const ArticleCardHorizontalSkeleton = React.forwardRef<HTMLDivElement>(
   ({ className }: { className?: string }, ref) => (
-    <div className={cn(css.root, className)} ref={ref}>
+    <div className={cn(css.root, css.skeleton, className)} ref={ref}>
       <div className={css.meta}>
         <div className={cn(css.meta__author, css.author)}>
           <Skeleton className={css.author__avatar} height={32} width={32} circle={true} />
           <span className={css.autor__username}>
-            <Skeleton width={150} />
+            <Skeleton width={100} />
           </span>
         </div>
         <div className={css.meta__date}>
-          <Skeleton width={150} />
+          <Skeleton width={100} />
         </div>
       </div>
       <div className={css.title}>
@@ -88,7 +88,7 @@ export const ArticleCardHorizontalSkeleton = React.forwardRef<HTMLDivElement>(
       </div>
       <div className={css.hero}>
         <div className={css.hero__inner}>
-          <Skeleton style={{ paddingBottom: "50%" }} />
+          <Skeleton style={{ paddingBottom: "50%", lineHeight: 0 }} />
         </div>
       </div>
       <div className={cn(css.main)}>
