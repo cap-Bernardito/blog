@@ -55,7 +55,7 @@ async function jsonToMd(data) {
     img: data.img,
     createdAt: transformDate(data.createdAt),
     views: data.views,
-    type: data.type,
+    type: data.type.filter((type) => !/[+.#]/.test(type)),
     original: data.link,
     slug: data.slug,
   };
