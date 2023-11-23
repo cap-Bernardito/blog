@@ -9,6 +9,8 @@ import { ScrollPositionStateSchema } from "entities/scroll-position";
 import type { SessionStateSchema } from "entities/session";
 import type { UserStateSchema } from "entities/user";
 
+import { baseApi } from "shared/api";
+
 import { createReducerManager } from "./reducer-manager";
 
 export type StateSchemaKey = keyof StateSchema;
@@ -18,6 +20,7 @@ export type AsyncStateSchemaKey = keyof AsyncStateSchema;
 export type ReducerManager = ReturnType<typeof createReducerManager>;
 
 export type StaticStateSchema = {
+  [baseApi.reducerPath]: ReturnType<typeof baseApi.reducer>;
   session: SessionStateSchema;
   scrollPosition: ScrollPositionStateSchema;
 };

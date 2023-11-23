@@ -4,6 +4,7 @@ import { ThunkConfig } from "app/app-store";
 
 import { type RequestLoginBody, type Session, sessionActions, sessionApi } from "entities/session";
 
+import { isFetchBaseQueryError } from "shared/api/is-fetch-base-query-error";
 import { USER_LOCALSTORAGE_KEY } from "shared/const/localstorage";
 import { SyncStorage } from "shared/lib/sync-storage";
 
@@ -13,7 +14,7 @@ export const loginByUsername = createAsyncThunk<Session, RequestLoginBody, Thunk
   "auth/login",
   async (authData, thunkAPI) => {
     try {
-      const response = await sessionApi.login(authData);
+      const response = await thunkAPI.dispatch(sessionApi.endpoints.login.initiate(authData)).unwrap();
 
       if (!response) {
         throw new Error("No data");
@@ -29,6 +30,13 @@ export const loginByUsername = createAsyncThunk<Session, RequestLoginBody, Thunk
 
       if (error instanceof Error) {
         errorMessage = error.message;
+      }
+
+      if (isFetchBaseQueryError(error)) {
+        // TODO: после перехода на RTK убрать поле "message"
+        if (error.data && typeof error.data === "object" && "message" in error.data) {
+          errorMessage = error.data.message as string;
+        }
       }
 
       return thunkAPI.rejectWithValue(errorMessage);

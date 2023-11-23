@@ -8,6 +8,7 @@ import { OpenLoginModal } from "widgets/login-modal";
 
 import { toSessionUserId } from "entities/session";
 
+import { baseApi } from "shared/api";
 import { getWithStore } from "shared/config/storybook/decorators/with-store";
 import { Country, Currency } from "shared/const/common";
 import { DelayedComponent } from "shared/lib/tests/delayed-component";
@@ -15,6 +16,7 @@ import { DelayedComponent } from "shared/lib/tests/delayed-component";
 import { ToolsPanel } from "./tools-panel";
 
 const preloadAuthStateWithUser: RootState = {
+  [baseApi.reducerPath]: {} as ReturnType<typeof baseApi.reducer>,
   session: {
     isAuthorized: true,
     accessToken: "atata",
@@ -42,6 +44,7 @@ const preloadAuthStateWithUser: RootState = {
 };
 
 const preloadOnlyAuthState: RootState = {
+  [baseApi.reducerPath]: {} as ReturnType<typeof baseApi.reducer>,
   session: {
     isAuthorized: true,
     accessToken: "atata",

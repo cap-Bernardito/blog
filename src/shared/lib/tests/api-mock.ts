@@ -1,11 +1,22 @@
 import { rest } from "msw";
 import { setupServer } from "msw/node";
+import nodeFetch, { Request, Response } from "node-fetch";
 
 import { configEnv } from "../../config/config-env";
 
 import { testSession, testUser } from "./fixtures/fixtures";
 
 export const requestUrl = (endPoint: string) => `${configEnv.API_BASEURL}/${endPoint}`;
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+global.fetch = nodeFetch;
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+global.Request = Request;
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+global.Response = Response;
 
 const handlers = [
   rest.get(requestUrl("profiles/1"), (req, res, ctx) => {
@@ -21,6 +32,7 @@ const handlers = [
   rest.post(requestUrl("login"), async (req, res, ctx) => {
     const { username, password } = await req.json();
 
+    // TODO: после перехода на RTK Query возвращать просто текст ошибки без {message: error}
     return password === "valid" && username === "username"
       ? res(ctx.delay(100), ctx.status(200), ctx.json(testSession))
       : res(ctx.delay(100), ctx.status(401), ctx.json({ message: "Login or password is incorrect" }));

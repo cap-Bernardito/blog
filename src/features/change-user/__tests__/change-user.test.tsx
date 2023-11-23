@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { toSessionUserId } from "entities/session";
 import { mapUser } from "entities/user";
 
+import { baseApi } from "shared/api";
 import { componentRender } from "shared/lib/tests/component-render";
 import { testUser } from "shared/lib/tests/fixtures/fixtures";
 
@@ -13,6 +14,7 @@ describe("change user form", () => {
   beforeEach(async () => {
     componentRender(<ChangeUserForm />, {
       initialState: {
+        [baseApi.reducerPath]: {} as ReturnType<typeof baseApi.reducer>,
         session: {
           isAuthorized: true,
           _isInit: true,
