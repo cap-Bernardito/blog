@@ -3,7 +3,6 @@ import { z } from "zod";
 const sessionUserIdSchema = z.number().brand<"SessionUserId">();
 
 export const sessionSchema = z.object({
-  accessToken: z.string(),
   userId: sessionUserIdSchema,
 });
 

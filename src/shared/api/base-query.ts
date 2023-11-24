@@ -7,20 +7,18 @@ import {
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { configEnv } from "../config/config-env";
-import { USER_LOCALSTORAGE_KEY } from "../const/localstorage";
 import { SyncStorage } from "../lib/sync-storage";
 
-const storage = new SyncStorage().create("local");
+const tokensStorage = new SyncStorage().create("memory", "tokens");
 
 export const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, object, FetchBaseQueryMeta> =
   fetchBaseQuery({
     baseUrl: configEnv.API_BASEURL,
     prepareHeaders: (headers) => {
-      // TODO: приделать нормальную авторизацию
-      const autorizationHeader = (storage.get(USER_LOCALSTORAGE_KEY) as string) && "atata";
+      const accessToken = tokensStorage.get("accessToken");
 
-      if (autorizationHeader) {
-        headers.set("Authorization", autorizationHeader);
+      if (accessToken) {
+        headers.set("Authorization", `Bearer ${accessToken}`);
       }
 
       return headers;

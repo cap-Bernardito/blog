@@ -1,7 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
 import { configEnv } from "../config/config-env";
-import { USER_LOCALSTORAGE_KEY } from "../const/localstorage";
 import { SyncStorage } from "../lib/sync-storage";
 
 export class HTTPClientError extends Error {
@@ -34,13 +33,14 @@ const axiosInstance = axios.create({
   withCredentials: true,
 });
 
+const tokensStorage = new SyncStorage().create("memory", "tokens");
+
 axiosInstance.interceptors.request.use(
   (config) => {
-    // TODO: приделать нормальную авторизацию
-    const autorizationHeader = (storage.get(USER_LOCALSTORAGE_KEY) as string) && "atata";
+    const accessToken = tokensStorage.get("accessToken");
 
-    if (autorizationHeader) {
-      config.headers.Authorization = autorizationHeader;
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
 
     return config;
@@ -58,8 +58,6 @@ axiosInstance.interceptors.response.use(
     return Promise.reject(normalizeError(error));
   },
 );
-
-const storage = new SyncStorage().create("local");
 
 export const request = {
   get: async <T>(url: string, config?: AxiosRequestConfig) => {

@@ -1,7 +1,16 @@
 import { StorageAdapter } from "./types";
 
 export default class MemoryAdapter implements StorageAdapter {
+  static #instance: MemoryAdapter;
   #storage = new Map();
+
+  constructor() {
+    if (MemoryAdapter.#instance) {
+      return MemoryAdapter.#instance;
+    }
+
+    MemoryAdapter.#instance = this;
+  }
 
   add(key: string, value: unknown): void {
     this.#storage.set(key, value);

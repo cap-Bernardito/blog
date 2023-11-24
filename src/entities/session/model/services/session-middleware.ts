@@ -14,7 +14,7 @@ import { fetchSession } from "./fetch-session";
 export const sessionMiddleware: Middleware = ({ dispatch }: { dispatch: AppDispatch }) => {
   return (next) => async (action) => {
     const storage = new SyncStorage().create("local");
-
+    // WIP: исправить
     if (sessionActions.initSession.match(action)) {
       const session = storage.get(USER_LOCALSTORAGE_KEY);
 
