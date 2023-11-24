@@ -17,7 +17,6 @@ export const sessionSlice = createSlice<
   {
     initSession: (state: SessionStateSchema) => void;
     setAuth: (state: SessionStateSchema, action: PayloadAction<Session>) => void;
-    setUser: (state: SessionStateSchema, action: PayloadAction<User>) => void;
     clearSession: (state: SessionStateSchema) => void;
   },
   "session"
@@ -32,10 +31,6 @@ export const sessionSlice = createSlice<
       state.isAuthorized = true;
       state.userId = payload.userId;
       state.accessToken = payload.accessToken;
-    },
-    setUser: (state, { payload }) => {
-      state.isAuthorized = true;
-      state.user = payload;
     },
     clearSession: (state) => {
       state.accessToken = undefined;
