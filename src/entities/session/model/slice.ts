@@ -15,7 +15,6 @@ const initialState: SessionStateSchema = {
 export const sessionSlice = createSlice<
   SessionStateSchema,
   {
-    initSession: (state: SessionStateSchema) => void;
     setAuth: (state: SessionStateSchema, action: PayloadAction<Session>) => void;
     clearSession: (state: SessionStateSchema) => void;
   },
@@ -24,12 +23,10 @@ export const sessionSlice = createSlice<
   name: "session",
   initialState,
   reducers: {
-    initSession: () => {
-      // Запуск экшона чекается в session-middleware
-    },
     setAuth: (state, { payload }) => {
       state.isAuthorized = true;
       state.userId = payload.userId;
+      state._isInit = true;
     },
     clearSession: (state) => {
       state.accessToken = undefined;
@@ -47,7 +44,6 @@ export const sessionSlice = createSlice<
       .addCase(fetchSession.fulfilled, (state, action: PayloadAction<User>) => {
         state.isLoading = false;
         state.user = action.payload;
-        state._isInit = true;
       })
       .addCase(fetchSession.rejected, (state, action) => {
         state.isLoading = false;

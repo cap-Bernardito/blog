@@ -29,7 +29,7 @@ const handlers = [
     return res(ctx.delay(100), ctx.status(200), ctx.json(testUser));
   }),
 
-  rest.post(requestUrl("login"), async (req, res, ctx) => {
+  rest.post(requestUrl("auth/login"), async (req, res, ctx) => {
     const { username, password } = await req.json();
 
     // TODO: после перехода на RTK Query возвращать просто текст ошибки без {message: error}

@@ -14,6 +14,7 @@ const tokensStorage = new SyncStorage().create("memory", "tokens");
 export const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, object, FetchBaseQueryMeta> =
   fetchBaseQuery({
     baseUrl: configEnv.API_BASEURL,
+    credentials: "include",
     prepareHeaders: (headers) => {
       const accessToken = tokensStorage.get("accessToken");
 

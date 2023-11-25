@@ -13,7 +13,7 @@ export const sessionApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     login: build.mutation<Session, RequestLoginBody>({
       query: (body) => ({
-        url: `/login`,
+        url: `/auth/login`,
         method: "POST",
         body,
       }),
@@ -30,7 +30,23 @@ export const sessionApi = baseApi.injectEndpoints({
         return result;
       },
     }),
+    auth: build.query<Session, void>({
+      query: () => ({
+        url: `/auth/token`,
+      }),
+      transformResponse: (response: SessionDTO) => {
+        const { user, accessToken } = response;
+
+        const result = mapSession(user);
+
+        checkSession(result);
+
+        tokensStorage.add("accessToken", accessToken);
+
+        return result;
+      },
+    }),
   }),
 });
 
-export const { useLoginMutation } = sessionApi;
+export const { useLoginMutation, useAuthQuery } = sessionApi;

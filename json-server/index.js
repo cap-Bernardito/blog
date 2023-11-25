@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 // https://billyyyyy3320.com/en/2019/07/21/create-json-server-with-multiple-files/
 const jsonServer = require("json-server");
+const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 const db = require("./db.js")();
 const router = jsonServer.router(db);
@@ -11,6 +12,8 @@ dotenv.config();
 const PORT = Number(process.env.SERVER_PORT);
 
 const server = jsonServer.create();
+
+server.use(cookieParser());
 
 server.use(
   jsonServer.rewriter({
@@ -30,7 +33,7 @@ server.use(async (req, res, next) => {
 });
 
 // Эндпоинт для логина
-server.post("/login", (req, res) => {
+server.post("/auth/login", (req, res) => {
   try {
     const { username, password } = req.body;
     const { users = [] } = db;
@@ -45,10 +48,45 @@ server.post("/login", (req, res) => {
         user,
       };
 
+      res.cookie("token", user.refreshToken, { maxAge: 30 * 24 * 60 * 60, httpOnly: true });
+
       return res.json(session);
     }
 
     return res.status(403).json({ message: "User not found" });
+  } catch (e) {
+    console.log(e);
+    return res.status(500).json({ message: e.message });
+  }
+});
+
+// Эндпоинт для токена
+// TODO: добавить генерацию токенов
+server.get("/auth/token", (req, res) => {
+  try {
+    const refreshToken = req.cookies.token;
+
+    if (!refreshToken) {
+      return res.status(403).json({ message: "AUTH ERROR" });
+    }
+
+    const { users = [] } = db;
+    const userFromBd = users.find((user) => user.refreshToken === refreshToken);
+
+    if (userFromBd) {
+      const { accessToken, ...user } = userFromBd;
+
+      const session = {
+        accessToken,
+        user,
+      };
+
+      res.cookie("token", user.refreshToken, { maxAge: 30 * 24 * 60 * 60, httpOnly: true });
+
+      return res.json(session);
+    }
+
+    return res.status(403).json({ message: "AUTH ERROR" });
   } catch (e) {
     console.log(e);
     return res.status(500).json({ message: e.message });
@@ -74,7 +112,9 @@ server.get("/articles-categories", (req, res) => {
         });
       });
 
-      const sortedTabs = Object.entries(tags).sort((a, b) => b[1] - a[1]).slice(0, 10);
+      const sortedTabs = Object.entries(tags)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 10);
 
       cacheTags = Object.fromEntries(sortedTabs);
     }
@@ -89,6 +129,14 @@ server.get("/articles-categories", (req, res) => {
 // проверяем, авторизован ли пользователь
 server.use((req, res, next) => {
   if (!req.headers.authorization) {
+    return res.status(403).json({ message: "AUTH ERROR" });
+  }
+
+  const [, accessToken] = req.headers.authorization.split("Bearer").map((i) => i.trim());
+  const { users = [] } = db;
+  const userFromBd = users.find((user) => user.accessToken === accessToken);
+
+  if (!userFromBd) {
     return res.status(403).json({ message: "AUTH ERROR" });
   }
 

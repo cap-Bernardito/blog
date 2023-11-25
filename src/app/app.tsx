@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { sessionActions } from "entities/session";
+import { loginByToken } from "features/auth/token";
 
 import { AppRouter } from "./app-router";
 import { useAppDispatch } from "./app-store";
@@ -11,7 +11,7 @@ export const App = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(sessionActions.initSession());
+    dispatch(loginByToken());
   }, [dispatch]);
 
   return <AppRouter />;

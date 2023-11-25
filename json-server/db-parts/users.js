@@ -4,6 +4,7 @@ module.exports = [
     username: "admin",
     password: "123",
     accessToken: "accessToken-for-id-1",
+    refreshToken: "refreshToken-for-id-1",
     role: "ADMIN",
   },
   {
@@ -11,6 +12,7 @@ module.exports = [
     username: "user",
     password: "123",
     accessToken: "accessToken-for-id-2",
+    refreshToken: "refreshToken-for-id-2",
     role: "USER",
   },
   {
@@ -18,6 +20,7 @@ module.exports = [
     username: "user1",
     password: "123",
     accessToken: "accessToken-for-id-3",
+    refreshToken: "refreshToken-for-id-3",
     role: "USER",
   },
   {
@@ -25,6 +28,7 @@ module.exports = [
     username: "user2",
     password: "123",
     accessToken: "accessToken-for-id-4",
+    refreshToken: "refreshToken-for-id-4",
     role: "USER",
   },
   {
@@ -32,6 +36,7 @@ module.exports = [
     username: "user3",
     password: "123",
     accessToken: "accessToken-for-id-5",
+    refreshToken: "refreshToken-for-id-5",
     role: "USER",
   },
   {
@@ -39,6 +44,7 @@ module.exports = [
     username: "user4",
     password: "123",
     accessToken: "accessToken-for-id-6",
+    refreshToken: "refreshToken-for-id-6",
     role: "USER",
   },
   {
@@ -46,6 +52,7 @@ module.exports = [
     username: "user5",
     password: "123",
     accessToken: "accessToken-for-id-7",
+    refreshToken: "refreshToken-for-id-7",
     role: "USER",
   },
   {
@@ -53,6 +60,7 @@ module.exports = [
     username: "user6",
     password: "123",
     accessToken: "accessToken-for-id-8",
+    refreshToken: "refreshToken-for-id-8",
     role: "USER",
   },
   {
@@ -60,13 +68,15 @@ module.exports = [
     username: "user7",
     password: "123",
     accessToken: "accessToken-for-id-9",
+    refreshToken: "refreshToken-for-id-9",
     role: "USER",
   },
   {
     id: 10,
     username: "user8",
     password: "123",
-    accessToken: "accessToken-for-id-0",
+    accessToken: "accessToken-for-id-10",
+    refreshToken: "refreshToken-for-id-10",
     role: "USER",
   },
 ];
