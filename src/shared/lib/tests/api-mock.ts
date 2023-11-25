@@ -38,6 +38,14 @@ const handlers = [
       : res(ctx.delay(100), ctx.status(401), ctx.json({ message: "Login or password is incorrect" }));
   }),
 
+  rest.get(requestUrl("auth/me"), async (req, res, ctx) => {
+    const hasAccessToken = window.document.cookie.includes("token");
+
+    return hasAccessToken
+      ? res(ctx.delay(100), ctx.status(200), ctx.json(testUser))
+      : res(ctx.delay(100), ctx.status(401), ctx.json({ message: "AUTH ERROR" }));
+  }),
+
   rest.put(requestUrl("profiles/1"), async (req, res, ctx) => {
     const { first } = await req.json();
 

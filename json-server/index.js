@@ -41,19 +41,47 @@ server.post("/auth/login", (req, res) => {
     const userFromBd = users.find((user) => user.username === username && user.password === password);
 
     if (userFromBd) {
-      const { accessToken, ...user } = userFromBd;
+      const { accessToken, refreshToken, ...user } = userFromBd;
 
       const session = {
         accessToken,
         user,
       };
 
-      res.cookie("token", user.refreshToken, { maxAge: 30 * 24 * 60 * 60, httpOnly: true });
+      res.cookie("token", refreshToken, { maxAge: 30 * 24 * 60 * 60, httpOnly: true, path: "/auth/" });
 
       return res.json(session);
     }
 
     return res.status(403).json({ message: "User not found" });
+  } catch (e) {
+    console.log(e);
+    return res.status(500).json({ message: e.message });
+  }
+});
+
+// Эндпоинт для получения текущего пользователя
+server.get("/auth/me", (req, res) => {
+  try {
+    if (!req.headers.authorization) {
+      return res.status(403).json({ message: "AUTH ERROR" });
+    }
+
+    const [, accessToken] = req.headers.authorization.split("Bearer").map((i) => i.trim());
+    const { users = [], profiles = [] } = db;
+    const userFromBd = users.find((user) => user.accessToken === accessToken);
+
+    if (!userFromBd) {
+      return res.status(403).json({ message: "AUTH ERROR" });
+    }
+
+    const userInfo = profiles.find((user) => user.id === userFromBd.id);
+
+    if (!userInfo) {
+      return res.status(403).json({ message: "AUTH ERROR" });
+    }
+
+    return res.json(userInfo);
   } catch (e) {
     console.log(e);
     return res.status(500).json({ message: e.message });
@@ -74,14 +102,14 @@ server.get("/auth/token", (req, res) => {
     const userFromBd = users.find((user) => user.refreshToken === refreshToken);
 
     if (userFromBd) {
-      const { accessToken, ...user } = userFromBd;
+      const { accessToken, refreshToken, ...user } = userFromBd;
 
       const session = {
         accessToken,
         user,
       };
 
-      res.cookie("token", user.refreshToken, { maxAge: 30 * 24 * 60 * 60, httpOnly: true });
+      res.cookie("token", refreshToken, { maxAge: 30 * 24 * 60 * 60, httpOnly: true, path: "/auth/" });
 
       return res.json(session);
     }

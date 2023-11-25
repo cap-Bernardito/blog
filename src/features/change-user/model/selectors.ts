@@ -1,12 +1,14 @@
 import { createSelector } from "reselect";
 
-import { sessionSelectors } from "entities/session";
+import { userSelectors } from "entities/user";
 
 import { formFields } from "./form-fields";
 import { FieldsListUser, UserWithoutId } from "./types";
 
-export const selectFormFields = createSelector(sessionSelectors.selectUser, (user) => {
-  if (!user) {
+export const selectFormFields = createSelector(userSelectors.selectMe, (user) => {
+  const me = user?.data;
+
+  if (!me) {
     return { all: null, defaults: null };
   }
 
@@ -17,10 +19,10 @@ export const selectFormFields = createSelector(sessionSelectors.selectUser, (use
     fullData.push({
       ...fieldMeta,
       name: fieldName,
-      value: user[fieldName],
+      value: me[fieldName],
     });
 
-    valuesOnly.push([fieldName, user[fieldName]]);
+    valuesOnly.push([fieldName, me[fieldName]]);
   }
 
   const defaultValues: UserWithoutId = Object.fromEntries(valuesOnly);

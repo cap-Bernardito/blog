@@ -1,7 +1,5 @@
 import { CombinedState, configureStore, Reducer, ReducersMapObject } from "@reduxjs/toolkit";
 
-import { sessionMiddleware } from "entities/session";
-
 import { baseApi } from "shared/api";
 
 import { createReducerManager } from "./reducer-manager";
@@ -20,7 +18,7 @@ export const makeStore = (preloadedState?: StateSchema, asyncReducers?: AsyncRed
     reducer: reducerManager.reduce as Reducer<CombinedState<StateSchema>>,
     devTools: __IS_DEV__,
     preloadedState,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(baseApi.middleware, sessionMiddleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(baseApi.middleware),
   });
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment

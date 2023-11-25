@@ -1,10 +1,7 @@
 import { screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { mapUser } from "entities/user";
-
 import { componentRender } from "shared/lib/tests/component-render";
-import { testUser } from "shared/lib/tests/fixtures/fixtures";
 
 import { LoginForm } from "../ui/login-form/login-form";
 
@@ -87,10 +84,6 @@ describe("login", () => {
 
     await waitFor(() => {
       expect(componentRender.store?.getState().session.isAuthorized).toBe(true);
-    });
-
-    await waitFor(() => {
-      expect(componentRender.store?.getState().session.user).toEqual(mapUser(testUser));
     });
   });
 

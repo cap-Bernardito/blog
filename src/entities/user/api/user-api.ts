@@ -1,5 +1,6 @@
 import { Session } from "entities/session/@x";
 
+import { baseApi, SESSION_TAG } from "shared/api";
 import { request } from "shared/api";
 
 import { checkUser } from "../lib/check-user";
@@ -29,3 +30,23 @@ export const updateUser = async (formData: RequestUpdateUserBody, userId: Sessio
 
   return result;
 };
+
+export const userRTKApi = baseApi.injectEndpoints({
+  endpoints: (build) => ({
+    me: build.query<User, void>({
+      query: () => ({
+        url: `/auth/me`,
+      }),
+      providesTags: [SESSION_TAG],
+      transformResponse: (response: UserDTO) => {
+        const result = mapUser(response);
+
+        checkUser(result);
+
+        return result;
+      },
+    }),
+  }),
+});
+
+export const { useMeQuery } = userRTKApi;
