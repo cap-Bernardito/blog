@@ -38,6 +38,10 @@ const handlers = [
       : res(ctx.delay(100), ctx.status(401), ctx.json({ message: "Login or password is incorrect" }));
   }),
 
+  rest.get(requestUrl("auth/logout"), async (req, res, ctx) => {
+    return res(ctx.delay(100), ctx.status(200), ctx.json({ status: "OK" }));
+  }),
+
   rest.get(requestUrl("auth/me"), async (req, res, ctx) => {
     const hasAccessToken = window.document.cookie.includes("token");
 

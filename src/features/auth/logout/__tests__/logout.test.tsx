@@ -44,15 +44,19 @@ describe("logout", () => {
     });
   });
 
-  // WIP: исчинить
-  // it("should change image on placeholder after clicking", async () => {
-  //   const { user, logoutButton } = setup(true);
-  //   expect(screen.getByTestId("avatar-image")).toBeInTheDocument();
+  it("should change image on placeholder after clicking", async () => {
+    const { user, logoutButton } = setup(true);
 
-  //   await user.click(logoutButton);
+    await waitFor(() => {
+      expect(screen.getByTestId("avatar-image")).toBeInTheDocument();
 
-  //   await waitFor(() => {
-  //     expect(screen.getByTestId("avatar-placeholder")).toBeInTheDocument();
-  //   });
-  // });
+      componentRender.store?.dispatch(baseApi.util.resetApiState());
+    });
+
+    await user.click(logoutButton);
+
+    await waitFor(() => {
+      expect(screen.getByTestId("avatar-placeholder")).toBeInTheDocument();
+    });
+  });
 });

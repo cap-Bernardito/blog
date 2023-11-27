@@ -46,7 +46,12 @@ export const sessionApi = baseApi.injectEndpoints({
         return result;
       },
     }),
+    logout: build.query<Session, void>({
+      query: () => ({
+        url: `/auth/logout`,
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation, useAuthQuery } = sessionApi;
+export const { useLoginMutation, useAuthQuery, useLogoutQuery } = sessionApi;

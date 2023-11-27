@@ -60,6 +60,13 @@ server.post("/auth/login", (req, res) => {
   }
 });
 
+// Эндпоинт для logout
+server.get("/auth/logout", (req, res) => {
+  res.cookie("token", 0, { maxAge: "-1", httpOnly: true, path: "/auth/" });
+
+  return res.json({ status: "OK" });
+});
+
 // Эндпоинт для получения текущего пользователя
 server.get("/auth/me", (req, res) => {
   try {
