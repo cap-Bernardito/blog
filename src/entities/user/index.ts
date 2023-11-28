@@ -4,7 +4,6 @@ export { useMeQuery, userRTKApi } from "./api/user-api";
 export { mapUser } from "./lib/map-user";
 export * as userSelectors from "./model/selectors";
 export { fetchUserData } from "./model/services/fetch-user-data";
-export { updateUserData } from "./model/services/update-user-data";
 export { userActions, userReducer } from "./model/slice/user-slice";
 export type { UserStateSchema } from "./model/types/user";
 export { isUserForm, type User, userFormSchema } from "./model/types/user-schema";

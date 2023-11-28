@@ -1,3 +1,5 @@
+import { Session } from "entities/session/@x";
+
 import { Country, Currency } from "shared/const/common";
 
 import { User } from "../model/types/user-schema";
@@ -14,4 +16,7 @@ export type UserDTO = {
   country: Country;
 };
 
-export type RequestUpdateUserBody = User;
+export type RequestUpdateUser = {
+  formData: Omit<User, "id">;
+  userId: Session["userId"];
+};

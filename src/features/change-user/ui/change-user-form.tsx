@@ -4,9 +4,11 @@ import { useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "app/app-store";
 
 import { sessionSelectors } from "entities/session";
-import { updateUserData } from "entities/user";
+import { userRTKApi } from "entities/user";
 import { isUserForm, userFormSchema } from "entities/user";
 import { UserForm } from "entities/user-form";
+
+import { isFetchBaseQueryError } from "shared/api/is-fetch-base-query-error";
 
 import { selectFormFields } from "../model/selectors";
 
@@ -21,7 +23,24 @@ export const ChangeUserForm = () => {
         throw new Error("Невалидные данные");
       }
 
-      await dispatch(updateUserData({ formData, userId })).unwrap();
+      try {
+        await dispatch(userRTKApi.endpoints.updateMe.initiate({ formData, userId })).unwrap();
+      } catch (error) {
+        let errorMessage = "";
+
+        if (error instanceof Error) {
+          errorMessage = error.message;
+        }
+
+        if (isFetchBaseQueryError(error)) {
+          // TODO: после перехода на RTK убрать поле "message"
+          if (error.data && typeof error.data === "object" && "message" in error.data) {
+            errorMessage = error.data.message as string;
+          }
+        }
+
+        throw new Error(errorMessage);
+      }
 
       return true;
     },

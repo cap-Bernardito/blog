@@ -1,5 +1,3 @@
-import { Session } from "entities/session/@x";
-
 import { baseApi, SESSION_TAG } from "shared/api";
 import { request } from "shared/api";
 
@@ -8,7 +6,7 @@ import { mapUser } from "../lib/map-user";
 import { mapUsers } from "../lib/map-users";
 import { User } from "../model/types/user-schema";
 
-import { RequestUpdateUserBody, UserDTO } from "./types";
+import { RequestUpdateUser, UserDTO } from "./types";
 
 export const getUser = async (userId: number): Promise<User> => {
   const response = await request.get<UserDTO>(`/profiles/${userId}`);
@@ -20,15 +18,6 @@ export const getAllUsers = async (): Promise<User[]> => {
   const response = await request.get<UserDTO[]>(`/profiles`);
 
   return mapUsers(response);
-};
-
-export const updateUser = async (formData: RequestUpdateUserBody, userId: Session["userId"]): Promise<User> => {
-  const response = await request.put<UserDTO, RequestUpdateUserBody>(`/profiles/${userId}`, formData);
-  const result = mapUser(response);
-
-  checkUser(result);
-
-  return result;
 };
 
 export const userRTKApi = baseApi.injectEndpoints({
@@ -46,7 +35,22 @@ export const userRTKApi = baseApi.injectEndpoints({
         return result;
       },
     }),
+    updateMe: build.mutation<User, RequestUpdateUser>({
+      query: ({ formData, userId }) => ({
+        url: `/profiles/${userId}`,
+        method: "PUT",
+        body: formData,
+      }),
+      invalidatesTags: [SESSION_TAG],
+      transformResponse: (response: UserDTO) => {
+        const result = mapUser(response);
+
+        checkUser(result);
+
+        return result;
+      },
+    }),
   }),
 });
 
-export const { useMeQuery } = userRTKApi;
+export const { useMeQuery, useUpdateMeMutation } = userRTKApi;

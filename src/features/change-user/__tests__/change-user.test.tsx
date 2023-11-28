@@ -1,85 +1,80 @@
-// import { screen, waitFor, within } from "@testing-library/react";
-// import userEvent from "@testing-library/user-event";
+import { act, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
-// import { toSessionUserId } from "entities/session";
+import { sessionActions, toSessionUserId } from "entities/session";
+import { userRTKApi } from "entities/user";
 
-// import { baseApi } from "shared/api";
-// import { componentRender } from "shared/lib/tests/component-render";
+import { baseApi } from "shared/api";
+import { componentRender } from "shared/lib/tests/component-render";
 
-// import { ChangeUserForm } from "../ui/change-user-form";
+import { ChangeUserForm } from "../ui/change-user-form";
 
-// WIP: исчинить ChangeUserForm
 describe("change user form", () => {
-  it("stub", () => {
-    expect(true).toBe(true);
+  beforeEach(async () => {
+    const mockedWindowDocumentCookie = jest.spyOn(window.document, "cookie", "get");
+
+    mockedWindowDocumentCookie.mockReturnValue("token=atata");
+
+    componentRender(<ChangeUserForm />);
+
+    await act(async () => {
+      componentRender.store?.dispatch(baseApi.util.resetApiState());
+      componentRender.store?.dispatch(sessionActions.setAuth({ userId: toSessionUserId(1) }));
+      await componentRender.store?.dispatch(userRTKApi.endpoints.me.initiate()).unwrap();
+    });
+
+    const user = userEvent.setup();
+
+    const editButton = screen.getByRole("button", { name: "Редактировать профиль" });
+    await user.click(editButton);
   });
-  // beforeEach(async () => {
-  //   componentRender(<ChangeUserForm />, {
-  //     initialState: {
-  //       [baseApi.reducerPath]: {} as ReturnType<typeof baseApi.reducer>,
-  //       session: {
-  //         isAuthorized: true,
-  //         _isInit: true,
-  //         userId: toSessionUserId(1),
-  //         isLoading: false,
-  //       },
-  //       scrollPosition: {
-  //         scroll: {},
-  //       },
-  //     },
-  //   });
 
-  //   const user = userEvent.setup();
-  //   const editButton = screen.getByRole("button", { name: "Редактировать профиль" });
+  const setup = () => {
+    const user = userEvent.setup();
+    const userForm = within(screen.getByRole("form"));
+    const saveButton = userForm.getByRole("button", { name: "Сохранить" });
+    const input = userForm.getByLabelText("Имя");
 
-  //   await user.click(editButton);
-  // });
+    return {
+      user,
+      userForm,
+      saveButton,
+      input,
+    };
+  };
 
-  // const setup = () => {
-  //   const user = userEvent.setup();
-  //   const userForm = within(screen.getByRole("form"));
-  //   const saveButton = userForm.getByRole("button", { name: "Сохранить" });
-  //   const input = userForm.getByLabelText("Имя");
+  it("should show HTTP client error", async () => {
+    const { user, saveButton, input } = setup();
 
-  //   return {
-  //     user,
-  //     userForm,
-  //     saveButton,
-  //     input,
-  //   };
-  // };
+    await user.clear(input);
+    await user.type(input, "generate HTTPError");
 
-  // it("should show HTTP client error", async () => {
-  //   const { user, saveButton, input } = setup();
-  //   await user.clear(input);
-  //   await user.type(input, "generate HTTPError");
+    await user.click(saveButton);
 
-  //   await user.click(saveButton);
+    await waitFor(() => {
+      expect(screen.getByText("Не получается")).toBeInTheDocument();
+    });
+  });
 
-  //   await waitFor(() => {
-  //     expect(screen.getByText("Не получается")).toBeInTheDocument();
-  //   });
-  // });
+  it("should show receiving data message", async () => {
+    const { user, saveButton, input } = setup();
+    await user.clear(input);
+    await user.type(input, "Вася-modified");
 
-  // it("should show receiving data message", async () => {
-  //   const { user, saveButton, input } = setup();
-  //   await user.clear(input);
-  //   await user.type(input, "Вася-modified");
+    await user.click(saveButton);
 
-  //   await user.click(saveButton);
+    expect(screen.getByText("Обновление данных")).toBeInTheDocument();
+  });
 
-  //   expect(screen.getByText("Обновление данных")).toBeInTheDocument();
-  // });
+  it("should show success message when data was modified", async () => {
+    const { user, saveButton, input } = setup();
+    await user.clear(input);
+    await user.type(input, "Вася-modified");
 
-  // it("should show success message when data was modified", async () => {
-  //   const { user, saveButton, input } = setup();
-  //   await user.clear(input);
-  //   await user.type(input, "Вася-modified");
+    await user.click(saveButton);
 
-  //   await user.click(saveButton);
-
-  //   await waitFor(() => {
-  //     expect(screen.getByText("Данные обновлены")).toBeInTheDocument();
-  //   });
-  // });
+    await waitFor(() => {
+      expect(screen.getByText("Данные обновлены")).toBeInTheDocument();
+    });
+  });
 });

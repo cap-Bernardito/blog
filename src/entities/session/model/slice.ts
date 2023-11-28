@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// import { updateUserData, User } from "entities/user/@x";
 import { SessionStateSchema } from "./types/session";
 import { Session } from "./types/session-schema";
 
@@ -29,12 +28,6 @@ export const sessionSlice = createSlice<
       state.userId = undefined;
       state.isAuthorized = false;
     },
-  },
-  extraReducers: () => {
-    // WIP: исчинить updateUserData
-    // builder.addCase(updateUserData.fulfilled, (state, action: PayloadAction<User>) => {
-    //   state.user = action.payload;
-    // });
   },
 });
 
