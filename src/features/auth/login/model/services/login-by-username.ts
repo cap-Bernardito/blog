@@ -4,7 +4,7 @@ import { ThunkConfig } from "app/app-store";
 
 import { type RequestLoginBody, type Session, sessionActions, sessionApi } from "entities/session";
 
-import { isFetchBaseQueryError } from "shared/api/is-fetch-base-query-error";
+import { getApiErrorMessage } from "shared/api/get-api-error-message";
 import { USER_LOCALSTORAGE_KEY } from "shared/const/localstorage";
 import { SyncStorage } from "shared/lib/sync-storage";
 
@@ -25,21 +25,7 @@ export const loginByUsername = createAsyncThunk<Session, RequestLoginBody, Thunk
 
       return response;
     } catch (error) {
-      // TODO: сделать обработку ошибок, когда API устаканится
-      let errorMessage = "";
-
-      if (error instanceof Error) {
-        errorMessage = error.message;
-      }
-
-      if (isFetchBaseQueryError(error)) {
-        // TODO: после перехода на RTK убрать поле "message"
-        if (error.data && typeof error.data === "object" && "message" in error.data) {
-          errorMessage = error.data.message as string;
-        }
-      }
-
-      return thunkAPI.rejectWithValue(errorMessage);
+      return thunkAPI.rejectWithValue(getApiErrorMessage(error));
     }
   },
 );

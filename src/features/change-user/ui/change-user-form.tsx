@@ -8,7 +8,7 @@ import { userRTKApi } from "entities/user";
 import { isUserForm, userFormSchema } from "entities/user";
 import { UserForm } from "entities/user-form";
 
-import { isFetchBaseQueryError } from "shared/api/is-fetch-base-query-error";
+import { getApiErrorMessage } from "shared/api/get-api-error-message";
 
 import { selectFormFields } from "../model/selectors";
 
@@ -26,20 +26,7 @@ export const ChangeUserForm = () => {
       try {
         await dispatch(userRTKApi.endpoints.updateMe.initiate({ formData, userId })).unwrap();
       } catch (error) {
-        let errorMessage = "";
-
-        if (error instanceof Error) {
-          errorMessage = error.message;
-        }
-
-        if (isFetchBaseQueryError(error)) {
-          // TODO: после перехода на RTK убрать поле "message"
-          if (error.data && typeof error.data === "object" && "message" in error.data) {
-            errorMessage = error.data.message as string;
-          }
-        }
-
-        throw new Error(errorMessage);
+        throw new Error(getApiErrorMessage(error));
       }
 
       return true;
