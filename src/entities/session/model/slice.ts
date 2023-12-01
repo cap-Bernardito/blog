@@ -27,6 +27,7 @@ export const sessionSlice = createSlice<
     clearSession: (state) => {
       state.userId = undefined;
       state.isAuthorized = false;
+      state._isInit = true;
     },
   },
 });
