@@ -71,7 +71,7 @@ server.get("/auth/logout", (req, res) => {
 server.get("/auth/me", (req, res) => {
   try {
     if (!req.headers.authorization) {
-      return res.status(403).json({ message: "AUTH ERROR" });
+      return res.status(401).json({ message: "AUTH ERROR" });
     }
 
     const [, accessToken] = req.headers.authorization.split("Bearer").map((i) => i.trim());
@@ -79,13 +79,13 @@ server.get("/auth/me", (req, res) => {
     const userFromBd = users.find((user) => user.accessToken === accessToken);
 
     if (!userFromBd) {
-      return res.status(403).json({ message: "AUTH ERROR" });
+      return res.status(401).json({ message: "AUTH ERROR" });
     }
 
     const userInfo = profiles.find((user) => user.id === userFromBd.id);
 
     if (!userInfo) {
-      return res.status(403).json({ message: "AUTH ERROR" });
+      return res.status(401).json({ message: "AUTH ERROR" });
     }
 
     return res.json(userInfo);
@@ -102,7 +102,7 @@ server.get("/auth/token", (req, res) => {
     const refreshToken = req.cookies.token;
 
     if (!refreshToken) {
-      return res.status(403).json({ message: "AUTH ERROR" });
+      return res.status(401).json({ message: "AUTH ERROR" });
     }
 
     const { users = [] } = db;
@@ -121,7 +121,7 @@ server.get("/auth/token", (req, res) => {
       return res.json(session);
     }
 
-    return res.status(403).json({ message: "AUTH ERROR" });
+    return res.status(401).json({ message: "AUTH ERROR" });
   } catch (e) {
     console.log(e);
     return res.status(500).json({ message: e.message });
@@ -164,7 +164,7 @@ server.get("/articles-categories", (req, res) => {
 // проверяем, авторизован ли пользователь
 server.use((req, res, next) => {
   if (!req.headers.authorization) {
-    return res.status(403).json({ message: "AUTH ERROR" });
+    return res.status(401).json({ message: "AUTH ERROR" });
   }
 
   const [, accessToken] = req.headers.authorization.split("Bearer").map((i) => i.trim());
@@ -172,7 +172,7 @@ server.use((req, res, next) => {
   const userFromBd = users.find((user) => user.accessToken === accessToken);
 
   if (!userFromBd) {
-    return res.status(403).json({ message: "AUTH ERROR" });
+    return res.status(401).json({ message: "AUTH ERROR" });
   }
 
   next();
