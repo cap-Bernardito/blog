@@ -1,5 +1,7 @@
 import { CombinedState, configureStore, Reducer, ReducersMapObject } from "@reduxjs/toolkit";
 
+import { invalidateAccessTokenListener } from "features/auth/invalidate-access-token";
+
 import { baseApi } from "shared/api";
 
 import { createReducerManager } from "./reducer-manager";
@@ -18,7 +20,8 @@ export const makeStore = (preloadedState?: StateSchema, asyncReducers?: AsyncRed
     reducer: reducerManager.reduce as Reducer<CombinedState<StateSchema>>,
     devTools: __IS_DEV__,
     preloadedState,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(baseApi.middleware),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(baseApi.middleware, invalidateAccessTokenListener.middleware),
   });
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
