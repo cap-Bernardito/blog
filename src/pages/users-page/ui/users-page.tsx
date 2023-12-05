@@ -1,44 +1,18 @@
-import { useEffect } from "react";
+import { userApi, UserCard } from "entities/user";
 
-import { AsyncReducersList, useAppDispatch, useAppSelector } from "app/app-store";
-
-import { UserCard } from "entities/user";
-
-import { useAsyncReducerLoader } from "shared/lib/use-async-reducer-loader";
 import { Loader } from "shared/ui/loader/loader";
-
-import { allUsersReducer } from "../model/slice/all-users-slice";
-import { allUsersSelectors, fetchAllUsers } from "..";
 
 import css from "./user-page.module.scss";
 
-const asyncAllUsersReducer: AsyncReducersList = { allUsers: allUsersReducer };
-
 export const UsersPage = () => {
-  const dispatch = useAppDispatch();
-  const users = useAppSelector(allUsersSelectors.selectData);
-  const error = useAppSelector(allUsersSelectors.selectError);
-  const isLoading = useAppSelector(allUsersSelectors.selectIsLoading);
+  const { data: users, isLoading, isSuccess, isError, error } = userApi.useAllUsersQuery();
 
-  useAsyncReducerLoader(asyncAllUsersReducer, true);
-
-  useEffect(() => {
-    const promise = dispatch(fetchAllUsers());
-
-    return () => promise.abort();
-  }, [dispatch]);
-
-  if (error) {
-    return <div>{error}</div>;
-  }
+  let userList;
 
   if (isLoading) {
-    return <Loader />;
-  }
-
-  const userList =
-    users &&
-    users.map((user) => (
+    userList = <Loader />;
+  } else if (isSuccess) {
+    userList = users.map((user) => (
       <UserCard
         key={user.id}
         avatar={user.avatar}
@@ -49,6 +23,9 @@ export const UsersPage = () => {
         className={css.userlist__item}
       />
     ));
+  } else if (isError) {
+    userList = <div>{error.toString()}</div>;
+  }
 
   return (
     <article>

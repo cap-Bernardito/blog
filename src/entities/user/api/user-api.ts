@@ -14,12 +14,6 @@ export const getUser = async (userId: number): Promise<User> => {
   return mapUser(response);
 };
 
-export const getAllUsers = async (): Promise<User[]> => {
-  const response = await request.get<UserDTO[]>(`/profiles`);
-
-  return mapUsers(response);
-};
-
 export const userRTKApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     me: build.query<User, void>({
@@ -50,7 +44,13 @@ export const userRTKApi = baseApi.injectEndpoints({
         return result;
       },
     }),
+    allUsers: build.query<User[], void>({
+      query: () => ({
+        url: `/profiles`,
+      }),
+      transformResponse: (response: UserDTO[]) => mapUsers(response),
+    }),
   }),
 });
 
-export const { useMeQuery, useUpdateMeMutation } = userRTKApi;
+export const { useMeQuery, useUpdateMeMutation, useAllUsersQuery } = userRTKApi;
