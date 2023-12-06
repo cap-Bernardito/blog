@@ -5,7 +5,6 @@ import { ArticleCommentsStateSchema } from "entities/article-comments";
 import { ArticlesListStateSchema } from "entities/articles-list";
 import { ScrollPositionStateSchema } from "entities/scroll-position";
 import type { SessionStateSchema } from "entities/session";
-import type { UserStateSchema } from "entities/user";
 
 import { baseApi } from "shared/api";
 
@@ -31,7 +30,6 @@ export type AsyncStateSchema = {
   articles?: ArticlesListStateSchema;
   article?: ArticleStateSchema;
   articleComments?: ArticleCommentsStateSchema;
-  user?: UserStateSchema;
 };
 
 export type AsyncReducersList = {

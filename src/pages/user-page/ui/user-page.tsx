@@ -1,35 +1,19 @@
 import plural from "plural-ru";
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import { AsyncReducersList, useAppDispatch, useAppSelector } from "app/app-store";
+import { userApi } from "entities/user";
 
-import { fetchUserData, userReducer, userSelectors } from "entities/user";
-
-import { useAsyncReducerLoader } from "shared/lib/use-async-reducer-loader";
 import { Avatar } from "shared/ui/avatar";
 import { Skeleton } from "shared/ui/skeleton";
 
 import css from "./user-page.module.scss";
 
-const asyncUserReducer: AsyncReducersList = { user: userReducer };
-
 export const UserPage = () => {
   const { id } = useParams();
-  const dispatch = useAppDispatch();
-  const user = useAppSelector(userSelectors.selectData);
-  const error = useAppSelector(userSelectors.selectError);
+  const { data: user, isError, error } = userApi.useGetUserQuery(id);
 
-  useAsyncReducerLoader(asyncUserReducer, true);
-
-  useEffect(() => {
-    const promise = dispatch(fetchUserData(Number(id)));
-
-    return () => promise.abort();
-  }, [dispatch, id]);
-
-  if (error) {
-    return <div>{error}</div>;
+  if (isError) {
+    return <div>{error.toString()}</div>;
   }
 
   return (

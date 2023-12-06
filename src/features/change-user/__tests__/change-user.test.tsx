@@ -63,7 +63,9 @@ describe("change user form", () => {
 
     await user.click(saveButton);
 
-    expect(screen.getByText("Обновление данных")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText("Обновление данных")).toBeInTheDocument();
+    });
   });
 
   it("should show success message when data was modified", async () => {
