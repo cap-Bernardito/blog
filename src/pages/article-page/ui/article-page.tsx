@@ -17,12 +17,11 @@ import {
   articleSelectors,
   fetchArticleData,
 } from "entities/article";
-import { articleCommentsReducer } from "entities/article-comments";
 import { useScrollPosition } from "entities/scroll-position";
 
 import { useAsyncReducerLoader } from "shared/lib/use-async-reducer-loader";
 
-const asyncArticleReducer: AsyncReducersList = { article: articleReducer, articleComments: articleCommentsReducer };
+const asyncArticleReducer: AsyncReducersList = { article: articleReducer };
 
 export const ArticlePage = () => {
   const { id } = useParams<Article["id"]>();

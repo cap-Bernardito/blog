@@ -1,7 +1,6 @@
 import { Reducer } from "@reduxjs/toolkit";
 
 import type { ArticleStateSchema } from "entities/article";
-import { ArticleCommentsStateSchema } from "entities/article-comments";
 import { ArticlesListStateSchema } from "entities/articles-list";
 import { ScrollPositionStateSchema } from "entities/scroll-position";
 import type { SessionStateSchema } from "entities/session";
@@ -29,7 +28,6 @@ export type StaticReducers<T> = {
 export type AsyncStateSchema = {
   articles?: ArticlesListStateSchema;
   article?: ArticleStateSchema;
-  articleComments?: ArticleCommentsStateSchema;
 };
 
 export type AsyncReducersList = {
