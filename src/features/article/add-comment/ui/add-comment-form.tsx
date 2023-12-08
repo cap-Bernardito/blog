@@ -3,9 +3,11 @@ import { useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "app/app-store";
 
 import { articleSelectors } from "entities/article";
-import { addCommentThunk } from "entities/article-comments";
+import { articleCommentsRTKApi } from "entities/article-comments";
 import { type MessageField, MessageForm } from "entities/message-form/";
 import { sessionSelectors } from "entities/session";
+
+import { getApiErrorMessage } from "shared/api/get-api-error-message";
 
 export const AddCommentForm = () => {
   const userId = useAppSelector(sessionSelectors.selectUserId);
@@ -18,16 +20,18 @@ export const AddCommentForm = () => {
         throw new Error("Невалидные данные");
       }
 
-      await dispatch(
-        addCommentThunk({
-          formData: {
+      try {
+        await dispatch(
+          articleCommentsRTKApi.endpoints.addArticleComment.initiate({
             articleId,
             userId,
             profileId: userId,
             text: formData.message,
-          },
-        }),
-      ).unwrap();
+          }),
+        ).unwrap();
+      } catch (error) {
+        throw new Error(getApiErrorMessage(error));
+      }
 
       return true;
     },

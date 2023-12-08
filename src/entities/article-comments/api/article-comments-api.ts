@@ -2,7 +2,7 @@ import { EntityState } from "@reduxjs/toolkit";
 
 import { Article } from "entities/article/@x/article";
 
-import { baseApi, request } from "shared/api";
+import { ARTICLE_COMMENTS, baseApi } from "shared/api";
 
 import { mapArticleComments } from "../lib/map-article-comments";
 import { articleCommentsAdapter, articleCommentsInitialState } from "../model/slice/article-comments-slice";
@@ -20,27 +20,19 @@ export const articleCommentsRTKApi = baseApi.injectEndpoints({
           _expand: "profile",
         },
       }),
+      providesTags: [ARTICLE_COMMENTS],
       transformResponse: (response: ArticleCommentDTO[]) =>
         articleCommentsAdapter.setAll(articleCommentsInitialState, mapArticleComments(response)),
     }),
+    addArticleComment: build.mutation<ArticleComment, RequestAddCommentData>({
+      query: (formData) => ({
+        url: `/comments`,
+        method: "POST",
+        body: formData,
+      }),
+      invalidatesTags: [ARTICLE_COMMENTS],
+    }),
   }),
 });
-
-export const getArticleComments = async (articleId: Article["id"]): Promise<ArticleComment[]> => {
-  const response = await request.get<ArticleCommentDTO[]>("/comments", {
-    params: {
-      articleId,
-      _expand: "profile",
-    },
-  });
-
-  return mapArticleComments(response);
-};
-
-export const addArticleComment = async (comment: RequestAddCommentData): Promise<ArticleComment> => {
-  const response = await request.post<ArticleComment, RequestAddCommentData>("/comments", comment);
-
-  return response;
-};
 
 export const { useAllArticleCommentsQuery } = articleCommentsRTKApi;
