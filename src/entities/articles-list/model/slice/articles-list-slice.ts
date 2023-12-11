@@ -130,15 +130,12 @@ export const articlesListSlice = createSlice({
       .addMatcher(articlesRTKApi.endpoints.getArticles.matchRejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message;
+      })
+
+      // Categories
+      .addMatcher(articlesRTKApi.endpoints.getCategories.matchFulfilled, (state, action) => {
+        state.categories = action.payload;
       });
-    // TODO: Сделать категории
-    // Categories
-    // .addCase(
-    //   fetchArticlesCategories.fulfilled,
-    //   (state, action: PayloadAction<ArticlesListStateSchema["categories"]>) => {
-    //     state.categories = action.payload;
-    //   },
-    // );
   },
 });
 
