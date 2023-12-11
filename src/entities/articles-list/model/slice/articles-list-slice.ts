@@ -2,7 +2,7 @@ import { createEntityAdapter, createSlice, PayloadAction } from "@reduxjs/toolki
 
 import { RootState } from "app/app-store";
 
-import { Article, articlesRTKApi } from "entities/article/@x/article";
+import { Article } from "entities/article/@x/article";
 
 import {
   ARTICLES_SORT_ORDER_LOCALSTORAGE_KEY,
@@ -12,6 +12,7 @@ import {
 } from "shared/const/localstorage";
 import { SyncStorage } from "shared/lib/sync-storage";
 
+import { articlesRTKApi } from "../../api/articles-api";
 import { ArticlesListStateSchema } from "../types/articles-list";
 
 const storage = new SyncStorage().create("local");

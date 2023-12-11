@@ -2,10 +2,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { ThunkConfig } from "app/app-store";
 
-import { articlesRTKApi } from "entities/article/@x/article";
-
 import { addQueryParams } from "shared/lib/add-query-params";
 
+import { articlesRTKApi } from "../../api/articles-api";
 import { selectLimit, selectPage, selectSearch, selectSortOrder, selectSortType, selectType } from "../selectors";
 
 export const fetchArticlesList = createAsyncThunk<void, { replace?: boolean }, ThunkConfig<string>>(
