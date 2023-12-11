@@ -2,13 +2,13 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { ThunkConfig } from "app/app-store";
 
-import { Article, getArticles } from "entities/article/@x/article";
+import { articlesRTKApi } from "entities/article/@x/article";
 
 import { addQueryParams } from "shared/lib/add-query-params";
 
 import { selectLimit, selectPage, selectSearch, selectSortOrder, selectSortType, selectType } from "../selectors";
 
-export const fetchArticlesList = createAsyncThunk<Article[], { replace?: boolean }, ThunkConfig<string>>(
+export const fetchArticlesList = createAsyncThunk<void, { replace?: boolean }, ThunkConfig<string>>(
   "article/fetchArticles",
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async ({ replace = false }, thunkApi) => {
@@ -26,22 +26,11 @@ export const fetchArticlesList = createAsyncThunk<Article[], { replace?: boolean
       ["type", type],
     ]);
 
-    try {
-      const response = await getArticles({ page, limit, sortOrder, sortType, search, type });
-
-      if (!response) {
-        throw new Error("No data");
-      }
-
-      return response;
-    } catch (error) {
-      let errorMessage = "";
-
-      if (error instanceof Error) {
-        errorMessage = error.message;
-      }
-
-      return thunkApi.rejectWithValue(errorMessage);
-    }
+    thunkApi.dispatch(
+      articlesRTKApi.endpoints.getArticles.initiate({
+        requestParams: { page, limit, sortOrder, sortType, search, type },
+        replace,
+      }),
+    );
   },
 );

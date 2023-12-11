@@ -2,7 +2,7 @@ import { createEntityAdapter, createSlice, PayloadAction } from "@reduxjs/toolki
 
 import { RootState } from "app/app-store";
 
-import { Article } from "entities/article/@x/article";
+import { Article, articlesRTKApi } from "entities/article/@x/article";
 
 import {
   ARTICLES_SORT_ORDER_LOCALSTORAGE_KEY,
@@ -12,8 +12,6 @@ import {
 } from "shared/const/localstorage";
 import { SyncStorage } from "shared/lib/sync-storage";
 
-import { fetchArticlesCategories } from "../services/fetch-articles-categories";
-import { fetchArticlesList } from "../services/fetch-articles-list-data";
 import { ArticlesListStateSchema } from "../types/articles-list";
 
 const storage = new SyncStorage().create("local");
@@ -49,7 +47,7 @@ const getInitialSort = () => {
 };
 
 const articlesListAdapter = createEntityAdapter<Article>({
-  selectId: (comment) => comment.id,
+  selectId: (article) => article.id,
 });
 
 const initialState = articlesListAdapter.getInitialState<ArticlesListStateSchema>({
@@ -109,40 +107,37 @@ export const articlesListSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchArticlesList.pending, (state, action) => {
+      .addMatcher(articlesRTKApi.endpoints.getArticles.matchPending, (state, action) => {
         state.error = undefined;
         state.isLoading = true;
 
-        if (action.meta.arg.replace) {
+        if (action.meta.arg.originalArgs.replace) {
           articlesListAdapter.removeAll(state);
         }
       })
-      .addCase(
-        fetchArticlesList.fulfilled,
-        (state, action: PayloadAction<Article[], string, { arg: { replace?: boolean } }>) => {
-          state.isLoading = false;
-          state._isInit = true;
-          state.hasMore = action.payload.length === state.limit;
-
-          if (action.meta.arg.replace) {
-            articlesListAdapter.setAll(state, action.payload);
-          } else {
-            articlesListAdapter.addMany(state, action.payload);
-          }
-        },
-      )
-      .addCase(fetchArticlesList.rejected, (state, action) => {
+      .addMatcher(articlesRTKApi.endpoints.getArticles.matchFulfilled, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload;
-      })
+        state._isInit = true;
+        state.hasMore = action.payload.length === state.limit;
 
-      // Categories
-      .addCase(
-        fetchArticlesCategories.fulfilled,
-        (state, action: PayloadAction<ArticlesListStateSchema["categories"]>) => {
-          state.categories = action.payload;
-        },
-      );
+        if (action.meta.arg.originalArgs.replace) {
+          articlesListAdapter.setAll(state, action.payload);
+        } else {
+          articlesListAdapter.addMany(state, action.payload);
+        }
+      })
+      .addMatcher(articlesRTKApi.endpoints.getArticles.matchRejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      });
+    // TODO: Сделать категории
+    // Categories
+    // .addCase(
+    //   fetchArticlesCategories.fulfilled,
+    //   (state, action: PayloadAction<ArticlesListStateSchema["categories"]>) => {
+    //     state.categories = action.payload;
+    //   },
+    // );
   },
 });
 

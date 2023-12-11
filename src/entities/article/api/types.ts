@@ -22,3 +22,8 @@ export type ArticlesRequestParams = {
   limit?: number;
   type?: string;
 };
+
+export type ArticlesRTKRequestParams = {
+  requestParams: ArticlesRequestParams;
+  replace?: boolean;
+};
