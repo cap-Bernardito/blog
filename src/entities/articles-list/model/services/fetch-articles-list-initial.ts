@@ -9,7 +9,7 @@ import { fetchArticlesCategories } from "./fetch-articles-categories";
 import { fetchArticlesList } from "./fetch-articles-list-data";
 
 export const fetchArticlesListInitial = createAsyncThunk<void, void, ThunkConfig<string>>(
-  "article/fetchArticlesInitial",
+  "articlesList/fetchArticlesInitial",
   async (_, thunkApi) => {
     const articlesIsInit = selectIsInit(thunkApi.getState());
 

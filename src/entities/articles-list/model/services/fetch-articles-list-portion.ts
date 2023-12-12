@@ -8,7 +8,7 @@ import { articlesActions } from "../slice/articles-list-slice";
 import { fetchArticlesList } from "./fetch-articles-list-data";
 
 export const fetchArticlesListPortion = createAsyncThunk<void, void, ThunkConfig<string>>(
-  "article/fetchArticlesPortion",
+  "articlesList/fetchArticlesPortion",
   async (_, thunkApi) => {
     const page = selectPage(thunkApi.getState());
     const hasMore = selectHasMore(thunkApi.getState());

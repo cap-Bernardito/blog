@@ -12,7 +12,8 @@ import {
 } from "shared/const/localstorage";
 import { SyncStorage } from "shared/lib/sync-storage";
 
-import { articlesRTKApi } from "../../api/articles-api";
+import { fetchArticlesCategories } from "../services/fetch-articles-categories";
+import { fetchArticlesList } from "../services/fetch-articles-list-data";
 import { ArticlesListStateSchema } from "../types/articles-list";
 
 const storage = new SyncStorage().create("local");
@@ -108,34 +109,40 @@ export const articlesListSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addMatcher(articlesRTKApi.endpoints.getArticles.matchPending, (state, action) => {
+      .addCase(fetchArticlesList.pending, (state, action) => {
         state.error = undefined;
         state.isLoading = true;
 
-        if (action.meta.arg.originalArgs.replace) {
+        if (action.meta.arg.replace) {
           articlesListAdapter.removeAll(state);
         }
       })
-      .addMatcher(articlesRTKApi.endpoints.getArticles.matchFulfilled, (state, action) => {
-        state.isLoading = false;
-        state._isInit = true;
-        state.hasMore = action.payload.length === state.limit;
+      .addCase(
+        fetchArticlesList.fulfilled,
+        (state, action: PayloadAction<Article[], string, { arg: { replace?: boolean } }>) => {
+          state.isLoading = false;
+          state._isInit = true;
+          state.hasMore = action.payload.length === state.limit;
 
-        if (action.meta.arg.originalArgs.replace) {
-          articlesListAdapter.setAll(state, action.payload);
-        } else {
-          articlesListAdapter.addMany(state, action.payload);
-        }
-      })
-      .addMatcher(articlesRTKApi.endpoints.getArticles.matchRejected, (state, action) => {
+          if (action.meta.arg.replace) {
+            articlesListAdapter.setAll(state, action.payload);
+          } else {
+            articlesListAdapter.addMany(state, action.payload);
+          }
+        },
+      )
+      .addCase(fetchArticlesList.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.error.message;
+        state.error = action.payload;
       })
 
       // Categories
-      .addMatcher(articlesRTKApi.endpoints.getCategories.matchFulfilled, (state, action) => {
-        state.categories = action.payload;
-      });
+      .addCase(
+        fetchArticlesCategories.fulfilled,
+        (state, action: PayloadAction<ArticlesListStateSchema["categories"]>) => {
+          state.categories = action.payload;
+        },
+      );
   },
 });
 
