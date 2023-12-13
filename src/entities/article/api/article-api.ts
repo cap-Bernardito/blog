@@ -1,21 +1,28 @@
 import { ArticlesRequestParams, mapArticles } from "entities/articles-list/@x";
 
-import { request } from "shared/api";
+import { ARTICLE, baseApi, request } from "shared/api";
 
 import { mapArticle } from "../lib/map-article";
 import { Article } from "../model/types/article";
 
 import { type ArticleDTO } from "./types";
 
-export const getArticle = async (articleId: Article["id"]): Promise<Article> => {
-  const response = await request.get<ArticleDTO>(`/articles/${articleId}`, {
-    params: {
-      _expand: "profile",
-    },
-  });
-
-  return mapArticle(response);
-};
+export const articleRTKApi = baseApi.injectEndpoints({
+  endpoints: (build) => ({
+    getArticle: build.query<Article, Article["id"] | undefined>({
+      query: (articleId) => {
+        return {
+          url: `/articles/${articleId}`,
+          params: {
+            _expand: "profile",
+          },
+        };
+      },
+      providesTags: [ARTICLE],
+      transformResponse: (response: ArticleDTO) => mapArticle(response),
+    }),
+  }),
+});
 
 export const getArticlesRecommendations = async (
   props: Pick<ArticlesRequestParams, "limit" | "type"> & { id: string },

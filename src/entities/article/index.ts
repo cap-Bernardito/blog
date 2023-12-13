@@ -1,5 +1,5 @@
+export { articleRTKApi } from "./api/article-api";
 export * as articleSelectors from "./model/selectors";
-export { fetchArticleData } from "./model/services/fetch-article-data";
 export { fetchArticlesRecommendations } from "./model/services/fetch-articles-recommendations";
 export { articleReducer } from "./model/slice/article-slice";
 export type { ArticleStateSchema } from "./model/types/article";

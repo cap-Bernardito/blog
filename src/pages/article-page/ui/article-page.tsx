@@ -1,7 +1,6 @@
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import { AsyncReducersList, useAppDispatch, useAppSelector } from "app/app-store";
+import { AsyncReducersList } from "app/app-store";
 
 import { ArticleCommentsList } from "widgets/article-comments-list";
 import { ArticleRecommendations } from "widgets/article-recommendations";
@@ -14,33 +13,24 @@ import {
   ArticleFooter,
   ArticleHeader,
   articleReducer,
-  articleSelectors,
-  fetchArticleData,
+  articleRTKApi,
 } from "entities/article";
 import { useScrollPosition } from "entities/scroll-position";
 
 import { useAsyncReducerLoader } from "shared/lib/use-async-reducer-loader";
 
+// TODO: Удалить reducer вместе с рекомендациями
 const asyncArticleReducer: AsyncReducersList = { article: articleReducer };
 
 export const ArticlePage = () => {
   const { id } = useParams<Article["id"]>();
-
-  const dispatch = useAppDispatch();
-  const articleData = useAppSelector(articleSelectors.selectArticleData);
-  const articleError = useAppSelector(articleSelectors.selectArticleError);
+  const { data: articleData, isError, error: articleError } = articleRTKApi.useGetArticleQuery(id);
 
   useAsyncReducerLoader(asyncArticleReducer, true);
   useScrollPosition(false, "top");
 
-  useEffect(() => {
-    if (id) {
-      dispatch(fetchArticleData(id));
-    }
-  }, [dispatch, id]);
-
-  if (articleError) {
-    return <div>{articleError}</div>;
+  if (isError) {
+    return <div>{articleError.toString()}</div>;
   }
 
   const { title, createdAt, views, img, body, type, id: articleId } = articleData || {};
