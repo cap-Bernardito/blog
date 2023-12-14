@@ -30,10 +30,3 @@ export type Article = {
   type: string[];
   body: ArticleBodyElement[];
 };
-
-export type ArticleStateSchema = {
-  data?: Article;
-  recommendations?: Article[];
-  isLoading: boolean;
-  error?: string;
-};

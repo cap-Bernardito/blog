@@ -4,9 +4,7 @@ import Swiper from "swiper";
 import { register } from "swiper/element/bundle";
 import type { SwiperProps, SwiperSlideProps } from "swiper/react";
 
-import { useAppDispatch, useAppSelector } from "app/app-store";
-
-import { Article, ArticleCardVertical, articleSelectors, fetchArticlesRecommendations } from "entities/article";
+import { Article, ArticleCardVertical, articleRTKApi } from "entities/article";
 
 import css from "./article-recommendations.module.scss";
 
@@ -31,14 +29,9 @@ type ArticleRecommendationsProps = {
 };
 
 export const ArticleRecommendations: React.FC<ArticleRecommendationsProps> = ({ className, type, id }) => {
-  const recommendations = useAppSelector(articleSelectors.selectRecommendations);
-  const dispatch = useAppDispatch();
+  const { data: recommendations, isSuccess } = articleRTKApi.useGetArticlesRecommendationsQuery({ type, id });
   const swiperElRef = useRef<SwiperRef>(null);
   const [swiper, setSwiper] = useState<Swiper>();
-
-  useEffect(() => {
-    dispatch(fetchArticlesRecommendations({ limit: 8, type, id }));
-  }, [dispatch, type, id]);
 
   useEffect(() => {
     if (!swiperElRef.current || !recommendations) {
@@ -88,7 +81,8 @@ export const ArticleRecommendations: React.FC<ArticleRecommendationsProps> = ({ 
   }, [swiperElRef.current, recommendations]);
 
   return (
-    recommendations && (
+    isSuccess &&
+    recommendations?.length > 0 && (
       <section className={cn(css.root, className)}>
         <h2 className={css.title}>Рекомендуем:</h2>
         <swiper-container ref={swiperElRef} init={false}>

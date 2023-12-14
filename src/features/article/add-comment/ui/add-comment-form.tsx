@@ -1,8 +1,9 @@
 import { useCallback } from "react";
+import { useParams } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "app/app-store";
 
-import { articleSelectors } from "entities/article";
+import { Article } from "entities/article";
 import { articleCommentsRTKApi } from "entities/article-comments";
 import { type MessageField, MessageForm } from "entities/message-form/";
 import { sessionSelectors } from "entities/session";
@@ -10,8 +11,8 @@ import { sessionSelectors } from "entities/session";
 import { getApiErrorMessage } from "shared/api/get-api-error-message";
 
 export const AddCommentForm = () => {
+  const { id: articleId } = useParams<Article["id"]>();
   const userId = useAppSelector(sessionSelectors.selectUserId);
-  const articleId = useAppSelector(articleSelectors.selectArticleId);
   const dispatch = useAppDispatch();
 
   const handleSummit = useCallback(

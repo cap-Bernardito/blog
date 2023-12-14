@@ -1,6 +1,6 @@
 import { ArticlesRequestParams, mapArticles } from "entities/articles-list/@x";
 
-import { ARTICLE, baseApi, request } from "shared/api";
+import { ARTICLE, baseApi } from "shared/api";
 
 import { mapArticle } from "../lib/map-article";
 import { Article } from "../model/types/article";
@@ -21,22 +21,19 @@ export const articleRTKApi = baseApi.injectEndpoints({
       providesTags: [ARTICLE],
       transformResponse: (response: ArticleDTO) => mapArticle(response),
     }),
+    getArticlesRecommendations: build.query<Article[], Pick<ArticlesRequestParams, "limit" | "type"> & { id: string }>({
+      query: ({ limit, type, id }) => {
+        return {
+          url: "/articles",
+          params: {
+            _limit: limit ?? 8,
+            _expand: "profile",
+            id_ne: id,
+            type_like: type || "",
+          },
+        };
+      },
+      transformResponse: (response: ArticleDTO[]) => mapArticles(response),
+    }),
   }),
 });
-
-export const getArticlesRecommendations = async (
-  props: Pick<ArticlesRequestParams, "limit" | "type"> & { id: string },
-): Promise<Article[]> => {
-  const { limit, type, id } = props;
-
-  const response = await request.get<ArticleDTO[]>(`/articles`, {
-    params: {
-      _limit: limit || 8,
-      _expand: "profile",
-      id_ne: id,
-      type_like: type,
-    },
-  });
-
-  return mapArticles(response);
-};
