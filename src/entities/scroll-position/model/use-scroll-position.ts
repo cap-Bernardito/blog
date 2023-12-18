@@ -1,15 +1,17 @@
 import { useEffect, useLayoutEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-import { useAppDispatch, useAppSelector } from "app/app-store";
+// eslint-disable-next-line @conarti/feature-sliced/layers-slices
+import { useAppDispatch, useAppSelector } from "app/app-store/store-hooks";
 
-import { scrollPositionActions, scrollPositionSelectors } from "..";
+import { scrollPositionActions } from "./slice/scroll-position-slice";
+import { selectScrollPosition } from "./selectors";
 
 export const useScrollPosition = (scrollOff = false, position?: "top") => {
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
 
-  const scrollPosition = useAppSelector(scrollPositionSelectors.selectScrollPosition(pathname));
+  const scrollPosition = useAppSelector(selectScrollPosition(pathname));
 
   useLayoutEffect(() => {
     return () => {

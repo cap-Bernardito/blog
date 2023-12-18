@@ -1,5 +1,6 @@
 import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 import StatoscopeWebpackPlugin from "@statoscope/webpack-plugin";
+import CircularDependencyPlugin from "circular-dependency-plugin";
 import CopyPlugin from "copy-webpack-plugin";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore, В пакете @types/dotenv-webpack неверные типы опций
@@ -47,5 +48,10 @@ export const buildPlugins = ({ paths, isDev }: BuildOptions): webpack.WebpackPlu
     new Dotenv({
       path: paths.env,
       prefix: "import.meta.env.",
+    }),
+
+    new CircularDependencyPlugin({
+      exclude: /node_modules/,
+      failOnError: true,
     }),
   ].filter(Boolean) as WebpackPluginInstance[];
