@@ -20,6 +20,9 @@ declare module "*.svg" {
 }
 
 declare const __IS_DEV__: boolean;
+declare const __API_BASEURL__: string;
+declare const __CLIENT_PORT__: number;
+declare const __SERVER_PORT__: number;
 
 const __brand: unique symbol;
 declare type Brand<K, T> = K & { [__brand]: T };

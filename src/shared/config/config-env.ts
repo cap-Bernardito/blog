@@ -2,14 +2,14 @@ import { z } from "zod";
 
 const envVariables = z.object({
   API_BASEURL: z.string().url(),
-  CLIENT_PORT: z.number(),
-  SERVER_PORT: z.number(),
+  CLIENT_PORT: z.string(),
+  SERVER_PORT: z.string(),
 });
 
 export const configEnv = {
-  API_BASEURL: import.meta.env.API_BASEURL,
-  CLIENT_PORT: Number(import.meta.env.CLIENT_PORT),
-  SERVER_PORT: Number(import.meta.env.SERVER_PORT),
+  API_BASEURL: __API_BASEURL__,
+  CLIENT_PORT: __CLIENT_PORT__,
+  SERVER_PORT: __SERVER_PORT__,
 } as const;
 
 declare global {

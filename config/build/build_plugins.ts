@@ -27,6 +27,9 @@ export const buildPlugins = ({ paths, isDev }: BuildOptions): webpack.WebpackPlu
 
     new webpack.DefinePlugin({
       __IS_DEV__: isDev,
+      __API_BASEURL__: JSON.stringify(process.env.API_BASEURL),
+      __CLIENT_PORT__: JSON.stringify(process.env.CLIENT_PORT),
+      __SERVER_PORT__: JSON.stringify(process.env.SERVER_PORT),
     }),
 
     isDev &&

@@ -74,9 +74,9 @@ const config: Config = {
   // A set of global variables that need to be available in all test environments
   globals: {
     __IS_DEV__: true,
-    API_BASEURL,
-    CLIENT_PORT,
-    SERVER_PORT,
+    __API_BASEURL__: API_BASEURL,
+    __CLIENT_PORT__: CLIENT_PORT,
+    __SERVER_PORT__: SERVER_PORT,
   },
 
   // Automatically reset mock state before every test
