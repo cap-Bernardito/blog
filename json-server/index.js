@@ -48,7 +48,13 @@ server.post("/auth/login", (req, res) => {
         user,
       };
 
-      res.cookie("token", refreshToken, { maxAge: 30 * 24 * 60 * 60, httpOnly: true, path: "/auth/" });
+      res.cookie("token", refreshToken, {
+        maxAge: 30 * 24 * 60 * 60,
+        path: "/auth/",
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+      });
 
       return res.json(session);
     }
@@ -62,7 +68,13 @@ server.post("/auth/login", (req, res) => {
 
 // Эндпоинт для logout
 server.get("/auth/logout", (req, res) => {
-  res.cookie("token", 0, { maxAge: "-1", httpOnly: true, path: "/auth/" });
+  res.cookie("token", "", {
+    maxAge: 0,
+    path: "/auth/",
+    httpOnly: true,
+    sameSite: "none",
+    secure: true,
+  });
 
   return res.json({ status: "OK" });
 });
@@ -116,7 +128,13 @@ server.get("/auth/token", (req, res) => {
         user,
       };
 
-      res.cookie("token", refreshToken, { maxAge: 30 * 24 * 60 * 60, httpOnly: true, path: "/auth/" });
+      res.cookie("token", refreshToken, {
+        maxAge: 30 * 24 * 60 * 60,
+        path: "/auth/",
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+      });
 
       return res.json(session);
     }
