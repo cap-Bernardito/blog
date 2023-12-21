@@ -37,7 +37,7 @@ type PolymorphicComponentPropWithRef<C extends React.ElementType, Props = object
   Props
 > & { ref?: PolymorphicRef<C> };
 
-type ButtonProps<C extends React.ElementType> = PolymorphicComponentPropWithRef<
+export type ButtonProps<C extends React.ElementType> = PolymorphicComponentPropWithRef<
   C,
   {
     className?: string;
@@ -47,7 +47,7 @@ type ButtonProps<C extends React.ElementType> = PolymorphicComponentPropWithRef<
   } & (C extends "a" ? LinkProps : object)
 >;
 
-type ButtonComponent = <C extends React.ElementType>(props: ButtonProps<C>) => React.ReactNode | null;
+export type ButtonComponent = <C extends React.ElementType>(props: ButtonProps<C>) => React.ReactNode | null;
 
 export const Button: ButtonComponent = React.forwardRef(function Button<C extends React.ElementType = "button">(
   props: ButtonProps<C>,
