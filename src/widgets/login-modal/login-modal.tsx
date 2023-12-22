@@ -7,15 +7,17 @@ import { LoginForm } from "features/auth/login";
 import { LogoutButton } from "features/auth/logout";
 
 import { ErrorFallback } from "entities/error-fallback";
+import { LoginButtonIcon, LoginButtonText } from "entities/login-button";
 import { sessionSelectors } from "entities/session";
 
-import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
 import { Loader } from "shared/ui/loader/loader";
 import { Modal, useModal } from "shared/ui/modal";
 
-import IconAvatar from "shared/assets/icons/avatar.svg";
+type LoginModalProps = {
+  LoginButton?: typeof LoginButtonIcon | typeof LoginButtonText;
+};
 
-export const LoginModal = () => {
+export const LoginModal: React.FC<LoginModalProps> = ({ LoginButton }) => {
   const modal = useModal();
   const isAuth = useAppSelector(sessionSelectors.isAuth);
 
@@ -23,15 +25,10 @@ export const LoginModal = () => {
     <ErrorBoundary fallback={<ErrorFallback />}>
       {isAuth ? (
         <LogoutButton />
+      ) : LoginButton ? (
+        <LoginButton onClick={modal.openModal} />
       ) : (
-        <Button
-          onClick={modal.openModal}
-          variant={ButtonVariant.ICON}
-          color={ButtonColor.SECONDARY}
-          title="Перейти к авторизации"
-        >
-          <IconAvatar width={32} height={32} viewBox="0 0 32 32" />
-        </Button>
+        <LoginButtonIcon onClick={modal.openModal} />
       )}
 
       {modal.modalIsOpen && (
