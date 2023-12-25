@@ -6,10 +6,10 @@ type LoginButtonTextProps = ButtonProps<"button"> & {
   className?: string;
 };
 
-export const LoginButtonText: React.FC<LoginButtonTextProps> = ({ ...props }) => {
+export const LoginButtonText: React.FC<React.PropsWithChildren<LoginButtonTextProps>> = ({ children, ...props }) => {
   return (
     <Button variant={ButtonVariant.DEFAULT} color={ButtonColor.DEFAULT} title="Перейти к авторизации" {...props}>
-      Войти
+      {children ? children : "Войти"}
     </Button>
   );
 };
