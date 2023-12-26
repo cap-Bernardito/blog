@@ -17,7 +17,7 @@
   - выбор категориии
   - переключение вида отображения - список / колонки
   - сортировка по дате загрузки / количеству просмотров
-  - отображение по возрастанию / по убыванию
+  - отображение по возрастанию / убыванию
   - виртуальный список
   - ленивая подгрузка при скролле
   - сохранение позиции скролла
@@ -35,8 +35,8 @@
 - SCSS, css modules
 - Jest, React Testing Library, Storybook, Loki
 - Webpack
-- ESLint, stylelint, prettier, lefthook
-- json-server
+- ESLint, Stylelint, Prettier, Lefthook
+- Json-server
 
 Ссылка на приложение - [Netlify](https://cap-bernardito-blog.netlify.app)
 
