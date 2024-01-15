@@ -3,18 +3,21 @@ import { Route, Routes } from "react-router-dom";
 
 import { PageLoader } from "widgets/page-loader/page-loader";
 
+import { LayoutArticle } from "../layouts/layout-article";
 import { LayoutArticles } from "../layouts/layout-articles";
 import { LayoutWithSidebar } from "../layouts/layout-with-sidebar";
 
 import { routeConfig } from "./app-router-config";
 import { ProtectedRoute } from "./protected-route";
 
+const layoutWithSidebarExcludedPages = [routeConfig.articles.path, routeConfig.article.path];
+
 export const AppRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<LayoutWithSidebar />}>
         {Object.values(routeConfig)
-          .filter((route) => route.path !== routeConfig.articles.path)
+          .filter((route) => !layoutWithSidebarExcludedPages.includes(route.path))
           .map(({ path, element, isProtected }) => (
             <Route
               key={path}
@@ -40,6 +43,23 @@ export const AppRouter = () => {
           element={
             <Suspense fallback={<PageLoader />}>
               <ProtectedRoute>{routeConfig.articles.element}</ProtectedRoute>
+            </Suspense>
+          }
+        />
+      </Route>
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <LayoutArticle />
+          </ProtectedRoute>
+        }
+      >
+        <Route
+          path={routeConfig.article.path}
+          element={
+            <Suspense fallback={<PageLoader />}>
+              <ProtectedRoute>{routeConfig.article.element}</ProtectedRoute>
             </Suspense>
           }
         />
