@@ -1,3 +1,4 @@
+/* stylelint-disable selector-pseudo-class-no-unknown */
 .root {
   --swiper-pagination-color: var(--secondary-color);
   --swiper-pagination-bottom: 0px;
@@ -12,6 +13,30 @@
   --swiper-pagination-bullet-border-radius: 4px;
 
   margin-bottom: var(--spacer-x3);
+
+  :global(.swiper-wrapper) {
+    height: auto;
+    padding-bottom: 18px;
+  }
+
+  :global(.swiper-slide) {
+    display: flex;
+    height: auto;
+  }
+
+  :global(.swiper-pagination.swiper-pagination) {
+    right: 10px;
+    left: 10px;
+
+    display: flex;
+    justify-content: space-between;
+
+    width: auto;
+  }
+
+  :global(.swiper-pagination-bullet) {
+    flex: 1 1 10px !important;
+  }
 }
 
 .title {
