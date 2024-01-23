@@ -6,13 +6,7 @@ import css from "./button.module.scss";
 
 export type ButtonVariant = "default" | "clear" | "icon" | "tab";
 
-export enum ButtonColor {
-  SECONDARY = "secondary",
-  SUCCESS = "success",
-  ERROR = "error",
-  DARK = "dark",
-  DEFAULT = "default",
-}
+export type ButtonColor = "default" | "secondary" | "success" | "error" | "dark";
 
 type PolymorphicRef<C extends React.ElementType> = React.ComponentPropsWithRef<C>["ref"];
 

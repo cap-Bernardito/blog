@@ -3,7 +3,7 @@ import hljs from "highlight.js/lib/core";
 import React, { useCallback, useEffect, useRef } from "react";
 
 import CopyIcon from "../../assets/icons/copy.svg";
-import { Button, ButtonColor } from "../button";
+import { Button } from "../button";
 
 import { Language, loadLanguageModule } from "./lib/import-languages";
 
@@ -38,13 +38,7 @@ export const Code: React.FC<CodeProps> = (props) => {
 
   return (
     <div className={cn(css.root, className)}>
-      <Button
-        className={cn(css.copy__btn)}
-        variant="icon"
-        color={ButtonColor.SECONDARY}
-        onClick={handleClick}
-        title="Скопировать"
-      >
+      <Button className={cn(css.copy__btn)} variant="icon" color="secondary" onClick={handleClick} title="Скопировать">
         <CopyIcon />
       </Button>
       <pre ref={nodeRef}>

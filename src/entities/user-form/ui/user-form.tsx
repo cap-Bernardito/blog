@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 import { wait } from "shared/lib/wait";
 import { Avatar } from "shared/ui/avatar";
-import { Button, ButtonColor } from "shared/ui/button";
+import { Button } from "shared/ui/button";
 import { Input } from "shared/ui/input";
 import { Select, SelectOption } from "shared/ui/select";
 
@@ -185,7 +185,7 @@ export const UserForm: React.FC<UserFormProps> = ({ className, onSubmit, formFie
                 type="button"
                 className={cn(css.root__button)}
                 onClick={handleCancelClick}
-                color={ButtonColor.ERROR}
+                color="error"
                 disabled={isSubmitting}
               >
                 {t("Отмена")}
@@ -197,7 +197,7 @@ export const UserForm: React.FC<UserFormProps> = ({ className, onSubmit, formFie
           </div>
           <div className={cn(css.header__item, css.header__right)}>
             {editableForm ? (
-              <Button className={cn(css.root__button)} disabled={!isDirty || isSubmitting} color={ButtonColor.SUCCESS}>
+              <Button className={cn(css.root__button)} disabled={!isDirty || isSubmitting} color="success">
                 {t("Сохранить")}
               </Button>
             ) : (

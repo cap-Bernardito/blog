@@ -9,7 +9,7 @@ import { useAppDispatch } from "app/app-store";
 import { Article } from "entities/article";
 import { articlesActions, fetchArticlesList } from "entities/articles-list";
 
-import { Button, ButtonColor } from "shared/ui/button";
+import { Button } from "shared/ui/button";
 import { Skeleton } from "shared/ui/skeleton";
 
 import css from "./go-to-category.module.scss";
@@ -43,7 +43,7 @@ export const GoToCategory: React.FC<GoToCategoryProps> = ({ className, categorie
     <div className={cn(css.root, className)}>
       {categories ? (
         categories.map((t) => (
-          <Button key={t} className={css.button} color={ButtonColor.DARK} onClick={handleClick}>
+          <Button key={t} className={css.button} color="dark" onClick={handleClick}>
             {t}
           </Button>
         ))

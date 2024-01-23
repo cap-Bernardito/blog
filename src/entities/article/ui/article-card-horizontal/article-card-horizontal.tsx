@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { routePaths } from "app/app-router/app-router-config";
 
 import { Avatar } from "shared/ui/avatar";
-import { Button, ButtonColor } from "shared/ui/button";
+import { Button } from "shared/ui/button";
 import { Skeleton } from "shared/ui/skeleton";
 
 import EyeIcon from "shared/assets/icons/eye.svg";
@@ -50,7 +50,7 @@ const ArticleCardHorizontalNoMemo = React.forwardRef<HTMLDivElement, ArticleCard
       <div className={cn(css.main)}>{excerpt}</div>
       <div className={css.footer}>
         <div className={css.footer__more}>
-          <Button as="a" to={articlePath} color={ButtonColor.SECONDARY}>
+          <Button as="a" to={articlePath} color="secondary">
             Читать далее
           </Button>
         </div>

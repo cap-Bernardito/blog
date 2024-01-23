@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import IconTheme from "../../assets/icons/theme.svg";
 
-import { Button, ButtonColor } from "./button";
+import { Button } from "./button";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
@@ -38,14 +38,14 @@ export const Clear: Story = {
 export const Secondary: Story = {
   args: {
     children: "Button",
-    color: ButtonColor.SECONDARY,
+    color: "secondary",
   },
 };
 
 export const SecondaryDark: Story = {
   args: {
     children: "Button",
-    color: ButtonColor.SECONDARY,
+    color: "secondary",
   },
   parameters: { theme: "dark" },
 };
@@ -53,14 +53,14 @@ export const SecondaryDark: Story = {
 export const Success: Story = {
   args: {
     children: "Button",
-    color: ButtonColor.SUCCESS,
+    color: "success",
   },
 };
 
 export const SuccessDark: Story = {
   args: {
     children: "Button",
-    color: ButtonColor.SUCCESS,
+    color: "success",
   },
   parameters: { theme: "dark" },
 };
@@ -68,14 +68,14 @@ export const SuccessDark: Story = {
 export const Error: Story = {
   args: {
     children: "Button",
-    color: ButtonColor.ERROR,
+    color: "error",
   },
 };
 
 export const ErrorDark: Story = {
   args: {
     children: "Button",
-    color: ButtonColor.ERROR,
+    color: "error",
   },
   parameters: { theme: "dark" },
 };
