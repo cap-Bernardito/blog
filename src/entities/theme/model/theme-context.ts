@@ -2,11 +2,12 @@ import { createContext } from "react";
 
 export type Theme = "light" | "dark" | "orange";
 
-export type ThemeContextProps = {
-  theme?: Theme;
-  setTheme?: (theme: Theme) => void;
-};
+export type ThemeContextProps = Theme;
 
-export const ThemeContext = createContext<ThemeContextProps>({});
+export type ThemeSwitcherContextProps = (theme: Theme) => void;
+
+export const ThemeContext = createContext<ThemeContextProps>("light");
+
+export const ThemeSwitcherContext = createContext<React.Dispatch<React.SetStateAction<Theme>>>(() => {});
 
 export const LOCAL_STORAGE_THEME_KEY = "theme";

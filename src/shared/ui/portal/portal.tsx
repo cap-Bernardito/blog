@@ -9,7 +9,7 @@ type PortalProps = {
 };
 
 export const Portal: React.FC<React.PropsWithChildren<PortalProps>> = ({ children, root }) => {
-  const { theme } = useTheme();
+  const theme = useTheme();
 
   return ReactDOM.createPortal(<ThemeProvider defaultTheme={theme}>{children}</ThemeProvider>, root);
 };

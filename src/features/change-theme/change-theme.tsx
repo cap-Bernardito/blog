@@ -1,7 +1,7 @@
 import cn from "classnames";
 import React, { ButtonHTMLAttributes } from "react";
 
-import { useTheme } from "entities/theme";
+import { useThemeSwitcher } from "entities/theme";
 
 import { Button, ButtonVariant } from "shared/ui/button";
 import { ButtonColor } from "shared/ui/button/button";
@@ -13,14 +13,14 @@ type ChangeThemeProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 export const ChangeTheme: React.FC<ChangeThemeProps> = ({ className }) => {
-  const { theme, toggleTheme } = useTheme();
+  const themeSwitcher = useThemeSwitcher();
 
   return (
     <Button
-      className={cn(className, theme)}
+      className={cn(className)}
       variant={ButtonVariant.ICON}
       color={ButtonColor.SECONDARY}
-      onClick={toggleTheme}
+      onClick={themeSwitcher}
       title="Переключить тему"
     >
       <Icon />

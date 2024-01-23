@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { SyncStorage } from "shared/lib/sync-storage";
 
-import { LOCAL_STORAGE_THEME_KEY, Theme, ThemeContext } from "../model/theme-context";
+import { LOCAL_STORAGE_THEME_KEY, Theme, ThemeContext, ThemeSwitcherContext } from "../model/theme-context";
 
 const storage = new SyncStorage().create("local");
 
@@ -26,13 +26,33 @@ export const ThemeProvider: React.FC<React.PropsWithChildren<ThemeProviderProps>
 }) => {
   const [theme, setTheme] = useState<Theme>(defaultTheme);
 
-  const defaultProps = useMemo(
-    () => ({
-      theme: theme,
-      setTheme: setTheme,
-    }),
-    [theme],
-  );
+  const switchTheme = useCallback(() => {
+    setTheme((currentTheme: Theme) => {
+      let newTheme: Theme;
+
+      switch (currentTheme) {
+        case "dark": {
+          newTheme = "orange";
+          break;
+        }
+        case "orange": {
+          newTheme = "light";
+          break;
+        }
+        case "light": {
+          newTheme = "dark";
+          break;
+        }
+        default: {
+          newTheme = "light";
+        }
+      }
+
+      storage.add(LOCAL_STORAGE_THEME_KEY, newTheme);
+
+      return newTheme;
+    });
+  }, []);
 
   useEffect(() => {
     document.body.classList.remove(...themeClasses);
@@ -40,8 +60,10 @@ export const ThemeProvider: React.FC<React.PropsWithChildren<ThemeProviderProps>
   }, [theme]);
 
   return (
-    <ThemeContext.Provider value={defaultProps}>
-      <div className={`theme theme-${theme}`}>{children}</div>
+    <ThemeContext.Provider value={theme}>
+      <ThemeSwitcherContext.Provider value={switchTheme}>
+        <div className={`theme theme-${theme}`}>{children}</div>
+      </ThemeSwitcherContext.Provider>
     </ThemeContext.Provider>
   );
 };
