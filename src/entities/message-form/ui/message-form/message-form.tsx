@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
+import { Button, ButtonColor } from "shared/ui/button";
 import { Textarea } from "shared/ui/textarea";
 
 import ArrowIcon from "shared/assets/icons/arrow-btn.svg";
@@ -130,12 +130,7 @@ export const MessageForm: React.FC<MessageFormProps> = ({ className, onSubmit })
             );
           }}
         />
-        <Button
-          className={cn(css.button)}
-          aria-label="Отправить"
-          variant={ButtonVariant.ICON}
-          color={ButtonColor.SECONDARY}
-        >
+        <Button className={cn(css.button)} aria-label="Отправить" variant="icon" color={ButtonColor.SECONDARY}>
           {<ArrowIcon />}
         </Button>
       </div>

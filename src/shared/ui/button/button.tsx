@@ -4,12 +4,7 @@ import { Link, LinkProps } from "react-router-dom";
 
 import css from "./button.module.scss";
 
-export enum ButtonVariant {
-  CLEAR = "clear",
-  ICON = "icon",
-  TAB = "tab",
-  DEFAULT = "default",
-}
+export type ButtonVariant = "default" | "clear" | "icon" | "tab";
 
 export enum ButtonColor {
   SECONDARY = "secondary",

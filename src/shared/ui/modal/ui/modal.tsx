@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import FocusLock from "react-focus-lock";
 
 import CloseIcon from "../../../assets/icons/close.svg";
-import { Button, ButtonVariant } from "../../button";
+import { Button } from "../../button";
 import { Overlay } from "../../overlay/overlay";
 import { Portal } from "../../portal/portal";
 
@@ -68,7 +68,7 @@ export const Modal: React.FC<React.PropsWithChildren<ModalProps>> = ({ className
               <Button
                 className={cn(css.close)}
                 onClick={onClose}
-                variant={ButtonVariant.ICON}
+                variant="icon"
                 data-test-id="modal-close-button"
                 title="Закрыть модальное окно"
               >

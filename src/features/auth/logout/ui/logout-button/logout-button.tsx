@@ -5,7 +5,7 @@ import { useAppDispatch } from "app/app-store";
 import { useMeQuery } from "entities/user";
 
 import { Avatar } from "shared/ui/avatar";
-import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
+import { Button, ButtonColor } from "shared/ui/button";
 
 import { logout } from "../../model/services/logout";
 
@@ -18,7 +18,7 @@ export const LogoutButton = () => {
   }, [dispatch]);
 
   return (
-    <Button onClick={handleClick} variant={ButtonVariant.ICON} color={ButtonColor.SECONDARY} aria-label="Выйти">
+    <Button onClick={handleClick} variant="icon" color={ButtonColor.SECONDARY} aria-label="Выйти">
       <Avatar url={userProfile?.avatar} size="md" />
     </Button>
   );

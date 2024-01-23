@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { ChangeLanguage } from "features/change-language";
 import { ChangeTheme } from "features/change-theme";
 
-import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
+import { Button, ButtonColor } from "shared/ui/button";
 
 import ArrowBottom from "shared/assets/icons/arrow-bottom.svg";
 
@@ -29,7 +29,7 @@ export const SidebarMain: React.FC<SidebarMainProps> = ({ className, isNarrow = 
         <Button
           className={css.root__toggle_btn}
           data-testid="sidebar-toggle"
-          variant={ButtonVariant.ICON}
+          variant="icon"
           color={ButtonColor.SECONDARY}
           onClick={() => setCollapsed((state) => !state)}
           title="Переключить сайдбар"

@@ -3,7 +3,7 @@ import React, { ButtonHTMLAttributes } from "react";
 
 import { useThemeSwitcher } from "entities/theme";
 
-import { Button, ButtonVariant } from "shared/ui/button";
+import { Button } from "shared/ui/button";
 import { ButtonColor } from "shared/ui/button/button";
 
 import Icon from "shared/assets/icons/theme.svg";
@@ -18,7 +18,7 @@ export const ChangeTheme: React.FC<ChangeThemeProps> = ({ className }) => {
   return (
     <Button
       className={cn(className)}
-      variant={ButtonVariant.ICON}
+      variant="icon"
       color={ButtonColor.SECONDARY}
       onClick={themeSwitcher}
       title="Переключить тему"

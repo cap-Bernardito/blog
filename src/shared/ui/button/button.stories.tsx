@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import IconTheme from "../../assets/icons/theme.svg";
 
-import { Button, ButtonColor, ButtonVariant } from "./button";
+import { Button, ButtonColor } from "./button";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
@@ -31,7 +31,7 @@ export const Default: Story = {
 export const Clear: Story = {
   args: {
     children: "Button",
-    variant: ButtonVariant.CLEAR,
+    variant: "clear",
   },
 };
 
@@ -83,7 +83,7 @@ export const ErrorDark: Story = {
 export const Icon: Story = {
   args: {
     children: <IconTheme width={32} height={32} viewBox="0 0 32 32" />,
-    variant: ButtonVariant.ICON,
+    variant: "icon",
   },
 };
 

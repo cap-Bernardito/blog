@@ -2,7 +2,7 @@ import cn from "classnames";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
+import { Button, ButtonColor } from "shared/ui/button";
 
 import "shared/config/i18n/i18n";
 
@@ -16,7 +16,7 @@ export const ChangeLanguage: React.FC<ChangeLanguageProps> = ({ className }) => 
   return (
     <Button
       className={cn(className)}
-      variant={ButtonVariant.CLEAR}
+      variant="clear"
       color={ButtonColor.SECONDARY}
       onClick={() => i18n.changeLanguage(i18n.language === "ru" ? "en" : "ru")}
       title={`Переключить язык на ${t("RU")}`}

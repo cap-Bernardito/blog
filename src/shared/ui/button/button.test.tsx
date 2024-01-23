@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
-import { Button, ButtonVariant } from "./button";
+import { Button } from "./button";
 
 describe("Button", () => {
   it("should be render", () => {
@@ -10,7 +10,7 @@ describe("Button", () => {
   });
 
   it("should apply passed class", () => {
-    render(<Button variant={ButtonVariant.CLEAR}>TEST</Button>);
+    render(<Button variant="clear">TEST</Button>);
 
     expect(screen.getByText("TEST")).toHaveClass("clear");
   });

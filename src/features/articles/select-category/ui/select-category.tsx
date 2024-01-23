@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "app/app-store";
 
 import { articlesActions, articlesSelectors, fetchArticlesList } from "entities/articles-list";
 
-import { Button, ButtonColor, ButtonVariant } from "shared/ui/button";
+import { Button, ButtonColor } from "shared/ui/button";
 import { Skeleton } from "shared/ui/skeleton";
 
 import css from "./select-category.module.scss";
@@ -37,7 +37,7 @@ const Tab: React.FC<TabProps> = React.memo(({ category, isActive, onClick }) => 
   }
 
   return (
-    <Button className={css.button} variant={ButtonVariant.TAB} onClick={handleClick}>
+    <Button className={css.button} variant="tab" onClick={handleClick}>
       {category}
     </Button>
   );
