@@ -4,3 +4,4 @@ export * as sessionSelectors from "./model/selectors";
 export { sessionActions, sessionReducer } from "./model/slice";
 export type { SessionStateSchema } from "./model/types/session";
 export type { Session } from "./model/types/session-schema";
+export { withAuth } from "./model/with-auth";
