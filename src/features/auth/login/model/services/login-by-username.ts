@@ -3,6 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ThunkConfig } from "app/app-store";
 
 import { type RequestLoginBody, type Session, sessionActions, sessionApi } from "entities/session";
+import { userRTKApi } from "entities/user/@x";
 
 import { getApiErrorMessage } from "shared/api/get-api-error-message";
 import { USER_LOCALSTORAGE_KEY } from "shared/const/localstorage";
@@ -15,6 +16,8 @@ export const loginByUsername = createAsyncThunk<Session, RequestLoginBody, Thunk
   async (authData, thunkAPI) => {
     try {
       const response = await thunkAPI.dispatch(sessionApi.endpoints.login.initiate(authData)).unwrap();
+
+      await thunkAPI.dispatch(userRTKApi.endpoints.me.initiate()).unwrap();
 
       if (!response) {
         throw new Error("No data");

@@ -32,10 +32,12 @@ const handlers = [
   rest.post(requestUrl("auth/login"), async (req, res, ctx) => {
     const { username, password } = await req.json();
 
-    // TODO: после перехода на RTK Query возвращать просто текст ошибки без {message: error}
-    return password === "valid" && username === "username"
-      ? res(ctx.delay(100), ctx.status(200), ctx.json(testSession))
-      : res(ctx.delay(100), ctx.status(401), ctx.json({ message: "Login or password is incorrect" }));
+    if (password === "valid" && username === "username") {
+      window.document.cookie = "token=123";
+      return res(ctx.delay(100), ctx.status(200), ctx.json(testSession));
+    }
+
+    return res(ctx.delay(100), ctx.status(401), ctx.json({ message: "Login or password is incorrect" }));
   }),
 
   rest.get(requestUrl("auth/logout"), async (req, res, ctx) => {
@@ -44,6 +46,8 @@ const handlers = [
 
   rest.get(requestUrl("auth/me"), async (req, res, ctx) => {
     const hasAccessToken = window.document.cookie.includes("token");
+
+    window.document.cookie = "";
 
     return hasAccessToken
       ? res(ctx.delay(100), ctx.status(200), ctx.json(testUser))
