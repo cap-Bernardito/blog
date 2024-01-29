@@ -8,6 +8,7 @@ import { withAuth } from "entities/session";
 import "shared/config/i18n/i18n";
 
 const UserGreeting = withAuth({
+  fallback: <p>Авторизация...</p>,
   Authorized: ({ viewer }) => <p> Привет, {viewer.first} </p>,
   UnAuthorized: () => (
     <>

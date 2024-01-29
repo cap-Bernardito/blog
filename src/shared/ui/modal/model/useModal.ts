@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-type TModal = {
+export type TModal = {
   modalIsOpen: boolean;
   closeModal: () => void;
   openModal: () => void;
