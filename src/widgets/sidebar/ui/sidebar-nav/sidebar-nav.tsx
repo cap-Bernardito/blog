@@ -1,9 +1,6 @@
 import cn from "classnames";
-import React, { useMemo } from "react";
 
-import { useAppSelector } from "app/app-store";
-
-import { sessionSelectors } from "entities/session";
+import { withAuth } from "entities/session";
 
 import { SidebarItemsList } from "../../model/nav-items";
 import { SidebarNavItem } from "../sidebar-nav-item/sidebar-nav-item";
@@ -15,30 +12,27 @@ type SidebarNavProps = {
   collapsed?: boolean;
 };
 
-export const SidebarNav: React.FC<SidebarNavProps> = ({ className, collapsed }) => {
-  const isAuth = useAppSelector(sessionSelectors.isAuth);
-  const navItems = useMemo(
-    () =>
-      SidebarItemsList.map(({ privateRoute, ...otherProps }) => {
-        if (privateRoute && !isAuth) {
-          return null;
-        }
+const SidebarNavItems = withAuth({
+  Authorized: ({ collapsed }) => (
+    <>
+      {SidebarItemsList.map((item) => (
+        <SidebarNavItem className={css.nav__item} key={item.title} collapsed={Boolean(collapsed)} item={{ ...item }} />
+      ))}
+    </>
+  ),
+  UnAuthorized: ({ collapsed }) => (
+    <>
+      {SidebarItemsList.filter(({ privateRoute }) => !privateRoute).map((item) => (
+        <SidebarNavItem className={css.nav__item} key={item.title} collapsed={Boolean(collapsed)} item={{ ...item }} />
+      ))}
+    </>
+  ),
+});
 
-        return (
-          <SidebarNavItem
-            className={css.nav__item}
-            key={otherProps.title}
-            collapsed={collapsed}
-            item={{ ...otherProps }}
-          />
-        );
-      }),
-    [collapsed, isAuth],
-  );
-
-  return (
-    <div className={cn(css.root, className)}>
-      <ul className={cn(css.root__nav, css.nav__list, { [css["collapsed"]]: collapsed })}>{navItems}</ul>
-    </div>
-  );
-};
+export const SidebarNav: React.FC<SidebarNavProps> = ({ className, collapsed }) => (
+  <div className={cn(css.root, className)}>
+    <ul className={cn(css.root__nav, css.nav__list, { [css["collapsed"]]: collapsed })}>
+      <SidebarNavItems collapsed={collapsed} />
+    </ul>
+  </div>
+);
