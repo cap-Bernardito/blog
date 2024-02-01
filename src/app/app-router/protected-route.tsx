@@ -1,23 +1,16 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
-import { sessionSelectors } from "entities/session";
+import { withAuth } from "entities/session";
 
 import { Loader } from "shared/ui/loader/loader";
 
-import { useAppSelector } from "../app-store";
+const WithAuthRoute = withAuth({
+  Authorized: ({ children }) => children,
+  UnAuthorized: () => <Navigate to="/" />,
+  fallback: <Loader />,
+});
 
-export const ProtectedRoute: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const isAuth = useAppSelector(sessionSelectors.isAuth);
-  const isAuthInit = useAppSelector(sessionSelectors.isAuthInit);
-
-  if (!isAuthInit) {
-    return <Loader />;
-  }
-
-  if (!isAuth) {
-    return <Navigate to="/" />;
-  }
-
-  return children;
-};
+export const ProtectedRoute: React.FC<React.PropsWithChildren> = ({ children }) => (
+  <WithAuthRoute>{children}</WithAuthRoute>
+);
