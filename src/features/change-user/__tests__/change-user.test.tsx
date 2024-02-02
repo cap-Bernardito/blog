@@ -19,7 +19,7 @@ describe("change user form", () => {
 
     await act(async () => {
       componentRender.store?.dispatch(baseApi.util.resetApiState());
-      componentRender.store?.dispatch(sessionActions.setAuth({ userId: toSessionUserId(1) }));
+      componentRender.store?.dispatch(sessionActions.setAuth({ userId: toSessionUserId(1), role: "ADMIN" }));
       await componentRender.store?.dispatch(userRTKApi.endpoints.me.initiate()).unwrap();
     });
 

@@ -41,7 +41,8 @@ server.post("/auth/login", (req, res) => {
     const userFromBd = users.find((user) => user.username === username && user.password === password);
 
     if (userFromBd) {
-      const { accessToken, refreshToken, ...user } = userFromBd;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { accessToken, refreshToken, password, ...user } = userFromBd;
 
       const session = {
         accessToken,
@@ -121,7 +122,8 @@ server.get("/auth/token", (req, res) => {
     const userFromBd = users.find((user) => user.refreshToken === refreshToken);
 
     if (userFromBd) {
-      const { accessToken, refreshToken, ...user } = userFromBd;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { accessToken, refreshToken, password, ...user } = userFromBd;
 
       const session = {
         accessToken,

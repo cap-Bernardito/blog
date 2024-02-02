@@ -8,6 +8,7 @@ export const testSession: SessionDTO = {
   user: {
     id: 1,
     username: "admin",
+    role: "ADMIN",
   },
 };
 

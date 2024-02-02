@@ -5,6 +5,7 @@ export type SessionDTO = {
   user: {
     username: string;
     id: number;
+    role: "ADMIN" | "USER" | "MANAGER";
   };
 };
 

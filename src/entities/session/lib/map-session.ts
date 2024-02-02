@@ -4,5 +4,6 @@ import { type Session } from "../model/types/session-schema";
 export function mapSession(dto: SessionDTO["user"]): Session {
   return {
     userId: toSessionUserId(dto.id),
+    role: dto.role,
   };
 }

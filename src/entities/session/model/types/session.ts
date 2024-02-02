@@ -1,10 +1,11 @@
-import { SessionUserId } from "./session-schema";
+import { Session, SessionUserId } from "./session-schema";
 
 export type SessionStateSchema =
   | {
       isAuthorized: false;
       isLoading: boolean;
       userId?: SessionUserId;
+      role?: Session["role"];
       _isInit?: true;
       error?: string;
     }
@@ -12,6 +13,7 @@ export type SessionStateSchema =
       isAuthorized: true;
       isLoading: boolean;
       userId: SessionUserId;
+      role: Session["role"];
       _isInit: true;
       error?: string;
     };

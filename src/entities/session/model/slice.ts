@@ -22,6 +22,7 @@ export const sessionSlice = createSlice<
     setAuth: (state, { payload }) => {
       state.isAuthorized = true;
       state.userId = payload.userId;
+      state.role = payload.role;
       state._isInit = true;
     },
     clearSession: (state) => {

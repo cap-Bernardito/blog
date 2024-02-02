@@ -17,11 +17,11 @@ module.exports = [
   },
   {
     id: 3,
-    username: "user1",
+    username: "manager",
     password: "123",
     accessToken: "accessToken-for-id-3",
     refreshToken: "refreshToken-for-id-3",
-    role: "USER",
+    role: "MANAGER",
   },
   {
     id: 4,
