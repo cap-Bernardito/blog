@@ -9,8 +9,11 @@ import { ProfilePage } from "pages/profile-page";
 import { UserPage } from "pages/user-page";
 import { UsersPage } from "pages/users-page";
 
+import { Session } from "entities/session";
+
 type AppRouteProps = RouteProps & {
   isProtected?: boolean;
+  roles?: Session["role"][];
 };
 
 export const enum AppRoutes {
@@ -48,26 +51,31 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
     path: routePaths[AppRoutes.PROFILE],
     element: <ProfilePage />,
     isProtected: true,
+    roles: ["ADMIN", "USER", "MANAGER"],
   },
   [AppRoutes.USERS]: {
     path: routePaths[AppRoutes.USERS],
     element: <UsersPage />,
     isProtected: true,
+    roles: ["ADMIN", "USER", "MANAGER"],
   },
   [AppRoutes.USER]: {
     path: routePaths[AppRoutes.USER],
     element: <UserPage />,
     isProtected: true,
+    roles: ["ADMIN", "USER", "MANAGER"],
   },
   [AppRoutes.ARTICLES]: {
     path: routePaths[AppRoutes.ARTICLES],
     element: <ArticlesPage />,
     isProtected: true,
+    roles: ["ADMIN", "USER", "MANAGER"],
   },
   [AppRoutes.ARTICLE]: {
     path: routePaths[AppRoutes.ARTICLE],
     element: <ArticlePage />,
     isProtected: true,
+    roles: ["ADMIN", "USER", "MANAGER"],
   },
   [AppRoutes.NOT_FOUND]: {
     path: routePaths[AppRoutes.NOT_FOUND],

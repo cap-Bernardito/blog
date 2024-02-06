@@ -5,10 +5,11 @@ import { useAppSelector } from "app/app-store/store-hooks";
 
 import { User, userSelectors } from "entities/user/@x";
 
-import { isAuth as isAuthSelect, isAuthInit as isAuthInitSelect } from "./selectors";
+import { Session } from "./types/session-schema";
+import { isAuth as isAuthSelect, isAuthInit as isAuthInitSelect, selectUserRole } from "./selectors";
 
 type WithAuthProps<P> = {
-  Authorized: React.ComponentType<P & { viewer: User }>;
+  Authorized: React.ComponentType<P & { viewer: User; viewerRole: Session["role"] }>;
   UnAuthorized: React.ComponentType<P>;
   fallback?: React.ReactNode;
 };
@@ -20,6 +21,7 @@ export const withAuth = <P extends React.PropsWithChildren<Record<string, unknow
 }: WithAuthProps<P>) => {
   return function WithAuthComponent(props: P) {
     const isAuth = useAppSelector(isAuthSelect);
+    const viewerRole = useAppSelector(selectUserRole);
     const isAuthInit = useAppSelector(isAuthInitSelect);
     const { data: currentUser, isSuccess, isLoading } = useAppSelector(userSelectors.selectMe);
 
@@ -27,6 +29,10 @@ export const withAuth = <P extends React.PropsWithChildren<Record<string, unknow
       return fallback;
     }
 
-    return isAuth && isSuccess ? <Authorized viewer={currentUser} {...props} /> : <UnAuthorized {...props} />;
+    return isAuth && isSuccess && viewerRole ? (
+      <Authorized viewer={currentUser} viewerRole={viewerRole} {...props} />
+    ) : (
+      <UnAuthorized {...props} />
+    );
   };
 };

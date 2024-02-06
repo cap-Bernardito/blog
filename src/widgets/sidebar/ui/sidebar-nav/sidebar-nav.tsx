@@ -13,9 +13,9 @@ type SidebarNavProps = {
 };
 
 const SidebarNavItems = withAuth({
-  Authorized: ({ collapsed }) => (
+  Authorized: ({ collapsed, viewerRole }) => (
     <>
-      {SidebarItemsList.map((item) => (
+      {SidebarItemsList.filter(({ roles }) => !roles || roles.includes(viewerRole)).map((item) => (
         <SidebarNavItem className={css.nav__item} key={item.title} collapsed={Boolean(collapsed)} item={{ ...item }} />
       ))}
     </>
