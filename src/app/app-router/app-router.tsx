@@ -18,13 +18,13 @@ export const AppRouter = () => {
       <Route path="/" element={<LayoutWithSidebar />}>
         {Object.values(routeConfig)
           .filter((route) => !layoutWithSidebarExcludedPages.includes(route.path))
-          .map(({ path, element, isProtected }) => (
+          .map(({ path, element, isProtected, roles }) => (
             <Route
               key={path}
               path={path}
               element={
                 <Suspense fallback={<PageLoader />}>
-                  {isProtected ? <ProtectedRoute>{element}</ProtectedRoute> : element}
+                  {isProtected ? <ProtectedRoute permissions={roles}>{element}</ProtectedRoute> : element}
                 </Suspense>
               }
             />
@@ -42,7 +42,7 @@ export const AppRouter = () => {
           path={routeConfig.articles.path}
           element={
             <Suspense fallback={<PageLoader />}>
-              <ProtectedRoute>{routeConfig.articles.element}</ProtectedRoute>
+              <ProtectedRoute permissions={routeConfig.articles.roles}>{routeConfig.articles.element}</ProtectedRoute>
             </Suspense>
           }
         />
@@ -59,7 +59,7 @@ export const AppRouter = () => {
           path={routeConfig.article.path}
           element={
             <Suspense fallback={<PageLoader />}>
-              <ProtectedRoute>{routeConfig.article.element}</ProtectedRoute>
+              <ProtectedRoute permissions={routeConfig.article.roles}>{routeConfig.article.element}</ProtectedRoute>
             </Suspense>
           }
         />
