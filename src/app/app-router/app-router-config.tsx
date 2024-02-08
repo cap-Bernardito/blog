@@ -1,6 +1,7 @@
 import { RouteProps } from "react-router-dom";
 
 import { AboutPage } from "pages/about-page";
+import { AdminPage } from "pages/admin-page";
 import { ArticlePage } from "pages/article-page";
 import { ArticlesPage } from "pages/articles-page";
 import { ForbiddenPage } from "pages/forbidden-page";
@@ -26,7 +27,8 @@ export const enum AppRoutes {
   ARTICLES = "articles",
   ARTICLE = "article",
   NOT_FOUND = "not_found",
-  FORBIDDEN_PAGE = "forbidden_page",
+  FORBIDDEN = "forbidden",
+  ADMIN = "admin",
 }
 
 export const routePaths: Record<AppRoutes, string> = {
@@ -37,7 +39,8 @@ export const routePaths: Record<AppRoutes, string> = {
   [AppRoutes.USER]: "/users/:id",
   [AppRoutes.ARTICLES]: "/articles",
   [AppRoutes.ARTICLE]: "/articles/:id",
-  [AppRoutes.FORBIDDEN_PAGE]: "/forbidden",
+  [AppRoutes.FORBIDDEN]: "/forbidden",
+  [AppRoutes.ADMIN]: "/admin",
   [AppRoutes.NOT_FOUND]: "*",
 };
 
@@ -80,9 +83,15 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
     isProtected: true,
     roles: ["ADMIN", "USER", "MANAGER"],
   },
-  [AppRoutes.FORBIDDEN_PAGE]: {
-    path: routePaths[AppRoutes.FORBIDDEN_PAGE],
+  [AppRoutes.FORBIDDEN]: {
+    path: routePaths[AppRoutes.FORBIDDEN],
     element: <ForbiddenPage />,
+  },
+  [AppRoutes.ADMIN]: {
+    path: routePaths[AppRoutes.ADMIN],
+    element: <AdminPage />,
+    isProtected: true,
+    roles: ["ADMIN"],
   },
   [AppRoutes.NOT_FOUND]: {
     path: routePaths[AppRoutes.NOT_FOUND],

@@ -46,4 +46,11 @@ export const SidebarItemsList: SidebarNavItemType[] = [
     Icon: Article,
     title: "Статьи",
   },
+  {
+    privateRoute: routeConfig.admin.isProtected,
+    roles: routeConfig.admin.roles,
+    path: routePaths.admin,
+    Icon: Profile,
+    title: "Админка",
+  },
 ];

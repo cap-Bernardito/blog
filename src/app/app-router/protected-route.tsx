@@ -12,7 +12,7 @@ const WithAuthRoute = withAuth({
     return !permissions || (permissions as Session["role"][]).includes(viewerRole) ? (
       children
     ) : (
-      <Navigate to={routePaths.forbidden_page} />
+      <Navigate to={routePaths.forbidden} />
     );
   },
   UnAuthorized: () => <Navigate to="/" />,
